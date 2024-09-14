@@ -1,0 +1,24 @@
+@use "@angular/material" as mat;
+
+$theme: mat.define-theme(
+  (
+    color: (
+      primary: mat.$violet-palette,
+    ),
+    typography: (
+      brand-family: "Open Sans, sans-serif",
+      plain-family: "Open Sans, sans-serif",
+      bold-weight: 900,
+    ),
+    density: (
+      scale: -1,
+    ),
+  )
+);
+
+@include mat.core();
+
+html {
+  @include mat.core-theme($theme);
+  @include mat.all-component-themes($theme);
+}
