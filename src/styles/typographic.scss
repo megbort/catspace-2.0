@@ -1,9 +1,45 @@
-@mixin h3 {
-  @apply text-2xl;
+@mixin h1 {
+  @apply leading-8 font-bold text-4xl tracking-wider;
+}
+
+@mixin h2 {
+  @apply leading-8 font-semibold text-3xl tracking-wider;
+}
+
+@mixin subtitle-1 {
+  @apply leading-6 font-semibold text-lg tracking-wide;
+
+  @media (min-width: 768px) {
+    @apply text-base;
+  }
+
+  @media (min-width: 1024px) {
+    @apply text-lg;
+  }
+}
+
+@mixin subtitle-2 {
+  @apply leading-6 font-semibold text-base tracking-normal;
+}
+
+@mixin text-body-1 {
+  @apply leading-4 font-normal text-base tracking-normal;
 }
 
 @mixin typography-styles {
-  h3 {
-    @include h3;
+  h1 {
+    @include h1();
+  }
+  h2 {
+    @include h2();
+  }
+  .subtitle-1 {
+    @include subtitle-1();
+  }
+  .subtitle-2 {
+    @include subtitle-2();
+  }
+  .text-body-1 {
+    @include text-body-1();
   }
 }

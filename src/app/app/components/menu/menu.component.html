@@ -1,1 +1,49 @@
-<p>menu works!</p>
+<nav aria-label="Main">
+  <div
+    class="bg-catspace-beige flex justify-between items-center h-28 px-4 md:px-8"
+  >
+    <div
+      class="flex items-center hover:cursor-pointer md:w-16 lg:w-10"
+      routerLink="/home"
+      title="Home"
+    >
+      <span class="material-icons mr-2 icon-28">pets</span>
+      <h2 class="mb-1">catspace</h2>
+    </div>
+
+    <div class="inline-block md:hidden">
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon class="mb-1">menu</mat-icon>
+      </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="/featured">Featured</button>
+      <button mat-menu-item routerLink="/cat-facts">Cat Facts</button>
+      <button mat-menu-item routerLink="/search">Search</button>
+      <button mat-menu-item routerLink="/login">Login</button>
+    </mat-menu>
+
+    <!-- Web menu -->
+    <div class="hidden md:flex md:gap-4 lg:gap-8">
+      <div class="menu-item" routerLink="/featured" title="Featured">
+        <p class="subtitle-1 pr-1">Featured</p>
+        <span class="material-icons hidden lg:block">auto_awesome</span>
+      </div>
+      <div class="menu-item" title="Cat Facts">
+        <p class="subtitle-1 pr-1">Cat Facts</p>
+        <span class="material-icons hidden lg:block"
+          >local_fire_department</span
+        >
+      </div>
+      <div class="menu-item" title="Search">
+        <p class="subtitle-1 pr-1">Search</p>
+        <span class="material-icons">search</span>
+      </div>
+    </div>
+    <div class="hidden md:block">
+      <button mat-flat-button>Login</button>
+    </div>
+  </div>
+</nav>
