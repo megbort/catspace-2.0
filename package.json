@@ -7,7 +7,9 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:catspace-2.0": "node dist/catspace-2.0/server/server.mjs"
+    "serve:ssr:catspace-2.0": "node dist/catspace-2.0/server/server.mjs",
+    "storybook": "ng run catspace-2.0:storybook",
+    "build-storybook": "ng run catspace-2.0:build-storybook"
   },
   "private": true,
   "dependencies": {
@@ -32,6 +34,14 @@
     "@angular-devkit/build-angular": "^18.0.2",
     "@angular/cli": "^18.0.2",
     "@angular/compiler-cli": "^18.0.0",
+    "@chromatic-com/storybook": "^1.9.0",
+    "@storybook/addon-essentials": "^8.3.3",
+    "@storybook/addon-interactions": "^8.3.3",
+    "@storybook/addon-links": "^8.3.3",
+    "@storybook/addon-onboarding": "^8.3.3",
+    "@storybook/angular": "^8.3.3",
+    "@storybook/blocks": "^8.3.3",
+    "@storybook/test": "^8.3.3",
     "@types/express": "^4.17.17",
     "@types/jasmine": "~5.1.0",
     "@types/node": "^18.18.0",
@@ -41,6 +51,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "storybook": "^8.3.3",
     "tailwindcss": "^3.4.11",
     "typescript": "~5.4.2"
   }
