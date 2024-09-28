@@ -8,7 +8,7 @@
       title="Home"
     >
       <span class="material-icons mr-2 icon-28">pets</span>
-      <h2 class="mb-1">catspace</h2>
+      <h2 class="mb-1">{{ "menu.catspace" | translate }}</h2>
     </div>
 
     <div class="inline-block md:hidden">
@@ -19,31 +19,41 @@
 
     <!-- Mobile menu -->
     <mat-menu #menu="matMenu">
-      <button mat-menu-item routerLink="/featured">Featured</button>
-      <button mat-menu-item routerLink="/cat-facts">Cat Facts</button>
-      <button mat-menu-item routerLink="/search">Search</button>
-      <button mat-menu-item routerLink="/login">Login</button>
+      <ul>
+        <li mat-menu-item routerLink="/featured">
+          {{ "menu.featured" | translate }}
+        </li>
+        <li mat-menu-item routerLink="/cat-facts">
+          {{ "menu.catFacts" | translate }}
+        </li>
+        <li mat-menu-item routerLink="/search">
+          {{ "menu.search" | translate }}
+        </li>
+        <li mat-menu-item routerLink="/login">
+          {{ "button.login" | translate }}
+        </li>
+      </ul>
     </mat-menu>
 
     <!-- Web menu -->
-    <div class="hidden md:flex md:gap-4 lg:gap-8">
-      <div class="menu-item" routerLink="/featured" title="Featured">
-        <p class="subtitle-1 pr-1">Featured</p>
+    <ul class="hidden md:flex md:gap-4 lg:gap-8">
+      <li class="menu-item" routerLink="/featured" title="Featured">
+        <p class="subtitle-1 pr-1">{{ "menu.featured" | translate }}</p>
         <span class="material-icons hidden lg:block">auto_awesome</span>
-      </div>
-      <div class="menu-item" title="Cat Facts">
-        <p class="subtitle-1 pr-1">Cat Facts</p>
+      </li>
+      <li class="menu-item" title="Cat Facts">
+        <p class="subtitle-1 pr-1">{{ "menu.catFacts" | translate }}</p>
         <span class="material-icons hidden lg:block"
           >local_fire_department</span
         >
-      </div>
-      <div class="menu-item" title="Search">
-        <p class="subtitle-1 pr-1">Search</p>
+      </li>
+      <li class="menu-item" title="Search">
+        <p class="subtitle-1 pr-1">{{ "menu.search" | translate }}</p>
         <span class="material-icons hidden lg:block">search</span>
-      </div>
-    </div>
+      </li>
+    </ul>
     <div class="hidden md:block">
-      <button mat-flat-button>Login</button>
+      <button mat-flat-button>{{ "button.login" | translate }}</button>
     </div>
   </div>
 </nav>

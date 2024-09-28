@@ -1,0 +1,16 @@
+{
+  "button": {
+    "createAccount": "Create Account",
+    "login": "Login"
+  },
+  "menu": {
+    "catspace": "catspace",
+    "featured": "Featured",
+    "catFacts": "Cat Facts",
+    "search": "Search"
+  },
+  "home": {
+    "heroTitle": "About Us",
+    "heroSubtitle": "A place run by cats, <em>for cats</em>. Upload and share your picture with other and make new friends."
+  }
+}

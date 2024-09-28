@@ -1,10 +1,11 @@
 <section class="hero-image">
   <div class="hero-content rounded-lg p-16 max-w-2xl">
-    <h1>Welcome to Catspace!</h1>
-    <p class="subtitle-2 py-4">
-      A place run by cats, <em>for cats.</em> Upload and share your picture with
-      others and make new friends.
-    </p>
-    <button mat-flat-button>Create Account</button>
+    <h1>{{ "home.heroTitle" | translate }}</h1>
+    <p
+      class="subtitle-2 py-4"
+      [innerHTML]="'home.heroSubtitle' | translate"
+    ></p>
+    <button mat-flat-button>{{ "button.createAccount" | translate }}</button>
   </div>
 </section>
+<section></section>
