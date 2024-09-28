@@ -1,0 +1,28 @@
+<section class="hero-image">
+  <div class="hero-content rounded-lg p-16 max-w-2xl">
+    <h1>{{ "home.heroTitle" | translate }}</h1>
+    <p
+      class="subtitle-2 py-4"
+      [innerHTML]="'home.heroSubtitle' | translate"
+    ></p>
+    <button mat-flat-button>{{ "button.createAccount" | translate }}</button>
+  </div>
+</section>
+<section>
+  <div
+    class="flex flex-col justify-between items-center py-28 px-8 m-auto md:flex-row max-w-6xl"
+  >
+    <div class="basis-1/2 px-8 pb-4 md:pb-0">
+      <img src="../../../assets/images/two-cats.png" alt="Cats" />
+    </div>
+    <div class="basis-1/2 px-8">
+      <h2 class="pb-4">{{ "home.about" | translate }}</h2>
+      <p class="pb-4">{{ "home.description1" | translate }}</p>
+      <p class="pb-6">{{ "home.description2" | translate }}</p>
+      <button mat-flat-button>{{ "button.createAccount" | translate }}</button>
+    </div>
+  </div>
+</section>
+<section>
+  <h2>{{ "home.featured" | translate }}</h2>
+</section>
