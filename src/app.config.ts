@@ -1,4 +1,5 @@
 import {
+  APP_INITIALIZER,
   ApplicationConfig,
   importProvidersFrom,
   provideZoneChangeDetection,
@@ -7,9 +8,10 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, provideHttpClient, withFetch } from '@angular/common/http';
+import { defaultTranslateConfig } from './app/shared/config/translate';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,16 +20,15 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(),
     provideAnimationsAsync(),
     provideHttpClient(withFetch()),
-    importProvidersFrom(
-      TranslateModule.forRoot({
-        loader: {
-          provide: TranslateLoader,
-          useFactory: HttpLoaderFactory,
-          deps: [HttpClient],
-        },
-        defaultLanguage: 'en',
-      })
-    ),
+    importProvidersFrom(TranslateModule.forRoot(defaultTranslateConfig)),
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (translate: TranslateService) => () => {
+        translate.use(translate.defaultLang);
+      },
+      deps: [TranslateService],
+      multi: true,
+    },
   ],
 };
 

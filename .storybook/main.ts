@@ -1,6 +1,7 @@
 import type { StorybookConfig } from '@storybook/angular';
 
 const config: StorybookConfig = {
+  staticDirs: ['../src/assets/i18n'],
   stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
   addons: [
     '@storybook/addon-links',
@@ -13,4 +14,5 @@ const config: StorybookConfig = {
     options: {},
   },
 };
+
 export default config;
