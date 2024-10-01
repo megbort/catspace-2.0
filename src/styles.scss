@@ -15,15 +15,49 @@ body {
   font-family: "Open Sans", sans-serif;
 }
 
-.material-icons.icon-16 {
-  font-size: 16px;
+* {
+  @apply box-border;
 }
-.material-icons.icon-18 {
-  font-size: 18px;
+
+.material-icons {
+  &.icon-16 {
+    @apply text-base;
+  }
+  &.icon-18 {
+    @apply text-lg;
+  }
+  &.icon-20 {
+    @apply text-xl;
+  }
+  &.icon-28 {
+    @apply text-2xl;
+  }
 }
-.material-icons.icon-20 {
-  font-size: 20px;
+
+.material-symbols-outlined {
+  &.icon-16 {
+    @apply text-base;
+  }
+  &.icon-18 {
+    @apply text-lg;
+  }
+  &.icon-20 {
+    @apply text-xl;
+  }
+  &.icon-28 {
+    @apply text-2xl;
+  }
 }
-.material-icons.icon-28 {
-  font-size: 28px;
+
+.mat-mdc-outlined-button .mdc-button__label {
+  @apply text-catspace-brown;
+}
+
+.mat-mdc-button,
+.mat-mdc-unelevated-button,
+.mat-mdc-raised-button,
+.mat-mdc-outlined-button {
+  &.card-button {
+    @apply h-7 text-xs;
+  }
 }

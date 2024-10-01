@@ -1,13 +1,20 @@
 {
   "button": {
     "createAccount": "Create Account",
-    "login": "Login"
+    "login": "Login",
+    "follow": "Follow",
+    "viewProfile": "View Profile"
+  },
+  "profile": {
+    "followers": "Followers"
   },
   "menu": {
     "catspace": "catspace",
     "featured": "Featured",
     "catFacts": "Cat Facts",
-    "search": "Search"
+    "search": "Search",
+    "home": "Home",
+    "account": "Account"
   },
   "home": {
     "heroTitle": "Welcome to catspace!",
@@ -16,5 +23,8 @@
     "description1": "At catspace, we believe every cat deserves a spotlight! Our platform is dedicated to feline enthusiasts, where you can showcase your beloved companions, share adorable moments, and connect with other cat lovers.",
     "description2": "Whether you're looking for tips, cat facts, or just a friendly community, we have it all. Join us to celebrate the purrfect world of cats and forge friendships that transcend borders, all while enjoying a playful atmosphere that's truly designed for our furry friends.",
     "featured": "Featured Profiles"
+  },
+  "footer": {
+    "copyright": "Designed and built by Megan Krenbrink © 2024"
   }
 }

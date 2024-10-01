@@ -1,0 +1,24 @@
+<footer class="mt-8">
+  <div
+    class="flex flex-col justify-between items-center bg-catspace-beige h-[275px] p-8"
+  >
+    <ul class="flex gap-2 sm:gap-4 items-center flex-wrap">
+      <li class="subtitle-2 footer-item">{{ "menu.home" | translate }}</li>
+      <span class="hidden sm:block text-3xl">&#183;</span>
+      <li class="subtitle-2 footer-item">{{ "menu.featured" | translate }}</li>
+      <span class="hidden sm:block text-3xl">&#183;</span>
+      <li class="subtitle-2 footer-item">{{ "menu.catFacts" | translate }}</li>
+      <span class="hidden sm:block text-3xl">&#183;</span>
+      <li class="subtitle-2 footer-item">{{ "menu.account" | translate }}</li>
+    </ul>
+    <div
+      class="flex items-center justify-center hover:cursor-pointer md:w-16 lg:w-10"
+      routerLink="/home"
+      title="Home"
+    >
+      <span class="material-icons mr-2 icon-28">pets</span>
+      <h2 class="mb-1">{{ "menu.catspace" | translate }}</h2>
+    </div>
+    <p class="text-caption">{{ "footer.copyright" | translate }}</p>
+  </div>
+</footer>

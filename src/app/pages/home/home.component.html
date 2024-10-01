@@ -24,5 +24,17 @@
   </div>
 </section>
 <section>
-  <h2>{{ "home.featured" | translate }}</h2>
+  <div class="py-16 px-10 max-w-7xl m-auto">
+    <h2 class="pb-8">{{ "home.featured" | translate }}</h2>
+    <div class="flex justify-center items-center gap-6 flex-wrap">
+      @for(profile of featured; track profile.id) {
+      <app-profile-card [profile]="profile"></app-profile-card>
+      }
+    </div>
+    <p
+      class="text-body-1 pt-4 mr-2 text-catspace-orange text-right hover:cursor-pointer hover:underline"
+    >
+      Explore more profiles
+    </p>
+  </div>
 </section>

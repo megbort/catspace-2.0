@@ -4,14 +4,14 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { applicationConfig } from '@storybook/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { storybookTranslateConfig } from '../../app/shared/config/translate';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 
 const meta: Meta<MenuComponent> = {
   title: 'Components/Menu',
   component: MenuComponent,
   decorators: [
     applicationConfig({
-      providers: [provideAnimations(), provideHttpClient()],
+      providers: [provideAnimations(), provideHttpClient(withFetch())],
     }),
     moduleMetadata({
       imports: [TranslateModule.forRoot(storybookTranslateConfig)],

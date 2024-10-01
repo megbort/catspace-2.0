@@ -1,1 +1,37 @@
-<p>profile-card works!</p>
+<div
+  class="flex flex-col justify-between shadow-card rounded p-4 h-[335px] w-[275px]"
+>
+  <img
+    [src]="profile?.imageUrl"
+    alt="{{ profile?.name }}"
+    class="object-cover w-full h-[150px] rounded"
+    alt="cat"
+  />
+  <div class="flex justify-between">
+    <div>
+      <p class="subtitle-1">{{ profile?.name }}</p>
+      <p class="text-body-1">&#64;{{ profile?.handle }}</p>
+      <p class="text-body-1">
+        255 {{ profile?.followers }} {{ "profile.followers" | translate }}
+      </p>
+    </div>
+    <div class="pr-1">
+      <span
+        class="material-symbols-outlined icon-18 text-catspace-orange hover:text-catspace-dark-orange hover:cursor-pointer"
+        >favorite</span
+      >
+    </div>
+  </div>
+
+  <div class="text-caption text-catspace-orange py-2">
+    {{ profile?.tags?.join(" ") || "" }}
+  </div>
+  <div class="flex justify-between gap-1">
+    <button mat-flat-button class="basis-1/2 card-button">
+      {{ "button.follow" | translate }}
+    </button>
+    <button mat-stroked-button class="basis-1/2 card-button">
+      {{ "button.viewProfile" | translate }}
+    </button>
+  </div>
+</div>

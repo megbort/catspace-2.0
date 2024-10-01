@@ -9,6 +9,9 @@ module.exports = {
       xl: "1280px",
       "2xl": "1536px",
     },
+    boxShadow: {
+      card: "0px 4px 4px 0px rgba(0,0,0,0.25)",
+    },
     extend: {
       colors: {
         "catspace-orange": "#eb9477",
@@ -18,6 +21,7 @@ module.exports = {
         "catspace-black": "#0D0D0D",
         "catspace-white": "#fefdf8",
         "catspace-grey": "#e8e8e8",
+        "catspace-brown": "#86736d",
       },
     },
   },

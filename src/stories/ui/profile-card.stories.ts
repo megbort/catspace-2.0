@@ -1,14 +1,32 @@
-import { Meta, type StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 import { ProfileCardComponent } from '../../app/components/profile-card/profile-card.component';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { applicationConfig } from '@storybook/angular';
+import { TranslateModule } from '@ngx-translate/core';
+import { storybookTranslateConfig } from '../../app/shared';
+import { provideHttpClient, withFetch } from '@angular/common/http';
+import { FeaturedProfile } from '../../app/services';
+
+const mockProfile: FeaturedProfile = {
+  id: 3,
+  imageUrl:
+    'https://images.pexels.com/photos/1276553/pexels-photo-1276553.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+  name: 'Luna Moonpurr',
+  handle: '@lunathepurr',
+  followers: 205,
+  tags: ['#mysterious', '#paws', '#moonlight', '#elegant'],
+  following: true,
+};
 
 const meta: Meta<ProfileCardComponent> = {
   title: 'Components/Profile Card',
   component: ProfileCardComponent,
   decorators: [
     applicationConfig({
-      providers: [provideAnimations()],
+      providers: [provideAnimations(), provideHttpClient(withFetch())],
+    }),
+    moduleMetadata({
+      imports: [TranslateModule.forRoot(storybookTranslateConfig)],
     }),
   ],
 };
@@ -17,5 +35,7 @@ export default meta;
 type Story = StoryObj<ProfileCardComponent>;
 
 export const Primary: Story = {
-  args: {},
+  args: {
+    profile: mockProfile,
+  },
 };
