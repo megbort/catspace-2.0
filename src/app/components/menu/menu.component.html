@@ -1,59 +1,67 @@
 <nav aria-label="Main">
-  <div
-    class="bg-catspace-beige flex justify-between items-center h-28 px-4 md:px-8"
-  >
+  <div class="bg-catspace-beige flex items-center h-28 px-4 md:px-8">
+    <!-- Logo -->
     <div
-      class="flex items-center hover:cursor-pointer md:w-16 lg:w-10"
+      class="flex-shrink-0 hover:cursor-pointer w-[225px]"
       routerLink="/home"
       title="Home"
     >
-      <span class="material-icons mr-2 icon-28">pets</span>
-      <h2 class="mb-1">{{ "menu.catspace" | translate }}</h2>
+      <img
+        src="../../../assets/images/catspace-logo.png"
+        alt="catspace logo"
+        class="w-full"
+      />
     </div>
 
+    <!-- Web menu -->
+    <div class="flex-grow flex justify-center">
+      <ul class="hidden md:flex md:gap-4 lg:gap-8">
+        <li class="menu-item" routerLink="/featured" title="Featured">
+          <p class="subtitle-1 pr-1">{{ "menu.featured" | translate }}</p>
+          <span class="material-icons hidden lg:block">auto_awesome</span>
+        </li>
+        <li class="menu-item" routerLink="/featured" title="Cat Facts">
+          <p class="subtitle-1 pr-1">{{ "menu.catFacts" | translate }}</p>
+          <span class="material-icons hidden lg:block"
+            >local_fire_department</span
+          >
+        </li>
+        <li class="menu-item" routerLink="/featured" title="Search">
+          <p class="subtitle-1 pr-1">{{ "menu.search" | translate }}</p>
+          <span class="material-icons hidden lg:block">search</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="hidden text-right md:block w-[225px]">
+      <button class="mr-2" mat-stroked-button>
+        {{ "button.signUp" | translate }}
+      </button>
+      <button mat-flat-button>{{ "button.login" | translate }}</button>
+    </div>
+
+    <!-- Mobile menu -->
     <div class="inline-block md:hidden">
       <button mat-icon-button [matMenuTriggerFor]="menu">
         <mat-icon class="mb-1">menu</mat-icon>
       </button>
     </div>
+  </div>
 
-    <!-- Mobile menu -->
-    <mat-menu #menu="matMenu">
-      <ul>
-        <li mat-menu-item routerLink="/featured">
-          {{ "menu.featured" | translate }}
-        </li>
-        <li mat-menu-item routerLink="/cat-facts">
-          {{ "menu.catFacts" | translate }}
-        </li>
-        <li mat-menu-item routerLink="/search">
-          {{ "menu.search" | translate }}
-        </li>
-        <li mat-menu-item routerLink="/login">
-          {{ "button.login" | translate }}
-        </li>
-      </ul>
-    </mat-menu>
-
-    <!-- Web menu -->
-    <ul class="hidden md:flex md:gap-4 lg:gap-8">
-      <li class="menu-item" routerLink="/featured" title="Featured">
-        <p class="subtitle-1 pr-1">{{ "menu.featured" | translate }}</p>
-        <span class="material-icons hidden lg:block">auto_awesome</span>
+  <mat-menu #menu="matMenu">
+    <ul>
+      <li mat-menu-item routerLink="/featured">
+        {{ "menu.featured" | translate }}
       </li>
-      <li class="menu-item" title="Cat Facts">
-        <p class="subtitle-1 pr-1">{{ "menu.catFacts" | translate }}</p>
-        <span class="material-icons hidden lg:block"
-          >local_fire_department</span
-        >
+      <li mat-menu-item routerLink="/featured">
+        {{ "menu.catFacts" | translate }}
       </li>
-      <li class="menu-item" title="Search">
-        <p class="subtitle-1 pr-1">{{ "menu.search" | translate }}</p>
-        <span class="material-icons hidden lg:block">search</span>
+      <li mat-menu-item routerLink="/featured">
+        {{ "menu.search" | translate }}
+      </li>
+      <li mat-menu-item routerLink="/featured">
+        {{ "button.login" | translate }}
       </li>
     </ul>
-    <div class="hidden md:block">
-      <button mat-flat-button>{{ "button.login" | translate }}</button>
-    </div>
-  </div>
+  </mat-menu>
 </nav>

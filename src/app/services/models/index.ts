@@ -1,1 +1,1 @@
-export * from './featured';
+export * from './profile';

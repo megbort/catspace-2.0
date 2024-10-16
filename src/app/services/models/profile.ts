@@ -1,4 +1,4 @@
-export interface FeaturedProfile {
+export interface Profile {
   id: number;
   imageUrl: string;
   name: string;

@@ -1,12 +1,17 @@
 <div
   class="flex flex-col justify-between shadow-card rounded p-4 h-[335px] w-[275px]"
 >
+  @defer (on viewport) {
   <img
     [src]="profile?.imageUrl"
     alt="{{ profile?.name }}"
     class="object-cover w-full h-[150px] rounded"
     alt="cat"
   />
+  }@placeholder {
+  <div class="bg-catspace-grey w-full h-[150px] rounded"></div>
+  }
+
   <div class="flex justify-between">
     <div>
       <p class="subtitle-1">{{ profile?.name }}</p>

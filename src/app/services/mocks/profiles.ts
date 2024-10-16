@@ -1,6 +1,6 @@
-import { FeaturedProfile } from '../models';
+import { Profile } from '../models';
 
-export const FEATURED: FeaturedProfile[] = [
+export const PROFILES: Profile[] = [
   {
     id: 1,
     imageUrl:

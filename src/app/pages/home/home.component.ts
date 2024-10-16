@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { TranslateModule } from '@ngx-translate/core';
 import { ProfileCardComponent } from '../../components/profile-card/profile-card.component';
-import { FEATURED, FeaturedProfile } from '../../services';
+import { PROFILES, Profile } from '../../services';
 
 @Component({
   selector: 'app-home',
@@ -12,5 +12,5 @@ import { FEATURED, FeaturedProfile } from '../../services';
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
-  featured: FeaturedProfile[] = FEATURED.slice(0, 4);
+  featured: Profile[] = PROFILES.slice(0, 4);
 }

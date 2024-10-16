@@ -24,9 +24,15 @@
   </div>
 </section>
 <section>
-  <div class="py-16 px-10 max-w-7xl m-auto">
-    <h2 class="pb-8">{{ "home.featured" | translate }}</h2>
-    <div class="flex justify-center items-center gap-6 flex-wrap">
+  <div
+    class="py-16 px-2 max-w-[320px] sm:max-w-2xl md:text-left lg:max-w-5xl xl:max-w-7xl mx-auto"
+  >
+    <h2 class="pb-8 text-center md:text-left">
+      {{ "home.featured" | translate }}
+    </h2>
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-center"
+    >
       @for(profile of featured; track profile.id) {
       <app-profile-card [profile]="profile"></app-profile-card>
       }
@@ -34,7 +40,7 @@
     <p
       class="text-body-1 pt-4 mr-2 text-catspace-orange text-right hover:cursor-pointer hover:underline"
     >
-      Explore more profiles
+      {{ "home.explore" | translate }}
     </p>
   </div>
 </section>
