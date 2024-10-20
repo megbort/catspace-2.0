@@ -1,0 +1,36 @@
+<div
+  class="flex flex-col gap-2 justify-between shadow-card rounded p-3 h-[250px] w-[250px]"
+>
+  <div
+    class="post-image relative hover:cursor-pointer hover:transform hover: transition-transform duration-300"
+  >
+    @defer (on viewport) {
+    <img
+      [src]="post.image"
+      alt="{{ post.title }}"
+      class="object-cover w-full rounded block"
+    />
+    } @placeholder {
+    <div class="bg-catspace-grey w-full rounded"></div>
+    }
+    <div
+      class="absolute top-0 left-0 w-full h-full bg-catspace-brown/50 flex justify-center items-center opacity-0 hover:opacity-100 transition-opacity duration-300 rounded"
+    >
+      <p class="text-body-1 text-catspace-white">View Post</p>
+    </div>
+  </div>
+  <div class="flex flex-col gap-1">
+    <div>
+      <p class="subtitle-2 line-clamp-2">{{ post.title }}</p>
+    </div>
+    <div class="flex justify-between items-center">
+      <p class="text-body-2 line-clamp-1">
+        {{ post.favorites }} {{ "common.favorites" | translate }}
+      </p>
+      <span
+        class="material-symbols-outlined icon-18 text-catspace-orange hover:text-catspace-dark-orange hover:cursor-pointer"
+        >favorite</span
+      >
+    </div>
+  </div>
+</div>

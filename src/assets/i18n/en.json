@@ -1,17 +1,19 @@
 {
+  "common": {
+    "catspace": "catspace",
+    "followers": "Followers",
+    "favorites": "Favorites"
+  },
   "button": {
     "createAccount": "Create Account",
     "login": "Login",
     "signUp": "Sign Up",
     "follow": "Follow",
     "viewProfile": "View Profile",
-    "showMore": "Show More"
-  },
-  "profile": {
-    "followers": "Followers"
+    "showMore": "Show More",
+    "viewPost": "View Post"
   },
   "menu": {
-    "catspace": "catspace",
     "featured": "Featured",
     "catFacts": "Cat Facts",
     "search": "Search",

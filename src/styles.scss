@@ -58,6 +58,6 @@ body {
 .mat-mdc-raised-button,
 .mat-mdc-outlined-button {
   &.card-button {
-    @apply h-7 text-xs;
+    @apply h-7 text-caption p-0;
   }
 }
