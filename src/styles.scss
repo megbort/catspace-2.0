@@ -61,3 +61,18 @@ body {
     @apply h-7 text-caption p-0;
   }
 }
+
+.mat-button-toggle-standalone.mat-button-toggle-appearance-standard:not(
+    [class*="mat-elevation-z"]
+  ),
+.mat-button-toggle-group-appearance-standard:not([class*="mat-elevation-z"]) {
+  border: none;
+}
+.card-button.mat-button-toggle-appearance-standard {
+  @apply text-white bg-catspace-orange border-transparent h-7 text-xs;
+}
+
+.mat-button-toggle-appearance-standard
+  .mat-button-toggle-label-content:is(span) {
+  line-height: 1;
+}

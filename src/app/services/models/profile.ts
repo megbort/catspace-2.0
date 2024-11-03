@@ -1,7 +1,7 @@
 import { Post } from './post';
 
 export interface Profile {
-  id: number;
+  id: string;
   image: string;
   name: string;
   handle: string;

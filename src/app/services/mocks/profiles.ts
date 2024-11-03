@@ -2,7 +2,7 @@ import { Profile } from '../models';
 
 export const PROFILES: Profile[] = [
   {
-    id: 1,
+    id: '01',
     image:
       'https://images.pexels.com/photos/2959715/pexels-photo-2959715.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     name: 'Kiku Krenbrink',
@@ -39,7 +39,7 @@ export const PROFILES: Profile[] = [
     ],
   },
   {
-    id: 2,
+    id: '02',
     image:
       'https://images.pexels.com/photos/2558605/pexels-photo-2558605.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     name: 'Baxter Whiskerpaws',
@@ -50,7 +50,7 @@ export const PROFILES: Profile[] = [
     posts: [],
   },
   {
-    id: 3,
+    id: '03',
     image:
       'https://images.pexels.com/photos/1276553/pexels-photo-1276553.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     name: 'Luna Moonpurr',
@@ -61,7 +61,7 @@ export const PROFILES: Profile[] = [
     posts: [],
   },
   {
-    id: 4,
+    id: '04',
     image:
       'https://images.pexels.com/photos/57416/cat-sweet-kitty-animals-57416.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     name: 'Oscar Furrytail',
@@ -72,7 +72,7 @@ export const PROFILES: Profile[] = [
     posts: [],
   },
   {
-    id: 5,
+    id: '05',
     image:
       'https://images.pexels.com/photos/1543793/pexels-photo-1543793.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     name: 'Milo Pouncester',
@@ -83,7 +83,7 @@ export const PROFILES: Profile[] = [
     posts: [],
   },
   {
-    id: 6,
+    id: '06',
     image:
       'https://images.pexels.com/photos/96938/pexels-photo-96938.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     name: 'Whiskers McFluff',
@@ -94,7 +94,7 @@ export const PROFILES: Profile[] = [
     posts: [],
   },
   {
-    id: 7,
+    id: '07',
     image:
       'https://images.pexels.com/photos/1084425/pexels-photo-1084425.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     name: 'Cleo Purrington',
@@ -105,7 +105,7 @@ export const PROFILES: Profile[] = [
     posts: [],
   },
   {
-    id: 8,
+    id: '08',
     image:
       'https://images.pexels.com/photos/730896/pexels-photo-730896.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     name: 'Charlie Snugglepaws',
@@ -116,7 +116,7 @@ export const PROFILES: Profile[] = [
     posts: [],
   },
   {
-    id: 9,
+    id: '09',
     image:
       'https://images.pexels.com/photos/4056390/pexels-photo-4056390.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     name: 'Oliver Cuddlekins',
@@ -127,7 +127,7 @@ export const PROFILES: Profile[] = [
     posts: [],
   },
   {
-    id: 10,
+    id: '10',
     image:
       'https://images.pexels.com/photos/4557382/pexels-photo-4557382.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     name: 'Mittens Whiskerface',
@@ -138,7 +138,7 @@ export const PROFILES: Profile[] = [
     posts: [],
   },
   {
-    id: 11,
+    id: '11',
     image:
       'https://images.pexels.com/photos/4083295/pexels-photo-4083295.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     name: 'Simba Roarheart',
@@ -149,7 +149,7 @@ export const PROFILES: Profile[] = [
     posts: [],
   },
   {
-    id: 12,
+    id: '12',
     image:
       'https://images.pexels.com/photos/1311285/pexels-photo-1311285.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     name: 'Whiskey Fuzzington',
@@ -160,7 +160,7 @@ export const PROFILES: Profile[] = [
     posts: [],
   },
   {
-    id: 13,
+    id: '13',
     image:
       'https://images.pexels.com/photos/2617753/pexels-photo-2617753.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     name: 'Zara Starwhiskers',
@@ -171,7 +171,7 @@ export const PROFILES: Profile[] = [
     posts: [],
   },
   {
-    id: 14,
+    id: '14',
     image:
       'https://images.pexels.com/photos/1416834/pexels-photo-1416834.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
 
@@ -183,7 +183,7 @@ export const PROFILES: Profile[] = [
     posts: [],
   },
   {
-    id: 15,
+    id: '15',
     image:
       'https://images.pexels.com/photos/416160/pexels-photo-416160.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     name: 'Cupcake Sweetnose',
@@ -194,7 +194,7 @@ export const PROFILES: Profile[] = [
     posts: [],
   },
   {
-    id: 16,
+    id: '16',
     image:
       'https://images.pexels.com/photos/7689487/pexels-photo-7689487.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     name: 'Meowmer Meemo',
