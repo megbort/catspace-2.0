@@ -8,7 +8,7 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
 import { Profile } from '../../app/services';
 
 const mockProfile: Profile = {
-  id: 3,
+  id: '3',
   image:
     'https://images.pexels.com/photos/1276553/pexels-photo-1276553.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
   name: 'Luna Moonpurr',

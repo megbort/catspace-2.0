@@ -6,9 +6,11 @@
 @import "./styles/theme";
 
 html,
-body {
+body,
+app-root {
   height: 100%;
 }
+
 body {
   @include typography-styles;
   margin: 0;
