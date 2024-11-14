@@ -4,7 +4,7 @@ export const PROFILES: Profile[] = [
   {
     id: '01',
     image:
-      'https://images.pexels.com/photos/2959715/pexels-photo-2959715.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1730658243/catspace/catspace-image-01_svkhtp.jpg',
     name: 'Kiku Krenbrink',
     handle: 'kikucatu',
     followers: 122,
@@ -41,7 +41,7 @@ export const PROFILES: Profile[] = [
   {
     id: '02',
     image:
-      'https://images.pexels.com/photos/2558605/pexels-photo-2558605.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1730658243/catspace/catspace-image-02_uz3etn.jpg',
     name: 'Baxter Whiskerpaws',
     handle: 'baxterwhiskers',
     followers: 98,
@@ -52,7 +52,7 @@ export const PROFILES: Profile[] = [
   {
     id: '03',
     image:
-      'https://images.pexels.com/photos/1276553/pexels-photo-1276553.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1730658243/catspace/catspace-image-03_fhxfnz.jpg',
     name: 'Luna Moonpurr',
     handle: 'lunathepurr',
     followers: 205,
@@ -63,7 +63,7 @@ export const PROFILES: Profile[] = [
   {
     id: '04',
     image:
-      'https://images.pexels.com/photos/57416/cat-sweet-kitty-animals-57416.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1730658244/catspace/catspace-image-04_osmx3b.jpg',
     name: 'Oscar Furrytail',
     handle: 'oscarfurry',
     followers: 150,
@@ -74,7 +74,7 @@ export const PROFILES: Profile[] = [
   {
     id: '05',
     image:
-      'https://images.pexels.com/photos/1543793/pexels-photo-1543793.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1730658245/catspace/catspace-image-05_cwyhxv.jpg',
     name: 'Milo Pouncester',
     handle: 'milotheleaper',
     followers: 180,
@@ -85,7 +85,7 @@ export const PROFILES: Profile[] = [
   {
     id: '06',
     image:
-      'https://images.pexels.com/photos/96938/pexels-photo-96938.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1730658246/catspace/catspace-image-06_tstuf4.jpg',
     name: 'Whiskers McFluff',
     handle: 'whiskersfluff',
     followers: 130,
@@ -96,7 +96,7 @@ export const PROFILES: Profile[] = [
   {
     id: '07',
     image:
-      'https://images.pexels.com/photos/1084425/pexels-photo-1084425.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1730658247/catspace/catspace-image-07_fvvlqp.jpg',
     name: 'Cleo Purrington',
     handle: 'cleothecat',
     followers: 112,
@@ -107,7 +107,7 @@ export const PROFILES: Profile[] = [
   {
     id: '08',
     image:
-      'https://images.pexels.com/photos/730896/pexels-photo-730896.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1730658247/catspace/catspace-image-08_xvdpu7.jpg',
     name: 'Charlie Snugglepaws',
     handle: 'charliesnuggles',
     followers: 90,
@@ -118,7 +118,7 @@ export const PROFILES: Profile[] = [
   {
     id: '09',
     image:
-      'https://images.pexels.com/photos/4056390/pexels-photo-4056390.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1730658248/catspace/catspace-image-09_tn6nt9.jpg',
     name: 'Oliver Cuddlekins',
     handle: 'olivercuddles',
     followers: 175,
@@ -129,7 +129,7 @@ export const PROFILES: Profile[] = [
   {
     id: '10',
     image:
-      'https://images.pexels.com/photos/4557382/pexels-photo-4557382.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1730658249/catspace/catspace-image-10_cpzqjm.jpg',
     name: 'Mittens Whiskerface',
     handle: 'mittenswhiskers',
     followers: 120,
@@ -140,7 +140,7 @@ export const PROFILES: Profile[] = [
   {
     id: '11',
     image:
-      'https://images.pexels.com/photos/4083295/pexels-photo-4083295.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1730658250/catspace/catspace-image-12_mbz9yf.jpg',
     name: 'Simba Roarheart',
     handle: 'simbaking',
     followers: 200,
@@ -151,7 +151,7 @@ export const PROFILES: Profile[] = [
   {
     id: '12',
     image:
-      'https://images.pexels.com/photos/1311285/pexels-photo-1311285.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1730658251/catspace/catspace-image-13_aohajw.jpg',
     name: 'Whiskey Fuzzington',
     handle: 'whiskeyfuzz',
     followers: 88,
@@ -162,7 +162,7 @@ export const PROFILES: Profile[] = [
   {
     id: '13',
     image:
-      'https://images.pexels.com/photos/2617753/pexels-photo-2617753.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1730658252/catspace/catspace-image-14_tygyih.jpg',
     name: 'Zara Starwhiskers',
     handle: 'zarastar',
     followers: 135,
@@ -173,7 +173,7 @@ export const PROFILES: Profile[] = [
   {
     id: '14',
     image:
-      'https://images.pexels.com/photos/1416834/pexels-photo-1416834.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1730658252/catspace/catspace-image-15_e7oivm.jpg',
 
     name: 'Whisper Softpaws',
     handle: 'whisperthesoft',
@@ -185,7 +185,7 @@ export const PROFILES: Profile[] = [
   {
     id: '15',
     image:
-      'https://images.pexels.com/photos/416160/pexels-photo-416160.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1730658253/catspace/catspace-image-16_hsbzbk.jpg',
     name: 'Cupcake Sweetnose',
     handle: 'cupcakesweetie',
     followers: 20,
@@ -196,7 +196,7 @@ export const PROFILES: Profile[] = [
   {
     id: '16',
     image:
-      'https://images.pexels.com/photos/7689487/pexels-photo-7689487.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1730658249/catspace/catspace-image-11_xm3ssp.jpg',
     name: 'Meowmer Meemo',
     handle: 'memomeow',
     followers: 20,

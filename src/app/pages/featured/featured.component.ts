@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PROFILES } from '../../services';
+import { Profile, ProfileService } from '../../services';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   FollowEvent,
@@ -16,15 +16,24 @@ import { Router } from '@angular/router';
   styleUrl: './featured.component.scss',
 })
 export class FeaturedComponent {
-  profiles = PROFILES;
+  profiles: Profile[] = [];
 
-  constructor(readonly router: Router) {}
+  constructor(
+    private readonly router: Router,
+    private readonly profileService: ProfileService
+  ) {}
 
-  view(id: string) {
+  ngOnInit(): void {
+    this.profileService.getProfiles().subscribe((data) => {
+      this.profiles = data;
+    });
+  }
+
+  view(id: string): void {
     this.router.navigate(['/profile', id]);
   }
 
-  follow(event: FollowEvent) {
+  follow(event: FollowEvent): void {
     console.log(`Id: ${event.id}; Follow: ${event.following}`);
   }
 }
