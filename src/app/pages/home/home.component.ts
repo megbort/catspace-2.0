@@ -10,11 +10,10 @@ import { Router } from '@angular/router';
 import { map } from 'rxjs';
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [MatButtonModule, TranslateModule, ProfileCardComponent],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss',
+    selector: 'app-home',
+    imports: [MatButtonModule, TranslateModule, ProfileCardComponent],
+    templateUrl: './home.component.html',
+    styleUrl: './home.component.scss'
 })
 export class HomeComponent {
   featured: Profile[] = [];

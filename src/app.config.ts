@@ -1,9 +1,4 @@
-import {
-  APP_INITIALIZER,
-  ApplicationConfig,
-  importProvidersFrom,
-  provideZoneChangeDetection,
-} from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection, inject, provideAppInitializer } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
@@ -21,14 +16,12 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideHttpClient(withFetch()),
     importProvidersFrom(TranslateModule.forRoot(defaultTranslateConfig)),
-    {
-      provide: APP_INITIALIZER,
-      useFactory: (translate: TranslateService) => () => {
+    provideAppInitializer(() => {
+        const initializerFn = ((translate: TranslateService) => () => {
         translate.use(translate.defaultLang);
-      },
-      deps: [TranslateService],
-      multi: true,
-    },
+      })(inject(TranslateService));
+        return initializerFn();
+      }),
   ],
 };
 

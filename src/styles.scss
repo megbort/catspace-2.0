@@ -1,9 +1,9 @@
+@use "./styles/typographic" as typo;
+@use "./styles/theme";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import "./styles/typographic.scss";
-@import "./styles/theme";
 
 html,
 body,
@@ -12,9 +12,9 @@ app-root {
 }
 
 body {
-  @include typography-styles;
   margin: 0;
   font-family: "Open Sans", sans-serif;
+  @include typo.typography-styles();
 }
 
 * {

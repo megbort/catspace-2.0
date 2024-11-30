@@ -6,11 +6,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { catchError, of } from 'rxjs';
 
 @Component({
-  selector: 'app-profile',
-  standalone: true,
-  imports: [TranslateModule, MatButtonModule],
-  templateUrl: './profile.component.html',
-  styleUrl: './profile.component.scss',
+    selector: 'app-profile',
+    imports: [TranslateModule, MatButtonModule],
+    templateUrl: './profile.component.html',
+    styleUrl: './profile.component.scss'
 })
 export class ProfileComponent {
   profile?: Profile;

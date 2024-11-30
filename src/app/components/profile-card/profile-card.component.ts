@@ -12,16 +12,15 @@ export interface FollowEvent {
 }
 
 @Component({
-  selector: 'app-profile-card',
-  standalone: true,
-  imports: [
-    TranslateModule,
-    MatButtonModule,
-    RouterModule,
-    CommonModule,
-    MatButtonToggleModule,
-  ],
-  templateUrl: './profile-card.component.html',
+    selector: 'app-profile-card',
+    imports: [
+        TranslateModule,
+        MatButtonModule,
+        RouterModule,
+        CommonModule,
+        MatButtonToggleModule,
+    ],
+    templateUrl: './profile-card.component.html'
 })
 export class ProfileCardComponent {
   @Output() view = new EventEmitter<string>();

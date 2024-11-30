@@ -9,11 +9,10 @@ import {
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-featured',
-  standalone: true,
-  imports: [TranslateModule, ProfileCardComponent, CommonModule],
-  templateUrl: './featured.component.html',
-  styleUrl: './featured.component.scss',
+    selector: 'app-featured',
+    imports: [TranslateModule, ProfileCardComponent, CommonModule],
+    templateUrl: './featured.component.html',
+    styleUrl: './featured.component.scss'
 })
 export class FeaturedComponent {
   profiles: Profile[] = [];

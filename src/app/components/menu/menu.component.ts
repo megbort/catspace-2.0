@@ -6,16 +6,15 @@ import { TranslateModule } from '@ngx-translate/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-menu',
-  standalone: true,
-  imports: [
-    MatIconModule,
-    MatButtonModule,
-    MatMenuModule,
-    TranslateModule,
-    RouterModule,
-  ],
-  templateUrl: './menu.component.html',
-  styleUrl: './menu.component.scss',
+    selector: 'app-menu',
+    imports: [
+        MatIconModule,
+        MatButtonModule,
+        MatMenuModule,
+        TranslateModule,
+        RouterModule,
+    ],
+    templateUrl: './menu.component.html',
+    styleUrl: './menu.component.scss'
 })
 export class MenuComponent {}
