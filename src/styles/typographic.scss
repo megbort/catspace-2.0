@@ -24,10 +24,16 @@
 
 @mixin text-body-1 {
   @apply leading-6 font-normal text-base tracking-normal;
+  &.bold {
+    @apply font-medium;
+  }
 }
 
 @mixin text-body-2 {
   @apply leading-4 font-normal text-sm tracking-normal;
+  &.bold {
+    @apply font-medium;
+  }
 }
 
 @mixin text-caption {

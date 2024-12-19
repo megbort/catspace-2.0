@@ -1,0 +1,23 @@
+<div class="flex flex-col justify-center gap-2 p-8 w-full">
+  <h2 class="text-center pb-2">Login</h2>
+  <form class="flex flex-col">
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="Enter your email" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" placeholder="Enter your password" />
+    </mat-form-field>
+    <button mat-flat-button (click)="login()">Login</button>
+  </form>
+  <div class="text-center">
+    <p class="text-body-2 pt-8 text-center bold">Don't have an account yet?</p>
+    <button
+      class="px-2 text-body-2 text-catspace-orange hover:underline"
+      (click)="signup()"
+    >
+      Sign Up
+    </button>
+  </div>
+</div>

@@ -34,10 +34,12 @@
     </div>
 
     <div class="hidden text-right md:block w-[225px]">
-      <button class="mr-2" mat-stroked-button>
+      <button class="mr-2" mat-stroked-button (click)="openDialog('signup')">
         {{ "button.signUp" | translate }}
       </button>
-      <button mat-flat-button>{{ "button.login" | translate }}</button>
+      <button mat-flat-button (click)="openDialog('login')">
+        {{ "button.login" | translate }}
+      </button>
     </div>
 
     <!-- Mobile menu -->
