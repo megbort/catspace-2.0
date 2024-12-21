@@ -1,23 +1,53 @@
-<div class="flex flex-col justify-center gap-2 p-8 w-full">
-  <h2 class="text-center pb-2">Login</h2>
-  <form class="flex flex-col">
+<div class="flex flex-col justify-center gap-4 p-8 w-full">
+  <h2 class="text-center pb-2">{{ "button.login" | translate }}</h2>
+  <form [formGroup]="form" class="flex flex-col gap-2">
     <mat-form-field appearance="outline">
-      <mat-label>Email</mat-label>
-      <input matInput placeholder="Enter your email" />
+      <mat-label>{{ "common.email" | translate }}</mat-label>
+      <input
+        matInput
+        formControlName="email"
+        type="email"
+        placeholder="Enter your email"
+      />
+      @if(form.get('email')?.hasError('required')){
+      <mat-error>{{
+        "form.error.required"
+          | translate : { field: ("common.email" | translate) }
+      }}</mat-error>
+      } @if(form.get('email')?.hasError('email')){
+      <mat-error>{{ "form.error.emailInvalid" | translate }}</mat-error>
+      }
     </mat-form-field>
     <mat-form-field appearance="outline">
-      <mat-label>Password</mat-label>
-      <input matInput type="password" placeholder="Enter your password" />
+      <mat-label>{{ "common.password" | translate }}</mat-label>
+      <input
+        matInput
+        formControlName="password"
+        type="password"
+        placeholder="Enter your password"
+      />
+      @if(form.get('password')?.hasError('required')){
+      <mat-error>{{
+        "form.error.required"
+          | translate : { field: ("common.password" | translate) }
+      }}</mat-error>
+      } @if(form.get('password')?.hasError('minlength')){
+      <mat-error>{{ "form.error.passwordLength" | translate }}</mat-error>
+      }
     </mat-form-field>
-    <button mat-flat-button (click)="login()">Login</button>
   </form>
+  <button mat-flat-button [disabled]="!form.valid" (click)="login()">
+    {{ "button.login" | translate }}
+  </button>
   <div class="text-center">
-    <p class="text-body-2 pt-8 text-center bold">Don't have an account yet?</p>
+    <p class="text-body-2 pt-8 text-center bold">
+      {{ "form.loginMessage" | translate }}
+    </p>
     <button
       class="px-2 text-body-2 text-catspace-orange hover:underline"
       (click)="signup()"
     >
-      Sign Up
+      {{ "button.signUp" | translate }}
     </button>
   </div>
 </div>

@@ -1,20 +1,22 @@
 <nav aria-label="Main">
-  <div class="bg-catspace-beige flex items-center h-28 px-4 md:px-8">
+  <div
+    class="bg-catspace-beige flex items-center justify-around h-28 px-4 md:px-8"
+  >
     <!-- Logo -->
     <div
-      class="flex-shrink-0 hover:cursor-pointer w-[225px]"
+      class="hover:cursor-pointer md:basis-1/4 max-w-[225px]"
       routerLink="/home"
       title="Home"
     >
       <img
         src="https://res.cloudinary.com/dm1yyjg7i/image/upload/v1730658024/catspace/catspace-logo-lg_jxurk2.png"
         alt="catspace logo"
-        class="w-full"
+        class="w-[175px] md:w-[200px]"
       />
     </div>
 
     <!-- Web menu -->
-    <div class="flex-grow flex justify-center">
+    <div class="flex justify-center basis-2/4">
       <ul class="hidden md:flex md:gap-4 lg:gap-8">
         <li class="menu-item" routerLink="/featured" title="Featured">
           <p class="subtitle-1 pr-1">{{ "menu.featured" | translate }}</p>
@@ -26,20 +28,24 @@
             >local_fire_department</span
           >
         </li>
-        <li class="menu-item" routerLink="/featured" title="Search">
-          <p class="subtitle-1 pr-1">{{ "menu.search" | translate }}</p>
-          <span class="material-icons hidden lg:block">search</span>
-        </li>
       </ul>
     </div>
 
-    <div class="hidden text-right md:block w-[225px]">
-      <button class="mr-2" mat-stroked-button (click)="openDialog('signup')">
+    <div class="items-center justify-end gap-4 hidden md:flex w-[225px]">
+      @if(isLoggedIn()) {
+      <span class="material-symbols-outlined">notifications</span>
+      <div class="rounded-full bg-catspace-brown w-8 h-8"></div>
+      <button mat-stroked-button (click)="logout()">
+        {{ "button.logout" | translate }}
+      </button>
+      } @else {
+      <button mat-stroked-button (click)="openDialog('signup')">
         {{ "button.signUp" | translate }}
       </button>
       <button mat-flat-button (click)="openDialog('login')">
         {{ "button.login" | translate }}
       </button>
+      }
     </div>
 
     <!-- Mobile menu -->
@@ -59,7 +65,7 @@
         {{ "menu.catFacts" | translate }}
       </li>
       <li mat-menu-item routerLink="/featured">
-        {{ "menu.search" | translate }}
+        {{ "button.signUp" | translate }}
       </li>
       <li mat-menu-item routerLink="/featured">
         {{ "button.login" | translate }}

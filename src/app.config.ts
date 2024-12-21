@@ -1,4 +1,10 @@
-import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection, inject, provideAppInitializer } from '@angular/core';
+import {
+  ApplicationConfig,
+  importProvidersFrom,
+  provideZoneChangeDetection,
+  inject,
+  provideAppInitializer,
+} from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
@@ -7,6 +13,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, provideHttpClient, withFetch } from '@angular/common/http';
 import { defaultTranslateConfig } from './app/shared/config/translate';
+import { GlobalStore } from './app/shared';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,11 +24,12 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch()),
     importProvidersFrom(TranslateModule.forRoot(defaultTranslateConfig)),
     provideAppInitializer(() => {
-        const initializerFn = ((translate: TranslateService) => () => {
+      const initializerFn = ((translate: TranslateService) => () => {
         translate.use(translate.defaultLang);
       })(inject(TranslateService));
-        return initializerFn();
-      }),
+      return initializerFn();
+    }),
+    GlobalStore,
   ],
 };
 

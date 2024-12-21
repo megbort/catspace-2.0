@@ -7,6 +7,8 @@ import { storybookTranslateConfig } from '../../app/shared/config/translate';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
+import { GlobalStore } from '../../app/shared';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 const meta: Meta<LoginComponent> = {
   title: 'Components/Login',
@@ -24,6 +26,17 @@ const meta: Meta<LoginComponent> = {
               params: {},
             },
           },
+        },
+        GlobalStore,
+        {
+          provide: MatDialogRef,
+          useValue: {
+            close: () => {},
+          },
+        },
+        {
+          provide: MAT_DIALOG_DATA,
+          useValue: {},
         },
       ],
     }),

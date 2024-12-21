@@ -7,6 +7,7 @@ import { storybookTranslateConfig } from '../../app/shared/config/translate';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
+import { GlobalStore } from '../../app/shared';
 
 const meta: Meta<MenuComponent> = {
   title: 'Components/Menu',
@@ -25,6 +26,7 @@ const meta: Meta<MenuComponent> = {
             },
           },
         },
+        GlobalStore,
       ],
     }),
     moduleMetadata({

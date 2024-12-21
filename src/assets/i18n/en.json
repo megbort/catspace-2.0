@@ -2,7 +2,10 @@
   "common": {
     "catspace": "catspace",
     "followers": "Followers",
-    "favorites": "Favorites"
+    "favorites": "Favorites",
+    "email": "Email",
+    "password": "Password",
+    "account": "Account"
   },
   "button": {
     "createAccount": "Create Account",
@@ -13,7 +16,17 @@
     "viewProfile": "View Profile",
     "showMore": "Show More",
     "viewPost": "View Post",
-    "message": "Message"
+    "message": "Message",
+    "logout": "Logout"
+  },
+  "form": {
+    "loginMessage": "Don't have an account?",
+    "signUpMessage": "Already have an account?",
+    "error": {
+      "required": "{{field}} is required",
+      "emailInvalid": "Please enter a valid email",
+      "passwordLength": "Password must be at least 6 characters long"
+    }
   },
   "menu": {
     "featured": "Featured",
