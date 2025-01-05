@@ -5,7 +5,11 @@ import {
   inject,
   provideAppInitializer,
 } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import {
+  InMemoryScrollingOptions,
+  provideRouter,
+  withInMemoryScrolling,
+} from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -15,10 +19,17 @@ import { HttpClient, provideHttpClient, withFetch } from '@angular/common/http';
 import { defaultTranslateConfig } from './app/shared/config/translate';
 import { GlobalStore } from './app/shared';
 
+const scrollConfig: InMemoryScrollingOptions = {
+  scrollPositionRestoration: 'top',
+  anchorScrolling: 'enabled',
+};
+
+const inMemoryScrollingConfig = withInMemoryScrolling(scrollConfig);
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes),
+    provideRouter(routes, inMemoryScrollingConfig),
     provideClientHydration(),
     provideAnimationsAsync(),
     provideHttpClient(withFetch()),

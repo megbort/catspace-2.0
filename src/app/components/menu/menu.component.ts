@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { SignupComponent } from '../auth/signup/signup.component';
 import { LoginComponent } from '../auth/login/login.component';
-import { GlobalStore } from '../../shared';
+import { GlobalStore, Dialog, DialogType } from '../../shared';
 
 @Component({
   selector: 'app-menu',
@@ -30,11 +30,12 @@ export class MenuComponent {
     public globalStore: GlobalStore
   ) {}
 
-  openDialog(dialogType: 'signup' | 'login'): void {
-    this.dialog.open(
-      dialogType === 'signup' ? SignupComponent : LoginComponent,
-      { width: '500px' }
-    );
+  openDialog(dialog: DialogType): void {
+    if (dialog === Dialog.SignUp) {
+      this.dialog.open(SignupComponent, { width: '500px' });
+    } else {
+      this.dialog.open(LoginComponent, { width: '500px' });
+    }
   }
 
   logout(): void {

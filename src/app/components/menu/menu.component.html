@@ -39,7 +39,7 @@
         {{ "button.logout" | translate }}
       </button>
       } @else {
-      <button mat-stroked-button (click)="openDialog('signup')">
+      <button mat-stroked-button (click)="openDialog('signUp')">
         {{ "button.signUp" | translate }}
       </button>
       <button mat-flat-button (click)="openDialog('login')">
@@ -64,12 +64,32 @@
       <li mat-menu-item routerLink="/featured">
         {{ "menu.catFacts" | translate }}
       </li>
-      <li mat-menu-item routerLink="/featured">
+      @if(isLoggedIn()) {
+      <li mat-menu-item>
+        {{ "menu.notifications" | translate }}
+      </li>
+      <li mat-menu-item>
+        {{ "menu.account" | translate }}
+      </li>
+      <li mat-menu-item (click)="logout()" (keydown)="logout()">
+        {{ "button.logout" | translate }}
+      </li>
+      } @else {
+      <li
+        mat-menu-item
+        (click)="openDialog('signUp')"
+        (keydown)="openDialog('signUp')"
+      >
         {{ "button.signUp" | translate }}
       </li>
-      <li mat-menu-item routerLink="/featured">
+      <li
+        mat-menu-item
+        (click)="openDialog('login')"
+        (keydown)="openDialog('login')"
+      >
         {{ "button.login" | translate }}
       </li>
+      }
     </ul>
   </mat-menu>
 </nav>

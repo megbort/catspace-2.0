@@ -5,7 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { TranslateModule } from '@ngx-translate/core';
 import { GlobalStore } from '../../../shared';
 import { User, USER } from '../../../services';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import {
   FormBuilder,
   FormGroup,
@@ -13,6 +13,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { SignupComponent } from '../signup/signup.component';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +26,6 @@ import {
     ReactiveFormsModule,
   ],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss',
 })
 export class LoginComponent {
   form: FormGroup;
@@ -33,6 +33,7 @@ export class LoginComponent {
 
   constructor(
     private readonly globalStore: GlobalStore,
+    private readonly dialog: MatDialog,
     private readonly dialogRef: MatDialogRef<LoginComponent>,
     private readonly formBuilder: FormBuilder
   ) {
@@ -56,7 +57,8 @@ export class LoginComponent {
     }
   }
 
-  signup(): void {
-    console.log('signup');
+  signUp(): void {
+    this.dialogRef.close();
+    this.dialog.open(SignupComponent, { width: '500px' });
   }
 }

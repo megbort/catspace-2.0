@@ -17,11 +17,21 @@
     "showMore": "Show More",
     "viewPost": "View Post",
     "message": "Message",
-    "logout": "Logout"
+    "logout": "Logout",
+    "next": "Next",
+    "back": "Back"
   },
   "form": {
     "loginMessage": "Don't have an account?",
     "signUpMessage": "Already have an account?",
+    "signUp": {
+      "step1": "We're excited to have you join! Lets start with getting some basic information for your profile.",
+      "step2": "Almost done! Next, fill out your email and password then get ready to start posting.",
+      "name": "Profile Name",
+      "handle": "Handle",
+      "handleHelp": "This is a quick way to tag others and shows one your profile like '@myhandle2000'",
+      "description": "Profile Description (optional)"
+    },
     "error": {
       "required": "{{field}} is required",
       "emailInvalid": "Please enter a valid email",
@@ -33,7 +43,8 @@
     "catFacts": "Cat Facts",
     "search": "Search",
     "home": "Home",
-    "account": "Account"
+    "account": "Account",
+    "notifications": "Notifications"
   },
   "home": {
     "heroTitle": "Welcome to catspace!",
@@ -45,7 +56,7 @@
     "explore": "Explore more profiles"
   },
   "footer": {
-    "copyright": "Designed and built by Megan Krenbrink © 2024"
+    "copyright": "Designed and built by Megan Krenbrink © 2025"
   },
   "profile": {
     "placeholder": "Hello! I'm {{name}}, the fluffiest boss around. I spend my days napping in sunbeams and pretending not to care about your attention... but don't be fooled—I control everything. Pet me if you must, but only for 3 seconds, then I'll claw your hand. My real passion? Pushing your things off ledges just to see what happens. Feed me at exactly 6 p.m., or else..."

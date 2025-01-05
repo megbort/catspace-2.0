@@ -1,5 +1,4 @@
 import { Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
-import { LoginComponent } from '../../app/components/auth/login/login.component';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { applicationConfig } from '@storybook/angular';
 import { TranslateModule } from '@ngx-translate/core';
@@ -9,10 +8,11 @@ import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 import { GlobalStore } from '../../app/shared';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { SignupComponent } from '../../app/components/auth/signup/signup.component';
 
-const meta: Meta<LoginComponent> = {
-  title: 'Components/Auth/Login',
-  component: LoginComponent,
+const meta: Meta<SignupComponent> = {
+  title: 'Components/Auth/SignUp',
+  component: SignupComponent,
   decorators: [
     applicationConfig({
       providers: [
@@ -47,7 +47,7 @@ const meta: Meta<LoginComponent> = {
 };
 
 export default meta;
-type Story = StoryObj<LoginComponent>;
+type Story = StoryObj<SignupComponent>;
 
 export const Primary: Story = {
   args: {},
