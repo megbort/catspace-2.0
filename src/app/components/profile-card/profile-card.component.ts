@@ -4,7 +4,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { TranslateModule } from '@ngx-translate/core';
 import { Profile } from '../../services';
 import { RouterModule } from '@angular/router';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import {
+  MatButtonToggleChange,
+  MatButtonToggleModule,
+} from '@angular/material/button-toggle';
+import { UnpicImageDirective } from '@unpic/angular';
+import { GlobalStore } from '../../shared';
+import { MatDialog } from '@angular/material/dialog';
+import { AuthMessageComponent } from '../auth/auth-message.component';
 
 export interface FollowEvent {
   id: string;
@@ -12,20 +19,22 @@ export interface FollowEvent {
 }
 
 @Component({
-    selector: 'app-profile-card',
-    imports: [
-        TranslateModule,
-        MatButtonModule,
-        RouterModule,
-        CommonModule,
-        MatButtonToggleModule,
-    ],
-    templateUrl: './profile-card.component.html'
+  selector: 'app-profile-card',
+  imports: [
+    TranslateModule,
+    MatButtonModule,
+    RouterModule,
+    CommonModule,
+    MatButtonToggleModule,
+    UnpicImageDirective,
+  ],
+  templateUrl: './profile-card.component.html',
 })
 export class ProfileCardComponent {
   @Output() view = new EventEmitter<string>();
   @Output() follow = new EventEmitter<FollowEvent>();
 
+  @Input() userFollowing?: string[] = [];
   @Input() profile: Profile = {
     id: '',
     image: '',
@@ -33,23 +42,42 @@ export class ProfileCardComponent {
     handle: '',
     followers: 0,
     tags: [],
-    following: false,
-    posts: [],
   };
 
-  followUser() {
-    this.profile.following = !this.profile.following;
+  following = false;
 
-    this.follow.emit({
-      id: this.profile.id,
-      following: this.profile.following,
+  constructor(
+    private readonly globalStore: GlobalStore,
+    private readonly dialog: MatDialog
+  ) {}
+
+  setFollowingStatus(): void {
+    if (!this.globalStore.authorized()) {
+      return;
+    }
+
+    this.userFollowing?.forEach((id) => {
+      if (id === this.profile.id) {
+        this.following = true;
+      }
     });
   }
 
-  handleKeyboardEvent(event: KeyboardEvent): void {
-    if (event.key === 'Enter' || event.key === ' ') {
-      this.followUser();
-      event.preventDefault();
+  toggleFollow(event: MatButtonToggleChange): void {
+    if (!this.globalStore.authorized()) {
+      this.showAuthMessage();
+      event.source.checked = this.following;
+      return;
     }
+
+    this.following = !this.following;
+    this.follow.emit({
+      id: this.profile.id,
+      following: this.following,
+    });
+  }
+
+  showAuthMessage(): void {
+    this.dialog.open(AuthMessageComponent);
   }
 }

@@ -3,12 +3,13 @@
 >
   @defer (on viewport) {
   <img
+    unpic
     [src]="profile.image"
     alt="{{ profile.name }}"
     class="object-cover w-full h-[150px] rounded"
     alt="cat"
   />
-  }@placeholder {
+  } @placeholder {
   <div class="bg-catspace-grey w-full rounded h-[150px]"></div>
   }
   <div>
@@ -24,13 +25,10 @@
   <div class="flex justify-between gap-2">
     <mat-button-toggle
       class="basis-1/2 card-button"
-      [checked]="profile.following"
-      (click)="followUser()"
-      (keydown)="handleKeyboardEvent($event)"
+      [checked]="following"
+      (change)="toggleFollow($event)"
     >
-      {{
-        (profile.following ? "button.unfollow" : "button.follow") | translate
-      }}
+      {{ (following ? "button.unfollow" : "button.follow") | translate }}
     </mat-button-toggle>
 
     <button

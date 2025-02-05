@@ -3,7 +3,11 @@
 }
 
 @mixin h2 {
-  @apply leading-8 font-semibold text-3xl tracking-wider;
+  @apply leading-8 font-semibold text-2xl tracking-wider;
+
+  @media (min-width: 768px) {
+    @apply text-3xl;
+  }
 }
 
 @mixin subtitle-1 {

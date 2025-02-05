@@ -8,6 +8,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { SignupComponent } from '../auth/signup/signup.component';
 import { LoginComponent } from '../auth/login/login.component';
 import { GlobalStore, Dialog, DialogType } from '../../shared';
+import { UnpicImageDirective } from '@unpic/angular';
 
 @Component({
   selector: 'app-menu',
@@ -18,6 +19,7 @@ import { GlobalStore, Dialog, DialogType } from '../../shared';
     TranslateModule,
     RouterModule,
     MatDialogModule,
+    UnpicImageDirective,
   ],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss',

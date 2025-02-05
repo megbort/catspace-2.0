@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { PROFILES, Post } from '../../services';
+import { Post, USER } from '../../services';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
@@ -9,5 +9,5 @@ import { TranslateModule } from '@ngx-translate/core';
   templateUrl: './post-card.component.html',
 })
 export class PostCardComponent {
-  post: Post = PROFILES[0].posts[0];
+  post: Post = USER.posts[0];
 }

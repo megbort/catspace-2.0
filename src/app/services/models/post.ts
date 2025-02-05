@@ -3,5 +3,6 @@ export interface Post {
   title: string;
   image: string;
   favorites: number;
-  isFavorite: boolean;
+  tags: string[];
+  comments: string[];
 }

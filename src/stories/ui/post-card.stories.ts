@@ -5,9 +5,9 @@ import { TranslateModule } from '@ngx-translate/core';
 import { storybookTranslateConfig } from '../../app/shared';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { PostCardComponent } from '../../app/components/post-card/post-card.component';
-import { Post, PROFILES } from '../../app/services';
+import { Post, USER } from '../../app/services';
 
-const post: Post = PROFILES[0].posts[0];
+const post: Post = USER.posts[0];
 
 const meta: Meta<PostCardComponent> = {
   title: 'Components/Post Card',

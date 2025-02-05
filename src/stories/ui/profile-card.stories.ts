@@ -3,7 +3,7 @@ import { ProfileCardComponent } from '../../app/components/profile-card/profile-
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { applicationConfig } from '@storybook/angular';
 import { TranslateModule } from '@ngx-translate/core';
-import { storybookTranslateConfig } from '../../app/shared';
+import { GlobalStore, storybookTranslateConfig } from '../../app/shared';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { Profile } from '../../app/services';
 
@@ -15,8 +15,6 @@ const mockProfile: Profile = {
   handle: 'lunathepurr',
   followers: 205,
   tags: ['#mysterious', '#paws', '#moonlight', '#elegant'],
-  following: true,
-  posts: [],
 };
 
 const meta: Meta<ProfileCardComponent> = {
@@ -24,7 +22,11 @@ const meta: Meta<ProfileCardComponent> = {
   component: ProfileCardComponent,
   decorators: [
     applicationConfig({
-      providers: [provideAnimations(), provideHttpClient(withFetch())],
+      providers: [
+        provideAnimations(),
+        provideHttpClient(withFetch()),
+        GlobalStore,
+      ],
     }),
     moduleMetadata({
       imports: [TranslateModule.forRoot(storybookTranslateConfig)],

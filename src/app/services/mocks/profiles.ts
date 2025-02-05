@@ -9,34 +9,6 @@ export const PROFILES: Profile[] = [
     handle: 'kikucatu',
     followers: 122,
     tags: ['#catnip', '#tabby', '#curious', '#soft'],
-    following: true,
-    posts: [
-      {
-        id: 'kikuPost001',
-        title: 'Sunday morning vibes',
-        image:
-          'https://images.pexels.com/photos/2959715/pexels-photo-2959715.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-        favorites: 202,
-        isFavorite: false,
-      },
-      {
-        id: 'kikuPost002',
-        title: "I'm feeling like some zooms today",
-        image:
-          'https://images.pexels.com/photos/2959715/pexels-photo-2959715.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-        favorites: 202,
-        isFavorite: false,
-      },
-      {
-        id: 'kikuPost003',
-        title:
-          "Waiting here for my human to come home, they're always late >:(",
-        image:
-          'https://images.pexels.com/photos/2959715/pexels-photo-2959715.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-        favorites: 202,
-        isFavorite: false,
-      },
-    ],
   },
   {
     id: '02',
@@ -46,8 +18,6 @@ export const PROFILES: Profile[] = [
     handle: 'baxterwhiskers',
     followers: 98,
     tags: ['#playful', '#stripped', '#whiskers', '#fluffy'],
-    following: false,
-    posts: [],
   },
   {
     id: '03',
@@ -57,8 +27,6 @@ export const PROFILES: Profile[] = [
     handle: 'lunathepurr',
     followers: 205,
     tags: ['#mysterious', '#paws', '#moonlight', '#elegant'],
-    following: true,
-    posts: [],
   },
   {
     id: '04',
@@ -68,8 +36,6 @@ export const PROFILES: Profile[] = [
     handle: 'oscarfurry',
     followers: 150,
     tags: ['#cuddly', '#orange', '#gentle', '#bigeyes'],
-    following: false,
-    posts: [],
   },
   {
     id: '05',
@@ -79,8 +45,6 @@ export const PROFILES: Profile[] = [
     handle: 'milotheleaper',
     followers: 180,
     tags: ['#energetic', '#grey', '#jumping', '#adventurous'],
-    following: true,
-    posts: [],
   },
   {
     id: '06',
@@ -90,8 +54,6 @@ export const PROFILES: Profile[] = [
     handle: 'whiskersfluff',
     followers: 130,
     tags: ['#fluffy', '#quiet', '#snuggly', '#playful'],
-    following: false,
-    posts: [],
   },
   {
     id: '07',
@@ -101,8 +63,6 @@ export const PROFILES: Profile[] = [
     handle: 'cleothecat',
     followers: 112,
     tags: ['#regal', '#white', '#sophisticated', '#graceful'],
-    following: true,
-    posts: [],
   },
   {
     id: '08',
@@ -112,8 +72,6 @@ export const PROFILES: Profile[] = [
     handle: 'charliesnuggles',
     followers: 90,
     tags: ['#snuggly', '#striped', '#friendly', '#sleepy'],
-    following: true,
-    posts: [],
   },
   {
     id: '09',
@@ -123,8 +81,6 @@ export const PROFILES: Profile[] = [
     handle: 'olivercuddles',
     followers: 175,
     tags: ['#cute', '#calico', '#curledup', '#content'],
-    following: false,
-    posts: [],
   },
   {
     id: '10',
@@ -134,8 +90,6 @@ export const PROFILES: Profile[] = [
     handle: 'mittenswhiskers',
     followers: 120,
     tags: ['#adorable', '#mittens', '#sweet', '#kitten'],
-    following: true,
-    posts: [],
   },
   {
     id: '11',
@@ -145,8 +99,6 @@ export const PROFILES: Profile[] = [
     handle: 'simbaking',
     followers: 200,
     tags: ['#brave', '#lion', '#golden', '#majestic'],
-    following: false,
-    posts: [],
   },
   {
     id: '12',
@@ -156,8 +108,6 @@ export const PROFILES: Profile[] = [
     handle: 'whiskeyfuzz',
     followers: 88,
     tags: ['#mischievous', '#gray', '#fuzzy', '#playful'],
-    following: true,
-    posts: [],
   },
   {
     id: '13',
@@ -167,8 +117,6 @@ export const PROFILES: Profile[] = [
     handle: 'zarastar',
     followers: 135,
     tags: ['#star', '#white', '#shiny', '#playful'],
-    following: false,
-    posts: [],
   },
   {
     id: '14',
@@ -179,8 +127,6 @@ export const PROFILES: Profile[] = [
     handle: 'whisperthesoft',
     followers: 155,
     tags: ['#gentle', '#gray', '#quiet', '#graceful'],
-    following: true,
-    posts: [],
   },
   {
     id: '15',
@@ -190,8 +136,6 @@ export const PROFILES: Profile[] = [
     handle: 'cupcakesweetie',
     followers: 20,
     tags: ['#meowmix', '#sweet', '#blessed', '#clawz'],
-    following: false,
-    posts: [],
   },
   {
     id: '16',
@@ -201,7 +145,5 @@ export const PROFILES: Profile[] = [
     handle: 'memomeow',
     followers: 20,
     tags: ['#meemo', '#fuzzhead', '#scratch', '#nice'],
-    following: false,
-    posts: [],
   },
 ];

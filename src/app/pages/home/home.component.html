@@ -1,37 +1,53 @@
 <section class="hero-image">
-  <div class="hero-content rounded-lg p-16 max-w-2xl">
+  <img
+    unpic
+    priority
+    class="hero-image-img"
+    src="https://res.cloudinary.com/dm1yyjg7i/image/upload/v1730658242/catspace/cat-doodle_c9w2ic.png"
+    alt="A drawing of many cats"
+  />
+  <div class="hero-content rounded-lg p-12 max-w-2xl">
     <h1>{{ "home.heroTitle" | translate }}</h1>
     <p
       class="subtitle-2 py-4"
       [innerHTML]="'home.heroSubtitle' | translate"
     ></p>
-    <button mat-flat-button>{{ "button.createAccount" | translate }}</button>
+    <button mat-flat-button (click)="signUp()">
+      {{ "button.createAccount" | translate }}
+    </button>
   </div>
 </section>
 <section>
   <div
-    class="flex flex-col justify-between items-center py-28 px-8 m-auto md:flex-row max-w-6xl"
+    class="flex flex-col justify-between items-center py-24 px-8 m-auto md:flex-row max-w-6xl"
   >
     <div class="basis-1/2 px-8 pb-4 md:pb-0">
-      <img src="../../../assets/images/two-cats.png" alt="Cats" />
+      <img
+        unpic
+        class="max-w-[400px]"
+        src="https://res.cloudinary.com/dm1yyjg7i/image/upload/v1730658254/catspace/two-cats_y45tum.png"
+        alt="Two orange cats"
+      />
     </div>
-    <div class="basis-1/2 px-8">
+    <div class="basis-1/2 p-8 flex flex-col gap-4">
       <h2 class="pb-4">{{ "home.about" | translate }}</h2>
-      <p class="pb-4">{{ "home.description1" | translate }}</p>
-      <p class="pb-6">{{ "home.description2" | translate }}</p>
-      <button mat-flat-button>{{ "button.createAccount" | translate }}</button>
+      <p class="text-body">{{ "home.description1" | translate }}</p>
+      <p class="text-body">{{ "home.description2" | translate }}</p>
+      <button mat-flat-button (click)="signUp()" class="w-max">
+        {{ "button.createAccount" | translate }}
+      </button>
     </div>
   </div>
 </section>
 <section>
   <div
-    class="py-16 px-2 max-w-[320px] sm:max-w-2xl md:text-left lg:max-w-5xl xl:max-w-7xl mx-auto"
+    class="py-16 px-2 max-w-[320px] sm:max-w-2xl md:text-left xl:max-w-7xl mx-auto"
   >
     <h2 class="pb-8 text-center md:text-left">
       {{ "home.featured" | translate }}
     </h2>
     <div
-      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-center"
+      class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8 justify-center"
     >
       @for(profile of featured; track profile.id) {
       <app-profile-card
@@ -43,6 +59,7 @@
     </div>
     <p
       class="text-body-1 pt-4 mr-2 text-catspace-orange text-right hover:cursor-pointer hover:underline"
+      routerLink="/featured"
     >
       {{ "home.explore" | translate }}
     </p>

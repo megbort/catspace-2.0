@@ -6,20 +6,30 @@ import {
   ProfileCardComponent,
 } from '../../components/profile-card/profile-card.component';
 import { Profile, ProfileService } from '../../services';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { map } from 'rxjs';
+import { UnpicImageDirective } from '@unpic/angular';
+import { SignupComponent } from '../../components/auth/signup/signup.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
-    selector: 'app-home',
-    imports: [MatButtonModule, TranslateModule, ProfileCardComponent],
-    templateUrl: './home.component.html',
-    styleUrl: './home.component.scss'
+  selector: 'app-home',
+  imports: [
+    MatButtonModule,
+    TranslateModule,
+    ProfileCardComponent,
+    UnpicImageDirective,
+    RouterModule,
+  ],
+  templateUrl: './home.component.html',
+  styleUrl: './home.component.scss',
 })
 export class HomeComponent {
   featured: Profile[] = [];
 
   constructor(
     private readonly router: Router,
+    private readonly dialog: MatDialog,
     private readonly profileService: ProfileService
   ) {}
 
@@ -38,5 +48,9 @@ export class HomeComponent {
 
   follow(event: FollowEvent): void {
     console.log(`Id: ${event.id}; Follow: ${event.following}`);
+  }
+
+  signUp(): void {
+    this.dialog.open(SignupComponent, { width: '500px' });
   }
 }

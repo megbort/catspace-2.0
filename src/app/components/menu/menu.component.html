@@ -9,6 +9,8 @@
       title="Home"
     >
       <img
+        unpic
+        priority
         src="https://res.cloudinary.com/dm1yyjg7i/image/upload/v1730658024/catspace/catspace-logo-lg_jxurk2.png"
         alt="catspace logo"
         class="w-[175px] md:w-[200px]"
@@ -71,23 +73,21 @@
       <li mat-menu-item>
         {{ "menu.account" | translate }}
       </li>
-      <li mat-menu-item (click)="logout()" (keydown)="logout()">
-        {{ "button.logout" | translate }}
+      <li mat-menu-item>
+        <button (click)="logout()">
+          {{ "button.logout" | translate }}
+        </button>
       </li>
       } @else {
-      <li
-        mat-menu-item
-        (click)="openDialog('signUp')"
-        (keydown)="openDialog('signUp')"
-      >
-        {{ "button.signUp" | translate }}
+      <li mat-menu-item>
+        <button (click)="openDialog('signUp')">
+          {{ "button.signUp" | translate }}
+        </button>
       </li>
-      <li
-        mat-menu-item
-        (click)="openDialog('login')"
-        (keydown)="openDialog('login')"
-      >
-        {{ "button.login" | translate }}
+      <li mat-menu-item>
+        <button (click)="openDialog('login')">
+          {{ "button.login" | translate }}
+        </button>
       </li>
       }
     </ul>

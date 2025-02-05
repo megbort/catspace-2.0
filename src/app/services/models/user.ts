@@ -1,3 +1,5 @@
+import { Post } from './post';
+
 export interface User {
   id: string;
   email: string;
@@ -5,6 +7,7 @@ export interface User {
   handle: string;
   name: string;
   description: string;
-  following?: string[];
-  favorites?: string[];
+  posts: Post[];
+  following: string[];
+  favorites: string[];
 }
