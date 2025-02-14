@@ -40,8 +40,10 @@ export class ProfileCardComponent {
     image: '',
     name: '',
     handle: '',
+    description: '',
     followers: 0,
     tags: [],
+    posts: [],
   };
 
   following = false;

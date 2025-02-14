@@ -2,21 +2,25 @@
   class="flex flex-col gap-2 justify-between shadow-card rounded p-3 h-[250px] w-[250px]"
 >
   <div
-    class="post-image relative hover:cursor-pointer hover:transform hover: transition-transform duration-300"
+    class="post-image relative hover:cursor-pointer hover:transform hover:transition-transform duration-300 w-full h-[150px] overflow-hidden rounded"
   >
     @defer (on viewport) {
     <img
+      unpic
+      priority
       [src]="post.image"
       alt="{{ post.title }}"
-      class="object-cover w-full rounded block"
+      class="w-full h-full object-cover rounded block"
     />
     } @placeholder {
-    <div class="bg-catspace-grey w-full rounded"></div>
+    <div class="bg-catspace-grey w-full h-full rounded"></div>
     }
     <div
       class="absolute top-0 left-0 w-full h-full bg-catspace-brown/50 flex justify-center items-center opacity-0 hover:opacity-100 transition-opacity duration-300 rounded"
     >
-      <p class="text-body-1 text-catspace-white">View Post</p>
+      <p class="text-body-1 text-catspace-white">
+        {{ "post.view" | translate }}
+      </p>
     </div>
   </div>
   <div class="flex flex-col gap-1">

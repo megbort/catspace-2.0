@@ -7,7 +7,7 @@
   <div
     class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-center"
   >
-    @for(profile of profiles; track profile.id) {
+    @for(profile of profiles.slice(0, loadedProfiles); track profile.id) {
     <app-profile-card
       [profile]="profile"
       (view)="view($event)"
@@ -15,9 +15,14 @@
     ></app-profile-card>
     }
   </div>
-  <p
-    class="text-body-1 py-8 text-catspace-orange text-center hover:cursor-pointer hover:underline"
-  >
-    {{ "button.showMore" | translate }}
-  </p>
+  @if(loadedProfiles < profiles.length){
+  <div class="flex justify-center">
+    <button
+      class="text-body-1 py-8 text-catspace-orange hover:cursor-pointer hover:underline"
+      (click)="showMore()"
+    >
+      {{ "button.showMore" | translate }}
+    </button>
+  </div>
+  }
 </div>

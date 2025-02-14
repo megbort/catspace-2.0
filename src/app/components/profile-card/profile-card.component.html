@@ -12,31 +12,32 @@
   } @placeholder {
   <div class="bg-catspace-grey w-full rounded h-[150px]"></div>
   }
-  <div>
-    <p class="subtitle-1 line-clamp-1">{{ profile.name }}</p>
-    <p class="text-body-1">&#64;{{ profile.handle }}</p>
-    <p class="text-body-1">
-      {{ profile.followers }} {{ "common.followers" | translate }}
+  <div class="h-full flex flex-col justify-around">
+    <div>
+      <p class="subtitle-1 line-clamp-1">{{ profile.name }}</p>
+      <p class="text-body-1">&#64;{{ profile.handle }}</p>
+      <p class="text-body-1">
+        {{ profile.followers }} {{ "common.followers" | translate }}
+      </p>
+    </div>
+    <p class="text-body-2 text-catspace-orange py-2 line-clamp-2">
+      {{ profile.tags.join(" ") }}
     </p>
-  </div>
-  <div class="text-body-2 text-catspace-orange py-2 line-clamp-2">
-    {{ profile.tags.join(" ") }}
-  </div>
-  <div class="flex justify-between gap-2">
-    <mat-button-toggle
-      class="basis-1/2 card-button"
-      [checked]="following"
-      (change)="toggleFollow($event)"
-    >
-      {{ (following ? "button.unfollow" : "button.follow") | translate }}
-    </mat-button-toggle>
-
-    <button
-      mat-stroked-button
-      class="basis-1/2 card-button"
-      (click)="view.emit(profile.id)"
-    >
-      {{ "button.viewProfile" | translate }}
-    </button>
+    <div class="flex justify-between gap-2">
+      <mat-button-toggle
+        class="basis-1/2 card-button"
+        [checked]="following"
+        (change)="toggleFollow($event)"
+      >
+        {{ (following ? "button.unfollow" : "button.follow") | translate }}
+      </mat-button-toggle>
+      <button
+        mat-stroked-button
+        class="basis-1/2 card-button"
+        (click)="view.emit(profile.id)"
+      >
+        {{ "button.viewProfile" | translate }}
+      </button>
+    </div>
   </div>
 </div>

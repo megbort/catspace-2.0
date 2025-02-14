@@ -9,13 +9,14 @@ import {
 import { Router } from '@angular/router';
 
 @Component({
-    selector: 'app-featured',
-    imports: [TranslateModule, ProfileCardComponent, CommonModule],
-    templateUrl: './featured.component.html',
-    styleUrl: './featured.component.scss'
+  selector: 'app-featured',
+  imports: [TranslateModule, ProfileCardComponent, CommonModule],
+  templateUrl: './featured.component.html',
+  styleUrl: './featured.component.scss',
 })
 export class FeaturedComponent {
   profiles: Profile[] = [];
+  loadedProfiles = 8;
 
   constructor(
     private readonly router: Router,
@@ -34,5 +35,9 @@ export class FeaturedComponent {
 
   follow(event: FollowEvent): void {
     console.log(`Id: ${event.id}; Follow: ${event.following}`);
+  }
+
+  showMore(): void {
+    this.loadedProfiles += 8;
   }
 }

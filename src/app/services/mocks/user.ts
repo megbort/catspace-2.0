@@ -5,10 +5,10 @@ export const USER: User = {
   email: 'demo@example.com',
   image:
     'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1730658243/catspace/catspace-image-01_svkhtp.jpg',
-  handle: 'demoHandle',
-  name: 'Demo Username',
+  handle: 'kikuKrenn',
+  name: 'Kiku Krenbrink',
   description:
-    'Hello this is a demo user. Look at my description here, I post things sometimes.',
+    "Hello! I'm Kiku, the fluffiest boss around. I spend my days napping in sunbeams and pretending not to care about your attention... but don't be fooled—I control everything. Pet me if you must, but only for 3 seconds, then I'll claw your hand. My real passion? Pushing your things off ledges just to see what happens. Feed me at exactly 6 p.m., or else...",
   favorites: [],
   following: [],
   posts: [

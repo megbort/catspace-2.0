@@ -131,7 +131,7 @@ $_rest: (
 $_primary: map.merge(map.get($_palettes, primary), $_rest);
 $_tertiary: map.merge(map.get($_palettes, tertiary), $_rest);
 
-$theme: mat.define-theme(
+$theme-config: (
   (
     color: (
       primary: $_primary,
@@ -154,5 +154,5 @@ $theme: mat.define-theme(
 html {
   @include mat.elevation-classes();
   @include mat.app-background();
-  @include mat.all-component-themes($theme);
+  @include mat.theme($theme-config);
 }
