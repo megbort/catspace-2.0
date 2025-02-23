@@ -14,7 +14,6 @@ import { FooterComponent } from './app/components/footer/footer.component';
     FooterComponent,
   ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
 })
 export class AppComponent {
   title = 'catspace-2.0';
