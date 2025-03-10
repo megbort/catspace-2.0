@@ -11,6 +11,7 @@ import { map } from 'rxjs';
 import { UnpicImageDirective } from '@unpic/angular';
 import { SignupComponent } from '../../components/auth/signup/signup.component';
 import { MatDialog } from '@angular/material/dialog';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -30,7 +31,8 @@ export class HomeComponent {
   constructor(
     private readonly router: Router,
     private readonly dialog: MatDialog,
-    private readonly profileService: ProfileService
+    private readonly profileService: ProfileService,
+    private readonly userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -40,6 +42,14 @@ export class HomeComponent {
       .subscribe((data) => {
         this.featured = data;
       });
+
+    this.fetchFireStore();
+  }
+
+  fetchFireStore() {
+    this.userService.getUsers().subscribe((data) => {
+      console.log(data);
+    });
   }
 
   view(id: string): void {
