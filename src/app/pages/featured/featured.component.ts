@@ -12,7 +12,6 @@ import { Router } from '@angular/router';
   selector: 'app-featured',
   imports: [TranslateModule, ProfileCardComponent, CommonModule],
   templateUrl: './featured.component.html',
-  styleUrl: './featured.component.scss',
 })
 export class FeaturedComponent {
   profiles: Profile[] = [];

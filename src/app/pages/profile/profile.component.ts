@@ -10,7 +10,6 @@ import { PostCardComponent } from '../../components/post-card/post-card.componen
   selector: 'app-profile',
   imports: [TranslateModule, MatButtonModule, PostCardComponent],
   templateUrl: './profile.component.html',
-  styleUrl: './profile.component.scss',
 })
 export class ProfileComponent {
   profile?: Profile;

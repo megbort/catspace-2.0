@@ -45,7 +45,7 @@ export const PROFILES: Profile[] = [
         title:
           'Vel enim labore sanctus diam gubergren invidunt sed ea dolor ut invidunt.',
         image:
-          'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1738715772/catspace-image-20_japkom.jpg',
+          'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1738715772/catspace/catspace-image-20_japkom.jpg',
         favorites: 212,
         tags: [],
         comments: [],
@@ -54,7 +54,7 @@ export const PROFILES: Profile[] = [
         id: 'U0001P0005',
         title: 'Te ea hendrerit veniam est labore soluta.',
         image:
-          'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1738715778/catspace-image-21_sx2mwr.jpg',
+          'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1738715778/catspace/catspace-image-21_sx2mwr.jpg',
         favorites: 29,
         tags: [],
         comments: [],
@@ -64,7 +64,7 @@ export const PROFILES: Profile[] = [
         title:
           'Sea est gubergren rebum sed invidunt vero vero et nonumy ipsum.',
         image:
-          'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1738715783/catspace-image-22_andwud.jpg',
+          'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1738715783/catspace/catspace-image-22_andwud.jpg',
         favorites: 49,
         tags: [],
         comments: [],
@@ -74,7 +74,7 @@ export const PROFILES: Profile[] = [
         title:
           'Sed lorem dolores erat velit sed zzril duis ad et in consequat takimata takimata nonummy.',
         image:
-          'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1738715788/catspace-image-23_nwcaj2.jpg',
+          'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1738715788/catspace/catspace-image-23_nwcaj2.jpg',
         favorites: 309,
         tags: [],
         comments: [],
@@ -84,7 +84,7 @@ export const PROFILES: Profile[] = [
         title:
           'Ut hendrerit ea sanctus et dolores justo quis sed elitr et eos duis tempor sadipscing nulla et erat takimata.',
         image:
-          'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1738715793/catspace-image-24_svabl9.jpg',
+          'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1738715793/catspace/catspace-image-24_svabl9.jpg',
         favorites: 34,
         tags: [],
         comments: [],
