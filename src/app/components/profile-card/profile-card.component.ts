@@ -46,6 +46,10 @@ export class ProfileCardComponent {
     posts: [],
   };
 
+  get formattedTags(): string {
+    return this.profile.tags.map((tag) => `#${tag}`).join(' ');
+  }
+
   following = false;
 
   constructor(

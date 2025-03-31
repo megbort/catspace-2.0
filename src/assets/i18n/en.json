@@ -40,7 +40,8 @@
   },
   "menu": {
     "featured": "Featured",
-    "catFacts": "Cat Facts",
+    "following": "Following",
+    "myPage": "My Page",
     "search": "Search",
     "home": "Home",
     "account": "Account",

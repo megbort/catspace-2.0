@@ -10,7 +10,7 @@ export const PROFILES: Profile[] = [
     description:
       "Hello! I'm Kiku, the fluffiest boss around. I spend my days napping in sunbeams and pretending not to care about your attention... but don't be fooled—I control everything. Pet me if you must, but only for 3 seconds, then I'll claw your hand. My real passion? Pushing your things off ledges just to see what happens. Feed me at exactly 6 p.m., or else...",
     followers: 122,
-    tags: ['#catnip', '#tabby', '#curious', '#soft'],
+    tags: ['catnip', 'tabby', 'curious', 'soft'],
     posts: [
       {
         id: 'U0001P0001',
@@ -100,7 +100,7 @@ export const PROFILES: Profile[] = [
     description:
       "Playful troublemaker with a love for chasing invisible things. If there's a box, I'm in it.",
     followers: 98,
-    tags: ['#playful', '#stripped', '#whiskers', '#fluffy'],
+    tags: ['playful', 'stripped', 'whiskers', 'fluffy'],
     posts: [],
   },
   {
@@ -112,7 +112,7 @@ export const PROFILES: Profile[] = [
     description:
       'A mysterious night owl who loves gazing at the moon and curling up in dark corners.',
     followers: 205,
-    tags: ['#mysterious', '#paws', '#moonlight', '#elegant'],
+    tags: ['mysterious', 'paws', 'moonlight', 'elegant'],
     posts: [],
   },
   {
@@ -124,7 +124,7 @@ export const PROFILES: Profile[] = [
     description:
       'A gentle giant with a heart as warm as his fur. Loves belly rubs—sometimes.',
     followers: 150,
-    tags: ['#cuddly', '#orange', '#gentle', '#bigeyes'],
+    tags: ['cuddly', 'orange', 'gentle', 'bigeyes'],
     posts: [],
   },
   {
@@ -136,7 +136,7 @@ export const PROFILES: Profile[] = [
     description:
       'Born to jump! The higher, the better. Catches treats midair like a pro.',
     followers: 180,
-    tags: ['#energetic', '#grey', '#jumping', '#adventurous'],
+    tags: ['energetic', 'grey', 'jumping', 'adventurous'],
     posts: [],
   },
   {
@@ -148,7 +148,7 @@ export const PROFILES: Profile[] = [
     description:
       'Soft as a cloud, sneaky as a ninja. Will steal your spot the moment you move.',
     followers: 130,
-    tags: ['#fluffy', '#quiet', '#snuggly', '#playful'],
+    tags: ['fluffy', 'quiet', 'snuggly', 'playful'],
     posts: [],
   },
   {
@@ -160,7 +160,7 @@ export const PROFILES: Profile[] = [
     description:
       'Regal and refined, with a purr that soothes souls. Bow before my fluffy majesty!',
     followers: 112,
-    tags: ['#regal', '#white', '#sophisticated', '#graceful'],
+    tags: ['regal', 'white', 'sophisticated', 'graceful'],
     posts: [],
   },
   {
@@ -172,7 +172,7 @@ export const PROFILES: Profile[] = [
     description:
       "Always ready for a nap or a cuddle. If you need a lap warmer, I'm your cat!",
     followers: 90,
-    tags: ['#snuggly', '#striped', '#friendly', '#sleepy'],
+    tags: ['snuggly', 'striped', 'friendly', 'sleepy'],
     posts: [],
   },
   {
@@ -184,7 +184,7 @@ export const PROFILES: Profile[] = [
     description:
       'Cuddles are my superpower. I will turn even the toughest humans into softies!',
     followers: 175,
-    tags: ['#cute', '#calico', '#curledup', '#content'],
+    tags: ['cute', 'calico', 'curledup', 'content'],
     posts: [],
   },
   {
@@ -196,7 +196,7 @@ export const PROFILES: Profile[] = [
     description:
       'Cuddles are my superpower. I will turn even the toughest humans into softies!',
     followers: 120,
-    tags: ['#adorable', '#mittens', '#sweet', '#kitten'],
+    tags: ['adorable', 'mittens', 'sweet', 'kitten'],
     posts: [],
   },
   {
@@ -208,7 +208,7 @@ export const PROFILES: Profile[] = [
     description:
       'Cuddles are my superpower. I will turn even the toughest humans into softies!',
     followers: 200,
-    tags: ['#brave', '#lion', '#golden', '#majestic'],
+    tags: ['brave', 'lion', 'golden', 'majestic'],
     posts: [],
   },
   {
@@ -220,7 +220,7 @@ export const PROFILES: Profile[] = [
     description:
       'Cuddles are my superpower. I will turn even the toughest humans into softies!',
     followers: 88,
-    tags: ['#mischievous', '#gray', '#fuzzy', '#playful'],
+    tags: ['mischievous', 'gray', 'fuzzy', 'playful'],
     posts: [],
   },
   {
@@ -232,7 +232,7 @@ export const PROFILES: Profile[] = [
     description:
       "A tiny troublemaker with the softest paws. If it's moving, I'll chase it!",
     followers: 135,
-    tags: ['#star', '#white', '#shiny', '#playful'],
+    tags: ['star', 'white', 'shiny', 'playful'],
     posts: [],
   },
   {
@@ -245,7 +245,7 @@ export const PROFILES: Profile[] = [
     description:
       "A tiny troublemaker with the softest paws. If it's moving, I'll chase it!",
     followers: 155,
-    tags: ['#gentle', '#gray', '#quiet', '#graceful'],
+    tags: ['gentle', 'gray', 'quiet', 'graceful'],
     posts: [],
   },
   {
@@ -257,7 +257,7 @@ export const PROFILES: Profile[] = [
     description:
       "A tiny troublemaker with the softest paws. If it's moving, I'll chase it!",
     followers: 20,
-    tags: ['#meowmix', '#sweet', '#blessed', '#clawz'],
+    tags: ['meowmix', 'sweet', 'blessed', 'clawz'],
     posts: [],
   },
   {
@@ -269,7 +269,7 @@ export const PROFILES: Profile[] = [
     description:
       "A tiny troublemaker with the softest paws. If it's moving, I'll chase it!",
     followers: 20,
-    tags: ['#meemo', '#fuzzhead', '#scratch', '#nice'],
+    tags: ['meemo', 'fuzzhead', 'scratch', 'nice'],
     posts: [],
   },
 ];

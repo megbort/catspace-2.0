@@ -11,14 +11,10 @@
 }
 
 @mixin subtitle-1 {
-  @apply leading-6 font-semibold text-xl tracking-wide;
+  @apply leading-6 font-semibold text-lg tracking-wide;
 
   @media (min-width: 768px) {
     @apply text-base;
-  }
-
-  @media (min-width: 1024px) {
-    @apply text-lg;
   }
 }
 

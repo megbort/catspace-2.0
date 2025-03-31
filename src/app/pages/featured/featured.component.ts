@@ -23,6 +23,10 @@ export class FeaturedComponent {
   ) {}
 
   ngOnInit(): void {
+    this.getProfiles();
+  }
+
+  getProfiles() {
     this.profileService.getProfiles().subscribe((data) => {
       this.profiles = data;
     });

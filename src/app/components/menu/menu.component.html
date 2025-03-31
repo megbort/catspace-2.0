@@ -19,17 +19,25 @@
 
     <!-- Web menu -->
     <div class="flex justify-center basis-2/4">
-      <ul class="hidden md:flex md:gap-4 lg:gap-8">
+      <ul class="hidden md:flex md:gap-4 lg:gap-10">
+        <li class="menu-item" routerLink="/home" title="Featured">
+          <p class="subtitle-1 pr-1">{{ "menu.home" | translate }}</p>
+          <span class="material-icons hidden icon-18 lg:block">home</span>
+        </li>
         <li class="menu-item" routerLink="/featured" title="Featured">
           <p class="subtitle-1 pr-1">{{ "menu.featured" | translate }}</p>
-          <span class="material-icons hidden lg:block">auto_awesome</span>
+          <span class="material-icons hidden icon-18 lg:block">star</span>
         </li>
-        <li class="menu-item" routerLink="/featured" title="Cat Facts">
-          <p class="subtitle-1 pr-1">{{ "menu.catFacts" | translate }}</p>
-          <span class="material-icons hidden lg:block"
-            >local_fire_department</span
-          >
+        @if(this.isLoggedIn()){
+        <li class="menu-item" title="Cat Facts">
+          <p class="subtitle-1 pr-1">{{ "menu.following" | translate }}</p>
+          <span class="material-icons hidden icon-18 lg:block">pets</span>
         </li>
+        <li class="menu-item" title="Cat Facts">
+          <p class="subtitle-1 pr-1">{{ "menu.myPage" | translate }}</p>
+          <span class="material-icons hidden icon-18 lg:block">person</span>
+        </li>
+        }
       </ul>
     </div>
 
@@ -60,13 +68,19 @@
 
   <mat-menu #menu="matMenu">
     <ul>
+      <li mat-menu-item routerLink="/home">
+        {{ "menu.home" | translate }}
+      </li>
       <li mat-menu-item routerLink="/featured">
         {{ "menu.featured" | translate }}
       </li>
-      <li mat-menu-item routerLink="/featured">
-        {{ "menu.catFacts" | translate }}
-      </li>
       @if(isLoggedIn()) {
+      <li mat-menu-item>
+        {{ "menu.following" | translate }}
+      </li>
+      <li mat-menu-item>
+        {{ "menu.myPage" | translate }}
+      </li>
       <li mat-menu-item>
         {{ "menu.notifications" | translate }}
       </li>

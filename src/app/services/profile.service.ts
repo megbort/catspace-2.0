@@ -1,23 +1,57 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Profile } from './models';
 import { PROFILES } from './mocks';
-import { Observable, of, throwError } from 'rxjs';
+import { catchError, map, Observable, of, throwError } from 'rxjs';
+import { collectionData, docData, Firestore } from '@angular/fire/firestore';
+import { collection, doc, FirestoreDataConverter } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProfileService {
+  firestore = inject(Firestore);
+
+  profileConverter: FirestoreDataConverter<Profile> = {
+    toFirestore(profile: Profile): any {
+      const { id, ...data } = profile;
+      return data;
+    },
+    fromFirestore(snapshot, options): Profile {
+      const data = snapshot.data(options) as Omit<Profile, 'id'>;
+      return { id: snapshot.id, ...data };
+    },
+  };
+
   getProfiles(): Observable<Profile[]> {
-    return of(PROFILES);
+    const profilesCollection = collection(
+      this.firestore,
+      'profiles'
+    ).withConverter(this.profileConverter);
+
+    return collectionData(profilesCollection).pipe(
+      catchError((error) => {
+        console.error('Error fetching Firestore data: ', error);
+        return of([]);
+      })
+    );
   }
 
   getProfileById(id: string): Observable<Profile> {
-    const profile = PROFILES.find((profile) => profile.id === id);
+    const profileDoc = doc(this.firestore, `profiles/${id}`).withConverter(
+      this.profileConverter
+    );
 
-    if (profile) {
-      return of(profile);
-    } else {
-      return throwError(() => new Error(`No profile found with id: ${id}`));
-    }
+    return docData(profileDoc).pipe(
+      map((profile) => {
+        if (!profile) {
+          throw new Error(`No profile found with id: ${id}`);
+        }
+        return profile;
+      }),
+      catchError((error) => {
+        console.error(`Error fetching profile with id ${id}:`, error);
+        return throwError(() => new Error(`No profile found with id: ${id}`));
+      })
+    );
   }
 }
