@@ -1,6 +1,10 @@
-import { inject, Injectable } from '@angular/core';
+import {
+  inject,
+  Injectable,
+  EnvironmentInjector,
+  runInInjectionContext,
+} from '@angular/core';
 import { Profile } from './models';
-import { PROFILES } from './mocks';
 import { catchError, map, Observable, of, throwError } from 'rxjs';
 import { collectionData, docData, Firestore } from '@angular/fire/firestore';
 import { collection, doc, FirestoreDataConverter } from 'firebase/firestore';
@@ -9,7 +13,8 @@ import { collection, doc, FirestoreDataConverter } from 'firebase/firestore';
   providedIn: 'root',
 })
 export class ProfileService {
-  firestore = inject(Firestore);
+  private readonly firestore = inject(Firestore);
+  private readonly environmentInjector = inject(EnvironmentInjector);
 
   profileConverter: FirestoreDataConverter<Profile> = {
     toFirestore(profile: Profile): any {
@@ -23,35 +28,39 @@ export class ProfileService {
   };
 
   getProfiles(): Observable<Profile[]> {
-    const profilesCollection = collection(
-      this.firestore,
-      'profiles'
-    ).withConverter(this.profileConverter);
+    return runInInjectionContext(this.environmentInjector, () => {
+      const profilesCollection = collection(
+        this.firestore,
+        'profiles'
+      ).withConverter(this.profileConverter);
 
-    return collectionData(profilesCollection).pipe(
-      catchError((error) => {
-        console.error('Error fetching Firestore data: ', error);
-        return of([]);
-      })
-    );
+      return collectionData(profilesCollection).pipe(
+        catchError((error) => {
+          console.error('Error fetching Firestore data: ', error);
+          return of([]);
+        })
+      );
+    });
   }
 
   getProfileById(id: string): Observable<Profile> {
-    const profileDoc = doc(this.firestore, `profiles/${id}`).withConverter(
-      this.profileConverter
-    );
+    return runInInjectionContext(this.environmentInjector, () => {
+      const profileDoc = doc(this.firestore, `profiles/${id}`).withConverter(
+        this.profileConverter
+      );
 
-    return docData(profileDoc).pipe(
-      map((profile) => {
-        if (!profile) {
-          throw new Error(`No profile found with id: ${id}`);
-        }
-        return profile;
-      }),
-      catchError((error) => {
-        console.error(`Error fetching profile with id ${id}:`, error);
-        return throwError(() => new Error(`No profile found with id: ${id}`));
-      })
-    );
+      return docData(profileDoc).pipe(
+        map((profile) => {
+          if (!profile) {
+            throw new Error(`No profile found with id: ${id}`);
+          }
+          return profile;
+        }),
+        catchError((error) => {
+          console.error(`Error fetching profile with id ${id}:`, error);
+          return throwError(() => new Error(`No profile found with id: ${id}`));
+        })
+      );
+    });
   }
 }
