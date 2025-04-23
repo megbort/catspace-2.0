@@ -44,7 +44,11 @@
     <div class="items-center justify-end gap-4 hidden md:flex w-[225px]">
       @if(isLoggedIn()) {
       <span class="material-symbols-outlined">notifications</span>
-      <div class="rounded-full bg-catspace-brown w-8 h-8"></div>
+      <button
+        class="rounded-full bg-catspace-brown w-8 h-8"
+        (click)="openProfileMenu()"
+      ></button>
+
       <button mat-stroked-button (click)="logout()">
         {{ "button.logout" | translate }}
       </button>

@@ -18,10 +18,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatProgressSpinnerModule,
   ],
   templateUrl: './profile.component.html',
-  styles: `
-    :host{
-    @apply grow;
-  }`,
 })
 export class ProfileComponent {
   profile?: Profile;
