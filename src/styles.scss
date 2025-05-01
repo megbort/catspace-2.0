@@ -68,6 +68,9 @@ body {
   &.card-button {
     @apply h-7 text-caption p-0;
   }
+  &.narrow {
+    @apply h-0 py-3 px-12;
+  }
 }
 
 .mat-button-toggle-standalone.mat-button-toggle-appearance-standard:not(
@@ -95,4 +98,8 @@ body {
 
 .mat-drawer.mat-sidenav {
   @apply h-screen;
+}
+
+button.mat-mdc-icon-button {
+  @apply flex items-center justify-center;
 }

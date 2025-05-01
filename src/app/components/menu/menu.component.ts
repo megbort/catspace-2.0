@@ -1,10 +1,4 @@
-import {
-  Component,
-  computed,
-  Output,
-  ViewChild,
-  EventEmitter,
-} from '@angular/core';
+import { Component, computed, output } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
@@ -15,7 +9,6 @@ import { SignupComponent } from '../auth/signup/signup.component';
 import { LoginComponent } from '../auth/login/login.component';
 import { GlobalStore, Dialog, DialogType } from '../../shared';
 import { UnpicImageDirective } from '@unpic/angular';
-import { UserSidenavComponent } from '../user-sidenav/user-sidenav.component';
 
 @Component({
   selector: 'app-menu',
@@ -32,9 +25,7 @@ import { UserSidenavComponent } from '../user-sidenav/user-sidenav.component';
   styleUrl: './menu.component.scss',
 })
 export class MenuComponent {
-  @ViewChild('profileMenu') profileMenu!: UserSidenavComponent;
-
-  @Output() openProfileDrawer = new EventEmitter<void>();
+  open = output<void>();
   isLoggedIn = computed(() => this.globalStore.authorized());
 
   constructor(
@@ -52,9 +43,5 @@ export class MenuComponent {
 
   logout(): void {
     this.globalStore.logout(null, false);
-  }
-
-  openProfileMenu(): void {
-    this.openProfileDrawer.emit();
   }
 }

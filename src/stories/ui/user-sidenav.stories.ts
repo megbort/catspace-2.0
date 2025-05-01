@@ -1,17 +1,14 @@
 import { Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
-import { ProfileCardComponent } from '../../app/components/profile-card/profile-card.component';
+import { UserSidenavComponent } from '../../app/components/user-sidenav/user-sidenav.component';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { applicationConfig } from '@storybook/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { GlobalStore, storybookTranslateConfig } from '../../app/shared';
 import { provideHttpClient, withFetch } from '@angular/common/http';
-import { Profile, PROFILES } from '../../app/services';
 
-const profile: Profile = PROFILES[0];
-
-const meta: Meta<ProfileCardComponent> = {
-  title: 'Components/Profile Menu',
-  component: ProfileCardComponent,
+const meta: Meta<UserSidenavComponent> = {
+  title: 'Components/User Sidenav',
+  component: UserSidenavComponent,
   decorators: [
     applicationConfig({
       providers: [
@@ -27,10 +24,14 @@ const meta: Meta<ProfileCardComponent> = {
 };
 
 export default meta;
-type Story = StoryObj<ProfileCardComponent>;
+type Story = StoryObj<UserSidenavComponent>;
 
 export const Primary: Story = {
-  args: {
-    profile: profile,
-  },
+  render: () => ({
+    template: `
+      <div style="max-width: 400px;">
+        <app-user-sidenav></app-user-sidenav>
+      </div>
+    `,
+  }),
 };

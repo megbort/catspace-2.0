@@ -42,11 +42,11 @@
     </div>
 
     <div class="items-center justify-end gap-4 hidden md:flex w-[225px]">
-      @if(isLoggedIn()) {
+      @if(!isLoggedIn()) {
       <span class="material-symbols-outlined">notifications</span>
       <button
         class="rounded-full bg-catspace-brown w-8 h-8"
-        (click)="openProfileMenu()"
+        (click)="open.emit()"
       ></button>
 
       <button mat-stroked-button (click)="logout()">

@@ -6,11 +6,11 @@
     [disableClose]="true"
     (openedChange)="onSidenavToggle($event)"
   >
-    <app-user-sidenav (closeDrawer)="profileDrawer.close()"></app-user-sidenav>
+    <app-user-sidenav (close)="profileDrawer.close()"></app-user-sidenav>
   </mat-sidenav>
 
   <mat-sidenav-content class="flex flex-col grow">
-    <app-menu (openProfileDrawer)="profileDrawer.open()"></app-menu>
+    <app-menu (open)="profileDrawer.open()"></app-menu>
     <router-outlet></router-outlet>
     <app-footer></app-footer>
   </mat-sidenav-content>

@@ -1,18 +1,18 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { TranslateModule } from '@ngx-translate/core';
+import { USER } from '../../services';
 
 @Component({
   selector: 'app-user-sidenav',
   standalone: true,
-  imports: [MatSidenavModule, MatButtonModule],
+  imports: [MatSidenavModule, MatButtonModule, MatIconModule, TranslateModule],
   templateUrl: './user-sidenav.component.html',
+  styleUrls: ['./user-sidenav.component.scss'],
 })
 export class UserSidenavComponent {
-  @Output() closeDrawer = new EventEmitter<void>();
-
-  close() {
-    this.closeDrawer.emit();
-    document.body.style.overflow = '';
-  }
+  close = output<void>();
+  user = USER;
 }
