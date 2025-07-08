@@ -9,6 +9,8 @@ import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 import { GlobalStore } from '../../app/shared';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { AuthService } from '../../app/services';
+import { signal } from '@angular/core';
 
 const meta: Meta<LoginComponent> = {
   title: 'Components/Auth/Login',
@@ -38,6 +40,17 @@ const meta: Meta<LoginComponent> = {
           provide: MAT_DIALOG_DATA,
           useValue: {},
         },
+        AuthService,
+        {
+          provide: AuthService,
+          useValue: {
+            login: () => of(void 0),
+            logout: () => of(void 0),
+            register: () => of(void 0),
+            user$: of(null),
+            currentUserSignal: signal(null),
+          },
+        },
       ],
     }),
     moduleMetadata({
@@ -51,4 +64,11 @@ type Story = StoryObj<LoginComponent>;
 
 export const Primary: Story = {
   args: {},
+  render: () => ({
+    template: `
+      <div style="max-width: 500px;">
+        <app-login></app-login>
+      </div>
+    `,
+  }),
 };

@@ -19,6 +19,7 @@ import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { environment } from './environments/environment';
 import { setLogLevel } from 'firebase/firestore';
+import { provideAuth, getAuth } from '@angular/fire/auth';
 
 setLogLevel('error'); // Change log level to debug firestore
 
@@ -38,6 +39,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch()),
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),
+    provideAuth(() => getAuth()),
     importProvidersFrom(TranslateModule.forRoot(defaultTranslateConfig)),
     GlobalStore,
   ],

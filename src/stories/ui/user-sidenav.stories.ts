@@ -27,6 +27,7 @@ export default meta;
 type Story = StoryObj<UserSidenavComponent>;
 
 export const Primary: Story = {
+  args: {},
   render: () => ({
     template: `
       <div style="max-width: 400px;">

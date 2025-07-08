@@ -4,7 +4,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { TranslateModule } from '@ngx-translate/core';
 import { GlobalStore } from '../../../shared';
-import { User, USER } from '../../../services';
+import { AuthService, User, USER } from '../../../services';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import {
   FormBuilder,
@@ -14,6 +14,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { SignupComponent } from '../signup/signup.component';
+import { catchError, of } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -35,7 +36,8 @@ export class LoginComponent {
     private readonly globalStore: GlobalStore,
     private readonly dialog: MatDialog,
     private readonly dialogRef: MatDialogRef<LoginComponent>,
-    private readonly formBuilder: FormBuilder
+    private readonly formBuilder: FormBuilder,
+    private readonly authService: AuthService
   ) {
     this.form = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -46,14 +48,29 @@ export class LoginComponent {
   ngOnInit(): void {
     this.form.patchValue({
       email: this.user.email,
-      password: '123456',
+      password: '654321',
     });
   }
 
   login(): void {
     if (this.form.valid) {
-      this.globalStore.login(USER, true);
-      this.dialogRef.close();
+      const rawForm = this.form.getRawValue();
+      this.authService
+        .login(rawForm.email, rawForm.password)
+        .pipe(
+          // TODO show error messages to the user
+          catchError((error) => {
+            console.error('Login error:', error);
+            return of(null);
+          })
+        )
+        .subscribe(() => {
+          // TODO add snack bar message
+          console.log('Login successful');
+          this.dialogRef.close();
+          // TODO handle fetch user data
+          this.globalStore.login(USER, true);
+        });
     }
   }
 

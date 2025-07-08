@@ -8,6 +8,8 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 import { GlobalStore } from '../../app/shared';
+import { AuthService } from '../../app/services';
+import { signal } from '@angular/core';
 
 const meta: Meta<MenuComponent> = {
   title: 'Components/Menu',
@@ -27,6 +29,17 @@ const meta: Meta<MenuComponent> = {
           },
         },
         GlobalStore,
+        AuthService,
+        {
+          provide: AuthService,
+          useValue: {
+            login: () => of(void 0),
+            logout: () => of(void 0),
+            register: () => of(void 0),
+            user$: of(null),
+            currentUserSignal: signal(null),
+          },
+        },
       ],
     }),
     moduleMetadata({

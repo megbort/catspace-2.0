@@ -2,7 +2,7 @@ import { User } from '../models';
 
 export const USER: User = {
   id: 'U0001',
-  email: 'demo@example.com',
+  email: 'demo2@example.com',
   image:
     'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1730658243/catspace/catspace-image-01_svkhtp.jpg',
   handle: 'kikuKrenn',

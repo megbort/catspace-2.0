@@ -20,7 +20,7 @@
     <!-- Web menu -->
     <div class="flex justify-center basis-2/4">
       <ul class="hidden md:flex md:gap-4 lg:gap-10">
-        <li class="menu-item" routerLink="/home" title="Featured">
+        <li class="menu-item" routerLink="/home" title="Home">
           <p class="subtitle-1 pr-1">{{ "menu.home" | translate }}</p>
           <span class="material-icons hidden icon-18 lg:block">home</span>
         </li>
@@ -28,12 +28,12 @@
           <p class="subtitle-1 pr-1">{{ "menu.featured" | translate }}</p>
           <span class="material-icons hidden icon-18 lg:block">star</span>
         </li>
-        @if(this.isLoggedIn()){
-        <li class="menu-item" title="Cat Facts">
+        @if(isLoggedIn()){
+        <li class="menu-item" title="Following">
           <p class="subtitle-1 pr-1">{{ "menu.following" | translate }}</p>
           <span class="material-icons hidden icon-18 lg:block">pets</span>
         </li>
-        <li class="menu-item" title="Cat Facts">
+        <li class="menu-item" title="My Page">
           <p class="subtitle-1 pr-1">{{ "menu.myPage" | translate }}</p>
           <span class="material-icons hidden icon-18 lg:block">person</span>
         </li>
@@ -42,7 +42,7 @@
     </div>
 
     <div class="items-center justify-end gap-4 hidden md:flex w-[225px]">
-      @if(!isLoggedIn()) {
+      @if(isLoggedIn()) {
       <span class="material-symbols-outlined">notifications</span>
       <button
         class="rounded-full bg-catspace-brown w-8 h-8"

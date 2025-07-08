@@ -9,6 +9,7 @@ import { SignupComponent } from '../auth/signup/signup.component';
 import { LoginComponent } from '../auth/login/login.component';
 import { GlobalStore, Dialog, DialogType } from '../../shared';
 import { UnpicImageDirective } from '@unpic/angular';
+import { AuthService } from '../../services';
 
 @Component({
   selector: 'app-menu',
@@ -26,9 +27,10 @@ import { UnpicImageDirective } from '@unpic/angular';
 })
 export class MenuComponent {
   open = output<void>();
-  isLoggedIn = computed(() => this.globalStore.authorized());
+  isLoggedIn = computed(() => this.authService.currentUserSignal());
 
   constructor(
+    private readonly authService: AuthService,
     private readonly dialog: MatDialog,
     public globalStore: GlobalStore
   ) {}
@@ -42,6 +44,7 @@ export class MenuComponent {
   }
 
   logout(): void {
+    this.authService.logout().subscribe();
     this.globalStore.logout(null, false);
   }
 }

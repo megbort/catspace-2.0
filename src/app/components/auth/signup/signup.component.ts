@@ -12,8 +12,10 @@ import { MatInputModule } from '@angular/material/input';
 import { TranslateModule } from '@ngx-translate/core';
 import { GlobalStore } from '../../../shared';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { User, USER } from '../../../services';
+import { AuthService, User, USER } from '../../../services';
 import { LoginComponent } from '../login/login.component';
+import { catchError } from 'rxjs/internal/operators/catchError';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-signup',
@@ -37,7 +39,8 @@ export class SignupComponent {
     private readonly globalStore: GlobalStore,
     private readonly dialog: MatDialog,
     private readonly dialogRef: MatDialogRef<SignupComponent>,
-    private readonly formBuilder: FormBuilder
+    private readonly formBuilder: FormBuilder,
+    private readonly authService: AuthService
   ) {
     this.form = this.formBuilder.group({
       name: ['', [Validators.required]],
@@ -60,8 +63,23 @@ export class SignupComponent {
 
   signUp(): void {
     if (this.form.valid) {
-      this.globalStore.login(USER, true);
-      this.dialogRef.close();
+      const rawForm = this.form.getRawValue();
+      this.authService
+        .register(rawForm.email, rawForm.handle, rawForm.password)
+        .pipe(
+          catchError((error) => {
+            // TODO show error messages to the user
+            console.error('Registration error:', error);
+            return of(null);
+          })
+        )
+        .subscribe(() => {
+          // TODO add toast or notification
+          console.log('Registration successful');
+          this.dialogRef.close();
+          // TODO handle fetch user data
+          this.globalStore.login(USER, true);
+        });
     }
   }
 
