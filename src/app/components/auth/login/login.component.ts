@@ -3,8 +3,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { TranslateModule } from '@ngx-translate/core';
-import { GlobalStore } from '../../../shared';
-import { AuthService, User, USER } from '../../../services';
+import { AuthService } from '../../../services';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import {
   FormBuilder,
@@ -30,10 +29,8 @@ import { catchError, of } from 'rxjs';
 })
 export class LoginComponent {
   form: FormGroup;
-  user: User = USER;
 
   constructor(
-    private readonly globalStore: GlobalStore,
     private readonly dialog: MatDialog,
     private readonly dialogRef: MatDialogRef<LoginComponent>,
     private readonly formBuilder: FormBuilder,
@@ -47,8 +44,8 @@ export class LoginComponent {
 
   ngOnInit(): void {
     this.form.patchValue({
-      email: this.user.email,
-      password: '654321',
+      email: 'demo3@example.com', // Default email for demo purposes
+      password: '123456', // Default password for demo purposes
     });
   }
 
@@ -58,18 +55,14 @@ export class LoginComponent {
       this.authService
         .login(rawForm.email, rawForm.password)
         .pipe(
-          // TODO show error messages to the user
           catchError((error) => {
             console.error('Login error:', error);
             return of(null);
           })
         )
         .subscribe(() => {
-          // TODO add snack bar message
           console.log('Login successful');
           this.dialogRef.close();
-          // TODO handle fetch user data
-          this.globalStore.login(USER, true);
         });
     }
   }

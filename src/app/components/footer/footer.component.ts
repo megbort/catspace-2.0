@@ -5,6 +5,7 @@ import { GlobalStore, Dialog, DialogType } from '../../shared';
 import { RouterModule } from '@angular/router';
 import { SignupComponent } from '../auth/signup/signup.component';
 import { LoginComponent } from '../auth/login/login.component';
+import { AuthService } from '../../services';
 
 @Component({
   selector: 'app-footer',
@@ -17,6 +18,7 @@ export class FooterComponent {
 
   constructor(
     private readonly dialog: MatDialog,
+    private readonly authService: AuthService,
     public globalStore: GlobalStore
   ) {}
 
@@ -29,6 +31,6 @@ export class FooterComponent {
   }
 
   logout(): void {
-    this.globalStore.logout(null, false);
+    this.authService.logout().subscribe();
   }
 }

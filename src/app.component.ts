@@ -26,18 +26,7 @@ export class AppComponent {
   authService = inject(AuthService);
 
   ngOnInit(): void {
-    this.authService.user$.subscribe((user) => {
-      if (user) {
-        this.authService.currentUserSignal.set({
-          email: user.email ?? '',
-          handle: user.displayName ?? '',
-          name: user.displayName ?? '',
-        });
-      } else {
-        this.authService.currentUserSignal.set(null);
-      }
-      console.log(this.authService.currentUserSignal());
-    });
+    this.authService.initializeUser();
   }
 
   onSidenavToggle(isOpened: boolean): void {

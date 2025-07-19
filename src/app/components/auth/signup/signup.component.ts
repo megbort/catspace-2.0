@@ -51,34 +51,28 @@ export class SignupComponent {
     });
   }
 
-  ngOnInit(): void {
-    this.form.patchValue({
-      name: this.user.name,
-      handle: this.user.handle,
-      description: this.user.description,
-      email: this.user.email,
-      password: '123456',
-    });
-  }
-
   signUp(): void {
     if (this.form.valid) {
       const rawForm = this.form.getRawValue();
+      const { name, handle, description, email, password } = rawForm;
+
       this.authService
-        .register(rawForm.email, rawForm.handle, rawForm.password)
+        .register(email, password, { name, handle, description })
         .pipe(
           catchError((error) => {
-            // TODO show error messages to the user
             console.error('Registration error:', error);
+            console.error('Error code:', error.code);
+            console.error('Error message:', error.message);
             return of(null);
           })
         )
-        .subscribe(() => {
-          // TODO add toast or notification
-          console.log('Registration successful');
-          this.dialogRef.close();
-          // TODO handle fetch user data
-          this.globalStore.login(USER, true);
+        .subscribe((result) => {
+          if (result !== null) {
+            console.log('Registration successful');
+            this.dialogRef.close();
+          } else {
+            console.log('Registration failed');
+          }
         });
     }
   }

@@ -5,6 +5,13 @@ import { applicationConfig } from '@storybook/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { GlobalStore, storybookTranslateConfig } from '../../app/shared';
 import { provideHttpClient, withFetch } from '@angular/common/http';
+import { computed, signal } from '@angular/core';
+import { USER } from '../../app/services/mocks';
+
+class MockGlobalStore {
+  private readonly userSignal = signal(USER);
+  user = computed(() => this.userSignal());
+}
 
 const meta: Meta<UserSidenavComponent> = {
   title: 'Components/User Sidenav',
@@ -14,7 +21,7 @@ const meta: Meta<UserSidenavComponent> = {
       providers: [
         provideAnimations(),
         provideHttpClient(withFetch()),
-        GlobalStore,
+        { provide: GlobalStore, useClass: MockGlobalStore },
       ],
     }),
     moduleMetadata({
@@ -27,7 +34,6 @@ export default meta;
 type Story = StoryObj<UserSidenavComponent>;
 
 export const Primary: Story = {
-  args: {},
   render: () => ({
     template: `
       <div style="max-width: 400px;">

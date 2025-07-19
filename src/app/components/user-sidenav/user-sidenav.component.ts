@@ -1,9 +1,9 @@
-import { Component, output } from '@angular/core';
+import { Component, output, computed } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { TranslateModule } from '@ngx-translate/core';
-import { USER } from '../../services';
+import { GlobalStore } from '../../shared';
 
 @Component({
   selector: 'app-user-sidenav',
@@ -14,5 +14,7 @@ import { USER } from '../../services';
 })
 export class UserSidenavComponent {
   close = output<void>();
-  user = USER;
+  user = computed(() => this.globalStore.user());
+
+  constructor(private readonly globalStore: GlobalStore) {}
 }

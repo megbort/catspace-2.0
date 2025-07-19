@@ -13,14 +13,16 @@
   </div>
   <div class="flex gap-4">
     <div class="w-20 h-20 rounded-full bg-catspace-brown"></div>
+    @if (user(); as currentUser) {
     <div>
-      <p class="subtitle-1">{{ user.name }}</p>
-      <p>&#64;{{ user.handle }}</p>
-      <p class="text-body-2 text-catspace-orange">{{ user.email }}</p>
+      <p class="subtitle-1">{{ currentUser.name }}</p>
+      <p>&#64;{{ currentUser.handle }}</p>
+      <p class="text-body-2 text-catspace-orange">{{ currentUser.email }}</p>
       <button mat-stroked-button class="narrow mt-2">
         {{ "button.editProfile" | translate }}
       </button>
     </div>
+    }
   </div>
   <div class="pl-20 mt-8">
     <ul class="flex flex-col gap-8">
