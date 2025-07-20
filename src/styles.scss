@@ -103,3 +103,10 @@ body {
 button.mat-mdc-icon-button {
   @apply flex items-center justify-center;
 }
+
+.mat-mdc-snack-bar-container .mat-mdc-snackbar-surface {
+  box-shadow: none;
+  --mdc-snackbar-container-color: transparent;
+  --mdc-snackbar-container-shape: 0;
+  --mdc-snackbar-supporting-text-color: inherit;
+}

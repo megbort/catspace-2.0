@@ -33,12 +33,27 @@
       "name": "Profile Name",
       "handle": "Handle",
       "handleHelp": "This is a quick way to tag others and shows one your profile like '@myhandle2000'",
-      "description": "Profile Description (optional)"
+      "description": "Profile Description (optional)",
+      "placeholder": {
+        "name": "Enter your profile name",
+        "handle": "Enter your handle",
+        "email": "Enter your email",
+        "password": "Enter your password",
+        "description": "Enter a short description about yourself, this will be shown on your profile page."
+      }
     },
     "error": {
-      "required": "{{field}} is required",
-      "emailInvalid": "Please enter a valid email",
-      "passwordLength": "Password must be at least 6 characters long"
+      "login": "Login failed. Please check your email and password.",
+      "emailInUse": "This email is already in use. Please use a different email.",
+      "signUpDefault": "Sign up failed. Please try again.",
+      "emailInvalid": "The email address is invalid. Please enter a valid email.",
+      "required": "This field is required.",
+      "passwordLength": "Password must be at least 6 characters long."
+    },
+    "success": {
+      "accountCreated": "Account created successfully!",
+      "profileUpdated": "Profile updated successfully!",
+      "login": "Logged in successfully!"
     }
   },
   "menu": {

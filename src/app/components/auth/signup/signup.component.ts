@@ -9,13 +9,12 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { TranslateModule } from '@ngx-translate/core';
-import { GlobalStore } from '../../../shared';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { AuthService, User, USER } from '../../../services';
+import { AuthService, NotificationService } from '../../../services';
 import { LoginComponent } from '../login/login.component';
 import { catchError } from 'rxjs/internal/operators/catchError';
-import { of } from 'rxjs';
+import { of, tap } from 'rxjs';
 
 @Component({
   selector: 'app-signup',
@@ -31,16 +30,15 @@ import { of } from 'rxjs';
 })
 export class SignupComponent {
   form: FormGroup;
-  user: User = USER;
   step: 1 | 2 = 1;
-  isHandleFocused = false;
 
   constructor(
-    private readonly globalStore: GlobalStore,
     private readonly dialog: MatDialog,
     private readonly dialogRef: MatDialogRef<SignupComponent>,
     private readonly formBuilder: FormBuilder,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
+    private readonly notificationService: NotificationService,
+    private readonly translate: TranslateService
   ) {
     this.form = this.formBuilder.group({
       name: ['', [Validators.required]],
@@ -61,24 +59,35 @@ export class SignupComponent {
         .pipe(
           catchError((error) => {
             console.error('Registration error:', error);
-            console.error('Error code:', error.code);
-            console.error('Error message:', error.message);
+
+            const errorMessage = this.getErrorMessage(error);
+            this.notificationService.error(errorMessage);
+
             return of(null);
+          }),
+          tap((result) => {
+            if (result) {
+              this.notificationService.success(
+                'Account created successfully! Welcome to Catspace!'
+              );
+              this.dialogRef.close();
+            }
           })
         )
-        .subscribe((result) => {
-          if (result !== null) {
-            console.log('Registration successful');
-            this.dialogRef.close();
-          } else {
-            console.log('Registration failed');
-          }
-        });
+        .subscribe();
     }
   }
 
   login(): void {
     this.dialogRef.close();
     this.dialog.open(LoginComponent, { width: '500px' });
+  }
+
+  private getErrorMessage(error: any): string {
+    if (error.code === 'auth/email-already-in-use') {
+      return this.translate.instant('form.error.emailInUse');
+    } else {
+      return this.translate.instant('form.error.signUpDefault');
+    }
   }
 }

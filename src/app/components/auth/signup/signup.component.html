@@ -15,14 +15,11 @@
             matInput
             formControlName="name"
             type="text"
-            placeholder="Enter your profile name"
+            [placeholder]="'form.signUp.placeholder.name' | translate"
           />
-          @if(form.get('name')?.hasError('required') && form.get('name')?.dirty)
-          {
-          <mat-error>{{
-            "form.error.required"
-              | translate : { field: ("form.signUp.name" | translate) }
-          }}</mat-error>
+          @if(form.get('name')?.hasError('required') &&
+          form.get('name')?.touched) {
+          <mat-error>{{ "form.error.required" | translate }}</mat-error>
           }
         </mat-form-field>
 
@@ -35,16 +32,13 @@
             matInput
             formControlName="handle"
             type="text"
-            placeholder="Enter a handle"
+            [placeholder]="'form.signUp.placeholder.handle' | translate"
             class="text-left"
           />
           <span matTextPrefix class="text-gray-400">&#64;&nbsp;</span>
           @if(form.get('handle')?.hasError('required') &&
-          form.get('handle')?.dirty) {
-          <mat-error>{{
-            "form.error.required"
-              | translate : { field: ("form.signUp.handle" | translate) }
-          }}</mat-error>
+          form.get('handle')?.touched) {
+          <mat-error>{{ "form.error.required" | translate }}</mat-error>
           }
         </mat-form-field>
         <mat-form-field appearance="outline">
@@ -55,7 +49,7 @@
             matInput
             formControlName="description"
             type="text"
-            placeholder="Enter your profile description"
+            [placeholder]="'form.signUp.placeholder.description' | translate"
           >
           </textarea>
         </mat-form-field>
@@ -74,16 +68,13 @@
             matInput
             formControlName="email"
             type="email"
-            placeholder="Enter your email"
+            [placeholder]="'form.signUp.placeholder.email' | translate"
           />
           @if(form.get('email')?.hasError('required') &&
-          form.get('email')?.dirty) {
-          <mat-error>{{
-            "form.error.required"
-              | translate : { field: ("common.email" | translate) }
-          }}</mat-error>
+          form.get('email')?.touched) {
+          <mat-error>{{ "form.error.required" | translate }}</mat-error>
           } @if(form.get('email')?.hasError('email') &&
-          form.get('email')?.dirty) {
+          form.get('email')?.touched) {
           <mat-error>{{ "form.error.emailInvalid" | translate }}</mat-error>
           }
         </mat-form-field>
@@ -93,16 +84,16 @@
             matInput
             formControlName="password"
             type="password"
-            placeholder="Enter your password"
+            [placeholder]="'form.signUp.placeholder.password' | translate"
           />
           @if(form.get('password')?.hasError('required') &&
-          form.get('password')?.dirty) {
+          form.get('password')?.touched) {
           <mat-error>{{
             "form.error.required"
               | translate : { field: ("common.password" | translate) }
           }}</mat-error>
           } @if(form.get('password')?.hasError('minlength') &&
-          form.get('password')?.dirty) {
+          form.get('password')?.touched) {
           <mat-error>{{ "form.error.passwordLength" | translate }}</mat-error>
           }
         </mat-form-field>

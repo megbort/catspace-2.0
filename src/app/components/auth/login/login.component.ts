@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { TranslateModule } from '@ngx-translate/core';
-import { AuthService } from '../../../services';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { AuthService, NotificationService } from '../../../services';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import {
   FormBuilder,
@@ -13,7 +13,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { SignupComponent } from '../signup/signup.component';
-import { catchError, of } from 'rxjs';
+import { catchError, of, tap } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -34,7 +34,9 @@ export class LoginComponent {
     private readonly dialog: MatDialog,
     private readonly dialogRef: MatDialogRef<LoginComponent>,
     private readonly formBuilder: FormBuilder,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
+    private readonly notificationService: NotificationService,
+    private readonly translate: TranslateService
   ) {
     this.form = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -44,8 +46,8 @@ export class LoginComponent {
 
   ngOnInit(): void {
     this.form.patchValue({
-      email: 'demo3@example.com', // Default email for demo purposes
-      password: '123456', // Default password for demo purposes
+      email: 'demo3@example.com', // Default email for testing
+      password: '123456', // Default password for testing
     });
   }
 
@@ -57,13 +59,21 @@ export class LoginComponent {
         .pipe(
           catchError((error) => {
             console.error('Login error:', error);
+            this.notificationService.error(
+              this.translate.instant('form.error.login')
+            );
             return of(null);
+          }),
+          tap((result) => {
+            if (result) {
+              this.notificationService.success(
+                this.translate.instant('form.success.login')
+              );
+              this.dialogRef.close();
+            }
           })
         )
-        .subscribe(() => {
-          console.log('Login successful');
-          this.dialogRef.close();
-        });
+        .subscribe();
     }
   }
 
