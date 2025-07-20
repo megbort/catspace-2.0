@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Profile, ProfileService } from '../../services';
+import { LoaderService, Profile, ProfileService } from '../../services';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   FollowEvent,
@@ -8,6 +8,7 @@ import {
 } from '../../components/profile-card/profile-card.component';
 import { Router } from '@angular/router';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { catchError, finalize, of, tap } from 'rxjs';
 
 @Component({
   selector: 'app-featured',
@@ -31,7 +32,8 @@ export class FeaturedComponent {
 
   constructor(
     private readonly router: Router,
-    private readonly profileService: ProfileService
+    private readonly profileService: ProfileService,
+    private readonly loader: LoaderService
   ) {}
 
   ngOnInit(): void {
@@ -40,10 +42,23 @@ export class FeaturedComponent {
 
   getProfiles() {
     this.loading.set(true);
-    this.profileService.getProfiles().subscribe((data) => {
-      this.profiles = data;
-      this.loading.set(false);
-    });
+    this.loader.show();
+    this.profileService
+      .getProfiles()
+      .pipe(
+        catchError((error) => {
+          console.error('Error fetching profiles:', error);
+          return of([]);
+        }),
+        tap((result) => {
+          this.profiles = result;
+        }),
+        finalize(() => {
+          this.loader.hide();
+          this.loading.set(false);
+        })
+      )
+      .subscribe();
   }
 
   view(id: string): void {

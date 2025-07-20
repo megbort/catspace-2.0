@@ -11,7 +11,7 @@ import {
 } from '@angular/material/snack-bar';
 
 const meta: Meta<NotificationComponent> = {
-  title: 'Components/Notification',
+  title: 'Design System/Notification',
   component: NotificationComponent,
   decorators: [
     applicationConfig({

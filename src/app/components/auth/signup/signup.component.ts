@@ -11,10 +11,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { AuthService, NotificationService } from '../../../services';
+import {
+  AuthService,
+  NotificationService,
+  LoaderService,
+} from '../../../services';
 import { LoginComponent } from '../login/login.component';
 import { catchError } from 'rxjs/internal/operators/catchError';
-import { of, tap } from 'rxjs';
+import { finalize, of, tap } from 'rxjs';
 
 @Component({
   selector: 'app-signup',
@@ -38,6 +42,7 @@ export class SignupComponent {
     private readonly formBuilder: FormBuilder,
     private readonly authService: AuthService,
     private readonly notificationService: NotificationService,
+    private readonly loader: LoaderService,
     private readonly translate: TranslateService
   ) {
     this.form = this.formBuilder.group({
@@ -53,6 +58,8 @@ export class SignupComponent {
     if (this.form.valid) {
       const rawForm = this.form.getRawValue();
       const { name, handle, description, email, password } = rawForm;
+
+      this.loader.show();
 
       this.authService
         .register(email, password, { name, handle, description })
@@ -72,6 +79,9 @@ export class SignupComponent {
               );
               this.dialogRef.close();
             }
+          }),
+          finalize(() => {
+            this.loader.hide();
           })
         )
         .subscribe();

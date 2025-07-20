@@ -3,7 +3,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { AuthService, NotificationService } from '../../../services';
+import {
+  AuthService,
+  LoaderService,
+  NotificationService,
+} from '../../../services';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import {
   FormBuilder,
@@ -13,7 +17,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { SignupComponent } from '../signup/signup.component';
-import { catchError, of, tap } from 'rxjs';
+import { catchError, finalize, of, tap } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -36,7 +40,8 @@ export class LoginComponent {
     private readonly formBuilder: FormBuilder,
     private readonly authService: AuthService,
     private readonly notificationService: NotificationService,
-    private readonly translate: TranslateService
+    private readonly translate: TranslateService,
+    private readonly loader: LoaderService
   ) {
     this.form = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -53,6 +58,8 @@ export class LoginComponent {
 
   login(): void {
     if (this.form.valid) {
+      this.loader.show();
+
       const rawForm = this.form.getRawValue();
       this.authService
         .login(rawForm.email, rawForm.password)
@@ -71,6 +78,9 @@ export class LoginComponent {
               );
               this.dialogRef.close();
             }
+          }),
+          finalize(() => {
+            this.loader.hide();
           })
         )
         .subscribe();

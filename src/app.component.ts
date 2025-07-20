@@ -4,6 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MenuComponent } from './app/components/menu/menu.component';
 import { FooterComponent } from './app/components/footer/footer.component';
 import { UserSidenavComponent } from './app/components/user-sidenav/user-sidenav.component';
+import { LoaderComponent } from './app/components/loader/loader.component';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { AuthService } from './app/services';
 
@@ -16,6 +17,7 @@ import { AuthService } from './app/services';
     MenuComponent,
     FooterComponent,
     UserSidenavComponent,
+    LoaderComponent,
     MatSidenavModule,
   ],
   templateUrl: './app.component.html',

@@ -5,9 +5,14 @@ import {
   runInInjectionContext,
 } from '@angular/core';
 import { Profile } from './models';
-import { catchError, map, Observable, of, throwError } from 'rxjs';
+import { catchError, from, map, Observable, of, throwError } from 'rxjs';
 import { collectionData, docData, Firestore } from '@angular/fire/firestore';
-import { collection, doc, FirestoreDataConverter } from 'firebase/firestore';
+import {
+  collection,
+  doc,
+  FirestoreDataConverter,
+  getDocs,
+} from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root',
@@ -34,7 +39,8 @@ export class ProfileService {
         'profiles'
       ).withConverter(this.profileConverter);
 
-      return collectionData(profilesCollection).pipe(
+      return from(getDocs(profilesCollection)).pipe(
+        map((snapshot) => snapshot.docs.map((doc) => doc.data())),
         catchError((error) => {
           console.error('Error fetching Firestore data: ', error);
           return of([]);

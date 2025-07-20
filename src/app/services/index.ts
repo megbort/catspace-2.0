@@ -1,4 +1,5 @@
 export * from './auth.service';
+export * from './loader.service';
 export * from './mocks';
 export * from './models';
 export * from './notification.service';
