@@ -12,7 +12,7 @@
       class="subtitle-2 py-4"
       [innerHTML]="'home.heroSubtitle' | translate"
     ></p>
-    <button mat-flat-button (click)="signUp()">
+    <button mat-flat-button (click)="signUp()" [disabled]="isLoggedIn()">
       {{ "button.createAccount" | translate }}
     </button>
   </div>
@@ -25,7 +25,7 @@
       <img
         unpic
         class="max-w-[400px]"
-        src="https://res.cloudinary.com/dm1yyjg7i/image/upload/v1730658254/catspace/two-cats_y45tum.png"
+        src="https://res.cloudinary.com/dm1yyjg7i/image/upload/v1753054362/catspace/cat-doodle-2_gb462f.jpg"
         alt="Two orange cats"
       />
     </div>
@@ -33,7 +33,12 @@
       <h2 class="pb-4">{{ "home.about" | translate }}</h2>
       <p class="text-body">{{ "home.description1" | translate }}</p>
       <p class="text-body">{{ "home.description2" | translate }}</p>
-      <button mat-flat-button (click)="signUp()" class="w-max">
+      <button
+        mat-flat-button
+        (click)="signUp()"
+        class="w-max"
+        [disabled]="isLoggedIn()"
+      >
         {{ "button.createAccount" | translate }}
       </button>
     </div>

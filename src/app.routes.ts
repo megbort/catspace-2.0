@@ -8,4 +8,8 @@ export const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'featured', component: FeaturedComponent },
   { path: 'profile/:id', component: ProfileComponent },
+  {
+    path: 'my-page',
+    redirectTo: '/profile/me',
+  },
 ];

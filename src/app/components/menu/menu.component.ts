@@ -30,10 +30,14 @@ export class MenuComponent {
   isLoggedIn = computed(() => this.authService.currentUserSignal());
 
   constructor(
-    private readonly authService: AuthService,
+    public readonly authService: AuthService,
     private readonly dialog: MatDialog,
     public globalStore: GlobalStore
   ) {}
+
+  get currentUser() {
+    return this.authService.currentUserSignal();
+  }
 
   openDialog(dialog: DialogType): void {
     if (dialog === Dialog.SignUp) {

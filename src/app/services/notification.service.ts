@@ -13,7 +13,7 @@ export class NotificationService {
 
   private show(data: NotificationData, config?: MatSnackBarConfig) {
     const defaultConfig: MatSnackBarConfig = {
-      duration: 400000,
+      duration: 3000,
       verticalPosition: 'top',
       horizontalPosition: 'center',
       ...config,

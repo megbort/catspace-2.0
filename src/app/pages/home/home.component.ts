@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, computed } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   FollowEvent,
   ProfileCardComponent,
 } from '../../components/profile-card/profile-card.component';
-import { Profile, ProfileService } from '../../services';
+import { AuthService, Profile, ProfileService } from '../../services';
 import { Router, RouterModule } from '@angular/router';
 import { map } from 'rxjs';
 import { UnpicImageDirective } from '@unpic/angular';
@@ -26,8 +26,10 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class HomeComponent {
   featured: Profile[] = [];
+  isLoggedIn = computed(() => this.authService.currentUserSignal());
 
   constructor(
+    private readonly authService: AuthService,
     private readonly router: Router,
     private readonly dialog: MatDialog,
     private readonly profileService: ProfileService

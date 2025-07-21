@@ -12,7 +12,18 @@
     </button>
   </div>
   <div class="flex gap-4">
-    <div class="w-20 h-20 rounded-full bg-catspace-brown"></div>
+    <div class="w-20 h-20 rounded-full overflow-hidden">
+      @if (user(); as currentUser) {
+      <img
+        [src]="
+          currentUser.image ||
+          'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1753057717/catspace/no-avatar_mm3idt.png'
+        "
+        [alt]="currentUser.name + '\'s avatar'"
+        class="w-full h-full object-cover"
+      />
+      }
+    </div>
     @if (user(); as currentUser) {
     <div>
       <p class="subtitle-1">{{ currentUser.name }}</p>
@@ -26,7 +37,12 @@
   </div>
   <div class="pl-20 mt-8">
     <ul class="flex flex-col gap-8">
-      <li class="menu-item">
+      <li
+        class="menu-item"
+        routerLink="/my-page"
+        (click)="close.emit()"
+        (keypress)="close.emit()"
+      >
         <span class="material-symbols-outlined">person</span>
         <p class="subtitle-2">{{ "menu.myPage" | translate }}</p>
       </li>
@@ -50,7 +66,7 @@
         <span class="material-symbols-outlined">help</span>
         <p class="subtitle-2">{{ "menu.help" | translate }}</p>
       </li>
-      <li class="menu-item">
+      <li class="menu-item" (click)="logout()" (keypress)="logout()">
         <span class="material-symbols-outlined">logout</span>
         <p class="subtitle-2">{{ "menu.logout" | translate }}</p>
       </li>

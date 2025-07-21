@@ -6,6 +6,7 @@ import {
   UserCredential,
 } from 'firebase/auth';
 import { from, Observable } from 'rxjs';
+import { Router } from '@angular/router';
 import { User } from './models';
 import { UserService } from './user.service';
 import { GlobalStore } from '../shared';
@@ -20,7 +21,8 @@ export class AuthService {
 
   constructor(
     private readonly userService: UserService,
-    private readonly globalStore: GlobalStore
+    private readonly globalStore: GlobalStore,
+    private readonly router: Router
   ) {}
 
   initializeUser(): void {
@@ -104,6 +106,7 @@ export class AuthService {
     const promise = this.firebaseAuth.signOut().then(() => {
       this.currentUserSignal.set(null);
       this.globalStore.logout(null, false);
+      this.router.navigate(['/home']);
     });
     return from(promise);
   }

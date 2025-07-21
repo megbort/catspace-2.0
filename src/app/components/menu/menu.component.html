@@ -33,7 +33,7 @@
           <p class="subtitle-1 pr-1">{{ "menu.following" | translate }}</p>
           <span class="material-icons hidden icon-18 lg:block">pets</span>
         </li>
-        <li class="menu-item" title="My Page">
+        <li class="menu-item" routerLink="/my-page" title="My Page">
           <p class="subtitle-1 pr-1">{{ "menu.myPage" | translate }}</p>
           <span class="material-icons hidden icon-18 lg:block">person</span>
         </li>
@@ -45,9 +45,18 @@
       @if(isLoggedIn()) {
       <span class="material-symbols-outlined">notifications</span>
       <button
-        class="rounded-full bg-catspace-brown w-8 h-8"
+        class="rounded-full w-8 h-8 overflow-hidden"
         (click)="open.emit()"
-      ></button>
+      >
+        <img
+          [src]="
+            currentUser?.image ||
+            'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1753057717/catspace/no-avatar_mm3idt.png'
+          "
+          [alt]="(currentUser?.name || 'User') + '\'s avatar'"
+          class="w-full h-full object-cover"
+        />
+      </button>
 
       <button mat-stroked-button (click)="logout()">
         {{ "button.logout" | translate }}
@@ -82,7 +91,7 @@
       <li mat-menu-item>
         {{ "menu.following" | translate }}
       </li>
-      <li mat-menu-item>
+      <li mat-menu-item routerLink="/my-page">
         {{ "menu.myPage" | translate }}
       </li>
       <li mat-menu-item>
