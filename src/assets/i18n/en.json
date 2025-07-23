@@ -22,11 +22,13 @@
     "back": "Back",
     "newPost": "New Post",
     "close": "Close",
-    "editProfile": "Edit Profile"
+    "save": "Save",
+    "cancel": "Cancel"
   },
   "form": {
     "loginMessage": "Don't have an account?",
     "signUpMessage": "Already have an account?",
+    "editProfile": "Edit Profile",
     "signUp": {
       "step1": "We're excited to have you join! Lets start with getting some basic information for your profile.",
       "step2": "Almost done! Next, fill out your email and password then get ready to start posting.",

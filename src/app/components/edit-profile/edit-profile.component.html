@@ -1,0 +1,114 @@
+<div class="flex flex-col justify-center gap-4 p-8 w-full">
+  <h2 class="text-center pb-2">{{ "form.editProfile" | translate }}</h2>
+  <div>
+    <form [formGroup]="form">
+      <div class="flex flex-col w-full gap-1">
+        <div class="flex gap-4 pb-8">
+          <!-- Avatar -->
+          <div class="relative w-[150px] h-[150px]">
+            <div
+              class="w-full h-full rounded-full overflow-hidden border-2 border-gray-200"
+            >
+              <img
+                [src]="
+                  form.get('avatar')?.value ||
+                  'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1753057717/catspace/no-avatar_mm3idt.png'
+                "
+                alt="Profile avatar"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div class="absolute bottom-2 right-2 z-10">
+              <button
+                type="button"
+                mat-mini-fab
+                color="primary"
+                (click)="editAvatar()"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+            </div>
+          </div>
+
+          <div class="flex-1 flex flex-col gap-1">
+            <!-- Name -->
+            <mat-form-field appearance="outline">
+              <mat-label>
+                {{ "form.signUp.name" | translate }}
+              </mat-label>
+              <input
+                matInput
+                formControlName="name"
+                type="text"
+                [placeholder]="'form.signUp.placeholder.name' | translate"
+              />
+              @if(form.get('name')?.hasError('required') &&
+              form.get('name')?.touched) {
+              <mat-error>{{ "form.error.required" | translate }}</mat-error>
+              } @if(form.get('name')?.hasError('minlength') &&
+              form.get('name')?.touched) {
+              <mat-error>{{ "form.error.nameLength" | translate }}</mat-error>
+              }
+            </mat-form-field>
+            <!-- Handle -->
+            <mat-form-field appearance="outline">
+              <mat-label>
+                {{ "form.signUp.handle" | translate }}
+              </mat-label>
+              <input
+                matInput
+                formControlName="handle"
+                type="text"
+                [placeholder]="'form.signUp.placeholder.handle' | translate"
+                class="text-left"
+              />
+              <span matTextPrefix class="text-gray-400">&#64;&nbsp;</span>
+              @if(form.get('handle')?.hasError('required') &&
+              form.get('handle')?.touched) {
+              <mat-error>{{ "form.error.required" | translate }}</mat-error>
+              }
+            </mat-form-field>
+          </div>
+        </div>
+        <!-- Description -->
+        <mat-form-field appearance="outline">
+          <mat-label>
+            {{ "form.signUp.description" | translate }}
+          </mat-label>
+          <textarea
+            matInput
+            formControlName="description"
+            type="text"
+            [placeholder]="'form.signUp.placeholder.description' | translate"
+          >
+          </textarea>
+          @if(form.get('description')?.hasError('maxlength') &&
+          form.get('description')?.touched) {
+          <mat-error>{{
+            "form.error.descriptionLength" | translate
+          }}</mat-error>
+          }
+        </mat-form-field>
+        <div class="flex gap-2 mt-4">
+          <button
+            mat-stroked-button
+            type="button"
+            (click)="cancel()"
+            class="flex-1"
+          >
+            {{ "button.cancel" | translate }}
+          </button>
+          <button
+            mat-flat-button
+            type="button"
+            (click)="save()"
+            [disabled]="!form.valid"
+            class="flex-1"
+          >
+            {{ "button.save" | translate }}
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

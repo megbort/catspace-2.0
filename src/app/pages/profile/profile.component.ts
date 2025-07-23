@@ -11,13 +11,21 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { PostCardComponent } from '../../components/post-card/post-card.component';
+import { EditProfileComponent } from '../../components/edit-profile/edit-profile.component';
 import { catchError, switchMap } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-profile',
-  imports: [TranslateModule, MatButtonModule, PostCardComponent, CommonModule],
+  imports: [
+    TranslateModule,
+    MatButtonModule,
+    MatDialogModule,
+    PostCardComponent,
+    CommonModule,
+  ],
   templateUrl: './profile.component.html',
 })
 export class ProfileComponent {
@@ -37,7 +45,8 @@ export class ProfileComponent {
     private readonly postService: PostService,
     private readonly authService: AuthService,
     private readonly userService: UserService,
-    private readonly loader: LoaderService
+    private readonly loader: LoaderService,
+    private readonly dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -156,5 +165,9 @@ export class ProfileComponent {
         this.posts = posts;
         this.loader.hide();
       });
+  }
+
+  openEditProfile(): void {
+    this.dialog.open(EditProfileComponent, { width: '500px' });
   }
 }
