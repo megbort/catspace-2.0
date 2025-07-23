@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import { Profile } from './models';
 import { catchError, from, map, Observable, of, throwError } from 'rxjs';
-import { collectionData, docData, Firestore } from '@angular/fire/firestore';
+import { docData, Firestore } from '@angular/fire/firestore';
 import {
   collection,
   doc,

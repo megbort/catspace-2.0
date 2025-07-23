@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -11,8 +11,21 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { TranslateModule } from '@ngx-translate/core';
-import { LoaderService, NotificationService } from '../../services';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import {
+  LoaderService,
+  NotificationService,
+  AuthService,
+  UserService,
+} from '../../services';
+import { GlobalStore } from '../../shared';
+
+interface ProfileUpdates {
+  name: string;
+  handle: string;
+  description?: string;
+  image?: string;
+}
 
 @Component({
   selector: 'app-edit-profile',
@@ -27,14 +40,18 @@ import { LoaderService, NotificationService } from '../../services';
   ],
   templateUrl: './edit-profile.component.html',
 })
-export class EditProfileComponent {
+export class EditProfileComponent implements OnInit {
   form: FormGroup;
 
   constructor(
     private readonly dialog: MatDialog,
     private readonly loader: LoaderService,
     private readonly notificationService: NotificationService,
-    private readonly formBuilder: FormBuilder
+    private readonly formBuilder: FormBuilder,
+    private readonly authService: AuthService,
+    private readonly globalStore: GlobalStore,
+    private readonly userService: UserService,
+    private readonly translate: TranslateService
   ) {
     this.form = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
@@ -45,13 +62,16 @@ export class EditProfileComponent {
   }
 
   ngOnInit(): void {
-    this.form.patchValue({
-      name: 'John Doe',
-      handle: 'johndoe',
-      description: 'This is a sample description.',
-      avatar:
-        'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1753057717/catspace/no-avatar_mm3idt.png',
-    });
+    const currentUser = this.authService.currentUserSignal();
+
+    if (currentUser) {
+      this.form.patchValue({
+        name: currentUser.name || '',
+        handle: currentUser.handle || '',
+        description: currentUser.description || '',
+        avatar: currentUser.image || '',
+      });
+    }
   }
 
   cancel(): void {
@@ -65,15 +85,44 @@ export class EditProfileComponent {
   save(): void {
     if (this.form.valid) {
       this.loader.show();
-      // TODO: Implement save logic with user service
-      console.log('Form values:', this.form.value);
 
-      // Simulate API call
-      setTimeout(() => {
+      const currentUser = this.authService.currentUserSignal();
+
+      if (!currentUser) {
         this.loader.hide();
-        this.notificationService.success('Profile updated successfully!');
-        this.dialog.closeAll();
-      }, 1000);
+        this.notificationService.error(
+          this.translate.instant('form.error.userNotFound')
+        );
+        return;
+      }
+
+      const profileUpdates: ProfileUpdates = {
+        name: this.form.value.name,
+        handle: this.form.value.handle,
+        description: this.form.value.description ?? '',
+        image: this.form.value.avatar ?? '',
+      };
+
+      this.userService
+        .updateUserProfile(currentUser.id, profileUpdates)
+        .then(() => {
+          const updatedUser = { ...currentUser, ...profileUpdates };
+          this.authService.currentUserSignal.set(updatedUser);
+          this.globalStore.login(updatedUser, true);
+
+          this.loader.hide();
+          this.notificationService.success(
+            this.translate.instant('form.success.updateProfile')
+          );
+          this.dialog.closeAll();
+        })
+        .catch((error) => {
+          console.error('Error updating profile:', error);
+          this.loader.hide();
+          this.notificationService.error(
+            this.translate.instant('form.error.updateProfile')
+          );
+        });
     }
   }
 }

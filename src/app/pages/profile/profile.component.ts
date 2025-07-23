@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, computed } from '@angular/core';
 import {
   Post,
   PostService,
@@ -7,6 +7,7 @@ import {
   AuthService,
   UserService,
   LoaderService,
+  User,
 } from '../../services';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -29,10 +30,35 @@ import { CommonModule } from '@angular/common';
   templateUrl: './profile.component.html',
 })
 export class ProfileComponent {
-  profile?: Profile;
+  private readonly _profile = signal<Profile | undefined>(undefined);
+  private readonly currentProfileId = signal('');
+
   posts: Post[] = [];
   isOwner = signal(false);
-  private currentProfileId = '';
+
+  private userToProfile(user: User): Profile {
+    return {
+      id: user.id,
+      image: user.image || '',
+      name: user.name || '',
+      handle: user.handle || '',
+      description: user.description || '',
+      followers: 0,
+      tags: [],
+      posts: user.posts || [],
+    };
+  }
+
+  profile = computed(() => {
+    const currentUser = this.authService.currentUserSignal();
+    const isOwner = this.isOwner();
+    const profileId = this.currentProfileId();
+
+    if (currentUser && isOwner && profileId === currentUser.id) {
+      return this.userToProfile(currentUser);
+    }
+    return this._profile();
+  });
 
   get loading() {
     return this.loader.isLoading;
@@ -53,18 +79,16 @@ export class ProfileComponent {
     this.route.paramMap.subscribe((paramMap) => {
       const id = paramMap.get('id');
       if (id) {
-        // Handle "me" route parameter
         if (id === 'me') {
           const currentUser = this.authService.currentUserSignal();
           if (currentUser) {
-            this.currentProfileId = currentUser.id;
+            this.currentProfileId.set(currentUser.id);
             this.loadProfileData(currentUser.id);
           } else {
-            // Redirect to home if not logged in
             this.router.navigate(['/home']);
           }
         } else {
-          this.currentProfileId = id;
+          this.currentProfileId.set(id);
           this.loadProfileData(id);
         }
       }
@@ -96,7 +120,7 @@ export class ProfileComponent {
       .then((userData) => {
         if (userData) {
           this.isOwner.set(true);
-          this.profile = userData as unknown as Profile;
+          this._profile.set(this.userToProfile(userData));
           this.loadUserPosts(id);
         } else {
           this.loadProfileDataVisitor(id);
@@ -113,7 +137,7 @@ export class ProfileComponent {
       .getUserProfileById(id)
       .then((userData) => {
         if (userData) {
-          this.profile = userData as unknown as Profile;
+          this._profile.set(this.userToProfile(userData));
           this.loadUserPosts(id);
         } else {
           this.loader.hide();
@@ -135,7 +159,7 @@ export class ProfileComponent {
         }),
         switchMap((profileData) => {
           if (profileData) {
-            this.profile = profileData;
+            this._profile.set(profileData);
             return this.postService.getPostsByProfileId(id);
           } else {
             return [];

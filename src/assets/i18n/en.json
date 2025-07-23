@@ -23,7 +23,8 @@
     "newPost": "New Post",
     "close": "Close",
     "save": "Save",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "editProfile": "Edit Profile"
   },
   "form": {
     "loginMessage": "Don't have an account?",
@@ -50,11 +51,15 @@
       "signUpDefault": "Sign up failed. Please try again.",
       "emailInvalid": "The email address is invalid. Please enter a valid email.",
       "required": "This field is required.",
-      "passwordLength": "Password must be at least 6 characters long."
+      "passwordLength": "Password must be at least 6 characters long.",
+      "nameLength": "Name must be at least 2 characters long.",
+      "descriptionLength": "Description can't exceed 400 characters.",
+      "updateProfile": "Failed to update profile. Please try again.",
+      "userNotFound": "User not found. Please log in again."
     },
     "success": {
       "accountCreated": "Account created successfully!",
-      "profileUpdated": "Profile updated successfully!",
+      "updateProfile": "Profile updated successfully!",
       "login": "Logged in successfully!"
     }
   },

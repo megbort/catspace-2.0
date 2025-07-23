@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { User } from './models';
 import { catchError, map, Observable, of } from 'rxjs';
 import { collectionData, Firestore } from '@angular/fire/firestore';
-import { collection, doc, getDoc, setDoc } from 'firebase/firestore';
+import { collection, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root',
@@ -46,5 +46,21 @@ export class UserService {
         return of([] as User[]);
       })
     );
+  }
+
+  updateUserProfile(
+    uid: string,
+    updates: {
+      name?: string;
+      handle?: string;
+      description?: string;
+      image?: string;
+    }
+  ): Promise<void> {
+    const userRef = doc(this.firestore, `users/${uid}`);
+    return updateDoc(userRef, {
+      ...updates,
+      updatedAt: new Date().toISOString(),
+    });
   }
 }
