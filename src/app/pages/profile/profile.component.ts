@@ -15,7 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { PostCardComponent } from '../../components/post-card/post-card.component';
 import { EditProfileComponent } from '../../components/edit-profile/edit-profile.component';
-import { catchError, switchMap } from 'rxjs/operators';
+import { catchError, switchMap, take } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -80,13 +80,7 @@ export class ProfileComponent {
       const id = paramMap.get('id');
       if (id) {
         if (id === 'me') {
-          const currentUser = this.authService.currentUserSignal();
-          if (currentUser) {
-            this.currentProfileId.set(currentUser.id);
-            this.loadProfileData(currentUser.id);
-          } else {
-            this.router.navigate(['/home']);
-          }
+          this.handleMeRoute();
         } else {
           this.currentProfileId.set(id);
           this.loadProfileData(id);
@@ -95,13 +89,38 @@ export class ProfileComponent {
     });
   }
 
+  private handleMeRoute(): void {
+    const currentUser = this.authService.currentUserSignal();
+
+    if (currentUser) {
+      this.currentProfileId.set(currentUser.id);
+      this.loadProfileData(currentUser.id);
+    } else {
+      this.authService.user$.pipe(take(1)).subscribe((firebaseUser) => {
+        if (firebaseUser) {
+          this.currentProfileId.set(firebaseUser.uid);
+          this.loadProfileData(firebaseUser.uid);
+        } else {
+          this.router.navigate(['/home']);
+        }
+      });
+    }
+  }
+
   private loadProfileData(id: string): void {
     this.loader.show();
 
     const currentUser = this.authService.currentUserSignal();
 
     if (!currentUser) {
-      this.tryLoadAsUser(id);
+      this.authService.user$.pipe(take(1)).subscribe((firebaseUser) => {
+        if (firebaseUser && firebaseUser.uid === id) {
+          this.isOwner.set(true);
+          this.loadUserData(id);
+        } else {
+          this.tryLoadAsUser(id);
+        }
+      });
     } else {
       const isCurrentUser = currentUser.id === id;
       this.isOwner.set(isCurrentUser);

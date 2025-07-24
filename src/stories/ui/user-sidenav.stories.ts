@@ -3,10 +3,13 @@ import { UserSidenavComponent } from '../../app/components/user-sidenav/user-sid
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { applicationConfig } from '@storybook/angular';
 import { TranslateModule } from '@ngx-translate/core';
-import { GlobalStore, storybookTranslateConfig } from '../../app/shared';
+import { storybookTranslateConfig } from '../../app/shared';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { computed, signal } from '@angular/core';
 import { USER } from '../../app/services/mocks';
+import { AuthService } from '../../app/services';
+import { of } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 class MockGlobalStore {
   private readonly userSignal = signal(USER);
@@ -21,7 +24,20 @@ const meta: Meta<UserSidenavComponent> = {
       providers: [
         provideAnimations(),
         provideHttpClient(withFetch()),
-        { provide: GlobalStore, useClass: MockGlobalStore },
+        {
+          provide: AuthService,
+          useValue: {
+            login: () => of(void 0),
+            logout: () => of(void 0),
+            register: () => of(void 0),
+            user$: of(null),
+            currentUserSignal: signal(USER),
+          },
+        },
+        {
+          provide: ActivatedRoute,
+          useValue: {},
+        },
       ],
     }),
     moduleMetadata({

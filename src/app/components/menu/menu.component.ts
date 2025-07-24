@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { SignupComponent } from '../auth/signup/signup.component';
 import { LoginComponent } from '../auth/login/login.component';
-import { GlobalStore, Dialog, DialogType } from '../../shared';
+import { Dialog, DialogType } from '../../shared';
 import { UnpicImageDirective } from '@unpic/angular';
 import { AuthService } from '../../services';
 
@@ -31,8 +31,7 @@ export class MenuComponent {
 
   constructor(
     public readonly authService: AuthService,
-    private readonly dialog: MatDialog,
-    public globalStore: GlobalStore
+    private readonly dialog: MatDialog
   ) {}
 
   get currentUser() {
@@ -49,6 +48,5 @@ export class MenuComponent {
 
   logout(): void {
     this.authService.logout().subscribe();
-    this.globalStore.logout(null, false);
   }
 }

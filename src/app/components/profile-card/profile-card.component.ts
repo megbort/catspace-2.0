@@ -2,14 +2,13 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { TranslateModule } from '@ngx-translate/core';
-import { Profile } from '../../services';
+import { Profile, AuthService } from '../../services';
 import { RouterModule } from '@angular/router';
 import {
   MatButtonToggleChange,
   MatButtonToggleModule,
 } from '@angular/material/button-toggle';
 import { UnpicImageDirective } from '@unpic/angular';
-import { GlobalStore } from '../../shared';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthMessageComponent } from '../auth/auth-message.component';
 
@@ -53,12 +52,12 @@ export class ProfileCardComponent {
   following = false;
 
   constructor(
-    private readonly globalStore: GlobalStore,
+    private readonly authService: AuthService,
     private readonly dialog: MatDialog
   ) {}
 
   setFollowingStatus(): void {
-    if (!this.globalStore.authorized()) {
+    if (!this.authService.currentUserSignal()) {
       return;
     }
 
@@ -70,7 +69,7 @@ export class ProfileCardComponent {
   }
 
   toggleFollow(event: MatButtonToggleChange): void {
-    if (!this.globalStore.authorized()) {
+    if (!this.authService.currentUserSignal()) {
       this.showAuthMessage();
       event.source.checked = this.following;
       return;

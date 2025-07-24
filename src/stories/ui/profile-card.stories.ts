@@ -3,9 +3,17 @@ import { ProfileCardComponent } from '../../app/components/profile-card/profile-
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { applicationConfig } from '@storybook/angular';
 import { TranslateModule } from '@ngx-translate/core';
-import { GlobalStore, storybookTranslateConfig } from '../../app/shared';
+import { storybookTranslateConfig } from '../../app/shared';
 import { provideHttpClient, withFetch } from '@angular/common/http';
-import { Profile, PROFILES } from '../../app/services';
+import {
+  AuthService,
+  Profile,
+  PROFILES,
+  USER,
+  UserService,
+} from '../../app/services';
+import { of } from 'rxjs';
+import { signal } from '@angular/core';
 
 const profile: Profile = PROFILES[0];
 
@@ -17,7 +25,23 @@ const meta: Meta<ProfileCardComponent> = {
       providers: [
         provideAnimations(),
         provideHttpClient(withFetch()),
-        GlobalStore,
+        {
+          provide: UserService,
+          useValue: {
+            updateUserProfile: () => Promise.resolve(),
+            getUserProfileById: () => Promise.resolve(null),
+          },
+        },
+        {
+          provide: AuthService,
+          useValue: {
+            login: () => of(void 0),
+            logout: () => of(void 0),
+            register: () => of(void 0),
+            user$: of(null),
+            currentUserSignal: signal(USER),
+          },
+        },
       ],
     }),
     moduleMetadata({

@@ -1,24 +1,18 @@
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
-import { User } from '../../services';
 
 type GlobalState = {
-  user: User | null;
-  authorized: boolean;
+  isLoading: boolean;
 };
 
 const initialState: GlobalState = {
-  user: null,
-  authorized: false,
+  isLoading: false,
 };
 
 export const GlobalStore = signalStore(
   withState(initialState),
   withMethods((store) => ({
-    login(user: User | null, authorized: boolean) {
-      patchState(store, () => ({ user, authorized }));
-    },
-    logout(user: User | null, authorized: boolean) {
-      patchState(store, () => ({ user, authorized }));
+    setLoading(isLoading: boolean) {
+      patchState(store, () => ({ isLoading }));
     },
   }))
 );

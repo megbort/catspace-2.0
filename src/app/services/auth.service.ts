@@ -9,7 +9,6 @@ import { from, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { User } from './models';
 import { UserService } from './user.service';
-import { GlobalStore } from '../shared';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +20,6 @@ export class AuthService {
 
   constructor(
     private readonly userService: UserService,
-    private readonly globalStore: GlobalStore,
     private readonly router: Router
   ) {}
 
@@ -46,15 +44,12 @@ export class AuthService {
           };
 
           this.currentUserSignal.set(fullUser);
-          this.globalStore.login(fullUser, true);
         } catch (error) {
           console.error('Error loading user profile:', error);
           this.currentUserSignal.set(null);
-          this.globalStore.logout(null, false);
         }
       } else {
         this.currentUserSignal.set(null);
-        this.globalStore.logout(null, false);
       }
     });
   }
@@ -105,7 +100,6 @@ export class AuthService {
   logout(): Observable<void> {
     const promise = this.firebaseAuth.signOut().then(() => {
       this.currentUserSignal.set(null);
-      this.globalStore.logout(null, false);
       this.router.navigate(['/home']);
     });
     return from(promise);

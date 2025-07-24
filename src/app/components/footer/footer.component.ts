@@ -1,7 +1,7 @@
 import { Component, computed } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { GlobalStore, Dialog, DialogType } from '../../shared';
+import { Dialog, DialogType } from '../../shared';
 import { RouterModule } from '@angular/router';
 import { SignupComponent } from '../auth/signup/signup.component';
 import { LoginComponent } from '../auth/login/login.component';
@@ -14,12 +14,11 @@ import { AuthService } from '../../services';
   styleUrl: './footer.component.scss',
 })
 export class FooterComponent {
-  isLoggedIn = computed(() => this.globalStore.authorized());
+  isLoggedIn = computed(() => this.authService.currentUserSignal());
 
   constructor(
     private readonly dialog: MatDialog,
-    private readonly authService: AuthService,
-    public globalStore: GlobalStore
+    private readonly authService: AuthService
   ) {}
 
   openDialog(dialog: DialogType): void {

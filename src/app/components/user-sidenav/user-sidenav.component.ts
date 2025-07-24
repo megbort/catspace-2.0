@@ -5,7 +5,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { GlobalStore } from '../../shared';
 import { AuthService } from '../../services';
 import { EditProfileComponent } from '../edit-profile/edit-profile.component';
 
@@ -25,10 +24,9 @@ import { EditProfileComponent } from '../edit-profile/edit-profile.component';
 })
 export class UserSidenavComponent {
   close = output<void>();
-  user = computed(() => this.globalStore.user());
+  user = computed(() => this.authService.currentUserSignal());
 
   constructor(
-    private readonly globalStore: GlobalStore,
     private readonly authService: AuthService,
     private readonly dialog: MatDialog
   ) {}

@@ -19,7 +19,6 @@ import {
   UserService,
   MediaService,
 } from '../../services';
-import { GlobalStore } from '../../shared';
 import { catchError, tap } from 'rxjs';
 
 interface ProfileUpdates {
@@ -53,7 +52,6 @@ export class EditProfileComponent implements OnInit {
     private readonly notificationService: NotificationService,
     private readonly formBuilder: FormBuilder,
     private readonly authService: AuthService,
-    private readonly globalStore: GlobalStore,
     private readonly userService: UserService,
     private readonly mediaService: MediaService,
     private readonly translate: TranslateService
@@ -169,7 +167,6 @@ export class EditProfileComponent implements OnInit {
         tap(() => {
           const updatedUser = { ...currentUser, ...profileUpdates };
           this.authService.currentUserSignal.set(updatedUser);
-          this.globalStore.login(updatedUser, true);
 
           this.loader.hide();
           this.notificationService.success(

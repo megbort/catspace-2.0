@@ -6,16 +6,9 @@ import { storybookTranslateConfig } from '../../app/shared/config/translate';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { EditProfileComponent } from '../../app/components/edit-profile/edit-profile.component';
-import {
-  AuthService,
-  UserService,
-  LoaderService,
-  NotificationService,
-  MediaService,
-} from '../../app/services';
+import { AuthService, UserService, MediaService } from '../../app/services';
 import { of } from 'rxjs';
 import { signal } from '@angular/core';
-import { GlobalStore } from '../../app/shared';
 import { USER } from '../../app/services/mocks/users';
 
 const meta: Meta<EditProfileComponent> = {
@@ -31,13 +24,6 @@ const meta: Meta<EditProfileComponent> = {
           useValue: {
             close: () => {},
             closeAll: () => {},
-          },
-        },
-        {
-          provide: GlobalStore,
-          useValue: {
-            user: signal(USER),
-            login: () => {},
           },
         },
         {
