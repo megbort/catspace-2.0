@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { User } from './models';
-import { catchError, map, Observable, of } from 'rxjs';
+import { catchError, from, map, Observable, of } from 'rxjs';
 import { collectionData, Firestore } from '@angular/fire/firestore';
 import { collection, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
 
@@ -56,11 +56,13 @@ export class UserService {
       description?: string;
       image?: string;
     }
-  ): Promise<void> {
+  ): Observable<void> {
     const userRef = doc(this.firestore, `users/${uid}`);
-    return updateDoc(userRef, {
-      ...updates,
-      updatedAt: new Date().toISOString(),
-    });
+    return from(
+      updateDoc(userRef, {
+        ...updates,
+        updatedAt: new Date().toISOString(),
+      })
+    );
   }
 }

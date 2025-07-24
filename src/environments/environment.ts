@@ -1,7 +1,9 @@
 export const environment = {
   production: false,
-  cloudinary:
-    'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1730658243/catspace',
+  cloudinary: {
+    cloudName: 'dm1yyjg7i',
+    uploadPreset: 'catspace',
+  },
   firebaseConfig: {
     apiKey: process.env['FIREBASE_API_KEY'],
     authDomain: 'catspace-e7621.firebaseapp.com',

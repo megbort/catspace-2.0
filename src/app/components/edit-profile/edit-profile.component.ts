@@ -17,8 +17,10 @@ import {
   NotificationService,
   AuthService,
   UserService,
+  MediaService,
 } from '../../services';
 import { GlobalStore } from '../../shared';
+import { catchError, tap } from 'rxjs';
 
 interface ProfileUpdates {
   name: string;
@@ -42,6 +44,8 @@ interface ProfileUpdates {
 })
 export class EditProfileComponent implements OnInit {
   form: FormGroup;
+  selectedFile: File | null = null;
+  previewUrl: string | null = null;
 
   constructor(
     private readonly dialog: MatDialog,
@@ -51,6 +55,7 @@ export class EditProfileComponent implements OnInit {
     private readonly authService: AuthService,
     private readonly globalStore: GlobalStore,
     private readonly userService: UserService,
+    private readonly mediaService: MediaService,
     private readonly translate: TranslateService
   ) {
     this.form = this.formBuilder.group({
@@ -75,11 +80,41 @@ export class EditProfileComponent implements OnInit {
   }
 
   cancel(): void {
+    this.selectedFile = null;
+    this.previewUrl = null;
     this.dialog.closeAll();
   }
 
-  editAvatar(): void {
-    console.log('Edit avatar clicked');
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+
+    if (file) {
+      const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+      if (!allowedTypes.includes(file.type)) {
+        this.notificationService.error(
+          this.translate.instant('form.error.invalidFileType')
+        );
+        return;
+      }
+
+      const maxSize = 5 * 1024 * 1024; // 5MB
+      if (file.size > maxSize) {
+        this.notificationService.error(
+          this.translate.instant('form.error.fileTooLarge')
+        );
+        return;
+      }
+
+      this.selectedFile = file;
+
+      const reader = new FileReader();
+      reader.onload = (fileReadEvent) => {
+        this.previewUrl = fileReadEvent.target?.result as string;
+        this.form.patchValue({ avatar: this.previewUrl });
+      };
+      reader.readAsDataURL(file);
+    }
   }
 
   save(): void {
@@ -96,16 +131,42 @@ export class EditProfileComponent implements OnInit {
         return;
       }
 
-      const profileUpdates: ProfileUpdates = {
-        name: this.form.value.name,
-        handle: this.form.value.handle,
-        description: this.form.value.description ?? '',
-        image: this.form.value.avatar ?? '',
-      };
+      if (this.selectedFile) {
+        this.mediaService
+          .uploadUserAvatar(this.selectedFile, currentUser.id)
+          .pipe(
+            tap((imageUrl) => {
+              this.updateProfile(currentUser, imageUrl);
+            }),
+            catchError((error) => {
+              console.error('Error uploading image:', error);
+              this.loader.hide();
+              this.notificationService.error(
+                this.translate.instant('form.error.uploadFailed')
+              );
+              return [];
+            })
+          )
+          .subscribe();
+      } else {
+        const existingImageUrl = this.form.value.avatar ?? '';
+        this.updateProfile(currentUser, existingImageUrl);
+      }
+    }
+  }
 
-      this.userService
-        .updateUserProfile(currentUser.id, profileUpdates)
-        .then(() => {
+  private updateProfile(currentUser: any, imageUrl: string): void {
+    const profileUpdates: ProfileUpdates = {
+      name: this.form.value.name,
+      handle: this.form.value.handle,
+      description: this.form.value.description ?? '',
+      image: imageUrl,
+    };
+
+    this.userService
+      .updateUserProfile(currentUser.id, profileUpdates)
+      .pipe(
+        tap(() => {
           const updatedUser = { ...currentUser, ...profileUpdates };
           this.authService.currentUserSignal.set(updatedUser);
           this.globalStore.login(updatedUser, true);
@@ -115,14 +176,16 @@ export class EditProfileComponent implements OnInit {
             this.translate.instant('form.success.updateProfile')
           );
           this.dialog.closeAll();
-        })
-        .catch((error) => {
+        }),
+        catchError((error) => {
           console.error('Error updating profile:', error);
           this.loader.hide();
           this.notificationService.error(
             this.translate.instant('form.error.updateProfile')
           );
-        });
-    }
+          return [];
+        })
+      )
+      .subscribe();
   }
 }

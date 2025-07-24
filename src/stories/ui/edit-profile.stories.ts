@@ -6,11 +6,17 @@ import { storybookTranslateConfig } from '../../app/shared/config/translate';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { EditProfileComponent } from '../../app/components/edit-profile/edit-profile.component';
-import { AuthService, UserService } from '../../app/services';
+import {
+  AuthService,
+  UserService,
+  LoaderService,
+  NotificationService,
+  MediaService,
+} from '../../app/services';
 import { of } from 'rxjs';
 import { signal } from '@angular/core';
 import { GlobalStore } from '../../app/shared';
-import { USER } from '../../app/services/mocks';
+import { USER } from '../../app/services/mocks/users';
 
 const meta: Meta<EditProfileComponent> = {
   title: 'Components/Edit Profile',
@@ -30,7 +36,7 @@ const meta: Meta<EditProfileComponent> = {
         {
           provide: GlobalStore,
           useValue: {
-            user: signal(null),
+            user: signal(USER),
             login: () => {},
           },
         },
@@ -49,6 +55,14 @@ const meta: Meta<EditProfileComponent> = {
             register: () => of(void 0),
             user$: of(null),
             currentUserSignal: signal(USER),
+          },
+        },
+        {
+          provide: MediaService,
+          useValue: {
+            uploadUserAvatar: () => of('https://example.com/avatar.jpg'),
+            uploadImage: () => of('https://example.com/image.jpg'),
+            uploadPostImage: () => of('https://example.com/post.jpg'),
           },
         },
         {

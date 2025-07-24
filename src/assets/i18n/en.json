@@ -54,6 +54,9 @@
       "passwordLength": "Password must be at least 6 characters long.",
       "nameLength": "Name must be at least 2 characters long.",
       "descriptionLength": "Description can't exceed 400 characters.",
+      "invalidFileType": "Please select a valid image file (JPG, JPEG, or PNG).",
+      "fileTooLarge": "File size must be less than 5MB.",
+      "uploadFailed": "Failed to upload image. Please try again.",
       "updateProfile": "Failed to update profile. Please try again.",
       "userNotFound": "User not found. Please log in again."
     },

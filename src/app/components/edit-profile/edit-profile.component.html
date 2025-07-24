@@ -18,12 +18,19 @@
                 class="w-full h-full object-cover"
               />
             </div>
+            <input
+              #filePicker
+              type="file"
+              class="hidden"
+              accept=".jpg,.jpeg,.png"
+              (change)="onFileSelected($event)"
+            />
             <div class="absolute bottom-2 right-2 z-10">
               <button
                 type="button"
                 mat-mini-fab
                 color="primary"
-                (click)="editAvatar()"
+                (click)="filePicker.click()"
               >
                 <mat-icon>edit</mat-icon>
               </button>
