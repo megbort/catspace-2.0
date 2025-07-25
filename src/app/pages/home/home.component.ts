@@ -57,6 +57,6 @@ export class HomeComponent {
   }
 
   signUp(): void {
-    this.dialog.open(SignupComponent, { width: '500px' });
+    this.dialog.open(SignupComponent, { width: '500px', autoFocus: false });
   }
 }

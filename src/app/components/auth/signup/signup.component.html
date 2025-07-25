@@ -1,121 +1,118 @@
-<div class="flex flex-col justify-center gap-4 p-8 w-full">
-  <h2 class="text-center">{{ "button.signUp" | translate }}</h2>
-  <div>
-    <form [formGroup]="form">
-      @if(step === 1) {
-      <div class="flex flex-col w-full gap-1">
-        <p class="subtitle-2 text-center pb-4">
-          {{ "form.signUp.step1" | translate }}
-        </p>
-        <mat-form-field appearance="outline">
-          <mat-label>
-            {{ "form.signUp.name" | translate }}
-          </mat-label>
-          <input
-            matInput
-            formControlName="name"
-            type="text"
-            [placeholder]="'form.signUp.placeholder.name' | translate"
-          />
-          @if(form.get('name')?.hasError('required') &&
-          form.get('name')?.touched) {
-          <mat-error>{{ "form.error.required" | translate }}</mat-error>
-          }
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>
-            {{ "form.signUp.handle" | translate }}
-          </mat-label>
-          <input
-            #handleInput
-            matInput
-            formControlName="handle"
-            type="text"
-            [placeholder]="'form.signUp.placeholder.handle' | translate"
-            class="text-left"
-          />
-          <span matTextPrefix class="text-gray-400">&#64;&nbsp;</span>
-          @if(form.get('handle')?.hasError('required') &&
-          form.get('handle')?.touched) {
-          <mat-error>{{ "form.error.required" | translate }}</mat-error>
-          }
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>
-            {{ "form.signUp.description" | translate }}
-          </mat-label>
-          <textarea
-            matInput
-            formControlName="description"
-            type="text"
-            [placeholder]="'form.signUp.placeholder.description' | translate"
-          >
-          </textarea>
-        </mat-form-field>
-        <button mat-stroked-button (click)="step = 2" class="my-2">
-          {{ "button.next" | translate }}
-        </button>
-      </div>
-      } @else {
-      <div class="flex flex-col w-full gap-1">
-        <p class="subtitle-2 text-center pb-4">
-          {{ "form.signUp.step2" | translate }}
-        </p>
-        <mat-form-field appearance="outline">
-          <mat-label>{{ "common.email" | translate }}</mat-label>
-          <input
-            matInput
-            formControlName="email"
-            type="email"
-            [placeholder]="'form.signUp.placeholder.email' | translate"
-          />
-          @if(form.get('email')?.hasError('required') &&
-          form.get('email')?.touched) {
-          <mat-error>{{ "form.error.required" | translate }}</mat-error>
-          } @if(form.get('email')?.hasError('email') &&
-          form.get('email')?.touched) {
-          <mat-error>{{ "form.error.emailInvalid" | translate }}</mat-error>
-          }
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>{{ "common.password" | translate }}</mat-label>
-          <input
-            matInput
-            formControlName="password"
-            type="password"
-            [placeholder]="'form.signUp.placeholder.password' | translate"
-          />
-          @if(form.get('password')?.hasError('required') &&
-          form.get('password')?.touched) {
-          <mat-error>{{
-            "form.error.required"
-              | translate : { field: ("common.password" | translate) }
-          }}</mat-error>
-          } @if(form.get('password')?.hasError('minlength') &&
-          form.get('password')?.touched) {
-          <mat-error>{{ "form.error.passwordLength" | translate }}</mat-error>
-          }
-        </mat-form-field>
-        <button mat-stroked-button (click)="step = 1" class="my-2">
-          {{ "button.back" | translate }}
-        </button>
-        <button mat-flat-button (click)="signUp()" [disabled]="!form.valid">
-          {{ "button.signUp" | translate }}
-        </button>
-      </div>
-      }
-    </form>
-    <div class="text-center pt-6">
-      <p class="text-body-2 text-center bold">
-        {{ "form.signUpMessage" | translate }}
+<app-custom-dialog [title]="'auth.signUp' | translate">
+  <form [formGroup]="form">
+    @if(step === 1) {
+    <div class="flex flex-col w-full gap-1">
+      <p class="subtitle-2 text-center pb-4">
+        {{ "form.signUp.step1" | translate }}
       </p>
-      <button
-        class="px-2 text-body-2 text-catspace-orange hover:underline"
-        (click)="login()"
-      >
-        {{ "button.login" | translate }}
+      <mat-form-field appearance="outline">
+        <mat-label>
+          {{ "form.signUp.name" | translate }}
+        </mat-label>
+        <input
+          matInput
+          formControlName="name"
+          type="text"
+          [placeholder]="'form.signUp.placeholder.name' | translate"
+        />
+        @if(form.get('name')?.hasError('required') && form.get('name')?.touched)
+        {
+        <mat-error>{{ "form.error.required" | translate }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>
+          {{ "form.signUp.handle" | translate }}
+        </mat-label>
+        <input
+          #handleInput
+          matInput
+          formControlName="handle"
+          type="text"
+          [placeholder]="'form.signUp.placeholder.handle' | translate"
+          class="text-left"
+        />
+        <span matTextPrefix class="text-gray-400">&#64;&nbsp;</span>
+        @if(form.get('handle')?.hasError('required') &&
+        form.get('handle')?.touched) {
+        <mat-error>{{ "form.error.required" | translate }}</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>
+          {{ "form.signUp.description" | translate }}
+        </mat-label>
+        <textarea
+          matInput
+          formControlName="description"
+          type="text"
+          [placeholder]="'form.signUp.placeholder.description' | translate"
+        >
+        </textarea>
+      </mat-form-field>
+      <button mat-stroked-button (click)="step = 2" class="my-2">
+        {{ "button.next" | translate }}
       </button>
     </div>
+    } @else {
+    <div class="flex flex-col w-full gap-1">
+      <p class="subtitle-2 text-center pb-4">
+        {{ "form.signUp.step2" | translate }}
+      </p>
+      <mat-form-field appearance="outline">
+        <mat-label>{{ "common.email" | translate }}</mat-label>
+        <input
+          matInput
+          formControlName="email"
+          type="email"
+          [placeholder]="'form.signUp.placeholder.email' | translate"
+        />
+        @if(form.get('email')?.hasError('required') &&
+        form.get('email')?.touched) {
+        <mat-error>{{ "form.error.required" | translate }}</mat-error>
+        } @if(form.get('email')?.hasError('email') &&
+        form.get('email')?.touched) {
+        <mat-error>{{ "form.error.emailInvalid" | translate }}</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>{{ "common.password" | translate }}</mat-label>
+        <input
+          matInput
+          formControlName="password"
+          type="password"
+          [placeholder]="'form.signUp.placeholder.password' | translate"
+        />
+        @if(form.get('password')?.hasError('required') &&
+        form.get('password')?.touched) {
+        <mat-error>{{
+          "form.error.required"
+            | translate : { field: ("common.password" | translate) }
+        }}</mat-error>
+        } @if(form.get('password')?.hasError('minlength') &&
+        form.get('password')?.touched) {
+        <mat-error>{{ "form.error.passwordLength" | translate }}</mat-error>
+        }
+      </mat-form-field>
+      <button mat-stroked-button (click)="step = 1" class="my-2">
+        {{ "button.back" | translate }}
+      </button>
+      <button mat-flat-button (click)="signUp()" [disabled]="!form.valid">
+        {{ "button.signUp" | translate }}
+      </button>
+    </div>
+    }
+  </form>
+  <div class="text-center pt-6">
+    <p class="text-body-2 text-center bold">
+      {{ "form.signUpMessage" | translate }}
+    </p>
+    <button
+      class="px-2 text-body-2 text-catspace-orange hover:underline"
+      (click)="login()"
+    >
+      {{ "button.login" | translate }}
+    </button>
   </div>
-</div>
+</app-custom-dialog>

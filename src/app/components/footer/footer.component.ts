@@ -23,9 +23,9 @@ export class FooterComponent {
 
   openDialog(dialog: DialogType): void {
     if (dialog === Dialog.SignUp) {
-      this.dialog.open(SignupComponent, { width: '500px' });
+      this.dialog.open(SignupComponent, { width: '500px', autoFocus: false });
     } else {
-      this.dialog.open(LoginComponent, { width: '500px' });
+      this.dialog.open(LoginComponent, { width: '500px', autoFocus: false });
     }
   }
 

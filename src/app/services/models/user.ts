@@ -1,11 +1,5 @@
 import { Post } from './post';
 
-export interface UserForm {
-  email: string;
-  name: string;
-  handle: string;
-}
-
 export interface User {
   id: string;
   email: string;
@@ -16,4 +10,9 @@ export interface User {
   posts: Post[];
   following: string[];
   favorites: string[];
+  followers: string[];
+  tags: string[];
+  followerCount?: number;
+  followingCount?: number;
+  postCount?: number;
 }

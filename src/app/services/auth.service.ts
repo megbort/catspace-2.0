@@ -41,6 +41,8 @@ export class AuthService {
             posts: profile?.posts || [],
             following: profile?.following || [],
             favorites: profile?.favorites || [],
+            followers: profile?.followers || [],
+            tags: profile?.tags || [],
           };
 
           this.currentUserSignal.set(fullUser);

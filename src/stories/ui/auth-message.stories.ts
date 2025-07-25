@@ -49,4 +49,11 @@ type Story = StoryObj<AuthMessageComponent>;
 
 export const Primary: Story = {
   args: {},
+  render: () => ({
+    template: `
+      <div style="max-width: 500px;">
+        <app-auth-message></app-auth-message>
+      </div>
+    `,
+  }),
 };

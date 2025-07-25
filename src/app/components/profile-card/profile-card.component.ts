@@ -83,6 +83,6 @@ export class ProfileCardComponent {
   }
 
   showAuthMessage(): void {
-    this.dialog.open(AuthMessageComponent);
+    this.dialog.open(AuthMessageComponent, { autoFocus: false });
   }
 }

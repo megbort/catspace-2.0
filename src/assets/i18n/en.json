@@ -96,5 +96,10 @@
   },
   "post": {
     "view": "View Post"
+  },
+  "auth": {
+    "login": "Login",
+    "signUp": "Sign Up",
+    "authMessage": "Please sign or create an account to use this feature."
   }
 }

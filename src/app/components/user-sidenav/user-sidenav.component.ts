@@ -37,7 +37,10 @@ export class UserSidenavComponent {
   }
 
   openEditProfile(): void {
-    this.dialog.open(EditProfileComponent, { width: '500px' });
+    this.dialog.open(EditProfileComponent, {
+      width: '500px',
+      autoFocus: false,
+    });
     this.close.emit();
   }
 }

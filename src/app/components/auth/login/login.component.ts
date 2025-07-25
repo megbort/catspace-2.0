@@ -3,6 +3,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { CustomDialogComponent } from '../../custom-dialog/custom-dialog.component';
 import {
   AuthService,
   LoaderService,
@@ -28,6 +29,7 @@ import { catchError, finalize, of, tap } from 'rxjs';
     TranslateModule,
     FormsModule,
     ReactiveFormsModule,
+    CustomDialogComponent,
   ],
   templateUrl: './login.component.html',
 })
@@ -89,6 +91,6 @@ export class LoginComponent {
 
   signUp(): void {
     this.dialogRef.close();
-    this.dialog.open(SignupComponent, { width: '500px' });
+    this.dialog.open(SignupComponent, { width: '500px', autoFocus: false });
   }
 }

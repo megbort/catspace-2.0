@@ -11,6 +11,8 @@ export const USER: User = {
     "Hello! I'm Kiku, the fluffiest boss around. I spend my days napping in sunbeams and pretending not to care about your attention... but don't be fooled—I control everything. Pet me if you must, but only for 3 seconds, then I'll claw your hand. My real passion? Pushing your things off ledges just to see what happens. Feed me at exactly 6 p.m., or else...",
   favorites: [],
   following: [],
+  followers: [],
+  tags: ['catnip', 'tabby', 'curious', 'soft'],
   posts: [
     {
       id: 'U0001P0001',

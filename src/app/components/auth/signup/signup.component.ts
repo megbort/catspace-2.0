@@ -17,6 +17,7 @@ import {
   LoaderService,
 } from '../../../services';
 import { LoginComponent } from '../login/login.component';
+import { CustomDialogComponent } from '../../custom-dialog/custom-dialog.component';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { finalize, of, tap } from 'rxjs';
 
@@ -29,6 +30,7 @@ import { finalize, of, tap } from 'rxjs';
     TranslateModule,
     FormsModule,
     ReactiveFormsModule,
+    CustomDialogComponent,
   ],
   templateUrl: './signup.component.html',
 })
@@ -90,7 +92,7 @@ export class SignupComponent {
 
   login(): void {
     this.dialogRef.close();
-    this.dialog.open(LoginComponent, { width: '500px' });
+    this.dialog.open(LoginComponent, { width: '500px', autoFocus: false });
   }
 
   private getErrorMessage(error: any): string {

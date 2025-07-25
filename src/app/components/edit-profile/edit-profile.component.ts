@@ -12,6 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { CustomDialogComponent } from '../custom-dialog/custom-dialog.component';
 import {
   LoaderService,
   NotificationService,
@@ -38,6 +39,7 @@ interface ProfileUpdates {
     TranslateModule,
     FormsModule,
     ReactiveFormsModule,
+    CustomDialogComponent,
   ],
   templateUrl: './edit-profile.component.html',
 })
