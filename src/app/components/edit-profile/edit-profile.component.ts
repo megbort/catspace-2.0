@@ -20,7 +20,7 @@ import {
   UserService,
   MediaService,
 } from '../../services';
-import { catchError, tap } from 'rxjs';
+import { catchError, finalize, tap } from 'rxjs';
 
 interface ProfileUpdates {
   name: string;
@@ -139,11 +139,11 @@ export class EditProfileComponent implements OnInit {
               this.updateProfile(currentUser, imageUrl);
             }),
             catchError((error) => {
-              console.error('Error uploading image:', error);
+              const errorMessage =
+                error?.message ||
+                this.translate.instant('form.error.uploadFailed');
+              this.notificationService.error(errorMessage);
               this.loader.hide();
-              this.notificationService.error(
-                this.translate.instant('form.error.uploadFailed')
-              );
               return [];
             })
           )
@@ -170,19 +170,19 @@ export class EditProfileComponent implements OnInit {
           const updatedUser = { ...currentUser, ...profileUpdates };
           this.authService.currentUserSignal.set(updatedUser);
 
-          this.loader.hide();
           this.notificationService.success(
             this.translate.instant('form.success.updateProfile')
           );
           this.dialog.closeAll();
         }),
-        catchError((error) => {
-          console.error('Error updating profile:', error);
-          this.loader.hide();
+        catchError(() => {
           this.notificationService.error(
             this.translate.instant('form.error.updateProfile')
           );
           return [];
+        }),
+        finalize(() => {
+          this.loader.hide();
         })
       )
       .subscribe();

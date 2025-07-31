@@ -62,6 +62,9 @@ export class UserService {
       updateDoc(userRef, {
         ...updates,
         updatedAt: new Date().toISOString(),
+      }).catch((error) => {
+        console.error('Error updating user profile:', error);
+        throw error;
       })
     );
   }

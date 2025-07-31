@@ -101,5 +101,14 @@
     "login": "Login",
     "signUp": "Sign Up",
     "authMessage": "Please sign or create an account to use this feature."
+  },
+  "media": {
+    "rateLimitExceeded": "Rate limit exceeded. Please try again later.",
+    "error": {
+      "authFailed": "User must be authenticated to upload images.",
+      "fileTooLarge": "File size exceeds {{maxSizeBytes}} bytes. Please upload a smaller file.",
+      "invalidFileType": "Invalid file type. Please upload a file of type {{ fileTypes }}.",
+      "maxDimensions": "Image dimensions exceed {{maxWidth}}x{{maxHeight}} pixels. Please upload a smaller image."
+    }
   }
 }
