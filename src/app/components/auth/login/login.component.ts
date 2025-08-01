@@ -3,7 +3,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { CustomDialogComponent } from '../../custom-dialog/custom-dialog.component';
+import { CustomDialogComponent } from '../../ui/custom-dialog.component';
 import {
   AuthService,
   LoaderService,

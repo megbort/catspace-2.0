@@ -1,33 +1,37 @@
 import { Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
-import { MenuComponent } from '../../app/components/menu/menu.component';
+import { ProfileCardComponent } from '../app/components/profile-card/profile-card.component';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { applicationConfig } from '@storybook/angular';
 import { TranslateModule } from '@ngx-translate/core';
-import { storybookTranslateConfig } from '../../app/shared/config/translate';
+import { storybookTranslateConfig } from '../app/shared';
 import { provideHttpClient, withFetch } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
+import {
+  AuthService,
+  Profile,
+  PROFILES,
+  USER,
+  UserService,
+} from '../app/services';
 import { of } from 'rxjs';
-import { AuthService } from '../../app/services';
 import { signal } from '@angular/core';
 
-const meta: Meta<MenuComponent> = {
-  title: 'Components/Menu',
-  component: MenuComponent,
+const profile: Profile = PROFILES[0];
+
+const meta: Meta<ProfileCardComponent> = {
+  title: 'Components/Profile Card',
+  component: ProfileCardComponent,
   decorators: [
     applicationConfig({
       providers: [
         provideAnimations(),
         provideHttpClient(withFetch()),
         {
-          provide: ActivatedRoute,
+          provide: UserService,
           useValue: {
-            params: of({}),
-            snapshot: {
-              params: {},
-            },
+            updateUserProfile: () => Promise.resolve(),
+            getUserProfileById: () => Promise.resolve(null),
           },
         },
-        AuthService,
         {
           provide: AuthService,
           useValue: {
@@ -35,7 +39,7 @@ const meta: Meta<MenuComponent> = {
             logout: () => of(void 0),
             register: () => of(void 0),
             user$: of(null),
-            currentUserSignal: signal(null),
+            currentUserSignal: signal(USER),
           },
         },
       ],
@@ -47,8 +51,10 @@ const meta: Meta<MenuComponent> = {
 };
 
 export default meta;
-type Story = StoryObj<MenuComponent>;
+type Story = StoryObj<ProfileCardComponent>;
 
 export const Primary: Story = {
-  args: {},
+  args: {
+    profile: profile,
+  },
 };

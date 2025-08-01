@@ -10,6 +10,7 @@ import { LoginComponent } from '../auth/login/login.component';
 import { Dialog, DialogType } from '../../shared';
 import { UnpicImageDirective } from '@unpic/angular';
 import { AuthService } from '../../services';
+import { BannerComponent } from '../ui/banner.component';
 
 @Component({
   selector: 'app-menu',
@@ -21,6 +22,7 @@ import { AuthService } from '../../services';
     RouterModule,
     MatDialogModule,
     UnpicImageDirective,
+    BannerComponent,
   ],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss',

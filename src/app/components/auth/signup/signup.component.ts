@@ -17,7 +17,7 @@ import {
   LoaderService,
 } from '../../../services';
 import { LoginComponent } from '../login/login.component';
-import { CustomDialogComponent } from '../../custom-dialog/custom-dialog.component';
+import { CustomDialogComponent } from '../../ui/custom-dialog.component';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { finalize, of, tap } from 'rxjs';
 

@@ -5,7 +5,8 @@
     "favorites": "Favorites",
     "email": "Email",
     "password": "Password",
-    "account": "Account"
+    "account": "Account",
+    "demo": "This website is for demo purposes only. While it's fully functional, it's just for fun, feel free to explore and experiment! 😺"
   },
   "button": {
     "createAccount": "Create Account",

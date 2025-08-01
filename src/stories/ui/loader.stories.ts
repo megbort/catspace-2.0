@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { LoaderComponent } from '../../app/components/loader/loader.component';
+import { LoaderComponent } from '../../app/components/ui/loader.component';
 import { LoaderService } from '../../app/services/loader.service';
 import { applicationConfig } from '@storybook/angular';
 import { provideAnimations } from '@angular/platform-browser/animations';

@@ -4,7 +4,7 @@ import { applicationConfig } from '@storybook/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { storybookTranslateConfig } from '../../app/shared';
 import { provideHttpClient, withFetch } from '@angular/common/http';
-import { NotificationComponent } from '../../app/components/notification/notification.component';
+import { NotificationComponent } from '../../app/components/ui/notification.component';
 import {
   MAT_SNACK_BAR_DATA,
   MatSnackBarRef,

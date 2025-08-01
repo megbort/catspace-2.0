@@ -1,17 +1,19 @@
 import { Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
-import { AuthMessageComponent } from '../../app/components/auth/auth-message.component';
+import { LoginComponent } from '../app/components/auth/login/login.component';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { applicationConfig } from '@storybook/angular';
 import { TranslateModule } from '@ngx-translate/core';
-import { storybookTranslateConfig } from '../../app/shared/config/translate';
+import { storybookTranslateConfig } from '../app/shared/config/translate';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { AuthService } from '../app/services';
+import { signal } from '@angular/core';
 
-const meta: Meta<AuthMessageComponent> = {
-  title: 'Components/Auth/Message',
-  component: AuthMessageComponent,
+const meta: Meta<LoginComponent> = {
+  title: 'Components/Auth/Login',
+  component: LoginComponent,
   decorators: [
     applicationConfig({
       providers: [
@@ -36,6 +38,17 @@ const meta: Meta<AuthMessageComponent> = {
           provide: MAT_DIALOG_DATA,
           useValue: {},
         },
+        AuthService,
+        {
+          provide: AuthService,
+          useValue: {
+            login: () => of(void 0),
+            logout: () => of(void 0),
+            register: () => of(void 0),
+            user$: of(null),
+            currentUserSignal: signal(null),
+          },
+        },
       ],
     }),
     moduleMetadata({
@@ -45,14 +58,14 @@ const meta: Meta<AuthMessageComponent> = {
 };
 
 export default meta;
-type Story = StoryObj<AuthMessageComponent>;
+type Story = StoryObj<LoginComponent>;
 
 export const Primary: Story = {
   args: {},
   render: () => ({
     template: `
       <div style="max-width: 500px;">
-        <app-auth-message></app-auth-message>
+        <app-login></app-login>
       </div>
     `,
   }),

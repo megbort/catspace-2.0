@@ -5,7 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { Dialog, DialogType } from '../../shared';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
-import { CustomDialogComponent } from '../custom-dialog/custom-dialog.component';
+import { CustomDialogComponent } from '../ui/custom-dialog.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({

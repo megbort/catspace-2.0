@@ -1,37 +1,24 @@
 import { Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
-import { ProfileCardComponent } from '../../app/components/profile-card/profile-card.component';
+import { UserSidenavComponent } from '../app/components/user-sidenav/user-sidenav.component';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { applicationConfig } from '@storybook/angular';
 import { TranslateModule } from '@ngx-translate/core';
-import { storybookTranslateConfig } from '../../app/shared';
+import { storybookTranslateConfig } from '../app/shared';
 import { provideHttpClient, withFetch } from '@angular/common/http';
-import {
-  AuthService,
-  Profile,
-  PROFILES,
-  USER,
-  UserService,
-} from '../../app/services';
-import { of } from 'rxjs';
 import { signal } from '@angular/core';
+import { USER } from '../app/services/mocks';
+import { AuthService } from '../app/services';
+import { of } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
-const profile: Profile = PROFILES[0];
-
-const meta: Meta<ProfileCardComponent> = {
-  title: 'Components/Profile Card',
-  component: ProfileCardComponent,
+const meta: Meta<UserSidenavComponent> = {
+  title: 'Components/User Sidenav',
+  component: UserSidenavComponent,
   decorators: [
     applicationConfig({
       providers: [
         provideAnimations(),
         provideHttpClient(withFetch()),
-        {
-          provide: UserService,
-          useValue: {
-            updateUserProfile: () => Promise.resolve(),
-            getUserProfileById: () => Promise.resolve(null),
-          },
-        },
         {
           provide: AuthService,
           useValue: {
@@ -42,6 +29,10 @@ const meta: Meta<ProfileCardComponent> = {
             currentUserSignal: signal(USER),
           },
         },
+        {
+          provide: ActivatedRoute,
+          useValue: {},
+        },
       ],
     }),
     moduleMetadata({
@@ -51,10 +42,14 @@ const meta: Meta<ProfileCardComponent> = {
 };
 
 export default meta;
-type Story = StoryObj<ProfileCardComponent>;
+type Story = StoryObj<UserSidenavComponent>;
 
 export const Primary: Story = {
-  args: {
-    profile: profile,
-  },
+  render: () => ({
+    template: `
+      <div style="max-width: 400px;">
+        <app-user-sidenav></app-user-sidenav>
+      </div>
+    `,
+  }),
 };

@@ -2,14 +2,14 @@ import { Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { applicationConfig } from '@storybook/angular';
 import { TranslateModule } from '@ngx-translate/core';
-import { storybookTranslateConfig } from '../../app/shared/config/translate';
+import { storybookTranslateConfig } from '../app/shared/config/translate';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
-import { GlobalStore } from '../../app/shared';
+import { GlobalStore } from '../app/shared';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { SignupComponent } from '../../app/components/auth/signup/signup.component';
-import { AuthService } from '../../app/services';
+import { SignupComponent } from '../app/components/auth/signup/signup.component';
+import { AuthService } from '../app/services';
 import { signal } from '@angular/core';
 
 const meta: Meta<SignupComponent> = {

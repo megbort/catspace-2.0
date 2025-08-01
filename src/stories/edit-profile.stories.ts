@@ -2,14 +2,14 @@ import { Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { applicationConfig } from '@storybook/angular';
 import { TranslateModule } from '@ngx-translate/core';
-import { storybookTranslateConfig } from '../../app/shared/config/translate';
+import { storybookTranslateConfig } from '../app/shared/config/translate';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { EditProfileComponent } from '../../app/components/edit-profile/edit-profile.component';
-import { AuthService, UserService, MediaService } from '../../app/services';
+import { EditProfileComponent } from '../app/components/edit-profile/edit-profile.component';
+import { AuthService, UserService, MediaService } from '../app/services';
 import { of } from 'rxjs';
 import { signal } from '@angular/core';
-import { USER } from '../../app/services/mocks/users';
+import { USER } from '../app/services/mocks/users';
 
 const meta: Meta<EditProfileComponent> = {
   title: 'Components/Edit Profile',

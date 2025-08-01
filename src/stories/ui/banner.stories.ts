@@ -4,14 +4,11 @@ import { applicationConfig } from '@storybook/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { storybookTranslateConfig } from '../../app/shared';
 import { provideHttpClient, withFetch } from '@angular/common/http';
-import { PostCardComponent } from '../../app/components/post-card/post-card.component';
-import { Post, USER } from '../../app/services';
+import { BannerComponent } from '../../app/components/ui/banner.component';
 
-const post: Post = USER.posts[0];
-
-const meta: Meta<PostCardComponent> = {
-  title: 'Components/Post Card',
-  component: PostCardComponent,
+const meta: Meta<BannerComponent> = {
+  title: 'Design System/Banner',
+  component: BannerComponent,
   decorators: [
     applicationConfig({
       providers: [provideAnimations(), provideHttpClient(withFetch())],
@@ -23,10 +20,10 @@ const meta: Meta<PostCardComponent> = {
 };
 
 export default meta;
-type Story = StoryObj<PostCardComponent>;
+type Story = StoryObj<BannerComponent>;
 
-export const Primary: Story = {
+export const Default: Story = {
   args: {
-    post,
+    content: 'This is a banner message. Please pay attention to it!',
   },
 };
