@@ -17,6 +17,7 @@ import { PostCardComponent } from '../../components/post-card/post-card.componen
 import { EditProfileComponent } from '../../components/edit-profile/edit-profile.component';
 import { catchError, switchMap, take } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
+import { CreatePostComponent } from '../../components/create-post/create-post.component';
 
 @Component({
   selector: 'app-profile',
@@ -210,9 +211,16 @@ export class ProfileComponent {
       });
   }
 
-  openEditProfile(): void {
+  editProfile(): void {
     this.dialog.open(EditProfileComponent, {
       width: '500px',
+      autoFocus: false,
+    });
+  }
+
+  newPost(): void {
+    this.dialog.open(CreatePostComponent, {
+      width: '550px',
       autoFocus: false,
     });
   }

@@ -1,0 +1,48 @@
+<app-custom-dialog [title]="'createPost.title' | translate">
+  <form [formGroup]="form">
+    <div
+      class="rounded bg-catspace-grey h-[300px] flex flex-col items-center justify-center"
+    >
+      <span class="material-symbols-outlined icon-60 text-catspace-brown">
+        add_box
+      </span>
+      <p>{{ "createPost.form.image" | translate }}</p>
+    </div>
+    <input #filePicker type="file" class="hidden" accept=".jpg,.jpeg,.png" />
+
+    <div class="flex flex-col gap-1 mt-4">
+      <mat-form-field appearance="outline">
+        <mat-label>
+          {{ "createPost.form.title" | translate }}
+        </mat-label>
+        <input
+          matInput
+          formControlName="title"
+          type="text"
+          [placeholder]="'createPost.form.titlePlaceholder' | translate"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>
+          {{ "createPost.form.description" | translate }}
+        </mat-label>
+        <textarea
+          matInput
+          formControlName="description"
+          type="text"
+          [placeholder]="'createPost.form.descriptionPlaceholder' | translate"
+        ></textarea>
+      </mat-form-field>
+    </div>
+
+    <div class="flex gap-2 mt-4">
+      <button mat-stroked-button type="button" class="flex-1" (click)="close()">
+        {{ "button.cancel" | translate }}
+      </button>
+      <button mat-flat-button type="button" class="flex-1" (click)="post()">
+        {{ "button.post" | translate }}
+      </button>
+    </div>
+  </form>
+</app-custom-dialog>

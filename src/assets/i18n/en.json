@@ -6,7 +6,7 @@
     "email": "Email",
     "password": "Password",
     "account": "Account",
-    "demo": "This website is for demo purposes only. While it's fully functional, it's just for fun, feel free to explore and experiment! 😺"
+    "demo": "This website is for demo purposes only. It's functional, but is just for fun. Feel free to explore and experiment! 😺"
   },
   "button": {
     "createAccount": "Create Account",
@@ -25,7 +25,9 @@
     "close": "Close",
     "save": "Save",
     "cancel": "Cancel",
-    "editProfile": "Edit Profile"
+    "editProfile": "Edit Profile",
+    "post": "Post",
+    "delete": "Delete"
   },
   "form": {
     "loginMessage": "Don't have an account?",
@@ -110,6 +112,24 @@
       "fileTooLarge": "File size exceeds {{maxSizeBytes}} bytes. Please upload a smaller file.",
       "invalidFileType": "Invalid file type. Please upload a file of type {{ fileTypes }}.",
       "maxDimensions": "Image dimensions exceed {{maxWidth}}x{{maxHeight}} pixels. Please upload a smaller image."
+    }
+  },
+  "createPost": {
+    "title": "New Post",
+    "form": {
+      "title": "Post Title",
+      "titlePlaceholder": "Enter your post title",
+      "description": "Post Description",
+      "descriptionPlaceholder": "Enter a description for your post",
+      "image": "Click to upload image"
+    },
+    "error": {
+      "titleRequired": "Title is required.",
+      "contentRequired": "Content is required.",
+      "imageRequired": "Image is required."
+    },
+    "success": {
+      "postCreated": "Post created successfully!"
     }
   }
 }

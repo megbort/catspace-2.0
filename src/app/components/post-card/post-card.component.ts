@@ -15,7 +15,6 @@ export class PostCardComponent {
     title: '',
     image: '',
     favorites: 0,
-    tags: [],
     comments: [],
   };
 }

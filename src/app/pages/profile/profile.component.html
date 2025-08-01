@@ -27,10 +27,10 @@
       </div>
       @if (isOwner()) {
       <!-- Owner buttons -->
-      <button mat-flat-button class="w-full">
+      <button mat-flat-button class="w-full" (click)="newPost()">
         {{ "button.newPost" | translate }}
       </button>
-      <button mat-stroked-button class="w-full" (click)="openEditProfile()">
+      <button mat-stroked-button class="w-full" (click)="editProfile()">
         {{ "button.editProfile" | translate }}
       </button>
       } @else {

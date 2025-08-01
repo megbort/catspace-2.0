@@ -3,6 +3,5 @@ export interface Post {
   title: string;
   image: string;
   favorites: number;
-  tags: string[];
   comments: string[];
 }

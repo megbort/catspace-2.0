@@ -7,7 +7,7 @@
     >
       <span class="material-icons">close</span>
     </button>
-    <button mat-flat-button>
+    <button mat-flat-button (click)="newPost()">
       {{ "button.newPost" | translate }}
     </button>
   </div>
@@ -29,11 +29,7 @@
       <p class="subtitle-1">{{ currentUser.name }}</p>
       <p>&#64;{{ currentUser.handle }}</p>
       <p class="text-body-2 text-catspace-orange">{{ currentUser.email }}</p>
-      <button
-        mat-stroked-button
-        class="narrow mt-2"
-        (click)="openEditProfile()"
-      >
+      <button mat-stroked-button class="narrow mt-2" (click)="editProfile()">
         {{ "button.editProfile" | translate }}
       </button>
     </div>
