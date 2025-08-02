@@ -1,14 +1,62 @@
 <app-custom-dialog [title]="'createPost.title' | translate">
   <form [formGroup]="form">
-    <div
-      class="rounded bg-catspace-grey h-[300px] flex flex-col items-center justify-center"
+    @if(form.get('image')?.value) {
+    <div class="h-[300px]">
+      <div class="w-full h-full overflow-hidden rounded">
+        <img
+          [src]="form.get('image')?.value"
+          alt="Post preview"
+          class="w-full h-full object-cover"
+        />
+      </div>
+    </div>
+    <div class="flex justify-between mt-2">
+      <button
+        mat-button
+        type="button"
+        class="flex items-center"
+        (click)="removeImage()"
+      >
+        <div class="flex items-center gap-1">
+          <span class="material-symbols-outlined text-catspace-orange icon-16"
+            >delete</span
+          >
+          <span class="text-body-2 text-catspace-brown">{{
+            "button.remove" | translate
+          }}</span>
+        </div>
+      </button>
+      <button mat-button type="button" (click)="filePicker.click()">
+        <div class="flex items-center gap-1">
+          <span class="material-symbols-outlined icon-16 text-catspace-orange"
+            >upload</span
+          >
+          <span class="text-body-2 text-catspace-brown">{{
+            "button.uploadNew" | translate
+          }}</span>
+        </div>
+      </button>
+    </div>
+    } @else {
+    <button
+      type="button"
+      class="rounded bg-catspace-grey h-[300px] flex flex-col items-center justify-center cursor-pointer w-full border-none"
+      (click)="filePicker.click()"
+      [attr.aria-label]="'createPost.form.image' | translate"
     >
       <span class="material-symbols-outlined icon-60 text-catspace-brown">
         add_box
       </span>
       <p>{{ "createPost.form.image" | translate }}</p>
-    </div>
-    <input #filePicker type="file" class="hidden" accept=".jpg,.jpeg,.png" />
+    </button>
+    }
+    <input
+      #filePicker
+      type="file"
+      class="hidden"
+      accept=".jpg,.jpeg,.png"
+      (change)="onFileSelected($event)"
+    />
 
     <div class="flex flex-col gap-1 mt-4">
       <mat-form-field appearance="outline">

@@ -113,3 +113,7 @@ button.mat-mdc-icon-button {
   --mdc-snackbar-container-shape: 0;
   --mdc-snackbar-supporting-text-color: inherit;
 }
+
+button.mat-mdc-icon-button.small {
+  @apply w-6 h-6 p-0;
+}

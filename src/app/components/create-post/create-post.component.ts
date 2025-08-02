@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {
-  FormControl,
+  FormBuilder,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
@@ -9,10 +9,20 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { CustomDialogComponent } from '../ui/custom-dialog.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
+import {
+  AuthService,
+  LoaderService,
+  MediaService,
+  NotificationService,
+  Post,
+  PostService,
+  UserService,
+} from '../../services';
+import { catchError, finalize, of, tap } from 'rxjs';
 
 @Component({
   selector: 'app-create-post',
@@ -33,14 +43,21 @@ export class CreatePostComponent {
   selectedFile: File | null = null;
   previewUrl: string | null = null;
 
-  constructor(private readonly dialog: MatDialog) {
-    this.form = new FormGroup({
-      id: new FormControl(''),
-      title: new FormControl('', [Validators.required]),
-      description: new FormControl('', [Validators.required]),
-      image: new FormControl(null, [Validators.required]),
-      favorites: new FormControl(0),
-      comments: new FormControl([]),
+  constructor(
+    private readonly dialog: MatDialog,
+    private readonly loader: LoaderService,
+    private readonly notificationService: NotificationService,
+    private readonly formBuilder: FormBuilder,
+    private readonly authService: AuthService,
+    private readonly userService: UserService,
+    private readonly mediaService: MediaService,
+    private readonly postService: PostService,
+    private readonly translate: TranslateService
+  ) {
+    this.form = this.formBuilder.group({
+      title: ['', [Validators.required, Validators.minLength(2)]],
+      description: ['', [Validators.maxLength(400)]],
+      image: [''],
     });
   }
 
@@ -48,7 +65,115 @@ export class CreatePostComponent {
     this.dialog.closeAll();
   }
 
+  removeImage(): void {
+    this.selectedFile = null;
+    this.previewUrl = null;
+    this.form.patchValue({ image: '' });
+  }
+
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+
+    if (file) {
+      const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+      if (!allowedTypes.includes(file.type)) {
+        this.notificationService.error(
+          this.translate.instant('form.error.invalidFileType')
+        );
+        return;
+      }
+
+      const maxSize = 5 * 1024 * 1024; // 5MB
+      if (file.size > maxSize) {
+        this.notificationService.error(
+          this.translate.instant('form.error.fileTooLarge')
+        );
+        return;
+      }
+
+      this.selectedFile = file;
+
+      const reader = new FileReader();
+      reader.onload = (fileReadEvent) => {
+        this.previewUrl = fileReadEvent.target?.result as string;
+        this.form.patchValue({ image: this.previewUrl });
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
   post(): void {
-    this.dialog.closeAll();
+    if (this.form.valid) {
+      this.loader.show();
+
+      const currentUser = this.authService.currentUserSignal();
+
+      if (!currentUser) {
+        this.loader.hide();
+        this.notificationService.error(
+          this.translate.instant('form.error.userNotFound')
+        );
+        return;
+      }
+
+      if (this.selectedFile) {
+        // First, generate a unique post ID
+        const postId = this.postService.generatePostId(currentUser.id);
+
+        this.mediaService
+          .uploadPostImage(this.selectedFile, postId)
+          .pipe(
+            tap((imageUrl: string) => {
+              this.createPost(currentUser.id, imageUrl, postId);
+            }),
+            catchError((error: any) => {
+              const errorMessage =
+                error?.message ||
+                this.translate.instant('form.error.uploadFailed');
+              this.notificationService.error(errorMessage);
+              this.loader.hide();
+              return [];
+            })
+          )
+          .subscribe();
+      } else {
+        this.notificationService.error(
+          this.translate.instant('form.error.imageRequired')
+        );
+        this.loader.hide();
+      }
+    }
+  }
+
+  private createPost(userId: string, imageUrl: string, postId?: string): void {
+    const postData: Omit<Post, 'id'> = {
+      title: this.form.value.title,
+      image: imageUrl,
+      description: this.form.value.description || '',
+      favorites: 0,
+      comments: [],
+    };
+
+    this.postService
+      .createPost(userId, postData, postId)
+      .pipe(
+        tap(() => {
+          this.notificationService.success(
+            this.translate.instant('form.success.createPost')
+          );
+          this.dialog.closeAll();
+        }),
+        catchError(() => {
+          this.notificationService.error(
+            this.translate.instant('form.error.createPost')
+          );
+          return of(null);
+        }),
+        finalize(() => {
+          this.loader.hide();
+        })
+      )
+      .subscribe();
   }
 }

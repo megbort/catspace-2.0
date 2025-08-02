@@ -20,6 +20,7 @@ export const USER: User = {
       image:
         'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1738557256/catspace/catspace-image-17_pihkmj.jpg',
       favorites: 90,
+      description: 'Just enjoying the sun and dreaming of tuna treats.',
       comments: [],
     },
     {
@@ -28,6 +29,7 @@ export const USER: User = {
       image:
         'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1738557265/catspace/catspace-image-18_x1ks73.jpg',
       favorites: 202,
+      description: 'Just enjoying the sun and dreaming of tuna treats.',
       comments: [],
     },
     {
@@ -36,6 +38,7 @@ export const USER: User = {
       image:
         'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1738557273/catspace/catspace-image-19_ifqlkg.jpg',
       favorites: 20,
+      description: 'Just enjoying the sun and dreaming of tuna treats.',
       comments: [],
     },
     {
@@ -45,6 +48,7 @@ export const USER: User = {
       image:
         'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1738715772/catspace/catspace-image-20_japkom.jpg',
       favorites: 212,
+      description: 'Just enjoying the sun and dreaming of tuna treats.',
       comments: [],
     },
     {
@@ -53,6 +57,7 @@ export const USER: User = {
       image:
         'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1738715778/catspace/catspace-image-21_sx2mwr.jpg',
       favorites: 29,
+      description: 'Just enjoying the sun and dreaming of tuna treats.',
       comments: [],
     },
     {
@@ -61,6 +66,7 @@ export const USER: User = {
       image:
         'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1738715783/catspace/catspace-image-22_andwud.jpg',
       favorites: 49,
+      description: 'Just enjoying the sun and dreaming of tuna treats.',
       comments: [],
     },
     {
@@ -70,6 +76,7 @@ export const USER: User = {
       image:
         'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1738715788/catspace/catspace-image-23_nwcaj2.jpg',
       favorites: 309,
+      description: 'Just enjoying the sun and dreaming of tuna treats.',
       comments: [],
     },
     {
@@ -79,6 +86,7 @@ export const USER: User = {
       image:
         'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1738715793/catspace/catspace-image-24_svabl9.jpg',
       favorites: 34,
+      description: 'Just enjoying the sun and dreaming of tuna treats.',
       comments: [],
     },
   ],

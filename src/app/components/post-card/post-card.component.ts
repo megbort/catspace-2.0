@@ -14,6 +14,7 @@ export class PostCardComponent {
     id: '',
     title: '',
     image: '',
+    description: '',
     favorites: 0,
     comments: [],
   };

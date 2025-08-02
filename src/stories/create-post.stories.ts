@@ -6,6 +6,15 @@ import { storybookTranslateConfig } from '../app/shared';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { CreatePostComponent } from '../app/components/create-post/create-post.component';
 import { MatDialogRef } from '@angular/material/dialog';
+import {
+  AuthService,
+  MediaService,
+  PostService,
+  USER,
+  UserService,
+} from '../app/services';
+import { of } from 'rxjs';
+import { signal } from '@angular/core';
 
 const meta: Meta<CreatePostComponent> = {
   title: 'Components/Create Post',
@@ -20,6 +29,38 @@ const meta: Meta<CreatePostComponent> = {
           useValue: {
             close: () => {},
             closeAll: () => {},
+          },
+        },
+        {
+          provide: UserService,
+          useValue: {
+            updateUserProfile: () => Promise.resolve(),
+            getUserProfileById: () => Promise.resolve(null),
+          },
+        },
+        {
+          provide: AuthService,
+          useValue: {
+            login: () => of(void 0),
+            logout: () => of(void 0),
+            register: () => of(void 0),
+            user$: of(null),
+            currentUserSignal: signal(USER),
+          },
+        },
+        {
+          provide: MediaService,
+          useValue: {
+            uploadUserAvatar: () => of('https://example.com/avatar.jpg'),
+            uploadImage: () => of('https://example.com/image.jpg'),
+            uploadPostImage: () => of('https://example.com/post.jpg'),
+          },
+        },
+        {
+          provide: PostService,
+          useValue: {
+            createPost: () => of('test-post-id'),
+            generatePostId: () => 'test-post-id',
           },
         },
       ],

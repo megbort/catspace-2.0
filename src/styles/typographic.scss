@@ -10,6 +10,14 @@
   }
 }
 
+@mixin h3 {
+  @apply leading-8 font-semibold text-xl tracking-wider;
+
+  @media (min-width: 768px) {
+    @apply text-lg;
+  }
+}
+
 @mixin subtitle-1 {
   @apply leading-6 font-semibold text-lg tracking-wide;
 
@@ -46,6 +54,9 @@
   }
   h2 {
     @include h2();
+  }
+  h3 {
+    @include h3();
   }
   .subtitle-1 {
     @include subtitle-1();

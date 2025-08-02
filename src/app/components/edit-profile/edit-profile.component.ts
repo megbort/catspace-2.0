@@ -20,7 +20,7 @@ import {
   UserService,
   MediaService,
 } from '../../services';
-import { catchError, finalize, tap } from 'rxjs';
+import { catchError, finalize, of, tap } from 'rxjs';
 
 interface ProfileUpdates {
   name: string;
@@ -179,7 +179,7 @@ export class EditProfileComponent implements OnInit {
           this.notificationService.error(
             this.translate.instant('form.error.updateProfile')
           );
-          return [];
+          return of(null);
         }),
         finalize(() => {
           this.loader.hide();

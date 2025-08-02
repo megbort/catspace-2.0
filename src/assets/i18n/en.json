@@ -27,7 +27,9 @@
     "cancel": "Cancel",
     "editProfile": "Edit Profile",
     "post": "Post",
-    "delete": "Delete"
+    "delete": "Delete",
+    "remove": "Remove",
+    "uploadNew": "Upload New"
   },
   "form": {
     "loginMessage": "Don't have an account?",
@@ -61,12 +63,15 @@
       "fileTooLarge": "File size must be less than 5MB.",
       "uploadFailed": "Failed to upload image. Please try again.",
       "updateProfile": "Failed to update profile. Please try again.",
-      "userNotFound": "User not found. Please log in again."
+      "userNotFound": "User not found. Please log in again.",
+      "imageRequired": "Please select an image for your post.",
+      "createPost": "Failed to create post. Please try again."
     },
     "success": {
       "accountCreated": "Account created successfully!",
       "updateProfile": "Profile updated successfully!",
-      "login": "Logged in successfully!"
+      "login": "Logged in successfully!",
+      "createPost": "Post created successfully!"
     }
   },
   "menu": {

@@ -13,17 +13,18 @@ import { TranslateModule } from '@ngx-translate/core';
     <div class="flex flex-col p-4">
       <div class="flex justify-end">
         <button
+          class="small"
           mat-icon-button
           (click)="close()"
           [attr.aria-label]="'buttons.close' | translate"
         >
-          <mat-icon>close</mat-icon>
+          <mat-icon class="icon-16">close</mat-icon>
         </button>
       </div>
 
       @if(title()){
-      <div class="text-center pb-4">
-        <h2>{{ title() }}</h2>
+      <div class="text-center pb-1">
+        <h3>{{ title() }}</h3>
       </div>
       }
 
