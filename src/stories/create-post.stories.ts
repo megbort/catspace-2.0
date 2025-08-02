@@ -10,7 +10,7 @@ import {
   AuthService,
   MediaService,
   PostService,
-  USER,
+  USERS,
   UserService,
 } from '../app/services';
 import { of } from 'rxjs';
@@ -45,7 +45,7 @@ const meta: Meta<CreatePostComponent> = {
             logout: () => of(void 0),
             register: () => of(void 0),
             user$: of(null),
-            currentUserSignal: signal(USER),
+            currentUserSignal: signal(USERS[0]),
           },
         },
         {

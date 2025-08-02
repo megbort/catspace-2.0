@@ -5,7 +5,7 @@ import {
   FollowEvent,
   ProfileCardComponent,
 } from '../../components/profile-card/profile-card.component';
-import { AuthService, Profile, ProfileService } from '../../services';
+import { AuthService, User, UserService } from '../../services';
 import { Router, RouterModule } from '@angular/router';
 import { map } from 'rxjs';
 import { UnpicImageDirective } from '@unpic/angular';
@@ -25,14 +25,14 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
-  featured: Profile[] = [];
+  featured: User[] = [];
   isLoggedIn = computed(() => this.authService.currentUserSignal());
 
   constructor(
     private readonly authService: AuthService,
     private readonly router: Router,
     private readonly dialog: MatDialog,
-    private readonly profileService: ProfileService
+    private readonly userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -40,10 +40,10 @@ export class HomeComponent {
   }
 
   getProfiles() {
-    this.profileService
-      .getProfiles()
-      .pipe(map((profiles) => profiles.slice(0, 4)))
-      .subscribe((data) => {
+    this.userService
+      .getUsers()
+      .pipe(map((users: User[]) => users.slice(0, 4)))
+      .subscribe((data: User[]) => {
         this.featured = data;
       });
   }

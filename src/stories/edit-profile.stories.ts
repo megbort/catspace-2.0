@@ -9,7 +9,7 @@ import { EditProfileComponent } from '../app/components/edit-profile/edit-profil
 import { AuthService, UserService, MediaService } from '../app/services';
 import { of } from 'rxjs';
 import { signal } from '@angular/core';
-import { USER } from '../app/services/mocks/users';
+import { USERS } from '../app/services/mocks/users';
 
 const meta: Meta<EditProfileComponent> = {
   title: 'Components/Edit Profile',
@@ -40,7 +40,7 @@ const meta: Meta<EditProfileComponent> = {
             logout: () => of(void 0),
             register: () => of(void 0),
             user$: of(null),
-            currentUserSignal: signal(USER),
+            currentUserSignal: signal(USERS[0]),
           },
         },
         {

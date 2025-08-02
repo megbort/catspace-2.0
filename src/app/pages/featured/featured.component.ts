@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LoaderService, Profile, ProfileService } from '../../services';
+import { LoaderService, User, UserService } from '../../services';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   FollowEvent,
@@ -8,7 +8,7 @@ import {
 } from '../../components/profile-card/profile-card.component';
 import { Router } from '@angular/router';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { catchError, finalize, of, tap } from 'rxjs';
+import { catchError, map, of } from 'rxjs';
 
 @Component({
   selector: 'app-featured',
@@ -26,13 +26,13 @@ import { catchError, finalize, of, tap } from 'rxjs';
   `,
 })
 export class FeaturedComponent {
-  profiles: Profile[] = [];
+  profiles: User[] = [];
   loadedProfiles = 8;
   loading = signal(false);
 
   constructor(
     private readonly router: Router,
-    private readonly profileService: ProfileService,
+    private readonly userService: UserService,
     private readonly loader: LoaderService
   ) {}
 
@@ -43,22 +43,20 @@ export class FeaturedComponent {
   getProfiles() {
     this.loading.set(true);
     this.loader.show();
-    this.profileService
-      .getProfiles()
+    this.userService
+      .getUsers()
       .pipe(
+        map((users: User[]) => users),
         catchError((error) => {
-          console.error('Error fetching profiles:', error);
+          console.error('Error fetching users:', error);
           return of([]);
-        }),
-        tap((result) => {
-          this.profiles = result;
-        }),
-        finalize(() => {
-          this.loader.hide();
-          this.loading.set(false);
         })
       )
-      .subscribe();
+      .subscribe((data: User[]) => {
+        this.profiles = data;
+        this.loader.hide();
+        this.loading.set(false);
+      });
   }
 
   view(id: string): void {

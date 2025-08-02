@@ -2,8 +2,6 @@ import { Component, signal, computed } from '@angular/core';
 import {
   Post,
   PostService,
-  Profile,
-  ProfileService,
   AuthService,
   UserService,
   LoaderService,
@@ -31,34 +29,21 @@ import { CreatePostComponent } from '../../components/create-post/create-post.co
   templateUrl: './profile.component.html',
 })
 export class ProfileComponent {
-  private readonly _profile = signal<Profile | undefined>(undefined);
+  private readonly _user = signal<User | undefined>(undefined);
   private readonly currentProfileId = signal('');
 
   posts: Post[] = [];
   isOwner = signal(false);
 
-  private userToProfile(user: User): Profile {
-    return {
-      id: user.id,
-      image: user.image || '',
-      name: user.name || '',
-      handle: user.handle || '',
-      description: user.description || '',
-      followers: 0,
-      tags: [],
-      posts: user.posts || [],
-    };
-  }
-
-  profile = computed(() => {
+  user = computed(() => {
     const currentUser = this.authService.currentUserSignal();
     const isOwner = this.isOwner();
     const profileId = this.currentProfileId();
 
     if (currentUser && isOwner && profileId === currentUser.id) {
-      return this.userToProfile(currentUser);
+      return currentUser;
     }
-    return this._profile();
+    return this._user();
   });
 
   get loading() {
@@ -68,7 +53,6 @@ export class ProfileComponent {
   constructor(
     private readonly route: ActivatedRoute,
     private readonly router: Router,
-    private readonly profileService: ProfileService,
     private readonly postService: PostService,
     private readonly authService: AuthService,
     private readonly userService: UserService,
@@ -129,7 +113,7 @@ export class ProfileComponent {
       if (isCurrentUser) {
         this.loadUserData(id);
       } else {
-        this.loadProfileDataVisitor(id);
+        this.loadUserDataVisitor(id);
       }
     }
   }
@@ -140,15 +124,15 @@ export class ProfileComponent {
       .then((userData) => {
         if (userData) {
           this.isOwner.set(true);
-          this._profile.set(this.userToProfile(userData));
+          this._user.set(userData);
           this.loadUserPosts(id);
         } else {
-          this.loadProfileDataVisitor(id);
+          this.loadUserDataVisitor(id);
         }
       })
       .catch((error) => {
-        console.error('Error loading user data, trying profile data', error);
-        this.loadProfileDataVisitor(id);
+        console.error('Error loading user data, trying user data', error);
+        this.loadUserDataVisitor(id);
       });
   }
 
@@ -157,7 +141,7 @@ export class ProfileComponent {
       .getUserProfileById(id)
       .then((userData) => {
         if (userData) {
-          this._profile.set(this.userToProfile(userData));
+          this._user.set(userData);
           this.loadUserPosts(id);
         } else {
           this.loader.hide();
@@ -169,17 +153,17 @@ export class ProfileComponent {
       });
   }
 
-  private loadProfileDataVisitor(id: string): void {
-    this.profileService
-      .getProfileById(id)
+  private loadUserDataVisitor(id: string): void {
+    this.userService
+      .getUserById(id)
       .pipe(
         catchError((error) => {
-          console.error('Error loading profile data', error);
+          console.error('Error loading user data', error);
           return [null];
         }),
-        switchMap((profileData) => {
-          if (profileData) {
-            this._profile.set(profileData);
+        switchMap((userData) => {
+          if (userData) {
+            this._user.set(userData);
             return this.postService.getPostsByProfileId(id);
           } else {
             return [];

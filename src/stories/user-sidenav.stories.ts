@@ -6,7 +6,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { storybookTranslateConfig } from '../app/shared';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { signal } from '@angular/core';
-import { USER } from '../app/services/mocks';
+import { USERS } from '../app/services/mocks';
 import { AuthService } from '../app/services';
 import { of } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
@@ -26,7 +26,7 @@ const meta: Meta<UserSidenavComponent> = {
             logout: () => of(void 0),
             register: () => of(void 0),
             user$: of(null),
-            currentUserSignal: signal(USER),
+            currentUserSignal: signal(USERS[0]),
           },
         },
         {

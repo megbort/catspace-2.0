@@ -9,20 +9,20 @@
       >
         <img
           [src]="
-            profile()?.image ||
+            user()?.image ||
             'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1753057717/catspace/no-avatar_mm3idt.png'
           "
-          [alt]="(profile()?.name || 'User') + '\'s avatar'"
+          [alt]="(user()?.name || 'User') + '\'s avatar'"
           class="h-full w-full object-cover"
         />
       </div>
       <div class="flex flex-col gap-2">
-        <h2>{{ profile()?.name }}</h2>
+        <h2>{{ user()?.name }}</h2>
         <p class="subtitle-1 text-catspace-dark-beige">
-          &#64;{{ profile()?.handle }}
+          &#64;{{ user()?.handle }}
         </p>
         <p class="text-body-1">
-          {{ profile()?.description }}
+          {{ user()?.description }}
         </p>
       </div>
       @if (isOwner()) {

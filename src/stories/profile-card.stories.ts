@@ -5,17 +5,11 @@ import { applicationConfig } from '@storybook/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { storybookTranslateConfig } from '../app/shared';
 import { provideHttpClient, withFetch } from '@angular/common/http';
-import {
-  AuthService,
-  Profile,
-  PROFILES,
-  USER,
-  UserService,
-} from '../app/services';
+import { AuthService, User, USERS, UserService } from '../app/services';
 import { of } from 'rxjs';
 import { signal } from '@angular/core';
 
-const profile: Profile = PROFILES[0];
+const profile: User = USERS[0];
 
 const meta: Meta<ProfileCardComponent> = {
   title: 'Components/Profile Card',
@@ -39,7 +33,7 @@ const meta: Meta<ProfileCardComponent> = {
             logout: () => of(void 0),
             register: () => of(void 0),
             user$: of(null),
-            currentUserSignal: signal(USER),
+            currentUserSignal: signal(USERS[0]),
           },
         },
       ],

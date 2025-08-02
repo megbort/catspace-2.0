@@ -118,7 +118,6 @@ export class CreatePostComponent {
       }
 
       if (this.selectedFile) {
-        // First, generate a unique post ID
         const postId = this.postService.generatePostId(currentUser.id);
 
         this.mediaService
@@ -133,7 +132,7 @@ export class CreatePostComponent {
                 this.translate.instant('form.error.uploadFailed');
               this.notificationService.error(errorMessage);
               this.loader.hide();
-              return [];
+              return of(null);
             })
           )
           .subscribe();

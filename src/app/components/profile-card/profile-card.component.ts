@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { TranslateModule } from '@ngx-translate/core';
-import { Profile, AuthService } from '../../services';
+import { User, AuthService } from '../../services';
 import { RouterModule } from '@angular/router';
 import {
   MatButtonToggleChange,
@@ -34,19 +34,22 @@ export class ProfileCardComponent {
   @Output() follow = new EventEmitter<FollowEvent>();
 
   @Input() userFollowing?: string[] = [];
-  @Input() profile: Profile = {
+  @Input() profile: User = {
     id: '',
+    email: '',
     image: '',
     name: '',
     handle: '',
     description: '',
-    followers: 0,
-    tags: [],
     posts: [],
+    following: [],
+    favorites: [],
+    followers: [],
+    tags: [],
   };
 
   get formattedTags(): string {
-    return this.profile.tags.map((tag) => `#${tag}`).join(' ');
+    return this.profile.tags.map((tag: string) => `#${tag}`).join(' ');
   }
 
   following = false;

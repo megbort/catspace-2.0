@@ -144,7 +144,7 @@ export class EditProfileComponent implements OnInit {
                 this.translate.instant('form.error.uploadFailed');
               this.notificationService.error(errorMessage);
               this.loader.hide();
-              return [];
+              return of(null);
             })
           )
           .subscribe();

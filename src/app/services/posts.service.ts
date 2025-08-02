@@ -13,7 +13,7 @@ export class PostService {
   getPostsByProfileId(profileId: string): Observable<Post[]> {
     const postsCollection = collection(
       this.firestore,
-      `profiles/${profileId}/posts`
+      `users/${profileId}/posts`
     );
     return collectionData(postsCollection, { idField: 'id' }) as Observable<
       Post[]
