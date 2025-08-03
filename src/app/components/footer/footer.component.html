@@ -3,10 +3,12 @@
     class="flex flex-col justify-between items-center bg-catspace-beige h-[200px] p-8"
   >
     <ul class="flex gap-2 sm:gap-4 items-center flex-wrap">
+      @if(!isLoggedIn()) {
       <li class="subtitle-2 footer-item" routerLink="/home">
         {{ "menu.home" | translate }}
       </li>
       <span class="hidden sm:block text-3xl">&#183;</span>
+      }
       <li class="subtitle-2 footer-item" routerLink="/featured">
         {{ "menu.featured" | translate }}
       </li>
@@ -45,11 +47,7 @@
       }
     </ul>
     <!-- Logo -->
-    <div
-      class="flex-shrink-0 hover:cursor-pointer w-[225px]"
-      routerLink="/home"
-      title="Home"
-    >
+    <div class="flex-shrink-0 w-[225px]">
       <img
         src="https://res.cloudinary.com/dm1yyjg7i/image/upload/v1730658024/catspace/catspace-logo-lg_jxurk2.png"
         alt="catspace logo"

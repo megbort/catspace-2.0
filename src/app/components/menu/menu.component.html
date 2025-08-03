@@ -4,11 +4,7 @@
     class="bg-catspace-beige flex items-center justify-around h-28 px-4 md:px-8 lg:px-0"
   >
     <!-- Logo -->
-    <div
-      class="hover:cursor-pointer md:basis-1/4 max-w-[225px]"
-      routerLink="/home"
-      title="Home"
-    >
+    <div class="md:basis-1/4 max-w-[225px]">
       <img
         unpic
         priority
@@ -21,10 +17,12 @@
     <!-- Web menu -->
     <div class="flex justify-center basis-2/4">
       <ul class="hidden md:flex md:gap-4 lg:gap-10">
+        @if(!isLoggedIn()) {
         <li class="menu-item" routerLink="/home" title="Home">
           <p class="subtitle-1 pr-1">{{ "menu.home" | translate }}</p>
           <span class="material-icons hidden icon-18 lg:block">home</span>
         </li>
+        }
         <li class="menu-item" routerLink="/featured" title="Featured">
           <p class="subtitle-1 pr-1">{{ "menu.featured" | translate }}</p>
           <span class="material-icons hidden icon-18 lg:block">star</span>
@@ -80,6 +78,11 @@
 
   <mat-menu #menu="matMenu">
     <ul>
+      @if(!isLoggedIn()) {
+      <li mat-menu-item routerLink="/home">
+        {{ "menu.home" | translate }}
+      </li>
+      }
       <li mat-menu-item routerLink="/featured">
         {{ "menu.featured" | translate }}
       </li>

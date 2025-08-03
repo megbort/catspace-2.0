@@ -9,6 +9,7 @@ import { from, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { User } from './models';
 import { UserService } from './user.service';
+import { toObservable } from '@angular/core/rxjs-interop';
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +18,7 @@ export class AuthService {
   firebaseAuth = inject(Auth);
   user$ = user(this.firebaseAuth);
   currentUserSignal = signal<User | null | undefined>(undefined);
+  currentUser$ = toObservable(this.currentUserSignal);
 
   constructor(
     private readonly userService: UserService,
@@ -100,10 +102,15 @@ export class AuthService {
   }
 
   logout(): Observable<void> {
-    const promise = this.firebaseAuth.signOut().then(() => {
-      this.currentUserSignal.set(null);
-      this.router.navigate(['/home']);
-    });
+    this.currentUserSignal.set(null);
+    const promise = this.firebaseAuth
+      .signOut()
+      .then(() => {
+        this.router.navigate(['/home']);
+      })
+      .catch(() => {
+        this.router.navigate(['/home']);
+      });
     return from(promise);
   }
 }

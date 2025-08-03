@@ -20,6 +20,7 @@ import { LoginComponent } from '../login/login.component';
 import { CustomDialogComponent } from '../../ui/custom-dialog.component';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { finalize, of, tap } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -45,7 +46,8 @@ export class SignupComponent {
     private readonly authService: AuthService,
     private readonly notificationService: NotificationService,
     private readonly loader: LoaderService,
-    private readonly translate: TranslateService
+    private readonly translate: TranslateService,
+    private readonly router: Router
   ) {
     this.form = this.formBuilder.group({
       name: ['', [Validators.required]],
@@ -80,6 +82,7 @@ export class SignupComponent {
                 this.translate.instant('auth.signUp.success.accountCreated')
               );
               this.dialogRef.close();
+              this.router.navigate(['/featured']);
             }
           }),
           finalize(() => {

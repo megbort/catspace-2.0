@@ -19,6 +19,7 @@ import {
 } from '@angular/forms';
 import { SignupComponent } from '../signup/signup.component';
 import { catchError, finalize, of, tap } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -43,7 +44,8 @@ export class LoginComponent {
     private readonly authService: AuthService,
     private readonly notificationService: NotificationService,
     private readonly translate: TranslateService,
-    private readonly loader: LoaderService
+    private readonly loader: LoaderService,
+    private readonly router: Router
   ) {
     this.form = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -76,9 +78,10 @@ export class LoginComponent {
           tap((result) => {
             if (result) {
               this.notificationService.success(
-                this.translate.instant('form.success.login')
+                this.translate.instant('auth.login.success.loggedIn')
               );
               this.dialogRef.close();
+              this.router.navigate(['/featured']);
             }
           }),
           finalize(() => {
