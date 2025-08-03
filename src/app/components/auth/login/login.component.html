@@ -1,34 +1,31 @@
-<app-custom-dialog [title]="'auth.login' | translate">
+<app-custom-dialog [title]="'auth.login.title' | translate">
   <form [formGroup]="form" class="flex flex-col gap-2">
     <mat-form-field appearance="outline">
-      <mat-label>{{ "common.email" | translate }}</mat-label>
+      <mat-label>{{ "auth.login.form.email" | translate }}</mat-label>
       <input
         matInput
         formControlName="email"
         type="email"
-        placeholder="Enter your email"
+        placeholder="{{ 'auth.login.form.placeholder.email' | translate }}"
       />
       @if(form.get('email')?.hasError('required')){
-      <mat-error>{{
-        "form.error.required"
-          | translate : { field: ("common.email" | translate) }
-      }}</mat-error>
+      <mat-error>{{ "form.error.required" | translate }}</mat-error>
       } @if(form.get('email')?.hasError('email')){
       <mat-error>{{ "form.error.emailInvalid" | translate }}</mat-error>
       }
     </mat-form-field>
     <mat-form-field appearance="outline">
-      <mat-label>{{ "common.password" | translate }}</mat-label>
+      <mat-label>{{ "auth.login.form.password" | translate }}</mat-label>
       <input
         matInput
         formControlName="password"
         type="password"
-        placeholder="Enter your password"
+        placeholder="{{ 'auth.login.form.placeholder.password' | translate }}"
       />
       @if(form.get('password')?.hasError('required')){
       <mat-error>{{
         "form.error.required"
-          | translate : { field: ("common.password" | translate) }
+          | translate : { field: ("auth.login.form.password" | translate) }
       }}</mat-error>
       } @if(form.get('password')?.hasError('minlength')){
       <mat-error>{{ "form.error.passwordLength" | translate }}</mat-error>
@@ -45,7 +42,7 @@
   </button>
   <div class="text-center">
     <p class="text-body-2 pt-8 text-center bold">
-      {{ "form.loginMessage" | translate }}
+      {{ "auth.noAccount" | translate }}
     </p>
     <button
       class="px-2 text-body-2 text-catspace-orange hover:underline"

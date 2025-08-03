@@ -27,29 +27,9 @@
     "cancel": "Cancel",
     "editProfile": "Edit Profile",
     "post": "Post",
-    "delete": "Delete",
-    "remove": "Remove",
-    "uploadNew": "Upload New"
+    "delete": "Delete"
   },
   "form": {
-    "loginMessage": "Don't have an account?",
-    "signUpMessage": "Already have an account?",
-    "editProfile": "Edit Profile",
-    "signUp": {
-      "step1": "We're excited to have you join! Lets start with getting some basic information for your profile.",
-      "step2": "Almost done! Next, fill out your email and password then get ready to start posting.",
-      "name": "Profile Name",
-      "handle": "Handle",
-      "handleHelp": "This is a quick way to tag others and shows one your profile like '@myhandle2000'",
-      "description": "Profile Description (optional)",
-      "placeholder": {
-        "name": "Enter your profile name",
-        "handle": "Enter your handle",
-        "email": "Enter your email",
-        "password": "Enter your password",
-        "description": "Enter a short description about yourself, this will be shown on your profile page."
-      }
-    },
     "error": {
       "login": "Login failed. Please check your email and password.",
       "emailInUse": "This email is already in use. Please use a different email.",
@@ -63,15 +43,7 @@
       "fileTooLarge": "File size must be less than 5MB.",
       "uploadFailed": "Failed to upload image. Please try again.",
       "updateProfile": "Failed to update profile. Please try again.",
-      "userNotFound": "User not found. Please log in again.",
-      "imageRequired": "Please select an image for your post.",
-      "createPost": "Failed to create post. Please try again."
-    },
-    "success": {
-      "accountCreated": "Account created successfully!",
-      "updateProfile": "Profile updated successfully!",
-      "login": "Logged in successfully!",
-      "createPost": "Post created successfully!"
+      "userNotFound": "User not found. Please log in again."
     }
   },
   "menu": {
@@ -100,15 +72,52 @@
     "copyright": "Designed and built by Megan Krenbrink."
   },
   "profile": {
-    "noPosts": "No Posts"
+    "noPosts": "No Posts",
+    "tags": "Profile Tags"
   },
   "post": {
-    "view": "View Post"
+    "view": "View Post",
+    "favorite": "Post has been added to your favorites!"
   },
   "auth": {
-    "login": "Login",
-    "signUp": "Sign Up",
-    "authMessage": "Please sign or create an account to use this feature."
+    "authMessage": "Please sign or create an account to use this feature.",
+    "noAccount": "Don't have an account?",
+    "haveAccount": "Already have an account?",
+    "login": {
+      "title": "Login",
+      "form": {
+        "email": "Email",
+        "password": "Password",
+        "placeholder": {
+          "email": "Enter your email",
+          "password": "Enter your password"
+        }
+      },
+      "success": {
+        "loggedIn": "Logged in successfully!"
+      }
+    },
+    "signUp": {
+      "title": "Sign Up",
+      "step1": "We're excited to have you join! Lets start with getting some basic information for your profile.",
+      "step2": "Almost done! Next, fill out your email and password then get ready to start posting.",
+      "form": {
+        "name": "Profile Name",
+        "handle": "Handle",
+        "handleHelp": "This is a quick way to tag others and shows one your profile like '@myhandle2000'",
+        "description": "Profile Description (optional)",
+        "placeholder": {
+          "name": "Enter your profile name",
+          "handle": "Enter your handle",
+          "email": "Enter your email",
+          "password": "Enter your password",
+          "description": "Enter a short description about yourself, this will be shown on your profile page."
+        }
+      },
+      "success": {
+        "accountCreated": "Account created successfully! You can now log in."
+      }
+    }
   },
   "media": {
     "rateLimitExceeded": "Rate limit exceeded. Please try again later.",
@@ -128,13 +137,27 @@
       "descriptionPlaceholder": "Enter a description for your post",
       "image": "Click to upload image"
     },
-    "error": {
-      "titleRequired": "Title is required.",
-      "contentRequired": "Content is required.",
-      "imageRequired": "Image is required."
-    },
     "success": {
       "postCreated": "Post created successfully!"
+    }
+  },
+  "editProfile": {
+    "title": "Edit Profile",
+    "form": {
+      "name": "Name",
+      "handle": "Handle",
+      "description": "Description",
+      "placeholder": {
+        "name": "Enter your profile name",
+        "handle": "Enter your handle",
+        "description": "Enter a short description about yourself."
+      }
+    },
+    "success": {
+      "profileUpdated": "Profile updated successfully!"
+    },
+    "error": {
+      "updateProfile": "Failed to update profile. Please try again."
     }
   }
 }

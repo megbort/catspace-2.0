@@ -16,6 +16,11 @@ import { AuthService } from '../../services';
 export class FooterComponent {
   isLoggedIn = computed(() => this.authService.currentUserSignal());
 
+  defaultDialogProperties = {
+    width: '500px',
+    autoFocus: false,
+  };
+
   constructor(
     private readonly dialog: MatDialog,
     private readonly authService: AuthService
@@ -23,9 +28,9 @@ export class FooterComponent {
 
   openDialog(dialog: DialogType): void {
     if (dialog === Dialog.SignUp) {
-      this.dialog.open(SignupComponent, { width: '500px', autoFocus: false });
+      this.dialog.open(SignupComponent, this.defaultDialogProperties);
     } else {
-      this.dialog.open(LoginComponent, { width: '500px', autoFocus: false });
+      this.dialog.open(LoginComponent, this.defaultDialogProperties);
     }
   }
 

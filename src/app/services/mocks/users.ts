@@ -126,7 +126,7 @@ export const USERS: User[] = [
   },
   {
     id: '04',
-    email: '',
+    email: 'demo2@example.com',
     image:
       'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1730658244/catspace/catspace-image-04_osmx3b.jpg',
     name: 'Oscar Furrytail',

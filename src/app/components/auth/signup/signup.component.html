@@ -1,19 +1,19 @@
-<app-custom-dialog [title]="'auth.signUp' | translate">
+<app-custom-dialog [title]="'auth.signUp.title' | translate">
   <form [formGroup]="form">
     @if(step === 1) {
     <div class="flex flex-col w-full gap-1">
       <p class="subtitle-2 text-center pb-4">
-        {{ "form.signUp.step1" | translate }}
+        {{ "auth.signUp.step1" | translate }}
       </p>
       <mat-form-field appearance="outline">
         <mat-label>
-          {{ "form.signUp.name" | translate }}
+          {{ "auth.signUp.form.name" | translate }}
         </mat-label>
         <input
           matInput
           formControlName="name"
           type="text"
-          [placeholder]="'form.signUp.placeholder.name' | translate"
+          [placeholder]="'auth.signUp.form.placeholder.name' | translate"
         />
         @if(form.get('name')?.hasError('required') && form.get('name')?.touched)
         {
@@ -23,14 +23,14 @@
 
       <mat-form-field appearance="outline">
         <mat-label>
-          {{ "form.signUp.handle" | translate }}
+          {{ "auth.signUp.form.handle" | translate }}
         </mat-label>
         <input
           #handleInput
           matInput
           formControlName="handle"
           type="text"
-          [placeholder]="'form.signUp.placeholder.handle' | translate"
+          [placeholder]="'auth.signUp.form.placeholder.handle' | translate"
           class="text-left"
         />
         <span matTextPrefix class="text-gray-400">&#64;&nbsp;</span>
@@ -41,13 +41,13 @@
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>
-          {{ "form.signUp.description" | translate }}
+          {{ "auth.signUp.form.description" | translate }}
         </mat-label>
         <textarea
           matInput
           formControlName="description"
           type="text"
-          [placeholder]="'form.signUp.placeholder.description' | translate"
+          [placeholder]="'auth.signUp.form.placeholder.description' | translate"
         >
         </textarea>
       </mat-form-field>
@@ -58,7 +58,7 @@
     } @else {
     <div class="flex flex-col w-full gap-1">
       <p class="subtitle-2 text-center pb-4">
-        {{ "form.signUp.step2" | translate }}
+        {{ "auth.signUp.step2" | translate }}
       </p>
       <mat-form-field appearance="outline">
         <mat-label>{{ "common.email" | translate }}</mat-label>
@@ -66,7 +66,7 @@
           matInput
           formControlName="email"
           type="email"
-          [placeholder]="'form.signUp.placeholder.email' | translate"
+          [placeholder]="'auth.signUp.form.placeholder.email' | translate"
         />
         @if(form.get('email')?.hasError('required') &&
         form.get('email')?.touched) {
@@ -82,7 +82,7 @@
           matInput
           formControlName="password"
           type="password"
-          [placeholder]="'form.signUp.placeholder.password' | translate"
+          [placeholder]="'auth.signUp.form.placeholder.password' | translate"
         />
         @if(form.get('password')?.hasError('required') &&
         form.get('password')?.touched) {
@@ -106,7 +106,7 @@
   </form>
   <div class="text-center pt-6">
     <p class="text-body-2 text-center bold">
-      {{ "form.signUpMessage" | translate }}
+      {{ "auth.haveAccount" | translate }}
     </p>
     <button
       class="px-2 text-body-2 text-catspace-orange hover:underline"

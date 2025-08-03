@@ -75,9 +75,9 @@ export class SignupComponent {
             return of(null);
           }),
           tap((result) => {
-            if (result) {
+            if (result !== null) {
               this.notificationService.success(
-                'Account created successfully! Welcome to Catspace!'
+                this.translate.instant('auth.signUp.success.accountCreated')
               );
               this.dialogRef.close();
             }

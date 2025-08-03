@@ -44,7 +44,6 @@
 
     <div class="items-center justify-end gap-4 hidden md:flex w-[225px]">
       @if(isLoggedIn()) {
-      <span class="material-symbols-outlined">notifications</span>
       <button
         class="rounded-full w-8 h-8 overflow-hidden"
         (click)="open.emit()"
@@ -58,9 +57,8 @@
           class="w-full h-full object-cover"
         />
       </button>
-
-      <button mat-stroked-button (click)="logout()">
-        {{ "button.logout" | translate }}
+      <button mat-flat-button (click)="openDialog('newPost')">
+        {{ "button.newPost" | translate }}
       </button>
       } @else {
       <button mat-stroked-button (click)="openDialog('signUp')">
@@ -82,9 +80,6 @@
 
   <mat-menu #menu="matMenu">
     <ul>
-      <li mat-menu-item routerLink="/home">
-        {{ "menu.home" | translate }}
-      </li>
       <li mat-menu-item routerLink="/featured">
         {{ "menu.featured" | translate }}
       </li>
@@ -94,12 +89,6 @@
       </li>
       <li mat-menu-item routerLink="/my-page">
         {{ "menu.myPage" | translate }}
-      </li>
-      <li mat-menu-item>
-        {{ "menu.notifications" | translate }}
-      </li>
-      <li mat-menu-item>
-        {{ "menu.account" | translate }}
       </li>
       <li mat-menu-item>
         <button (click)="logout()">

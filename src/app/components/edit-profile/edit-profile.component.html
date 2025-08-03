@@ -1,4 +1,4 @@
-<app-custom-dialog [title]="'form.editProfile' | translate">
+<app-custom-dialog [title]="'editProfile.title' | translate">
   <div class="flex flex-col gap-4">
     <form [formGroup]="form">
       <div class="flex flex-col w-full gap-1">
@@ -40,13 +40,13 @@
             <!-- Name -->
             <mat-form-field appearance="outline">
               <mat-label>
-                {{ "form.signUp.name" | translate }}
+                {{ "editProfile.form.name" | translate }}
               </mat-label>
               <input
                 matInput
                 formControlName="name"
                 type="text"
-                [placeholder]="'form.signUp.placeholder.name' | translate"
+                [placeholder]="'editProfile.form.placeholder.name' | translate"
               />
               @if(form.get('name')?.hasError('required') &&
               form.get('name')?.touched) {
@@ -59,13 +59,15 @@
             <!-- Handle -->
             <mat-form-field appearance="outline">
               <mat-label>
-                {{ "form.signUp.handle" | translate }}
+                {{ "editProfile.form.handle" | translate }}
               </mat-label>
               <input
                 matInput
                 formControlName="handle"
                 type="text"
-                [placeholder]="'form.signUp.placeholder.handle' | translate"
+                [placeholder]="
+                  'editProfile.form.placeholder.handle' | translate
+                "
                 class="text-left"
               />
               <span matTextPrefix class="text-gray-400">&#64;&nbsp;</span>
@@ -79,14 +81,16 @@
         <!-- Description -->
         <mat-form-field appearance="outline">
           <mat-label>
-            {{ "form.signUp.description" | translate }}
+            {{ "editProfile.form.description" | translate }}
           </mat-label>
           <textarea
             matInput
             formControlName="description"
             type="text"
             rows="4"
-            [placeholder]="'form.signUp.placeholder.description' | translate"
+            [placeholder]="
+              'editProfile.form.placeholder.description' | translate
+            "
           >
           </textarea>
           @if(form.get('description')?.hasError('maxlength') &&

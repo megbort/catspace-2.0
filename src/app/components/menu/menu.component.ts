@@ -11,6 +11,7 @@ import { Dialog, DialogType } from '../../shared';
 import { UnpicImageDirective } from '@unpic/angular';
 import { AuthService } from '../../services';
 import { BannerComponent } from '../ui/banner.component';
+import { CreatePostComponent } from '../create-post/create-post.component';
 
 @Component({
   selector: 'app-menu',
@@ -31,6 +32,11 @@ export class MenuComponent {
   open = output<void>();
   isLoggedIn = computed(() => this.authService.currentUserSignal());
 
+  defaultDialogProperties = {
+    width: '500px',
+    autoFocus: false,
+  };
+
   constructor(
     public readonly authService: AuthService,
     private readonly dialog: MatDialog
@@ -42,9 +48,14 @@ export class MenuComponent {
 
   openDialog(dialog: DialogType): void {
     if (dialog === Dialog.SignUp) {
-      this.dialog.open(SignupComponent, { width: '500px', autoFocus: false });
+      this.dialog.open(SignupComponent, this.defaultDialogProperties);
+    } else if (dialog === Dialog.Login) {
+      this.dialog.open(LoginComponent, this.defaultDialogProperties);
     } else {
-      this.dialog.open(LoginComponent, { width: '500px', autoFocus: false });
+      this.dialog.open(CreatePostComponent, {
+        width: '550px',
+        autoFocus: false,
+      });
     }
   }
 

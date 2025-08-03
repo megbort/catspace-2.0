@@ -4,13 +4,16 @@
   @defer (on viewport) {
   <img
     unpic
-    [src]="profile.image"
+    [src]="
+      profile.image ||
+      'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1753057717/catspace/no-avatar_mm3idt.png'
+    "
     alt="{{ profile.name }}"
-    class="object-cover w-full h-[150px] rounded"
+    class="object-cover w-full h-[180px] rounded"
     alt="cat"
   />
   } @placeholder {
-  <div class="bg-catspace-grey w-full rounded h-[150px]"></div>
+  <div class="bg-catspace-grey w-full rounded h-[180px]"></div>
   }
   <div class="h-full flex flex-col justify-around">
     <div>

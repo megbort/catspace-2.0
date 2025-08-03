@@ -12,10 +12,6 @@
 
 @mixin h3 {
   @apply leading-8 font-semibold text-xl tracking-wider;
-
-  @media (min-width: 768px) {
-    @apply text-lg;
-  }
 }
 
 @mixin subtitle-1 {
@@ -27,7 +23,7 @@
 }
 
 @mixin subtitle-2 {
-  @apply leading-5 font-semibold text-base tracking-normal;
+  @apply leading-5 font-medium text-base tracking-normal;
 }
 
 @mixin text-body-1 {

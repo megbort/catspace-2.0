@@ -1,6 +1,6 @@
 <div class="min-h-[800px]">
   <div
-    [ngClass]="{ 'sm:items-start': posts.length > 0 }"
+    [class]="posts.length > 0 ? ' sm:items-start' : ''"
     class="px-12 py-20 mb-20 flex flex-col items-center sm:flex-row gap-12 justify-center"
   >
     <div class="basis-1/3 flex flex-col items-center gap-4 max-w-[325px]">

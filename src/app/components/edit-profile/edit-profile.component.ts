@@ -171,13 +171,13 @@ export class EditProfileComponent implements OnInit {
           this.authService.currentUserSignal.set(updatedUser);
 
           this.notificationService.success(
-            this.translate.instant('form.success.updateProfile')
+            this.translate.instant('editProfile.success.profileUpdated')
           );
           this.dialog.closeAll();
         }),
         catchError(() => {
           this.notificationService.error(
-            this.translate.instant('form.error.updateProfile')
+            this.translate.instant('editProfile.error.updateProfile')
           );
           return of(null);
         }),
