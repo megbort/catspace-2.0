@@ -12,7 +12,9 @@ import {
   PostService,
   USERS,
   UserService,
+  LoaderService,
 } from '../app/services';
+import { GlobalStore } from '../app/shared/state/global.store';
 import { of } from 'rxjs';
 import { signal } from '@angular/core';
 
@@ -24,6 +26,8 @@ const meta: Meta<CreatePostComponent> = {
       providers: [
         provideAnimations(),
         provideHttpClient(withFetch()),
+        GlobalStore,
+        LoaderService,
         {
           provide: MatDialogRef,
           useValue: {

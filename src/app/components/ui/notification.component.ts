@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, inject, Inject } from '@angular/core';
 import {
   MAT_SNACK_BAR_DATA,
   MatSnackBarRef,
@@ -16,7 +16,7 @@ export interface NotificationData {
   imports: [MatIconModule, MatButtonModule],
   template: `
     <div
-      class="flex items-center justify-between gap-4 p-3 min-w-[320px] rounded shadow-md"
+      class="flex items-center justify-between gap-4 p-2 min-w-[320px] rounded shadow-md"
       [class]="data.type"
     >
       <div class="flex gap-2 grow">
@@ -65,10 +65,8 @@ export interface NotificationData {
   ],
 })
 export class NotificationComponent {
-  constructor(
-    @Inject(MAT_SNACK_BAR_DATA) public data: NotificationData,
-    private readonly snackBarRef: MatSnackBarRef<NotificationComponent>
-  ) {}
+  data = inject<NotificationData>(MAT_SNACK_BAR_DATA);
+  snackBarRef = inject(MatSnackBarRef);
 
   dismiss(): void {
     this.snackBarRef.dismiss();

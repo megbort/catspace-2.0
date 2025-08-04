@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -20,7 +20,6 @@ import {
   NotificationService,
   Post,
   PostService,
-  UserService,
 } from '../../services';
 import { catchError, finalize, of, tap } from 'rxjs';
 
@@ -43,17 +42,16 @@ export class CreatePostComponent {
   selectedFile: File | null = null;
   previewUrl: string | null = null;
 
-  constructor(
-    private readonly dialog: MatDialog,
-    private readonly loader: LoaderService,
-    private readonly notificationService: NotificationService,
-    private readonly formBuilder: FormBuilder,
-    private readonly authService: AuthService,
-    private readonly userService: UserService,
-    private readonly mediaService: MediaService,
-    private readonly postService: PostService,
-    private readonly translate: TranslateService
-  ) {
+  private readonly dialog = inject(MatDialog);
+  private readonly loader = inject(LoaderService);
+  private readonly notificationService = inject(NotificationService);
+  private readonly formBuilder = inject(FormBuilder);
+  private readonly authService = inject(AuthService);
+  private readonly mediaService = inject(MediaService);
+  private readonly postService = inject(PostService);
+  private readonly translate = inject(TranslateService);
+
+  constructor() {
     this.form = this.formBuilder.group({
       title: ['', [Validators.required, Validators.minLength(2)]],
       description: ['', [Validators.maxLength(400)]],

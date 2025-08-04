@@ -5,10 +5,10 @@
   <img
     unpic
     [src]="
-      profile.image ||
+      profile().image ||
       'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1753057717/catspace/no-avatar_mm3idt.png'
     "
-    alt="{{ profile.name }}"
+    alt="{{ profile().name }}"
     class="object-cover w-full h-[180px] rounded"
     alt="cat"
   />
@@ -17,10 +17,10 @@
   }
   <div class="h-full flex flex-col justify-around">
     <div>
-      <p class="subtitle-1 line-clamp-1">{{ profile.name }}</p>
-      <p class="text-body-1">&#64;{{ profile.handle }}</p>
+      <p class="subtitle-1 line-clamp-1">{{ profile().name }}</p>
+      <p class="text-body-1">&#64;{{ profile().handle }}</p>
       <p class="text-body-1">
-        {{ profile.followers.length }} {{ "common.followers" | translate }}
+        {{ profile().followers.length }} {{ "common.followers" | translate }}
       </p>
     </div>
     <p class="text-body-2 text-catspace-orange py-2 line-clamp-2">
@@ -37,7 +37,7 @@
       <button
         mat-stroked-button
         class="basis-1/2 card-button"
-        (click)="view.emit(profile.id)"
+        (click)="view.emit(profile().id)"
       >
         {{ "button.viewProfile" | translate }}
       </button>

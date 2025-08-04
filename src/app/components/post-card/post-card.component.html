@@ -8,8 +8,8 @@
     <img
       unpic
       priority
-      [src]="post.image"
-      alt="{{ post.title }}"
+      [src]="post().image"
+      alt="{{ post().title }}"
       class="w-full h-full object-cover rounded block"
     />
     } @placeholder {
@@ -25,11 +25,11 @@
   </div>
   <div class="flex flex-col gap-1">
     <div>
-      <p class="subtitle-2 line-clamp-2">{{ post.title }}</p>
+      <p class="subtitle-2 line-clamp-2">{{ post().title }}</p>
     </div>
     <div class="flex justify-between items-center">
       <p class="text-body-2 line-clamp-1">
-        {{ post.favorites }} {{ "common.favorites" | translate }}
+        {{ post().favorites }} {{ "common.favorites" | translate }}
       </p>
       <span
         class="material-symbols-outlined icon-18 text-catspace-orange hover:text-catspace-dark-orange hover:cursor-pointer"

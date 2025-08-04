@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -37,16 +37,16 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   form: FormGroup;
 
-  constructor(
-    private readonly dialog: MatDialog,
-    private readonly dialogRef: MatDialogRef<LoginComponent>,
-    private readonly formBuilder: FormBuilder,
-    private readonly authService: AuthService,
-    private readonly notificationService: NotificationService,
-    private readonly translate: TranslateService,
-    private readonly loader: LoaderService,
-    private readonly router: Router
-  ) {
+  private readonly dialog = inject(MatDialog);
+  private readonly dialogRef = inject(MatDialogRef<LoginComponent>);
+  private readonly authService = inject(AuthService);
+  private readonly notificationService = inject(NotificationService);
+  private readonly translate = inject(TranslateService);
+  private readonly loader = inject(LoaderService);
+  private readonly router = inject(Router);
+  private readonly formBuilder = inject(FormBuilder);
+
+  constructor() {
     this.form = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -81,7 +81,7 @@ export class LoginComponent {
                 this.translate.instant('auth.login.success.loggedIn')
               );
               this.dialogRef.close();
-              this.router.navigate(['/featured']);
+              this.router.navigate(['/following']);
             }
           }),
           finalize(() => {

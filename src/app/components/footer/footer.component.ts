@@ -1,4 +1,4 @@
-import { Component, computed } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { Dialog, DialogType } from '../../shared';
@@ -21,10 +21,8 @@ export class FooterComponent {
     autoFocus: false,
   };
 
-  constructor(
-    private readonly dialog: MatDialog,
-    private readonly authService: AuthService
-  ) {}
+  private readonly dialog = inject(MatDialog);
+  private readonly authService = inject(AuthService);
 
   openDialog(dialog: DialogType): void {
     if (dialog === Dialog.SignUp) {

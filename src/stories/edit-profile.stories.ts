@@ -6,7 +6,13 @@ import { storybookTranslateConfig } from '../app/shared/config/translate';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { EditProfileComponent } from '../app/components/edit-profile/edit-profile.component';
-import { AuthService, UserService, MediaService } from '../app/services';
+import {
+  AuthService,
+  UserService,
+  MediaService,
+  LoaderService,
+} from '../app/services';
+import { GlobalStore } from '../app/shared/state/global.store';
 import { of } from 'rxjs';
 import { signal } from '@angular/core';
 import { USERS } from '../app/services/mocks/users';
@@ -19,6 +25,8 @@ const meta: Meta<EditProfileComponent> = {
       providers: [
         provideAnimations(),
         provideHttpClient(withFetch()),
+        GlobalStore,
+        LoaderService,
         {
           provide: MatDialogRef,
           useValue: {

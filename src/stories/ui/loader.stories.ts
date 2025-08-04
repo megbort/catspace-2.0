@@ -1,22 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { LoaderComponent } from '../../app/components/ui/loader.component';
 import { LoaderService } from '../../app/services/loader.service';
+import { GlobalStore } from '../../app/shared/state/global.store';
 import { applicationConfig } from '@storybook/angular';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { signal } from '@angular/core';
-
-class MockLoaderService {
-  private readonly _isLoading = signal(true);
-  readonly isLoading = this._isLoading.asReadonly();
-
-  show(): void {
-    this._isLoading.set(true);
-  }
-
-  hide(): void {
-    this._isLoading.set(false);
-  }
-}
 
 const meta: Meta<LoaderComponent> = {
   title: 'Design System/Loader',
@@ -25,7 +12,15 @@ const meta: Meta<LoaderComponent> = {
     applicationConfig({
       providers: [
         provideAnimations(),
-        { provide: LoaderService, useClass: MockLoaderService },
+        {
+          provide: GlobalStore,
+          useFactory: () => {
+            const store = new GlobalStore();
+            store.setLoading(true);
+            return store;
+          },
+        },
+        LoaderService,
       ],
     }),
   ],

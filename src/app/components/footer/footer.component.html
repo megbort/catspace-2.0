@@ -14,7 +14,9 @@
       </li>
       @if(isLoggedIn()) {
       <span class="hidden sm:block text-3xl">&#183;</span>
-      <li class="subtitle-2 footer-item">{{ "menu.following" | translate }}</li>
+      <li class="subtitle-2 footer-item" routerLink="/following">
+        {{ "menu.following" | translate }}
+      </li>
       <span class="hidden sm:block text-3xl">&#183;</span>
       <li class="subtitle-2 footer-item" routerLink="/my-page">
         {{ "menu.myPage" | translate }}

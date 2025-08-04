@@ -3,9 +3,12 @@
     "catspace": "catspace",
     "followers": "Followers",
     "favorites": "Favorites",
+    "featured": "Featured",
+    "following": "Following",
     "email": "Email",
     "password": "Password",
     "account": "Account",
+    "latestPosts": "Latest Posts",
     "demo": "This website is for demo purposes only. It's functional, but is just for fun. Feel free to explore and experiment! 😺"
   },
   "button": {

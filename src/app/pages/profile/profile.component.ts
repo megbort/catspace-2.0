@@ -1,4 +1,4 @@
-import { Component, signal, computed } from '@angular/core';
+import { Component, signal, computed, inject } from '@angular/core';
 import {
   Post,
   PostService,
@@ -16,6 +16,7 @@ import { EditProfileComponent } from '../../components/edit-profile/edit-profile
 import { catchError, switchMap, take } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
 import { CreatePostComponent } from '../../components/create-post/create-post.component';
+import { GlobalStore } from '../../shared/state/global.store';
 
 @Component({
   selector: 'app-profile',
@@ -34,6 +35,7 @@ export class ProfileComponent {
 
   posts: Post[] = [];
   isOwner = signal(false);
+  loading = computed(() => this.globalStore.isLoading());
 
   user = computed(() => {
     const currentUser = this.authService.currentUserSignal();
@@ -46,19 +48,14 @@ export class ProfileComponent {
     return this._user();
   });
 
-  get loading() {
-    return this.loader.isLoading;
-  }
-
-  constructor(
-    private readonly route: ActivatedRoute,
-    private readonly router: Router,
-    private readonly postService: PostService,
-    private readonly authService: AuthService,
-    private readonly userService: UserService,
-    private readonly loader: LoaderService,
-    private readonly dialog: MatDialog
-  ) {}
+  private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
+  private readonly postService = inject(PostService);
+  private readonly authService = inject(AuthService);
+  private readonly userService = inject(UserService);
+  private readonly loader = inject(LoaderService);
+  private readonly dialog = inject(MatDialog);
+  private readonly globalStore = inject(GlobalStore);
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((paramMap) => {

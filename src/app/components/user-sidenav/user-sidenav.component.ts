@@ -1,4 +1,4 @@
-import { Component, output, computed } from '@angular/core';
+import { Component, output, computed, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -27,10 +27,8 @@ export class UserSidenavComponent {
   close = output<void>();
   user = computed(() => this.authService.currentUserSignal());
 
-  constructor(
-    private readonly authService: AuthService,
-    private readonly dialog: MatDialog
-  ) {}
+  private readonly authService = inject(AuthService);
+  private readonly dialog = inject(MatDialog);
 
   logout(): void {
     this.authService.logout().subscribe();

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input, Input } from '@angular/core';
 import { Post } from '../../services';
 import { TranslateModule } from '@ngx-translate/core';
 import { UnpicImageDirective } from '@unpic/angular';
@@ -10,12 +10,12 @@ import { UnpicImageDirective } from '@unpic/angular';
   templateUrl: './post-card.component.html',
 })
 export class PostCardComponent {
-  @Input() post: Post = {
+  post = input<Post>({
     id: '',
     title: '',
     image: '',
     description: '',
     favorites: 0,
     comments: [],
-  };
+  });
 }

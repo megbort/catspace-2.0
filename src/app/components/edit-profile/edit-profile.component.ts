@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -48,16 +48,16 @@ export class EditProfileComponent implements OnInit {
   selectedFile: File | null = null;
   previewUrl: string | null = null;
 
-  constructor(
-    private readonly dialog: MatDialog,
-    private readonly loader: LoaderService,
-    private readonly notificationService: NotificationService,
-    private readonly formBuilder: FormBuilder,
-    private readonly authService: AuthService,
-    private readonly userService: UserService,
-    private readonly mediaService: MediaService,
-    private readonly translate: TranslateService
-  ) {
+  private readonly dialog = inject(MatDialog);
+  private readonly loader = inject(LoaderService);
+  private readonly notificationService = inject(NotificationService);
+  private readonly formBuilder = inject(FormBuilder);
+  private readonly authService = inject(AuthService);
+  private readonly userService = inject(UserService);
+  private readonly mediaService = inject(MediaService);
+  private readonly translate = inject(TranslateService);
+
+  constructor() {
     this.form = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
       handle: ['', [Validators.required]],

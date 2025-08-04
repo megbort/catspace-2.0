@@ -1,17 +1,21 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
+import { GlobalStore } from '../shared/state/global.store';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoaderService {
-  private readonly _isLoading = signal(false);
-  readonly isLoading = this._isLoading.asReadonly();
+  private readonly globalStore = inject(GlobalStore);
+
+  get isLoading() {
+    return this.globalStore.isLoading;
+  }
 
   show(): void {
-    this._isLoading.set(true);
+    this.globalStore.setLoading(true);
   }
 
   hide(): void {
-    this._isLoading.set(false);
+    this.globalStore.setLoading(false);
   }
 }

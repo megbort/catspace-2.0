@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoaderService, User, UserService } from '../../services';
 import { TranslateModule } from '@ngx-translate/core';
@@ -9,6 +9,7 @@ import {
 import { Router } from '@angular/router';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { catchError, map, of } from 'rxjs';
+import { GlobalStore } from '../../shared/state/global.store';
 
 @Component({
   selector: 'app-featured',
@@ -28,20 +29,18 @@ import { catchError, map, of } from 'rxjs';
 export class FeaturedComponent {
   profiles: User[] = [];
   loadedProfiles = 8;
-  loading = signal(false);
+  loading = computed(() => this.globalStore.isLoading());
 
-  constructor(
-    private readonly router: Router,
-    private readonly userService: UserService,
-    private readonly loader: LoaderService
-  ) {}
+  private readonly globalStore = inject(GlobalStore);
+  private readonly router = inject(Router);
+  private readonly userService = inject(UserService);
+  private readonly loader = inject(LoaderService);
 
   ngOnInit(): void {
     this.getProfiles();
   }
 
   getProfiles() {
-    this.loading.set(true);
     this.loader.show();
     this.userService
       .getUsers()
@@ -55,7 +54,6 @@ export class FeaturedComponent {
       .subscribe((data: User[]) => {
         this.profiles = data;
         this.loader.hide();
-        this.loading.set(false);
       });
   }
 

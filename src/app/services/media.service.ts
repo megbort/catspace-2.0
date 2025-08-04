@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map, switchMap, take } from 'rxjs/operators';
@@ -36,11 +36,9 @@ export class MediaService {
     maxDimensions: { width: 2000, height: 2000 },
   };
 
-  constructor(
-    private readonly http: HttpClient,
-    private readonly authService: AuthService,
-    private readonly translateService: TranslateService
-  ) {}
+  private readonly http = inject(HttpClient);
+  private readonly authService = inject(AuthService);
+  private readonly translateService = inject(TranslateService);
 
   private validateFile(
     file: File,

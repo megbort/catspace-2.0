@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -39,16 +39,16 @@ export class SignupComponent {
   form: FormGroup;
   step: 1 | 2 = 1;
 
-  constructor(
-    private readonly dialog: MatDialog,
-    private readonly dialogRef: MatDialogRef<SignupComponent>,
-    private readonly formBuilder: FormBuilder,
-    private readonly authService: AuthService,
-    private readonly notificationService: NotificationService,
-    private readonly loader: LoaderService,
-    private readonly translate: TranslateService,
-    private readonly router: Router
-  ) {
+  private readonly dialog = inject(MatDialog);
+  private readonly dialogRef = inject(MatDialogRef<SignupComponent>);
+  private readonly formBuilder = inject(FormBuilder);
+  private readonly authService = inject(AuthService);
+  private readonly notificationService = inject(NotificationService);
+  private readonly loader = inject(LoaderService);
+  private readonly translate = inject(TranslateService);
+  private readonly router = inject(Router);
+
+  constructor() {
     this.form = this.formBuilder.group({
       name: ['', [Validators.required]],
       handle: ['', [Validators.required]],

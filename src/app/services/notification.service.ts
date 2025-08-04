@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import {
   NotificationComponent,
@@ -9,7 +9,7 @@ import {
   providedIn: 'root',
 })
 export class NotificationService {
-  constructor(private readonly snackBar: MatSnackBar) {}
+  snackBar = inject(MatSnackBar);
 
   private show(data: NotificationData, config?: MatSnackBarConfig) {
     const defaultConfig: MatSnackBarConfig = {

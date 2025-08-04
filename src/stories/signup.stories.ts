@@ -9,7 +9,7 @@ import { of } from 'rxjs';
 import { GlobalStore } from '../app/shared';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { SignupComponent } from '../app/components/auth/signup/signup.component';
-import { AuthService } from '../app/services';
+import { AuthService, LoaderService } from '../app/services';
 import { signal } from '@angular/core';
 
 const meta: Meta<SignupComponent> = {
@@ -30,6 +30,7 @@ const meta: Meta<SignupComponent> = {
           },
         },
         GlobalStore,
+        LoaderService,
         {
           provide: MatDialogRef,
           useValue: {

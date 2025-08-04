@@ -28,7 +28,7 @@
           <span class="material-icons hidden icon-18 lg:block">star</span>
         </li>
         @if(isLoggedIn()){
-        <li class="menu-item" title="Following">
+        <li class="menu-item" routerLink="/following" title="Following">
           <p class="subtitle-1 pr-1">{{ "menu.following" | translate }}</p>
           <span class="material-icons hidden icon-18 lg:block">pets</span>
         </li>
@@ -87,7 +87,7 @@
         {{ "menu.featured" | translate }}
       </li>
       @if(isLoggedIn()) {
-      <li mat-menu-item>
+      <li mat-menu-item routerLink="/following">
         {{ "menu.following" | translate }}
       </li>
       <li mat-menu-item routerLink="/my-page">

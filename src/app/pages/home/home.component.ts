@@ -1,4 +1,4 @@
-import { Component, computed } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { TranslateModule } from '@ngx-translate/core';
 import {
@@ -28,12 +28,10 @@ export class HomeComponent {
   featured: User[] = [];
   isLoggedIn = computed(() => this.authService.currentUserSignal());
 
-  constructor(
-    private readonly authService: AuthService,
-    private readonly router: Router,
-    private readonly dialog: MatDialog,
-    private readonly userService: UserService
-  ) {}
+  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
+  private readonly dialog = inject(MatDialog);
+  private readonly userService = inject(UserService);
 
   ngOnInit(): void {
     this.getProfiles();

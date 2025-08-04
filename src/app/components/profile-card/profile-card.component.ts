@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, inject, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
-import { TranslateModule } from '@ngx-translate/core';
-import { User, AuthService } from '../../services';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { User, AuthService, NotificationService } from '../../services';
 import { RouterModule } from '@angular/router';
 import {
   MatButtonToggleChange,
@@ -30,11 +30,8 @@ export interface FollowEvent {
   templateUrl: './profile-card.component.html',
 })
 export class ProfileCardComponent {
-  @Output() view = new EventEmitter<string>();
-  @Output() follow = new EventEmitter<FollowEvent>();
-
-  @Input() userFollowing?: string[] = [];
-  @Input() profile: User = {
+  userFollowing = input<string[]>();
+  profile = input<User>({
     id: '',
     email: '',
     image: '',
@@ -46,26 +43,31 @@ export class ProfileCardComponent {
     favorites: [],
     followers: [],
     tags: [],
-  };
+  });
 
-  get formattedTags(): string {
-    return this.profile.tags.map((tag: string) => `#${tag}`).join(' ');
-  }
+  view = output<string>();
+  follow = output<FollowEvent>();
 
   following = false;
 
-  constructor(
-    private readonly authService: AuthService,
-    private readonly dialog: MatDialog
-  ) {}
+  private readonly authService = inject(AuthService);
+  private readonly dialog = inject(MatDialog);
+  private readonly notificationService = inject(NotificationService);
+  private readonly translate = inject(TranslateService);
+
+  get formattedTags(): string {
+    return this.profile()
+      .tags.map((tag: string) => `#${tag}`)
+      .join(' ');
+  }
 
   setFollowingStatus(): void {
     if (!this.authService.currentUserSignal()) {
       return;
     }
 
-    this.userFollowing?.forEach((id) => {
-      if (id === this.profile.id) {
+    this.userFollowing()?.forEach((id) => {
+      if (id === this.profile().id) {
         this.following = true;
       }
     });
@@ -80,9 +82,13 @@ export class ProfileCardComponent {
 
     this.following = !this.following;
     this.follow.emit({
-      id: this.profile.id,
+      id: this.profile().id,
       following: this.following,
     });
+
+    this.notificationService.success(
+      this.translate.instant('auth.login.success.loggedIn')
+    );
   }
 
   showAuthMessage(): void {

@@ -1,4 +1,4 @@
-import { Component, computed, output } from '@angular/core';
+import { Component, computed, inject, output } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
@@ -37,10 +37,8 @@ export class MenuComponent {
     autoFocus: false,
   };
 
-  constructor(
-    public readonly authService: AuthService,
-    private readonly dialog: MatDialog
-  ) {}
+  public readonly authService = inject(AuthService);
+  private readonly dialog = inject(MatDialog);
 
   get currentUser() {
     return this.authService.currentUserSignal();

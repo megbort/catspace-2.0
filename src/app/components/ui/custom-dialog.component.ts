@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -37,9 +37,7 @@ import { TranslateModule } from '@ngx-translate/core';
 export class CustomDialogComponent {
   title = input<string>();
 
-  constructor(
-    private readonly dialogRef: MatDialogRef<CustomDialogComponent>
-  ) {}
+  private readonly dialogRef = inject(MatDialogRef<CustomDialogComponent>);
 
   close(): void {
     this.dialogRef.close();

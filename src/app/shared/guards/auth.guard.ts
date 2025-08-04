@@ -23,13 +23,12 @@ export const redirectIfAuthenticatedGuard: CanActivateFn = () => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  // Wait for the auth state to be determined and take only the first determined state
   return authService.currentUser$.pipe(
-    filter((user) => user !== undefined), // Wait until auth state is determined (not undefined)
-    take(1), // Take only the first emission after auth state is determined
+    filter((user) => user !== undefined),
+    take(1),
     map((user) => {
       if (user) {
-        router.navigate(['/featured']);
+        router.navigate(['/following']);
         return false;
       } else {
         return true;

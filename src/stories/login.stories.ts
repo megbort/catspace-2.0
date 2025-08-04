@@ -8,7 +8,8 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { AuthService } from '../app/services';
+import { AuthService, LoaderService } from '../app/services';
+import { GlobalStore } from '../app/shared/state/global.store';
 import { signal } from '@angular/core';
 
 const meta: Meta<LoginComponent> = {
@@ -19,6 +20,8 @@ const meta: Meta<LoginComponent> = {
       providers: [
         provideAnimations(),
         provideHttpClient(withFetch()),
+        GlobalStore,
+        LoaderService,
         {
           provide: ActivatedRoute,
           useValue: {
