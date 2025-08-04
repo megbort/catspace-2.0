@@ -7,11 +7,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 
 export function HttpLoaderStorybookFactory(http: HttpClient) {
-  return new TranslateHttpLoader(
-    http,
-    'http://localhost:4200/assets/i18n/',
-    '.json'
-  );
+  return new TranslateHttpLoader(http, './i18n/', '.json');
 }
 
 export const defaultTranslateConfig: TranslateModuleConfig = {
