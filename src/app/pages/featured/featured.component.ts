@@ -2,10 +2,7 @@ import { Component, inject, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoaderService, User, UserService } from '../../services';
 import { TranslateModule } from '@ngx-translate/core';
-import {
-  FollowEvent,
-  ProfileCardComponent,
-} from '../../components/profile-card/profile-card.component';
+import { ProfileCardComponent } from '../../components/profile-card/profile-card.component';
 import { Router } from '@angular/router';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { catchError, map, of } from 'rxjs';
@@ -57,12 +54,8 @@ export class FeaturedComponent {
       });
   }
 
-  view(id: string): void {
+  viewProfile(id: string): void {
     this.router.navigate(['/profile', id]);
-  }
-
-  follow(event: FollowEvent): void {
-    console.log(`Id: ${event.id}; Follow: ${event.following}`);
   }
 
   showMore(): void {

@@ -13,8 +13,7 @@
     @for(profile of profiles.slice(0, loadedProfiles); track profile.id) {
     <app-profile-card
       [profile]="profile"
-      (view)="view($event)"
-      (follow)="follow($event)"
+      (view)="viewProfile($event)"
     ></app-profile-card>
     }
   </div>

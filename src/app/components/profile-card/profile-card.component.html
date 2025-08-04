@@ -20,7 +20,7 @@
       <p class="subtitle-1 line-clamp-1">{{ profile().name }}</p>
       <p class="text-body-1">&#64;{{ profile().handle }}</p>
       <p class="text-body-1">
-        {{ profile().followers.length }} {{ "common.followers" | translate }}
+        {{ followerCount() }} {{ "common.followers" | translate }}
       </p>
     </div>
     <p class="text-body-2 text-catspace-orange py-2 line-clamp-2">
@@ -29,10 +29,10 @@
     <div class="flex justify-between gap-2">
       <mat-button-toggle
         class="basis-1/2 card-button"
-        [checked]="following"
+        [checked]="following()"
         (change)="toggleFollow($event)"
       >
-        {{ (following ? "button.unfollow" : "button.follow") | translate }}
+        {{ (following() ? "button.unfollow" : "button.follow") | translate }}
       </mat-button-toggle>
       <button
         mat-stroked-button

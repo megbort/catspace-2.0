@@ -1,8 +1,20 @@
-import { Component, inject, input, output } from '@angular/core';
+import {
+  Component,
+  inject,
+  input,
+  output,
+  signal,
+  OnInit,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { User, AuthService, NotificationService } from '../../services';
+import {
+  User,
+  AuthService,
+  NotificationService,
+  FollowService,
+} from '../../services';
 import { RouterModule } from '@angular/router';
 import {
   MatButtonToggleChange,
@@ -11,6 +23,7 @@ import {
 import { UnpicImageDirective } from '@unpic/angular';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthMessageComponent } from '../auth/auth-message.component';
+import { tap, catchError, EMPTY, take } from 'rxjs';
 
 export interface FollowEvent {
   id: string;
@@ -29,8 +42,7 @@ export interface FollowEvent {
   ],
   templateUrl: './profile-card.component.html',
 })
-export class ProfileCardComponent {
-  userFollowing = input<string[]>();
+export class ProfileCardComponent implements OnInit {
   profile = input<User>({
     id: '',
     email: '',
@@ -46,12 +58,13 @@ export class ProfileCardComponent {
   });
 
   view = output<string>();
-  follow = output<FollowEvent>();
 
-  following = false;
+  following = signal(false);
+  followerCount = signal(0);
 
   private readonly authService = inject(AuthService);
   private readonly dialog = inject(MatDialog);
+  private readonly followService = inject(FollowService);
   private readonly notificationService = inject(NotificationService);
   private readonly translate = inject(TranslateService);
 
@@ -61,34 +74,113 @@ export class ProfileCardComponent {
       .join(' ');
   }
 
-  setFollowingStatus(): void {
-    if (!this.authService.currentUserSignal()) {
-      return;
-    }
+  ngOnInit(): void {
+    this.loadFollowerCount();
+    this.setFollowingStatus();
+  }
 
-    this.userFollowing()?.forEach((id) => {
-      if (id === this.profile().id) {
-        this.following = true;
+  loadFollowerCount(): void {
+    this.followService
+      .getFollowers(this.profile().id)
+      .pipe(
+        tap((followers) => {
+          this.followerCount.set(followers.length);
+        }),
+        catchError((error) => {
+          console.error('Error loading follower count:', error);
+          this.followerCount.set(this.profile().followers.length);
+          return EMPTY;
+        })
+      )
+      .subscribe();
+  }
+
+  setFollowingStatus(): void {
+    this.authService.user$.pipe(take(1)).subscribe((firebaseUser) => {
+      if (firebaseUser) {
+        this.checkFollowingStatus(firebaseUser.uid);
       }
     });
   }
 
+  private checkFollowingStatus(currentUserId: string): void {
+    const profileId = this.profile().id;
+
+    this.followService
+      .getFollowing(currentUserId)
+      .pipe(
+        tap((following) => {
+          const isFollowing = following.some(
+            (follow) => follow.userId === profileId
+          );
+          this.following.set(isFollowing);
+        }),
+        catchError((error) => {
+          console.error('Error checking following status:', error);
+          this.following.set(false);
+          return EMPTY;
+        })
+      )
+      .subscribe();
+  }
+
   toggleFollow(event: MatButtonToggleChange): void {
-    if (!this.authService.currentUserSignal()) {
-      this.showAuthMessage();
-      event.source.checked = this.following;
-      return;
-    }
+    this.authService.user$.pipe(take(1)).subscribe((firebaseUser) => {
+      if (!firebaseUser) {
+        this.showAuthMessage();
+        event.source.checked = this.following();
+        return;
+      }
 
-    this.following = !this.following;
-    this.follow.emit({
-      id: this.profile().id,
-      following: this.following,
+      const currentUserId = firebaseUser.uid;
+      const targetUserId = this.profile().id;
+
+      this.following.set(!this.following());
+
+      if (this.following()) {
+        this.followService
+          .followUser(currentUserId, targetUserId)
+          .pipe(
+            tap(() => {
+              this.loadFollowerCount();
+
+              this.notificationService.success(
+                this.translate.instant('profile.followingSuccess', {
+                  name: this.profile().name,
+                })
+              );
+            }),
+            catchError((error) => {
+              this.following.set(false);
+              event.source.checked = false;
+              this.notificationService.error(
+                this.translate.instant('profile.followingError')
+              );
+              console.error('Error following user:', error);
+              return EMPTY;
+            })
+          )
+          .subscribe();
+      } else {
+        this.followService
+          .unfollowUser(currentUserId, targetUserId)
+          .pipe(
+            tap(() => {
+              this.loadFollowerCount();
+            }),
+            catchError((error) => {
+              this.following.set(true);
+              event.source.checked = true;
+              this.notificationService.error(
+                this.translate.instant('profile.unfollowError')
+              );
+              console.error('Error unfollowing user:', error);
+              return EMPTY;
+            })
+          )
+          .subscribe();
+      }
     });
-
-    this.notificationService.success(
-      this.translate.instant('auth.login.success.loggedIn')
-    );
   }
 
   showAuthMessage(): void {

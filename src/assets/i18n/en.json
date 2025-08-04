@@ -76,7 +76,10 @@
   },
   "profile": {
     "noPosts": "No Posts",
-    "tags": "Profile Tags"
+    "tags": "Profile Tags",
+    "followingSuccess": "You are now following {{name}}!",
+    "followingError": "Failed to follow user. Please try again.",
+    "unfollowError": "Failed to unfollow user. Please try again."
   },
   "post": {
     "view": "View Post",

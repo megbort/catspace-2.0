@@ -46,12 +46,8 @@ export class HomeComponent {
       });
   }
 
-  view(id: string): void {
+  viewProfile(id: string): void {
     this.router.navigate(['/profile', id]);
-  }
-
-  follow(event: FollowEvent): void {
-    console.log(`Id: ${event.id}; Follow: ${event.following}`);
   }
 
   signUp(): void {
