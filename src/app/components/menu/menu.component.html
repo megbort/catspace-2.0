@@ -18,23 +18,52 @@
     <div class="flex justify-center basis-2/4">
       <ul class="hidden md:flex md:gap-4 lg:gap-10">
         @if(!isLoggedIn()) {
-        <li class="menu-item" routerLink="/home" title="Home">
-          <p class="subtitle-1 pr-1">{{ "menu.home" | translate }}</p>
-          <span class="material-icons hidden icon-18 lg:block">home</span>
+        <li class="menu-item">
+          <a
+            routerLink="/home"
+            routerLinkActive="border-catspace-dark-orange text-catspace-dark-orange"
+            [routerLinkActiveOptions]="{ exact: true }"
+            title="Home"
+            class="flex items-center"
+          >
+            <p class="subtitle-1 pr-1">{{ "menu.home" | translate }}</p>
+            <span class="material-icons hidden icon-18 lg:block">home</span>
+          </a>
         </li>
         }
-        <li class="menu-item" routerLink="/featured" title="Featured">
-          <p class="subtitle-1 pr-1">{{ "menu.featured" | translate }}</p>
-          <span class="material-icons hidden icon-18 lg:block">star</span>
+        <li class="menu-item">
+          <a
+            routerLink="/featured"
+            routerLinkActive="text-catspace-dark-orange"
+            title="Featured"
+            class="flex items-center"
+          >
+            <p class="subtitle-1 pr-1">{{ "menu.featured" | translate }}</p>
+            <span class="material-icons hidden icon-18 lg:block">star</span>
+          </a>
         </li>
         @if(isLoggedIn()){
-        <li class="menu-item" routerLink="/following" title="Following">
-          <p class="subtitle-1 pr-1">{{ "menu.following" | translate }}</p>
-          <span class="material-icons hidden icon-18 lg:block">pets</span>
+        <li class="menu-item">
+          <a
+            routerLink="/following"
+            routerLinkActive="text-catspace-dark-orange"
+            title="Following"
+            class="flex items-center"
+          >
+            <p class="subtitle-1 pr-1">{{ "menu.following" | translate }}</p>
+            <span class="material-icons hidden icon-18 lg:block">pets</span>
+          </a>
         </li>
-        <li class="menu-item" routerLink="/my-page" title="My Page">
-          <p class="subtitle-1 pr-1">{{ "menu.myPage" | translate }}</p>
-          <span class="material-icons hidden icon-18 lg:block">person</span>
+        <li class="menu-item">
+          <a
+            routerLink="/profile/me"
+            routerLinkActive="text-catspace-dark-orange"
+            title="My Page"
+            class="flex items-center"
+          >
+            <p class="subtitle-1 pr-1">{{ "menu.myPage" | translate }}</p>
+            <span class="material-icons hidden icon-18 lg:block">person</span>
+          </a>
         </li>
         }
       </ul>
@@ -79,19 +108,34 @@
   <mat-menu #menu="matMenu">
     <ul>
       @if(!isLoggedIn()) {
-      <li mat-menu-item routerLink="/home">
-        {{ "menu.home" | translate }}
+      <li mat-menu-item>
+        <a
+          routerLink="/home"
+          routerLinkActive="text-catspace-dark-orange"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          {{ "menu.home" | translate }}
+        </a>
       </li>
       }
-      <li mat-menu-item routerLink="/featured">
-        {{ "menu.featured" | translate }}
+      <li mat-menu-item>
+        <a routerLink="/featured" routerLinkActive="text-catspace-dark-orange">
+          {{ "menu.featured" | translate }}
+        </a>
       </li>
       @if(isLoggedIn()) {
-      <li mat-menu-item routerLink="/following">
-        {{ "menu.following" | translate }}
+      <li mat-menu-item>
+        <a routerLink="/following" routerLinkActive="text-catspace-dark-orange">
+          {{ "menu.following" | translate }}
+        </a>
       </li>
-      <li mat-menu-item routerLink="/my-page">
-        {{ "menu.myPage" | translate }}
+      <li mat-menu-item>
+        <a
+          routerLink="/profile/me"
+          routerLinkActive="text-catspace-dark-orange"
+        >
+          {{ "menu.myPage" | translate }}
+        </a>
       </li>
       <li mat-menu-item>
         <button (click)="logout()">

@@ -1,10 +1,7 @@
 import { Component, computed, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { TranslateModule } from '@ngx-translate/core';
-import {
-  FollowEvent,
-  ProfileCardComponent,
-} from '../../components/profile-card/profile-card.component';
+import { ProfileCardComponent } from '../../components/profile-card/profile-card.component';
 import { AuthService, User, UserService } from '../../services';
 import { Router, RouterModule } from '@angular/router';
 import { map } from 'rxjs';

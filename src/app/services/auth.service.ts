@@ -15,13 +15,14 @@ import { toObservable } from '@angular/core/rxjs-interop';
   providedIn: 'root',
 })
 export class AuthService {
-  currentUserSignal = signal<User | null | undefined>(undefined);
-  currentUser$ = toObservable(this.currentUserSignal);
-
   private readonly userService = inject(UserService);
   private readonly router = inject(Router);
   private readonly firebaseAuth = inject(Auth);
 
+  currentUserSignal = signal<User | null | undefined>(undefined);
+  currentUser$ = toObservable(this.currentUserSignal);
+  isInitialized = signal<boolean>(false);
+  isInitialized$ = toObservable(this.isInitialized);
   user$ = user(this.firebaseAuth);
 
   initializeUser(): void {
@@ -54,6 +55,8 @@ export class AuthService {
       } else {
         this.currentUserSignal.set(null);
       }
+
+      this.isInitialized.set(true);
     });
   }
 

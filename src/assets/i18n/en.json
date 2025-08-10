@@ -8,7 +8,6 @@
     "email": "Email",
     "password": "Password",
     "account": "Account",
-    "latestPosts": "Latest Posts",
     "demo": "This website is for demo purposes only. It's functional, but is just for fun. Feel free to explore and experiment! 😺"
   },
   "button": {
@@ -30,7 +29,8 @@
     "cancel": "Cancel",
     "editProfile": "Edit Profile",
     "post": "Post",
-    "delete": "Delete"
+    "delete": "Delete",
+    "featured": "Featured Profiles"
   },
   "form": {
     "error": {
@@ -165,5 +165,11 @@
     "error": {
       "updateProfile": "Failed to update profile. Please try again."
     }
+  },
+  "following": {
+    "title": "Following",
+    "latest": "Latest Posts",
+    "empty1": "No profiles followed yet.",
+    "empty2": "Discover amazing creators on our featured page!"
   }
 }

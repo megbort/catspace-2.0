@@ -6,7 +6,7 @@ import { FooterComponent } from './app/components/footer/footer.component';
 import { UserSidenavComponent } from './app/components/user-sidenav/user-sidenav.component';
 import { LoaderComponent } from './app/components/ui/loader.component';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
-import { AuthService } from './app/services';
+import { AuthService, LoaderService } from './app/services';
 import { filter, take } from 'rxjs/operators';
 
 @Component({
@@ -28,10 +28,19 @@ export class AppComponent {
 
   authService = inject(AuthService);
   router = inject(Router);
+  loaderService = inject(LoaderService);
 
   ngOnInit(): void {
+    this.loaderService.show();
+
     this.authService.initializeUser();
     this.handleInitialRedirect();
+
+    this.authService.isInitialized$.subscribe((isInitialized) => {
+      if (isInitialized) {
+        this.loaderService.hide();
+      }
+    });
   }
 
   private handleInitialRedirect(): void {

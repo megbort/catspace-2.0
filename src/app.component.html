@@ -1,3 +1,4 @@
+@if(authService.isInitialized()) {
 <mat-sidenav-container class="min-h-screen flex flex-col">
   <mat-sidenav
     #profileDrawer
@@ -15,5 +16,6 @@
     <app-footer></app-footer>
   </mat-sidenav-content>
 </mat-sidenav-container>
+}
 
 <app-loader></app-loader>
