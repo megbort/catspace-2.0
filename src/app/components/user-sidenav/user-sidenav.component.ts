@@ -31,7 +31,7 @@ export class UserSidenavComponent {
   private readonly dialog = inject(MatDialog);
 
   logout(): void {
-    this.authService.logout().subscribe();
+    this.authService.logout();
     this.close.emit();
   }
 

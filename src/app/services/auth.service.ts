@@ -104,16 +104,10 @@ export class AuthService {
     return from(promise);
   }
 
-  logout(): Observable<void> {
+  logout(): void {
     this.currentUserSignal.set(null);
-    const promise = this.firebaseAuth
-      .signOut()
-      .then(() => {
-        this.router.navigate(['/home']);
-      })
-      .catch(() => {
-        this.router.navigate(['/home']);
-      });
-    return from(promise);
+    this.firebaseAuth.signOut().then(() => {
+      this.router.navigate(['/home']);
+    });
   }
 }

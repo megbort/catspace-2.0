@@ -58,6 +58,6 @@ export class MenuComponent {
   }
 
   logout(): void {
-    this.authService.logout().subscribe();
+    this.authService.logout();
   }
 }
