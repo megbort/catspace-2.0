@@ -57,6 +57,7 @@ export class AuthService {
       }
 
       this.isInitialized.set(true);
+      this.router.navigate(['/following']);
     });
   }
 

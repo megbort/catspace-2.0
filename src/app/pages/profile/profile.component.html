@@ -1,6 +1,6 @@
 <div class="min-h-[800px]">
   <div
-    [class]="posts.length > 0 ? ' sm:items-start' : ''"
+    [class]="posts().length > 0 ? ' sm:items-start' : ''"
     class="px-12 py-20 mb-20 flex flex-col items-center sm:flex-row gap-12 justify-center"
   >
     <div class="basis-1/3 flex flex-col items-center gap-4 max-w-[325px]">
@@ -42,11 +42,11 @@
       }
     </div>
 
-    @if(posts.length > 0) {
+    @if(posts().length > 0) {
     <div
       class="justify-center grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 max-w-[800px]"
     >
-      @for(post of posts; track $index) {
+      @for(post of posts(); track $index) {
       <app-post-card [post]="post"></app-post-card>
       }
     </div>

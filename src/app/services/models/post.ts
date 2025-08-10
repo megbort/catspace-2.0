@@ -5,4 +5,5 @@ export interface Post {
   description: string;
   favorites: number;
   comments: string[];
+  createdAt?: string;
 }

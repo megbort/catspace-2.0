@@ -30,7 +30,9 @@
     "editProfile": "Edit Profile",
     "post": "Post",
     "delete": "Delete",
-    "featured": "Featured Profiles"
+    "featured": "Featured Profiles",
+    "uploadNew": "Upload new",
+    "remove": "Remove"
   },
   "form": {
     "error": {
@@ -145,6 +147,9 @@
     },
     "success": {
       "postCreated": "Post created successfully!"
+    },
+    "error": {
+      "postFailed": "Failed to create post. Please try again."
     }
   },
   "editProfile": {

@@ -1,4 +1,4 @@
-@if(loading()){
+@if(loading() && !initialized()){
 <div class="h-screen"></div>
 } @else {
 <div
@@ -11,7 +11,7 @@
     <p class="subtitle-1">{{ "following.latest" | translate }}</p>
   </div>
 
-  @if(following.length === 0){
+  @if(followingPosts().length === 0){
   <div class="flex flex-col items-center gap-2">
     <span class="material-icons icon-36 text-catspace-black">pets</span>
     <div class="text-center">
@@ -27,7 +27,13 @@
     </button>
   </div>
   }@else {
-  <div>placeholder - posts from following profiles</div>
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+  >
+    @for (post of followingPosts(); track post.id) {
+    <app-post-card [post]="post" />
+    }
+  </div>
   }
 </div>
 }

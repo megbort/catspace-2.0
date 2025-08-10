@@ -1,4 +1,4 @@
-import { Component, signal, computed, inject } from '@angular/core';
+import { Component, signal, computed, inject, effect } from '@angular/core';
 import {
   Post,
   PostService,
@@ -32,8 +32,9 @@ import { GlobalStore } from '../../shared/state/global.store';
 export class ProfileComponent {
   private readonly _user = signal<User | undefined>(undefined);
   private readonly currentProfileId = signal('');
+  private readonly _posts = signal<Post[]>([]);
 
-  posts: Post[] = [];
+  posts = computed(() => this._posts());
   isOwner = signal(false);
   loading = computed(() => this.globalStore.isLoading());
 
@@ -56,6 +57,18 @@ export class ProfileComponent {
   private readonly loader = inject(LoaderService);
   private readonly dialog = inject(MatDialog);
   private readonly globalStore = inject(GlobalStore);
+
+  constructor() {
+    effect(() => {
+      const postCreatedUid = this.postService.postCreatedSignal();
+      const currentProfileId = this.currentProfileId();
+      const isOwner = this.isOwner();
+
+      if (postCreatedUid && isOwner && postCreatedUid === currentProfileId) {
+        this.loadUserPosts(currentProfileId);
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((paramMap) => {
@@ -172,7 +185,7 @@ export class ProfileComponent {
         })
       )
       .subscribe((posts: Post[]) => {
-        this.posts = posts;
+        this._posts.set(posts);
         this.loader.hide();
       });
   }
@@ -187,7 +200,7 @@ export class ProfileComponent {
         })
       )
       .subscribe((posts: Post[]) => {
-        this.posts = posts;
+        this._posts.set(posts);
         this.loader.hide();
       });
   }

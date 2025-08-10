@@ -157,13 +157,13 @@ export class CreatePostComponent {
       .pipe(
         tap(() => {
           this.notificationService.success(
-            this.translate.instant('form.success.createPost')
+            this.translate.instant('createPost.success.postCreated')
           );
           this.dialog.closeAll();
         }),
         catchError(() => {
           this.notificationService.error(
-            this.translate.instant('form.error.createPost')
+            this.translate.instant('createPost.error.postFailed')
           );
           return of(null);
         }),

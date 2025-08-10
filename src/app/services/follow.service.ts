@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { from, Observable, forkJoin } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { collectionData, Firestore } from '@angular/fire/firestore';
 import { collection, doc, setDoc, deleteDoc } from 'firebase/firestore';
 
@@ -77,6 +77,7 @@ export class FollowService {
     );
 
     return collectionData(followingCollection, { idField: 'id' }).pipe(
+      take(1), // Take only the first emission and complete
       map((docs) =>
         docs.map((doc: any) => ({
           id: doc.id,
@@ -96,6 +97,7 @@ export class FollowService {
     );
 
     return collectionData(followersCollection, { idField: 'id' }).pipe(
+      take(1), // Take only the first emission and complete
       map((docs) =>
         docs.map((doc: any) => ({
           id: doc.id,

@@ -80,8 +80,9 @@ export class LoginComponent {
               this.notificationService.success(
                 this.translate.instant('auth.login.success.loggedIn')
               );
+
+              this.authService.initializeUser();
               this.dialogRef.close();
-              this.router.navigate(['/following']);
             }
           }),
           finalize(() => {
