@@ -6,4 +6,5 @@ export interface Post {
   favorites: number;
   comments: string[];
   createdAt?: string;
+  userId?: string; // ID of the user who created the post
 }

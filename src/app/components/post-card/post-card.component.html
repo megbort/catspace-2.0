@@ -29,12 +29,23 @@
     </div>
     <div class="flex justify-between items-center">
       <p class="text-body-2 line-clamp-1">
-        {{ post().favorites }} {{ "common.favorites" | translate }}
+        {{ favoriteCount() }} {{ "common.favorites" | translate }}
       </p>
-      <span
-        class="material-symbols-outlined icon-18 text-catspace-orange hover:text-catspace-dark-orange hover:cursor-pointer"
-        >favorite</span
+      <button
+        type="button"
+        class="heart-button hover:cursor-pointer bg-transparent border-none p-0 text-catspace-orange hover:text-catspace-dark-orange"
+        [disabled]="loading()"
+        (click)="toggleFavorite()"
+        [attr.aria-label]="
+          isFavorited() ? 'Remove from favorites' : 'Add to favorites'
+        "
       >
+        @if (isFavorited()) {
+        <span class="material-icons icon-18">favorite</span>
+        } @else {
+        <span class="material-icons icon-18">favorite_border</span>
+        }
+      </button>
     </div>
   </div>
 </div>

@@ -1,4 +1,5 @@
 export * from './auth.service';
+export * from './favorite.service';
 export * from './follow.service';
 export * from './loader.service';
 export * from './media.service';

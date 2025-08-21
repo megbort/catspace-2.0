@@ -23,6 +23,7 @@ export const USERS: User[] = [
         favorites: 90,
         description: 'Just enjoying the sun and dreaming of tuna treats.',
         comments: [],
+        userId: '01',
       },
       {
         id: 'U0001P0002',
@@ -32,6 +33,7 @@ export const USERS: User[] = [
         favorites: 202,
         description: 'Just enjoying the sun and dreaming of tuna treats.',
         comments: [],
+        userId: '01',
       },
       {
         id: 'U0001P0003',
@@ -42,6 +44,7 @@ export const USERS: User[] = [
         favorites: 20,
         description: 'Just enjoying the sun and dreaming of tuna treats.',
         comments: [],
+        userId: '01',
       },
       {
         id: 'U0001P0004',
@@ -52,6 +55,7 @@ export const USERS: User[] = [
         favorites: 212,
         description: 'Just enjoying the sun and dreaming of tuna treats.',
         comments: [],
+        userId: '01',
       },
       {
         id: 'U0001P0005',
@@ -61,6 +65,7 @@ export const USERS: User[] = [
         favorites: 29,
         description: 'Just enjoying the sun and dreaming of tuna treats.',
         comments: [],
+        userId: '01',
       },
       {
         id: 'U0001P0006',
@@ -71,6 +76,7 @@ export const USERS: User[] = [
         favorites: 49,
         description: 'Just enjoying the sun and dreaming of tuna treats.',
         comments: [],
+        userId: '01',
       },
       {
         id: 'U0001P0007',
@@ -81,6 +87,7 @@ export const USERS: User[] = [
         favorites: 309,
         description: 'Just enjoying the sun and dreaming of tuna treats.',
         comments: [],
+        userId: '01',
       },
       {
         id: 'U0001P0008',
@@ -91,6 +98,7 @@ export const USERS: User[] = [
         favorites: 34,
         description: 'Just enjoying the sun and dreaming of tuna treats.',
         comments: [],
+        userId: '01',
       },
     ],
   },

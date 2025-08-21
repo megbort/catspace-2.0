@@ -81,7 +81,6 @@ export class LoginComponent {
                 this.translate.instant('auth.login.success.loggedIn')
               );
 
-              this.authService.initializeUser();
               this.dialogRef.close();
             }
           }),

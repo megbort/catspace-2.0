@@ -89,6 +89,7 @@
   },
   "auth": {
     "authMessage": "Please sign or create an account to use this feature.",
+    "loginRequired": "Please log in to favorite posts.",
     "noAccount": "Don't have an account?",
     "haveAccount": "Already have an account?",
     "login": {
@@ -176,5 +177,11 @@
     "latest": "Latest Posts",
     "empty1": "No profiles followed yet.",
     "empty2": "Discover amazing creators on our featured page!"
+  },
+  "favorite": {
+    "error": {
+      "favoritePost": "Failed to favorite post. Please try again.",
+      "unfavoritePost": "Failed to unfavorite post. Please try again."
+    }
   }
 }

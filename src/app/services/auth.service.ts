@@ -57,7 +57,6 @@ export class AuthService {
       }
 
       this.isInitialized.set(true);
-      this.router.navigate(['/following']);
     });
   }
 
@@ -99,7 +98,10 @@ export class AuthService {
       this.firebaseAuth,
       email,
       password
-    );
+    ).then((result) => {
+      this.router.navigate(['/following']);
+      return result;
+    });
 
     return from(promise);
   }

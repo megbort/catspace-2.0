@@ -21,6 +21,11 @@
         <p class="subtitle-1 text-catspace-dark-beige">
           &#64;{{ user()?.handle }}
         </p>
+        @if (!isOwner()) {
+        <p class="text-body-1 text-catspace-orange">
+          {{ followerCount() }} {{ "common.followers" | translate }}
+        </p>
+        }
         <p class="text-body-1">
           {{ user()?.description }}
         </p>
@@ -33,12 +38,18 @@
         {{ "button.editProfile" | translate }}
       </button>
       } @else {
-      <button mat-flat-button class="w-full">
-        {{ "button.follow" | translate }}
-      </button>
-      <button mat-stroked-button class="w-full">
-        {{ "button.message" | translate }}
-      </button>
+      <div class="w-full flex flex-col gap-2">
+        <mat-button-toggle
+          class="w-full profile-button"
+          [checked]="following()"
+          (change)="toggleFollow($event)"
+        >
+          {{ (following() ? "button.unfollow" : "button.follow") | translate }}
+        </mat-button-toggle>
+        <button mat-stroked-button class="w-full">
+          {{ "button.message" | translate }}
+        </button>
+      </div>
       }
     </div>
 

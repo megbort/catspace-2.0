@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, inject, OnInit, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  inject,
+  OnInit,
+  OnDestroy,
+  signal,
+} from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -14,8 +21,14 @@ import {
 } from '../../services';
 import { Post } from '../../services/models';
 import { PostCardComponent } from '../../components/post-card/post-card.component';
-import { switchMap, finalize, catchError, tap } from 'rxjs/operators';
-import { of } from 'rxjs';
+import {
+  switchMap,
+  finalize,
+  catchError,
+  tap,
+  takeUntil,
+} from 'rxjs/operators';
+import { of, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-following',
@@ -30,34 +43,54 @@ import { of } from 'rxjs';
   ],
   templateUrl: './following.component.html',
 })
-export class FollowingComponent implements OnInit {
+export class FollowingComponent implements OnInit, OnDestroy {
   private readonly globalStore = inject(GlobalStore);
   private readonly loader = inject(LoaderService);
   private readonly followService = inject(FollowService);
   private readonly postService = inject(PostService);
   private readonly authService = inject(AuthService);
+  private readonly destroy$ = new Subject<void>();
 
   initialized = signal(false);
   followingPosts = signal<Post[]>([]);
   loading = computed(() => this.globalStore.isLoading());
 
   ngOnInit(): void {
-    this.loadFollowingPosts();
+    this.authService.currentUser$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((user) => {
+        if (user && this.authService.isInitialized()) {
+          this.initialized.set(false);
+          this.loadFollowingPosts();
+        } else if (user === null) {
+          this.followingPosts.set([]);
+          this.initialized.set(false);
+        }
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   private loadFollowingPosts(): void {
-    this.loader.show();
-
     const currentUser = this.authService.currentUserSignal();
 
     if (!currentUser) {
-      this.loader.hide();
+      console.log('No current user found, cannot load following posts');
       return;
     }
 
+    if (this.initialized()) {
+      return;
+    }
+
+    this.loader.show();
     this.followService
       .getFollowing(currentUser.id)
       .pipe(
+        takeUntil(this.destroy$),
         switchMap((following) => {
           const followedUserIds = following.map((f) => f.userId);
 

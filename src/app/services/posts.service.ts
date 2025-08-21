@@ -11,8 +11,23 @@ import { collection, doc, setDoc } from 'firebase/firestore';
 export class PostService {
   firestore = inject(Firestore);
 
-  private readonly _postCreatedSignal = signal<string | null>(null);
+  private readonly _postCreatedSignal = signal<{
+    uid: string;
+    timestamp: number;
+  } | null>(null);
   readonly postCreatedSignal = this._postCreatedSignal.asReadonly();
+
+  resetPostCreatedSignal(): void {
+    this._postCreatedSignal.set(null);
+  }
+
+  private sortPostsByNewestFirst(posts: Post[]): Post[] {
+    return posts.sort((a: Post, b: Post) => {
+      const dateA = a.createdAt ? new Date(a.createdAt) : new Date(0);
+      const dateB = b.createdAt ? new Date(b.createdAt) : new Date(0);
+      return dateB.getTime() - dateA.getTime();
+    });
+  }
 
   getPostsByProfileId(profileId: string): Observable<Post[]> {
     const postsCollection = collection(
@@ -21,7 +36,15 @@ export class PostService {
     );
     return collectionData(postsCollection, { idField: 'id' }).pipe(
       take(1),
-      map((posts) => posts as Post[]),
+      map((posts) => {
+        const typedPosts = posts as Post[];
+        // Add userId to posts that might be missing it (for legacy support)
+        const postsWithUserId = typedPosts.map((post) => ({
+          ...post,
+          userId: post.userId || profileId, // Use profileId as fallback
+        }));
+        return this.sortPostsByNewestFirst(postsWithUserId);
+      }),
       catchError((error) => {
         console.error(`Error fetching posts for ${profileId}:`, error);
         return of([]);
@@ -48,12 +71,16 @@ export class PostService {
     const postData = {
       ...post,
       id: postRef.id,
+      userId: uid, // Add the user ID to the post
       createdAt: new Date().toISOString(),
     };
 
     return from(
       setDoc(postRef, postData).then(() => {
-        this._postCreatedSignal.set(uid);
+        this._postCreatedSignal.set({
+          uid,
+          timestamp: Date.now(),
+        });
         return postRef.id;
       })
     );
@@ -80,13 +107,7 @@ export class PostService {
           .flat()
           .filter((post): post is Post => post?.id != null);
 
-        const sortedPosts = [...allPosts].sort((a: Post, b: Post) => {
-          const dateA = a.createdAt ? new Date(a.createdAt) : new Date(0);
-          const dateB = b.createdAt ? new Date(b.createdAt) : new Date(0);
-          return dateB.getTime() - dateA.getTime();
-        });
-
-        return sortedPosts;
+        return this.sortPostsByNewestFirst(allPosts);
       }),
       catchError((error: any) => {
         console.error('Error in getPostsFromFollowedUsers forkJoin:', error);

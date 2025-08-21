@@ -7,7 +7,6 @@ import { UserSidenavComponent } from './app/components/user-sidenav/user-sidenav
 import { LoaderComponent } from './app/components/ui/loader.component';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { AuthService, LoaderService } from './app/services';
-import { filter, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -34,26 +33,12 @@ export class AppComponent {
     this.loaderService.show();
 
     this.authService.initializeUser();
-    this.handleInitialRedirect();
 
     this.authService.isInitialized$.subscribe((isInitialized) => {
       if (isInitialized) {
         this.loaderService.hide();
       }
     });
-  }
-
-  private handleInitialRedirect(): void {
-    this.authService.currentUser$
-      .pipe(
-        filter((user) => user !== undefined),
-        take(1)
-      )
-      .subscribe((user) => {
-        if (user && this.router.url === '/home') {
-          this.router.navigate(['/featured']);
-        }
-      });
   }
 
   onSidenavToggle(isOpened: boolean): void {
