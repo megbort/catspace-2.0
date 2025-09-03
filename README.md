@@ -4,13 +4,17 @@ Welcome to Catspace—the social media platform designed just for cats! Imagine 
 
 This is the second version of the project, now upgraded to the latest version of Angular. While I'm building on the core concept from the original project, this version will feature ongoing updates and enhancements.
 
+Visit the live site at [catspace.megankrenbrink.com]("https://catspace.megankrenbrink.com")
+
 Enjoy exploring Catspace!
 
 — Megan Krenbrink
 
-## <br>
+<br>
 
-## 🚀 Getting Started
+---
+
+## Getting Started
 
 ### Prerequisites
 
@@ -33,9 +37,13 @@ ng build
 
 # Run tests
 ng test
+
+# Start storybook server
+npm run storybook
 ```
 
 Open [http://localhost:4200](http://localhost:4200) to view the app.
+Open [http://localhost:6006](http://localhost:6006) to view storybook.
 
 ## 🛠️ Tech Stack
 
@@ -45,7 +53,7 @@ Open [http://localhost:4200](http://localhost:4200) to view the app.
 - **Storybook** for UI development
 - **Firestore** for backend/data
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 src/
@@ -62,6 +70,6 @@ src/
 └── environments/       # Environment configs
 ```
 
-## 🔗 Backend Integration
+## Backend Integration
 
 This frontend uses Firestore for data, but can be adapted for any API. Some data is mocked for demo purposes.
