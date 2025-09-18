@@ -2,13 +2,13 @@ import { Component, inject, input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogRef } from '@angular/material/dialog';
-import { CommonModule } from '@angular/common';
+
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-custom-dialog',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatIconModule, TranslateModule],
+  imports: [MatButtonModule, MatIconModule, TranslateModule],
   template: `
     <div class="flex flex-col p-4">
       <div class="flex justify-end">

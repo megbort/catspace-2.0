@@ -6,7 +6,6 @@ import {
   signal,
   OnInit,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import {
@@ -36,7 +35,6 @@ export interface FollowEvent {
     TranslateModule,
     MatButtonModule,
     RouterModule,
-    CommonModule,
     MatButtonToggleModule,
     UnpicImageDirective,
   ],
@@ -147,7 +145,8 @@ export class ProfileCardComponent implements OnInit {
               this.notificationService.success(
                 this.translate.instant('profile.followingSuccess', {
                   name: this.profile().name,
-                })
+                }),
+                { duration: 50000 }
               );
             }),
             catchError((error) => {

@@ -1,4 +1,4 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { TranslateModule } from '@ngx-translate/core';
 import { ProfileCardComponent } from '../../components/profile-card/profile-card.component';
@@ -21,7 +21,7 @@ import { MatDialog } from '@angular/material/dialog';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   featured: User[] = [];
   isLoggedIn = computed(() => this.authService.currentUserSignal());
 

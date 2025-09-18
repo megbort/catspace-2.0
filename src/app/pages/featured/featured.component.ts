@@ -1,5 +1,4 @@
-import { Component, inject, computed } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, inject, computed, OnInit } from '@angular/core';
 import { LoaderService, User, UserService } from '../../services';
 import { TranslateModule } from '@ngx-translate/core';
 import { ProfileCardComponent } from '../../components/profile-card/profile-card.component';
@@ -10,12 +9,7 @@ import { GlobalStore } from '../../shared/state/global.store';
 
 @Component({
   selector: 'app-featured',
-  imports: [
-    TranslateModule,
-    ProfileCardComponent,
-    CommonModule,
-    MatProgressSpinnerModule,
-  ],
+  imports: [TranslateModule, ProfileCardComponent, MatProgressSpinnerModule],
   templateUrl: './featured.component.html',
   styles: `
   :host{
@@ -23,7 +17,7 @@ import { GlobalStore } from '../../shared/state/global.store';
   }
   `,
 })
-export class FeaturedComponent {
+export class FeaturedComponent implements OnInit {
   profiles: User[] = [];
   loadedProfiles = 8;
   loading = computed(() => this.globalStore.isLoading());

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -19,7 +19,6 @@ import {
 } from '@angular/forms';
 import { SignupComponent } from '../signup/signup.component';
 import { catchError, finalize, of, tap } from 'rxjs';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -34,7 +33,7 @@ import { Router } from '@angular/router';
   ],
   templateUrl: './login.component.html',
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   form: FormGroup;
 
   private readonly dialog = inject(MatDialog);
@@ -43,7 +42,6 @@ export class LoginComponent {
   private readonly notificationService = inject(NotificationService);
   private readonly translate = inject(TranslateService);
   private readonly loader = inject(LoaderService);
-  private readonly router = inject(Router);
   private readonly formBuilder = inject(FormBuilder);
 
   constructor() {

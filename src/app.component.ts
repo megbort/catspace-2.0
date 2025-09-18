@@ -1,4 +1,4 @@
-import { Component, inject, ViewChild } from '@angular/core';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { RouterOutlet, RouterModule, Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MenuComponent } from './app/components/menu/menu.component';
@@ -22,7 +22,7 @@ import { AuthService, LoaderService } from './app/services';
   ],
   templateUrl: './app.component.html',
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   @ViewChild('profileDrawer') profileDrawer!: MatSidenav;
 
   authService = inject(AuthService);

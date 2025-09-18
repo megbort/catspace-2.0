@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import {
   Component,
   computed,
@@ -33,14 +33,13 @@ import { of, Subject } from 'rxjs';
 @Component({
   selector: 'app-following',
   imports: [
-    CommonModule,
     TranslateModule,
     MatIconModule,
     MatButtonModule,
     RouterModule,
     MatProgressSpinnerModule,
-    PostCardComponent,
-  ],
+    PostCardComponent
+],
   templateUrl: './following.component.html',
 })
 export class FollowingComponent implements OnInit, OnDestroy {

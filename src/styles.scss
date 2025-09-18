@@ -100,7 +100,7 @@ body {
 }
 
 .mat-mdc-dialog-surface {
-  --mdc-dialog-container-shape: 10px;
+  --mat-dialog-container-shape: 10px;
 }
 
 .mat-drawer.mat-sidenav {
@@ -113,9 +113,9 @@ button.mat-mdc-icon-button {
 
 .mat-mdc-snack-bar-container .mat-mdc-snackbar-surface {
   box-shadow: none;
-  --mdc-snackbar-container-color: transparent;
-  --mdc-snackbar-container-shape: 0;
-  --mdc-snackbar-supporting-text-color: inherit;
+  --mat-snackbar-container-shape: 0;
+  --mat-snackbar-supporting-text-color: inherit;
+  --mat-sys-inverse-surface: transparent;
 }
 
 button.mat-mdc-icon-button.small {

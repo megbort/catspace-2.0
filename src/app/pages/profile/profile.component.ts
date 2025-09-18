@@ -1,4 +1,11 @@
-import { Component, signal, computed, inject, effect } from '@angular/core';
+import {
+  Component,
+  signal,
+  computed,
+  inject,
+  effect,
+  OnInit,
+} from '@angular/core';
 import {
   Post,
   PostService,
@@ -21,7 +28,6 @@ import { PostCardComponent } from '../../components/post-card/post-card.componen
 import { EditProfileComponent } from '../../components/edit-profile/edit-profile.component';
 import { AuthMessageComponent } from '../../components/auth/auth-message.component';
 import { catchError, switchMap, take, tap } from 'rxjs/operators';
-import { CommonModule } from '@angular/common';
 import { CreatePostComponent } from '../../components/create-post/create-post.component';
 import { GlobalStore } from '../../shared/state/global.store';
 import { EMPTY } from 'rxjs';
@@ -34,11 +40,10 @@ import { EMPTY } from 'rxjs';
     MatDialogModule,
     MatButtonToggleModule,
     PostCardComponent,
-    CommonModule,
   ],
   templateUrl: './profile.component.html',
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
   private readonly _user = signal<User | undefined>(undefined);
   private readonly currentProfileId = signal('');
   private readonly _posts = signal<Post[]>([]);
