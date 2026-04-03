@@ -1,0 +1,106 @@
+// Icon size helpers
+%icon-size-classes {
+  &.icon-16 {
+    @apply text-base;
+  }
+
+  &.icon-18 {
+    @apply text-lg;
+  }
+
+  &.icon-20 {
+    @apply text-xl;
+  }
+
+  &.icon-24 {
+    @apply text-2xl;
+  }
+
+  &.icon-36 {
+    @apply text-4xl;
+  }
+}
+
+.material-icons {
+  @extend %icon-size-classes;
+}
+
+.material-symbols-outlined {
+  @extend %icon-size-classes;
+
+  &.icon-60 {
+    @apply text-6xl;
+  }
+}
+
+// Button overrides
+.mat-mdc-outlined-button .mdc-button__label {
+  @apply text-catspace-brown;
+}
+
+.mat-mdc-button,
+.mat-mdc-unelevated-button,
+.mat-mdc-raised-button,
+.mat-mdc-outlined-button {
+  &.card-button {
+    @apply h-7 p-0 text-caption;
+  }
+
+  &.narrow {
+    @apply h-0 px-12 py-3;
+  }
+}
+
+// Toggle styles
+.mat-button-toggle-standalone.mat-button-toggle-appearance-standard:not(
+    [class*="mat-elevation-z"]
+  ),
+.mat-button-toggle-group-appearance-standard:not([class*="mat-elevation-z"]) {
+  @apply border-none;
+}
+
+.card-button.mat-button-toggle-appearance-standard,
+.profile-button.mat-button-toggle-appearance-standard {
+  @apply border-transparent bg-catspace-orange text-white;
+}
+
+.card-button.mat-button-toggle-appearance-standard {
+  @apply h-7 text-xs;
+}
+
+.profile-button.mat-button-toggle-appearance-standard {
+  @apply h-9 px-4 text-sm;
+}
+
+.mat-button-toggle-appearance-standard
+  .mat-button-toggle-label-content:is(span) {
+  @apply leading-none;
+}
+
+// Misc Material overrides
+.mdc-notched-outline__notch {
+  @apply border-none;
+}
+
+.mat-mdc-dialog-surface {
+  --mat-dialog-container-shape: 10px;
+}
+
+.mat-drawer.mat-sidenav {
+  @apply h-screen;
+}
+
+button.mat-mdc-icon-button {
+  @apply flex items-center justify-center;
+}
+
+button.mat-mdc-icon-button.small {
+  @apply h-6 w-6 p-0;
+}
+
+.mat-mdc-snack-bar-container .mat-mdc-snackbar-surface {
+  box-shadow: none;
+  --mat-snackbar-container-shape: 0;
+  --mat-snackbar-supporting-text-color: inherit;
+  --mat-sys-inverse-surface: transparent;
+}

@@ -3,7 +3,7 @@
     <button
       mat-icon-button
       [attr.aria-label]="'button.close' | translate"
-      (click)="this.close.emit()"
+      (click)="sidenavClose.emit()"
     >
       <span class="material-icons">close</span>
     </button>
@@ -14,25 +14,25 @@
   <div class="flex gap-4">
     <div class="w-20 h-20 rounded-full overflow-hidden">
       @if (user(); as currentUser) {
-      <img
-        [src]="
-          currentUser.image ||
-          'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1753057717/catspace/no-avatar_mm3idt.png'
-        "
-        [alt]="currentUser.name + '\'s avatar'"
-        class="w-full h-full object-cover"
-      />
+        <img
+          [src]="
+            currentUser.image ||
+            'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1753057717/catspace/no-avatar_mm3idt.png'
+          "
+          [alt]="currentUser.name + '\'s avatar'"
+          class="w-full h-full object-cover"
+        />
       }
     </div>
     @if (user(); as currentUser) {
-    <div>
-      <p class="subtitle-1">{{ currentUser.name }}</p>
-      <p>&#64;{{ currentUser.handle }}</p>
-      <p class="text-body-2 text-catspace-orange">{{ currentUser.email }}</p>
-      <button mat-stroked-button class="narrow mt-2" (click)="editProfile()">
-        {{ "button.editProfile" | translate }}
-      </button>
-    </div>
+      <div>
+        <p class="subtitle-1">{{ currentUser.name }}</p>
+        <p>&#64;{{ currentUser.handle }}</p>
+        <p class="text-body-2 text-catspace-orange">{{ currentUser.email }}</p>
+        <button mat-stroked-button class="narrow mt-2" (click)="editProfile()">
+          {{ "button.editProfile" | translate }}
+        </button>
+      </div>
     }
   </div>
   <div class="pl-20 mt-8">
@@ -40,8 +40,8 @@
       <li
         class="menu-item"
         routerLink="/my-page"
-        (click)="close.emit()"
-        (keypress)="close.emit()"
+        (click)="sidenavClose.emit()"
+        (keypress)="sidenavClose.emit()"
       >
         <span class="material-symbols-outlined">person</span>
         <p class="subtitle-2">{{ "menu.myPage" | translate }}</p>

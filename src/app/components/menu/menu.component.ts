@@ -9,7 +9,7 @@ import { SignupComponent } from '../auth/signup/signup.component';
 import { LoginComponent } from '../auth/login/login.component';
 import { Dialog, DialogType } from '../../shared';
 import { UnpicImageDirective } from '@unpic/angular';
-import { AuthService } from '../../services';
+import { AuthService, ThemeService } from '../../services';
 import { BannerComponent } from '../ui/banner.component';
 import { CreatePostComponent } from '../create-post/create-post.component';
 
@@ -31,6 +31,7 @@ import { CreatePostComponent } from '../create-post/create-post.component';
 export class MenuComponent {
   open = output<void>();
   isLoggedIn = computed(() => this.authService.currentUserSignal());
+  isDarkTheme = computed(() => this.themeService.theme() === 'dark');
 
   defaultDialogProperties = {
     width: '500px',
@@ -38,6 +39,7 @@ export class MenuComponent {
   };
 
   public readonly authService = inject(AuthService);
+  private readonly themeService = inject(ThemeService);
   private readonly dialog = inject(MatDialog);
 
   get currentUser() {
@@ -59,5 +61,9 @@ export class MenuComponent {
 
   logout(): void {
     this.authService.logout();
+  }
+
+  toggleTheme(): void {
+    this.themeService.toggleTheme();
   }
 }

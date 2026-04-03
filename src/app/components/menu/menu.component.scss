@@ -1,3 +1,21 @@
 .menu-item {
   @apply flex items-center cursor-pointer text-catspace-black hover:border-catspace-dark-orange hover:text-catspace-dark-orange transition-all duration-300 ease-in-out;
 }
+
+.theme-toggle {
+  @apply text-catspace-black;
+}
+
+.new-post-btn {
+  @apply min-w-max;
+}
+
+.menu-item .subtitle-1 {
+  color: inherit;
+}
+
+:host-context(.dark-theme) .menu-item,
+:host-context(.dark-theme) .theme-toggle,
+:host-context(.dark-theme) .theme-toggle-mobile {
+  color: var(--app-text-primary);
+}

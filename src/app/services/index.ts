@@ -7,4 +7,5 @@ export * from './mocks';
 export * from './models';
 export * from './notification.service';
 export * from './posts.service';
+export * from './theme.service';
 export * from './user.service';

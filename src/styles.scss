@@ -1,9 +1,31 @@
-@use "./styles/typographic" as typo;
+@use "./styles/typographic" as *;
 @use "./styles/theme";
+@use "./styles/material";
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --app-bg-primary: #fff8f4;
+  --app-surface: #f9ede5;
+  --app-text-primary: #2d1f1a;
+  --app-text-secondary: #6f5f58;
+  --app-border: #e5d1c5;
+  --app-nav-footer-bg: #f9ede5;
+  --app-nav-footer-text: #2d1f1a;
+}
+
+.dark-theme {
+  --app-bg-primary: #171210;
+  --app-surface: #231b18;
+  --app-text-primary: #f6e8e1;
+  --app-text-secondary: #c9b3a8;
+  --app-border: #4a3a33;
+  --app-nav-footer-bg: #5a3022;
+  --app-nav-footer-text: #fff3ec;
+  color-scheme: dark;
+}
 
 html,
 body,
@@ -14,110 +36,26 @@ app-root {
 body {
   @apply m-0;
   font-family: "Open Sans", sans-serif;
-  @include typo.typography-styles();
+  @include typography-styles();
+  background-color: var(--app-bg-primary);
+  color: var(--app-text-primary);
 }
 
 * {
   @apply box-border;
 }
 
-.material-icons {
-  &.icon-16 {
-    @apply text-base;
-  }
-  &.icon-18 {
-    @apply text-lg;
-  }
-  &.icon-20 {
-    @apply text-xl;
-  }
-  &.icon-24 {
-    @apply text-2xl;
-  }
-  &.icon-36 {
-    @apply text-4xl;
-  }
+.dark-theme .bg-catspace-beige {
+  background-color: var(--app-nav-footer-bg);
 }
 
-.material-symbols-outlined {
-  &.icon-16 {
-    @apply text-base;
-  }
-  &.icon-18 {
-    @apply text-lg;
-  }
-  &.icon-20 {
-    @apply text-xl;
-  }
-  &.icon-24 {
-    @apply text-2xl;
-  }
-  &.icon-36 {
-    @apply text-4xl;
-  }
-  &.icon-60 {
-    @apply text-6xl;
-  }
+.dark-theme .text-catspace-black {
+  color: var(--app-text-primary);
 }
 
-.mat-mdc-outlined-button .mdc-button__label {
-  @apply text-catspace-brown;
-}
-
-.mat-mdc-button,
-.mat-mdc-unelevated-button,
-.mat-mdc-raised-button,
-.mat-mdc-outlined-button {
-  &.card-button {
-    @apply h-7 text-caption p-0;
-  }
-  &.narrow {
-    @apply h-0 py-3 px-12;
-  }
-}
-
-.mat-button-toggle-standalone.mat-button-toggle-appearance-standard:not(
-    [class*="mat-elevation-z"]
-  ),
-.mat-button-toggle-group-appearance-standard:not([class*="mat-elevation-z"]) {
-  @apply border-none;
-}
-.card-button.mat-button-toggle-appearance-standard {
-  @apply text-white bg-catspace-orange border-transparent h-7 text-xs;
-}
-
-.profile-button.mat-button-toggle-appearance-standard {
-  @apply text-white bg-catspace-orange border-transparent h-9 text-sm px-4;
-}
-
-.mat-button-toggle-appearance-standard
-  .mat-button-toggle-label-content:is(span) {
-  @apply leading-none;
-}
-
-.mdc-notched-outline__notch {
-  @apply border-none;
-}
-
-.mat-mdc-dialog-surface {
-  --mat-dialog-container-shape: 10px;
-}
-
-.mat-drawer.mat-sidenav {
-  @apply h-screen;
-}
-
-button.mat-mdc-icon-button {
-  @apply flex items-center justify-center;
-}
-
-.mat-mdc-snack-bar-container .mat-mdc-snackbar-surface {
-  box-shadow: none;
-  --mat-snackbar-container-shape: 0;
-  --mat-snackbar-supporting-text-color: inherit;
-  --mat-sys-inverse-surface: transparent;
-}
-
-button.mat-mdc-icon-button.small {
-  @apply w-6 h-6 p-0;
+.dark-theme .mat-mdc-menu-panel,
+.dark-theme .mat-drawer,
+.dark-theme .mat-drawer-content {
+  background-color: var(--app-surface);
+  color: var(--app-text-primary);
 }

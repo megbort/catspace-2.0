@@ -38,7 +38,7 @@
   },
   "devDependencies": {
     "@angular-builders/custom-webpack": "^20.0.0",
-    "@angular/build": "^20.3.2",
+    "@angular/build": "^21.2.6",
     "@angular/cli": "^20.3.2",
     "@angular/compiler-cli": "^20.3.1",
     "@chromatic-com/storybook": "^4.1.1",
@@ -48,6 +48,7 @@
     "@types/express": "^4.17.17",
     "@types/jasmine": "~5.1.0",
     "@types/node": "^18.19.80",
+    "baseline-browser-mapping": "^2.10.14",
     "dotenv-webpack": "^8.1.0",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",

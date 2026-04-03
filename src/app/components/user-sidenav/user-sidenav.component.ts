@@ -24,7 +24,7 @@ import { CreatePostComponent } from '../create-post/create-post.component';
   styleUrls: ['./user-sidenav.component.scss'],
 })
 export class UserSidenavComponent {
-  close = output<void>();
+  sidenavClose = output<void>();
   user = computed(() => this.authService.currentUserSignal());
 
   private readonly authService = inject(AuthService);
@@ -32,7 +32,7 @@ export class UserSidenavComponent {
 
   logout(): void {
     this.authService.logout();
-    this.close.emit();
+    this.sidenavClose.emit();
   }
 
   editProfile(): void {
@@ -40,7 +40,7 @@ export class UserSidenavComponent {
       width: '500px',
       autoFocus: false,
     });
-    this.close.emit();
+    this.sidenavClose.emit();
   }
 
   newPost(): void {
@@ -48,6 +48,6 @@ export class UserSidenavComponent {
       width: '550px',
       autoFocus: false,
     });
-    this.close.emit();
+    this.sidenavClose.emit();
   }
 }

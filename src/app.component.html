@@ -1,21 +1,23 @@
-@if(authService.isInitialized()) {
-<mat-sidenav-container class="min-h-screen flex flex-col">
-  <mat-sidenav
-    #profileDrawer
-    mode="over"
-    position="end"
-    [disableClose]="true"
-    (openedChange)="onSidenavToggle($event)"
-  >
-    <app-user-sidenav (close)="profileDrawer.close()"></app-user-sidenav>
-  </mat-sidenav>
+@if (authService.isInitialized()) {
+  <mat-sidenav-container class="min-h-screen flex flex-col">
+    <mat-sidenav
+      #profileDrawer
+      mode="over"
+      position="end"
+      [disableClose]="true"
+      (openedChange)="onSidenavToggle($event)"
+    >
+      <app-user-sidenav
+        (sidenavClose)="profileDrawer.close()"
+      ></app-user-sidenav>
+    </mat-sidenav>
 
-  <mat-sidenav-content class="flex flex-col grow">
-    <app-menu (open)="profileDrawer.open()"></app-menu>
-    <router-outlet></router-outlet>
-    <app-footer></app-footer>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+    <mat-sidenav-content class="flex flex-col grow">
+      <app-menu (open)="profileDrawer.open()"></app-menu>
+      <router-outlet></router-outlet>
+      <app-footer></app-footer>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 }
 
 <app-loader></app-loader>
