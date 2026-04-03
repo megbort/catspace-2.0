@@ -1,8 +1,15 @@
 import { inject, Injectable } from '@angular/core';
 import { from, Observable, forkJoin, of } from 'rxjs';
-import { map, take, catchError } from 'rxjs/operators';
-import { collectionData, Firestore } from '@angular/fire/firestore';
-import { collection, doc, setDoc, deleteDoc, getDoc } from 'firebase/firestore';
+import { map, catchError } from 'rxjs/operators';
+import { Firestore } from '@angular/fire/firestore';
+import {
+  collection,
+  deleteDoc,
+  doc,
+  getDoc,
+  getDocs,
+  setDoc,
+} from 'firebase/firestore';
 
 export interface FavoritePost {
   postId: string;
@@ -19,13 +26,13 @@ export class FavoriteService {
   favoritePost(
     userId: string,
     postId: string,
-    postOwnerId: string
+    postOwnerId: string,
   ): Observable<void> {
     const userFavoriteDoc = this.getUserFavoriteDoc(userId, postId);
     const postFavoriteDoc = this.getPostFavoriteDoc(
       postOwnerId,
       postId,
-      userId
+      userId,
     );
 
     const favoriteData: FavoritePost = {
@@ -51,13 +58,13 @@ export class FavoriteService {
   unfavoritePost(
     userId: string,
     postId: string,
-    postOwnerId: string
+    postOwnerId: string,
   ): Observable<void> {
     const userFavoriteDoc = this.getUserFavoriteDoc(userId, postId);
     const postFavoriteDoc = this.getPostFavoriteDoc(
       postOwnerId,
       postId,
-      userId
+      userId,
     );
 
     return forkJoin([
@@ -72,16 +79,17 @@ export class FavoriteService {
   getUserFavorites(userId: string): Observable<FavoritePost[]> {
     const favoritesCollection = collection(
       this.firestore,
-      `users/${userId}/favorites`
+      `users/${userId}/favorites`,
     );
 
-    return collectionData(favoritesCollection, { idField: 'id' }).pipe(
-      take(1),
-      map((favorites) => favorites as FavoritePost[]),
+    return from(getDocs(favoritesCollection)).pipe(
+      map((favorites) =>
+        favorites.docs.map((favoriteDoc) => favoriteDoc.data() as FavoritePost),
+      ),
       catchError((error) => {
         console.error(`Error fetching favorites for user ${userId}:`, error);
         return of([]);
-      })
+      }),
     );
   }
 
@@ -90,22 +98,24 @@ export class FavoriteService {
    */
   getPostFavorites(
     postOwnerId: string,
-    postId: string
+    postId: string,
   ): Observable<{ userId: string; favoritedAt: string }[]> {
     const postFavoritesCollection = collection(
       this.firestore,
-      `users/${postOwnerId}/posts/${postId}/favorites`
+      `users/${postOwnerId}/posts/${postId}/favorites`,
     );
 
-    return collectionData(postFavoritesCollection, { idField: 'id' }).pipe(
-      take(1),
-      map(
-        (favorites) => favorites as { userId: string; favoritedAt: string }[]
+    return from(getDocs(postFavoritesCollection)).pipe(
+      map((favorites) =>
+        favorites.docs.map(
+          (favoriteDoc) =>
+            favoriteDoc.data() as { userId: string; favoritedAt: string },
+        ),
       ),
       catchError((error) => {
         console.error(`Error fetching favorites for post ${postId}:`, error);
         return of([]);
-      })
+      }),
     );
   }
 
@@ -120,7 +130,7 @@ export class FavoriteService {
       catchError((error) => {
         console.error(`Error checking if post ${postId} is favorited:`, error);
         return of(false);
-      })
+      }),
     );
   }
 
@@ -129,10 +139,10 @@ export class FavoriteService {
    */
   getPostFavoriteCount(
     postOwnerId: string,
-    postId: string
+    postId: string,
   ): Observable<number> {
     return this.getPostFavorites(postOwnerId, postId).pipe(
-      map((favorites) => favorites.length)
+      map((favorites) => favorites.length),
     );
   }
 
@@ -143,11 +153,11 @@ export class FavoriteService {
   private getPostFavoriteDoc(
     postOwnerId: string,
     postId: string,
-    userId: string
+    userId: string,
   ) {
     return doc(
       this.firestore,
-      `users/${postOwnerId}/posts/${postId}/favorites/${userId}`
+      `users/${postOwnerId}/posts/${postId}/favorites/${userId}`,
     );
   }
 }

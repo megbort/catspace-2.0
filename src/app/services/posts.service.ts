@@ -1,9 +1,9 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { Post } from './models';
 import { from, Observable, forkJoin, of } from 'rxjs';
-import { map, catchError, take } from 'rxjs/operators';
-import { collectionData, Firestore } from '@angular/fire/firestore';
-import { collection, doc, setDoc } from 'firebase/firestore';
+import { map, catchError } from 'rxjs/operators';
+import { Firestore } from '@angular/fire/firestore';
+import { collection, doc, getDocs, setDoc } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root',
@@ -32,12 +32,13 @@ export class PostService {
   getPostsByProfileId(profileId: string): Observable<Post[]> {
     const postsCollection = collection(
       this.firestore,
-      `users/${profileId}/posts`
+      `users/${profileId}/posts`,
     );
-    return collectionData(postsCollection, { idField: 'id' }).pipe(
-      take(1),
+    return from(getDocs(postsCollection)).pipe(
       map((posts) => {
-        const typedPosts = posts as Post[];
+        const typedPosts = posts.docs.map(
+          (postDoc) => ({ id: postDoc.id, ...postDoc.data() }) as Post,
+        );
         // Add userId to posts that might be missing it (for legacy support)
         const postsWithUserId = typedPosts.map((post) => ({
           ...post,
@@ -48,7 +49,7 @@ export class PostService {
       catchError((error) => {
         console.error(`Error fetching posts for ${profileId}:`, error);
         return of([]);
-      })
+      }),
     );
   }
 
@@ -61,7 +62,7 @@ export class PostService {
   createPost(
     uid: string,
     post: Omit<Post, 'id'>,
-    postId?: string
+    postId?: string,
   ): Observable<string> {
     const postsCollection = collection(this.firestore, `users/${uid}/posts`);
     const postRef = postId
@@ -82,7 +83,7 @@ export class PostService {
           timestamp: Date.now(),
         });
         return postRef.id;
-      })
+      }),
     );
   }
 
@@ -97,8 +98,8 @@ export class PostService {
         catchError((error: any) => {
           console.warn(`Failed to load posts for user ${userId}:`, error);
           return of([]);
-        })
-      )
+        }),
+      ),
     );
 
     return forkJoin(postObservables).pipe(
@@ -112,7 +113,7 @@ export class PostService {
       catchError((error: any) => {
         console.error('Error in getPostsFromFollowedUsers forkJoin:', error);
         return of([]);
-      })
+      }),
     );
   }
 }

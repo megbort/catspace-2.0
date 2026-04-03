@@ -12,9 +12,5 @@
   ],
   "include": [
     "src/**/*.d.ts"
-  ],
-  "exclude": [
-    "server.ts",
-    "src/main.server.ts"
   ]
 }

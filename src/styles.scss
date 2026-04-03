@@ -36,9 +36,9 @@ app-root {
 body {
   @apply m-0;
   font-family: "Open Sans", sans-serif;
-  @include typography-styles();
   background-color: var(--app-bg-primary);
   color: var(--app-text-primary);
+  @include typography-styles();
 }
 
 * {

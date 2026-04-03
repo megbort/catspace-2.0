@@ -7,12 +7,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { GlobalStore } from './app/shared';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { AuthService, LoaderService } from './app/services';
+import { signal } from '@angular/core';
 
 class MockGlobalStore {
-  authorized = jasmine.createSpy('authorized').and.returnValue(false);
+  authorized = vi.fn().mockReturnValue(false);
   user = null;
-  login = jasmine.createSpy('login');
-  logout = jasmine.createSpy('logout');
+  login = vi.fn();
+  logout = vi.fn();
 }
 
 class MockActivatedRoute {
@@ -24,6 +27,19 @@ class MockActivatedRoute {
   paramMap = of({
     get: () => 'mockParam',
   });
+}
+
+class MockAuthService {
+  initializeUser = vi.fn();
+  isInitialized$ = of(true);
+  isInitialized = signal(true);
+  currentUserSignal = signal(null);
+}
+
+class MockLoaderService {
+  show = vi.fn();
+  hide = vi.fn();
+  isLoading = signal(false);
 }
 
 class FakeTranslateLoader implements TranslateLoader {
@@ -52,6 +68,8 @@ describe('AppComponent Tests', () => {
       providers: [
         { provide: GlobalStore, useClass: MockGlobalStore },
         { provide: ActivatedRoute, useClass: MockActivatedRoute },
+        { provide: AuthService, useClass: MockAuthService },
+        { provide: LoaderService, useClass: MockLoaderService },
       ],
     }).compileComponents();
   });

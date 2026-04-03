@@ -1,3 +1,5 @@
+import { firebaseApiKey } from './firebase-key';
+
 export const environment = {
   production: true,
   cloudinary: {
@@ -5,9 +7,9 @@ export const environment = {
     uploadPreset: 'catspace',
   },
   firebaseConfig: {
-    apiKey: process.env['FIREBASE_API_KEY'],
+    apiKey: firebaseApiKey,
     authDomain: 'catspace-e7621.firebaseapp.com',
-    databaseURL: 'catspace-e7621-default-rtdb.firebaseio.com',
+    databaseURL: 'https://catspace-e7621-default-rtdb.firebaseio.com',
     projectId: 'catspace-e7621',
     storageBucket: 'catspace-e7621.firebasestorage.app',
     messagingSenderId: '591661681407',

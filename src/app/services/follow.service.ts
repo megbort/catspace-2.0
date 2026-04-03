@@ -1,8 +1,14 @@
 import { inject, Injectable } from '@angular/core';
 import { from, Observable, forkJoin } from 'rxjs';
-import { map, take } from 'rxjs/operators';
-import { collectionData, Firestore } from '@angular/fire/firestore';
-import { collection, doc, setDoc, deleteDoc } from 'firebase/firestore';
+import { map } from 'rxjs/operators';
+import { Firestore } from '@angular/fire/firestore';
+import {
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  setDoc,
+} from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root',
@@ -13,11 +19,11 @@ export class FollowService {
   followUser(currentUserId: string, targetUserId: string): Observable<void> {
     const currentUserFollowingDoc = this.getUserFollowingDoc(
       currentUserId,
-      targetUserId
+      targetUserId,
     );
     const targetUserFollowerDoc = this.getUserFollowerDoc(
       targetUserId,
-      currentUserId
+      currentUserId,
     );
 
     const followingData = {
@@ -39,11 +45,11 @@ export class FollowService {
   unfollowUser(currentUserId: string, targetUserId: string): Observable<void> {
     const currentUserFollowingDoc = this.getUserFollowingDoc(
       currentUserId,
-      targetUserId
+      targetUserId,
     );
     const targetUserFollowerDoc = this.getUserFollowerDoc(
       targetUserId,
-      currentUserId
+      currentUserId,
     );
 
     return forkJoin([
@@ -55,7 +61,7 @@ export class FollowService {
   private getUserFollowingDoc(userId: string, followingUserId: string) {
     const followingCollection = collection(
       this.firestore,
-      `users/${userId}/following`
+      `users/${userId}/following`,
     );
     return doc(followingCollection, followingUserId);
   }
@@ -63,48 +69,58 @@ export class FollowService {
   private getUserFollowerDoc(userId: string, followerUserId: string) {
     const followersCollection = collection(
       this.firestore,
-      `users/${userId}/followers`
+      `users/${userId}/followers`,
     );
     return doc(followersCollection, followerUserId);
   }
 
   getFollowing(
-    userId: string
+    userId: string,
   ): Observable<{ id: string; userId: string; followedAt: string }[]> {
     const followingCollection = collection(
       this.firestore,
-      `users/${userId}/following`
+      `users/${userId}/following`,
     );
 
-    return collectionData(followingCollection, { idField: 'id' }).pipe(
-      take(1), // Take only the first emission and complete
+    return from(getDocs(followingCollection)).pipe(
       map((docs) =>
-        docs.map((doc: any) => ({
-          id: doc.id,
-          userId: doc.userId,
-          followedAt: doc.followedAt,
-        }))
-      )
+        docs.docs.map((followDoc) => {
+          const data = followDoc.data() as {
+            userId?: string;
+            followedAt?: string;
+          };
+          return {
+            id: followDoc.id,
+            userId: data.userId || '',
+            followedAt: data.followedAt || '',
+          };
+        }),
+      ),
     );
   }
 
   getFollowers(
-    userId: string
+    userId: string,
   ): Observable<{ id: string; userId: string; followedAt: string }[]> {
     const followersCollection = collection(
       this.firestore,
-      `users/${userId}/followers`
+      `users/${userId}/followers`,
     );
 
-    return collectionData(followersCollection, { idField: 'id' }).pipe(
-      take(1), // Take only the first emission and complete
+    return from(getDocs(followersCollection)).pipe(
       map((docs) =>
-        docs.map((doc: any) => ({
-          id: doc.id,
-          userId: doc.userId,
-          followedAt: doc.followedAt,
-        }))
-      )
+        docs.docs.map((followerDoc) => {
+          const data = followerDoc.data() as {
+            userId?: string;
+            followedAt?: string;
+          };
+          return {
+            id: followerDoc.id,
+            userId: data.userId || '',
+            followedAt: data.followedAt || '',
+          };
+        }),
+      ),
     );
   }
 }

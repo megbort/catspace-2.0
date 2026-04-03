@@ -26,51 +26,58 @@ export class AuthService {
   user$ = user(this.firebaseAuth);
 
   initializeUser(): void {
-    this.user$.subscribe(async (firebaseUser) => {
-      if (firebaseUser) {
-        try {
-          const profile = await this.userService.getUserProfileById(
-            firebaseUser.uid
-          );
+    this.user$.subscribe({
+      next: async (firebaseUser) => {
+        if (firebaseUser) {
+          try {
+            const profile = await this.userService.getUserProfileById(
+              firebaseUser.uid,
+            );
 
-          const fullUser: User = {
-            id: firebaseUser.uid,
-            email: firebaseUser.email || '',
-            image: profile?.image || '',
-            handle: profile?.handle || '',
-            name: profile?.name || firebaseUser.displayName || '',
-            description: profile?.description || '',
-            posts: profile?.posts || [],
-            following: profile?.following || [],
-            favorites: profile?.favorites || [],
-            followers: profile?.followers || [],
-            tags: profile?.tags || [],
-          };
+            const fullUser: User = {
+              id: firebaseUser.uid,
+              email: firebaseUser.email || '',
+              image: profile?.image || '',
+              handle: profile?.handle || '',
+              name: profile?.name || firebaseUser.displayName || '',
+              description: profile?.description || '',
+              posts: profile?.posts || [],
+              following: profile?.following || [],
+              favorites: profile?.favorites || [],
+              followers: profile?.followers || [],
+              tags: profile?.tags || [],
+            };
 
-          this.currentUserSignal.set(fullUser);
-        } catch (error) {
-          console.error('Error loading user profile:', error);
+            this.currentUserSignal.set(fullUser);
+          } catch (error) {
+            console.error('Error loading user profile:', error);
+            this.currentUserSignal.set(null);
+          }
+        } else {
           this.currentUserSignal.set(null);
         }
-      } else {
-        this.currentUserSignal.set(null);
-      }
 
-      this.isInitialized.set(true);
+        this.isInitialized.set(true);
+      },
+      error: (error) => {
+        console.error('Error initializing auth state:', error);
+        this.currentUserSignal.set(null);
+        this.isInitialized.set(true);
+      },
     });
   }
 
   register(
     email: string,
     password: string,
-    profile: { name: string; handle: string; description: string }
+    profile: { name: string; handle: string; description: string },
   ): Observable<void> {
     const { name, handle, description } = profile;
 
     const promise = createUserWithEmailAndPassword(
       this.firebaseAuth,
       email,
-      password
+      password,
     )
       .then(async (response) => {
         const uid = response.user.uid;
@@ -97,7 +104,7 @@ export class AuthService {
     const promise = signInWithEmailAndPassword(
       this.firebaseAuth,
       email,
-      password
+      password,
     ).then((result) => {
       this.router.navigate(['/following']);
       return result;

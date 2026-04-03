@@ -15,12 +15,9 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-builders/custom-webpack:browser",
+          "builder": "@angular/build:application",
           "options": {
-            "main": "src/main.ts",
-            "customWebpackConfig": {
-              "path": "src/webpack.config.ts"
-            },
+            "browser": "src/main.ts",
             "outputPath": "dist/catspace-2.0",
             "index": "src/index.html",
             "polyfills": ["zone.js"],
@@ -78,7 +75,7 @@
           "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@angular-builders/custom-webpack:dev-server",
+          "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
               "buildTarget": "catspace-2.0:build:production"
@@ -93,19 +90,11 @@
           "builder": "@angular/build:extract-i18n"
         },
         "test": {
-          "builder": "@angular-builders/custom-webpack:karma",
+          "builder": "@angular/build:unit-test",
           "options": {
-            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
-            "inlineStyleLanguage": "scss",
-            "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
-            ],
-            "styles": ["src/styles.scss"],
-            "scripts": []
+            "runner": "vitest",
+            "buildTarget": "catspace-2.0:build:development"
           }
         },
         "storybook": {
