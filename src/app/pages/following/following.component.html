@@ -1,6 +1,3 @@
-@if(loading() && !initialized()){
-<div class="h-screen"></div>
-} @else {
 <div
   class="mb-16 py-12 px-2 min-h-[575px] max-w-[320px] sm:max-w-2xl lg:max-w-5xl xl:max-w-7xl mx-auto"
 >
@@ -11,29 +8,38 @@
     <p class="subtitle-1">{{ "following.latest" | translate }}</p>
   </div>
 
-  @if(followingPosts().length === 0){
-  <div class="flex flex-col items-center gap-2">
-    <span class="material-icons icon-36 text-catspace-black">pets</span>
-    <div class="text-center">
-      <p class="text-body-1 text-catspace-black">
-        {{ "following.empty1" | translate }}
-      </p>
-      <p class="text-body-1 text-catspace-black">
-        {{ "following.empty2" | translate }}
-      </p>
+  @if (loading() || !initialized()) {
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+    >
+      @for (skeleton of skeletonCards; track $index) {
+        <div
+          class="h-[250px] w-[250px] rounded bg-catspace-grey/40 animate-pulse"
+        ></div>
+      }
     </div>
-    <button mat-flat-button routerLink="/featured">
-      {{ "button.featured" | translate }}
-    </button>
-  </div>
-  }@else {
-  <div
-    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
-  >
-    @for (post of followingPosts(); track post.id) {
-    <app-post-card [post]="post" />
-    }
-  </div>
+  } @else if (followingPosts().length === 0) {
+    <div class="flex flex-col items-center gap-2">
+      <span class="material-icons icon-36 text-catspace-black">pets</span>
+      <div class="text-center">
+        <p class="text-body-1 text-catspace-black">
+          {{ "following.empty1" | translate }}
+        </p>
+        <p class="text-body-1 text-catspace-black">
+          {{ "following.empty2" | translate }}
+        </p>
+      </div>
+      <button mat-flat-button routerLink="/featured">
+        {{ "button.featured" | translate }}
+      </button>
+    </div>
+  } @else {
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+    >
+      @for (post of followingPosts(); track post.id) {
+        <app-post-card [post]="post"></app-post-card>
+      }
+    </div>
   }
 </div>
-}

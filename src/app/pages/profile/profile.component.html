@@ -3,69 +3,95 @@
     [class]="posts().length > 0 ? ' sm:items-start' : ''"
     class="px-12 py-20 mb-20 flex flex-col items-center sm:flex-row gap-12 justify-center"
   >
-    <div class="basis-1/3 flex flex-col items-center gap-4 max-w-[325px]">
-      <div
-        class="relative overflow-hidden h-56 w-56 lg:h-64 lg:w-64 rounded-full"
-      >
-        <img
-          [src]="
-            user()?.image ||
-            'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1753057717/catspace/no-avatar_mm3idt.png'
-          "
-          [alt]="(user()?.name || 'User') + '\'s avatar'"
-          class="h-full w-full object-cover"
-        />
-      </div>
-      <div class="flex flex-col gap-2">
-        <h2>{{ user()?.name }}</h2>
-        <p class="subtitle-1 text-catspace-dark-beige">
-          &#64;{{ user()?.handle }}
-        </p>
-        @if (!isOwner()) {
-        <p class="text-body-1 text-catspace-orange">
-          {{ followerCount() }} {{ "common.followers" | translate }}
-        </p>
-        }
-        <p class="text-body-1">
-          {{ user()?.description }}
-        </p>
-      </div>
-      @if (isOwner()) {
-      <button mat-flat-button class="w-full" (click)="newPost()">
-        {{ "button.newPost" | translate }}
-      </button>
-      <button mat-stroked-button class="w-full" (click)="editProfile()">
-        {{ "button.editProfile" | translate }}
-      </button>
-      } @else {
-      <div class="w-full flex flex-col gap-2">
-        <mat-button-toggle
-          class="w-full profile-button"
-          [checked]="following()"
-          (change)="toggleFollow($event)"
-        >
-          {{ (following() ? "button.unfollow" : "button.follow") | translate }}
-        </mat-button-toggle>
-        <button mat-stroked-button class="w-full">
-          {{ "button.message" | translate }}
-        </button>
-      </div>
-      }
-    </div>
+    @if (loading() || !initialized()) {
+      <div class="basis-1/3 flex flex-col items-center gap-4 max-w-[325px]">
+        <div class="h-56 w-56 lg:h-64 lg:w-64 rounded-full overflow-hidden">
+          <app-skeleton [width]="'100%'" [height]="'100%'"></app-skeleton>
+        </div>
 
-    @if(posts().length > 0) {
-    <div
-      class="justify-center grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 max-w-[800px]"
-    >
-      @for(post of posts(); track $index) {
-      <app-post-card [post]="post"></app-post-card>
-      }
-    </div>
+        <div class="w-full flex flex-col gap-2">
+          <app-skeleton [width]="'70%'" [height]="28"></app-skeleton>
+          <app-skeleton [width]="'45%'" [height]="20"></app-skeleton>
+          <app-skeleton [width]="'90%'" [height]="18"></app-skeleton>
+          <app-skeleton [width]="'100%'" [height]="42"></app-skeleton>
+          <app-skeleton [width]="'100%'" [height]="42"></app-skeleton>
+        </div>
+      </div>
     } @else {
-    <div class="flex flex-col gap-2 items-center w-[800px]">
-      <span class="material-icons icon-36">photo_camera</span>
-      <p class="subtitle-1">{{ "profile.noPosts" | translate }}</p>
-    </div>
+      <div class="basis-1/3 flex flex-col items-center gap-4 max-w-[325px]">
+        <div
+          class="relative overflow-hidden h-56 w-56 lg:h-64 lg:w-64 rounded-full"
+        >
+          <img
+            [src]="
+              user()?.image ||
+              'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1753057717/catspace/no-avatar_mm3idt.png'
+            "
+            [alt]="(user()?.name || 'User') + '\'s avatar'"
+            class="h-full w-full object-cover"
+          />
+        </div>
+        <div class="flex flex-col gap-2">
+          <h2>{{ user()?.name }}</h2>
+          <p class="subtitle-1 text-catspace-dark-beige">
+            &#64;{{ user()?.handle }}
+          </p>
+          @if (!isOwner()) {
+            <p class="text-body-1 text-catspace-orange">
+              {{ followerCount() }} {{ "common.followers" | translate }}
+            </p>
+          }
+          <p class="text-body-1">
+            {{ user()?.description }}
+          </p>
+        </div>
+        @if (isOwner()) {
+          <button mat-flat-button class="w-full" (click)="newPost()">
+            {{ "button.newPost" | translate }}
+          </button>
+          <button mat-stroked-button class="w-full" (click)="editProfile()">
+            {{ "button.editProfile" | translate }}
+          </button>
+        } @else {
+          <div class="w-full flex flex-col gap-2">
+            <mat-button-toggle
+              class="w-full profile-button"
+              [checked]="following()"
+              (change)="toggleFollow($event)"
+            >
+              {{
+                (following() ? "button.unfollow" : "button.follow") | translate
+              }}
+            </mat-button-toggle>
+            <button mat-stroked-button class="w-full">
+              {{ "button.message" | translate }}
+            </button>
+          </div>
+        }
+      </div>
+    }
+
+    @if (loading() || !initialized()) {
+      <div
+        class="justify-center grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 max-w-[800px]"
+      >
+        @for (skeleton of postSkeletonCards; track $index) {
+          <app-skeleton [width]="250" [height]="250"></app-skeleton>
+        }
+      </div>
+    } @else if (posts().length > 0) {
+      <div
+        class="justify-center grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 max-w-[800px]"
+      >
+        @for (post of posts(); track $index) {
+          <app-post-card [post]="post"></app-post-card>
+        }
+      </div>
+    } @else {
+      <div class="flex flex-col gap-2 items-center w-[800px]">
+        <span class="material-icons icon-36">photo_camera</span>
+        <p class="subtitle-1">{{ "profile.noPosts" | translate }}</p>
+      </div>
     }
   </div>
 </div>

@@ -1,10 +1,10 @@
 <nav aria-label="main">
   <app-banner [content]="'common.demo' | translate"></app-banner>
   <div
-    class="bg-catspace-beige flex items-center justify-around h-28 px-4 md:px-8 lg:px-0"
+    class="bg-catspace-beige flex items-center justify-between h-28 px-4 md:px-8 md:grid md:grid-cols-[1fr_auto_1fr]"
   >
     <!-- Logo -->
-    <div class="md:basis-1/4 max-w-[225px]">
+    <div class="max-w-[225px] md:justify-self-start">
       <img
         unpic
         priority
@@ -15,7 +15,7 @@
     </div>
 
     <!-- Web menu -->
-    <div class="flex justify-center basis-2/4">
+    <div class="hidden md:flex justify-center md:justify-self-center">
       <ul class="hidden md:flex md:gap-4 lg:gap-10">
         @if (!isLoggedIn()) {
           <li class="menu-item">
@@ -69,7 +69,9 @@
       </ul>
     </div>
 
-    <div class="items-center justify-end gap-4 hidden md:flex w-[225px]">
+    <div
+      class="items-center justify-end gap-4 hidden md:flex md:justify-self-end"
+    >
       <button
         mat-icon-button
         class="theme-toggle"
@@ -173,7 +175,7 @@
         </li>
       } @else {
         <li mat-menu-item>
-          <button (click)="openDialog('signUp')">
+          <button class="min-w-[150px]" (click)="openDialog('signUp')">
             {{ "button.signUp" | translate }}
           </button>
         </li>

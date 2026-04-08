@@ -1,31 +1,37 @@
-@if(loading()){
-<div class="h-screen"></div>
-} @else {
 <div
   class="mb-16 py-12 px-2 min-h-[575px] max-w-[320px] sm:max-w-2xl lg:max-w-5xl xl:max-w-7xl mx-auto"
 >
   <h2 class="pb-12 text-center md:text-left">
     {{ "common.featured" | translate }}
   </h2>
-  <div
-    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-center"
-  >
-    @for(profile of profiles.slice(0, loadedProfiles); track profile.id) {
-    <app-profile-card
-      [profile]="profile"
-      (view)="viewProfile($event)"
-    ></app-profile-card>
-    }
-  </div>
-  @if(loadedProfiles < profiles.length){
-  <div class="flex justify-center">
-    <button
-      class="text-body-1 py-8 text-catspace-orange hover:cursor-pointer hover:underline"
-      (click)="showMore()"
+  @if (loading()) {
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-center"
     >
-      {{ "button.showMore" | translate }}
-    </button>
-  </div>
+      @for (skeleton of skeletonCards; track $index) {
+        <app-skeleton [width]="275" [height]="275"></app-skeleton>
+      }
+    </div>
+  } @else {
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-center"
+    >
+      @for (profile of profiles.slice(0, loadedProfiles); track profile.id) {
+        <app-profile-card
+          [profile]="profile"
+          (view)="viewProfile($event)"
+        ></app-profile-card>
+      }
+    </div>
+  }
+  @if (loadedProfiles < profiles.length) {
+    <div class="flex justify-center">
+      <button
+        class="text-body-1 py-8 text-catspace-orange hover:cursor-pointer hover:underline"
+        (click)="showMore()"
+      >
+        {{ "button.showMore" | translate }}
+      </button>
+    </div>
   }
 </div>
-}

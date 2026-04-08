@@ -1,6 +1,5 @@
 import { Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 import { UserSidenavComponent } from '../app/components/user-sidenav/user-sidenav.component';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { applicationConfig } from '@storybook/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { storybookTranslateConfig } from '../app/shared';
@@ -17,7 +16,6 @@ const meta: Meta<UserSidenavComponent> = {
   decorators: [
     applicationConfig({
       providers: [
-        provideAnimations(),
         provideHttpClient(withFetch()),
         {
           provide: AuthService,

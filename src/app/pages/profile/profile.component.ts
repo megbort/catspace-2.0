@@ -31,6 +31,7 @@ import { catchError, switchMap, take, tap } from 'rxjs/operators';
 import { CreatePostComponent } from '../../components/create-post/create-post.component';
 import { GlobalStore } from '../../shared/state/global.store';
 import { EMPTY } from 'rxjs';
+import { SkeletonComponent } from '../../components/ui/skeleton.component';
 
 @Component({
   selector: 'app-profile',
@@ -40,31 +41,11 @@ import { EMPTY } from 'rxjs';
     MatDialogModule,
     MatButtonToggleModule,
     PostCardComponent,
+    SkeletonComponent,
   ],
   templateUrl: './profile.component.html',
 })
 export class ProfileComponent implements OnInit {
-  private readonly _user = signal<User | undefined>(undefined);
-  private readonly currentProfileId = signal('');
-  private readonly _posts = signal<Post[]>([]);
-
-  posts = computed(() => this._posts());
-  isOwner = signal(false);
-  loading = computed(() => this.globalStore.isLoading());
-  following = signal(false);
-  followerCount = signal(0);
-
-  user = computed(() => {
-    const currentUser = this.authService.currentUserSignal();
-    const isOwner = this.isOwner();
-    const profileId = this.currentProfileId();
-
-    if (currentUser && isOwner && profileId === currentUser.id) {
-      return currentUser;
-    }
-    return this._user();
-  });
-
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly postService = inject(PostService);
@@ -76,6 +57,29 @@ export class ProfileComponent implements OnInit {
   private readonly followService = inject(FollowService);
   private readonly notificationService = inject(NotificationService);
   private readonly translate = inject(TranslateService);
+
+  private readonly _user = signal<User | undefined>(undefined);
+  private readonly currentProfileId = signal('');
+  private readonly _posts = signal<Post[]>([]);
+
+  posts = computed(() => this._posts());
+  isOwner = signal(false);
+  loading = computed(() => this.globalStore.isLoading());
+  initialized = signal(false);
+  following = signal(false);
+  followerCount = signal(0);
+  postSkeletonCards = Array.from({ length: 6 });
+
+  user = computed(() => {
+    const currentUser = this.authService.currentUserSignal();
+    const isOwner = this.isOwner();
+    const profileId = this.currentProfileId();
+
+    if (currentUser && isOwner && profileId === currentUser.id) {
+      return currentUser;
+    }
+    return this._user();
+  });
 
   constructor() {
     effect(() => {
@@ -122,20 +126,12 @@ export class ProfileComponent implements OnInit {
   }
 
   private loadProfileData(id: string): void {
+    this.initialized.set(false);
     this.loader.show();
 
     const currentUser = this.authService.currentUserSignal();
 
-    if (!currentUser) {
-      this.authService.user$.pipe(take(1)).subscribe((firebaseUser) => {
-        if (firebaseUser && firebaseUser.uid === id) {
-          this.isOwner.set(true);
-          this.loadUserData(id);
-        } else {
-          this.tryLoadAsUser(id);
-        }
-      });
-    } else {
+    if (currentUser) {
       const isCurrentUser = currentUser.id === id;
       this.isOwner.set(isCurrentUser);
 
@@ -147,7 +143,18 @@ export class ProfileComponent implements OnInit {
         this.loadFollowerCount();
         this.setFollowingStatus();
       }
+
+      return;
     }
+
+    this.authService.user$.pipe(take(1)).subscribe((firebaseUser) => {
+      if (firebaseUser?.uid === id) {
+        this.isOwner.set(true);
+        this.loadUserData(id);
+      } else {
+        this.tryLoadAsUser(id);
+      }
+    });
   }
 
   private tryLoadAsUser(id: string): void {
@@ -176,12 +183,12 @@ export class ProfileComponent implements OnInit {
           this._user.set(userData);
           this.loadUserPosts(id);
         } else {
-          this.loader.hide();
+          this.finishLoading();
         }
       })
       .catch((error) => {
         console.error('Error loading user data', error);
-        this.loader.hide();
+        this.finishLoading();
       });
   }
 
@@ -204,11 +211,11 @@ export class ProfileComponent implements OnInit {
         catchError((error) => {
           console.error('Error loading posts', error);
           return [];
-        })
+        }),
       )
       .subscribe((posts: Post[]) => {
         this._posts.set(posts);
-        this.loader.hide();
+        this.finishLoading();
       });
   }
 
@@ -219,12 +226,17 @@ export class ProfileComponent implements OnInit {
         catchError((error) => {
           console.error('Error loading posts', error);
           return [];
-        })
+        }),
       )
       .subscribe((posts: Post[]) => {
         this._posts.set(posts);
-        this.loader.hide();
+        this.finishLoading();
       });
+  }
+
+  private finishLoading(): void {
+    this.loader.hide();
+    this.initialized.set(true);
   }
 
   editProfile(): void {
@@ -256,7 +268,7 @@ export class ProfileComponent implements OnInit {
           const user = this._user();
           this.followerCount.set(user?.followers?.length || 0);
           return EMPTY;
-        })
+        }),
       )
       .subscribe();
   }
@@ -278,7 +290,7 @@ export class ProfileComponent implements OnInit {
       .pipe(
         tap((following) => {
           const isFollowing = following.some(
-            (follow) => follow.userId === profileId
+            (follow) => follow.userId === profileId,
           );
           this.following.set(isFollowing);
         }),
@@ -286,7 +298,7 @@ export class ProfileComponent implements OnInit {
           console.error('Error checking following status:', error);
           this.following.set(false);
           return EMPTY;
-        })
+        }),
       )
       .subscribe();
   }
@@ -314,18 +326,18 @@ export class ProfileComponent implements OnInit {
               this.notificationService.success(
                 this.translate.instant('profile.followingSuccess', {
                   name: user?.name || 'user',
-                })
+                }),
               );
             }),
             catchError((error) => {
               this.following.set(false);
               event.source.checked = false;
               this.notificationService.error(
-                this.translate.instant('profile.followingError')
+                this.translate.instant('profile.followingError'),
               );
               console.error('Error following user:', error);
               return EMPTY;
-            })
+            }),
           )
           .subscribe();
       } else {
@@ -339,11 +351,11 @@ export class ProfileComponent implements OnInit {
               this.following.set(true);
               event.source.checked = true;
               this.notificationService.error(
-                this.translate.instant('profile.unfollowError')
+                this.translate.instant('profile.unfollowError'),
               );
               console.error('Error unfollowing user:', error);
               return EMPTY;
-            })
+            }),
           )
           .subscribe();
       }

@@ -1,5 +1,4 @@
 import { Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { applicationConfig } from '@storybook/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { storybookTranslateConfig } from '../../app/shared';
@@ -15,7 +14,7 @@ const meta: Meta<NotificationComponent> = {
   component: NotificationComponent,
   decorators: [
     applicationConfig({
-      providers: [provideAnimations(), provideHttpClient(withFetch())],
+      providers: [provideHttpClient(withFetch())],
     }),
     moduleMetadata({
       imports: [TranslateModule.forRoot(storybookTranslateConfig)],

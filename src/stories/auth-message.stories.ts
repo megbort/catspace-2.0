@@ -1,6 +1,5 @@
 import { Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
 import { AuthMessageComponent } from '../app/components/auth/auth-message.component';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { applicationConfig } from '@storybook/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { storybookTranslateConfig } from '../app/shared/config/translate';
@@ -15,7 +14,6 @@ const meta: Meta<AuthMessageComponent> = {
   decorators: [
     applicationConfig({
       providers: [
-        provideAnimations(),
         provideHttpClient(withFetch()),
         {
           provide: ActivatedRoute,

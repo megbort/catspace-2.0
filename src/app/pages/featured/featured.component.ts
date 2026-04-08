@@ -3,23 +3,24 @@ import { LoaderService, User, UserService } from '../../services';
 import { TranslateModule } from '@ngx-translate/core';
 import { ProfileCardComponent } from '../../components/profile-card/profile-card.component';
 import { Router } from '@angular/router';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { catchError, map, of } from 'rxjs';
 import { GlobalStore } from '../../shared/state/global.store';
+import { SkeletonComponent } from '../../components/ui/skeleton.component';
 
 @Component({
   selector: 'app-featured',
-  imports: [TranslateModule, ProfileCardComponent, MatProgressSpinnerModule],
+  imports: [TranslateModule, ProfileCardComponent, SkeletonComponent],
   templateUrl: './featured.component.html',
   styles: `
-  :host{
-    @apply grow;
-  }
+    :host {
+      @apply grow;
+    }
   `,
 })
 export class FeaturedComponent implements OnInit {
   profiles: User[] = [];
   loadedProfiles = 8;
+  skeletonCards = Array.from({ length: 8 });
   loading = computed(() => this.globalStore.isLoading());
 
   private readonly globalStore = inject(GlobalStore);
@@ -40,7 +41,7 @@ export class FeaturedComponent implements OnInit {
         catchError((error) => {
           console.error('Error fetching users:', error);
           return of([]);
-        })
+        }),
       )
       .subscribe((data: User[]) => {
         this.profiles = data;

@@ -1,4 +1,3 @@
-
 import {
   Component,
   computed,
@@ -11,7 +10,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { GlobalStore } from '../../shared';
 import {
   LoaderService,
@@ -37,9 +35,8 @@ import { of, Subject } from 'rxjs';
     MatIconModule,
     MatButtonModule,
     RouterModule,
-    MatProgressSpinnerModule,
-    PostCardComponent
-],
+    PostCardComponent,
+  ],
   templateUrl: './following.component.html',
 })
 export class FollowingComponent implements OnInit, OnDestroy {
@@ -52,6 +49,7 @@ export class FollowingComponent implements OnInit, OnDestroy {
 
   initialized = signal(false);
   followingPosts = signal<Post[]>([]);
+  skeletonCards = Array.from({ length: 8 });
   loading = computed(() => this.globalStore.isLoading());
 
   ngOnInit(): void {
@@ -110,7 +108,7 @@ export class FollowingComponent implements OnInit, OnDestroy {
         finalize(() => {
           this.loader.hide();
           this.initialized.set(true);
-        })
+        }),
       )
       .subscribe();
   }

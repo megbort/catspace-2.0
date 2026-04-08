@@ -3,7 +3,6 @@ import { LoaderComponent } from '../../app/components/ui/loader.component';
 import { LoaderService } from '../../app/services/loader.service';
 import { GlobalStore } from '../../app/shared/state/global.store';
 import { applicationConfig } from '@storybook/angular';
-import { provideAnimations } from '@angular/platform-browser/animations';
 
 const meta: Meta<LoaderComponent> = {
   title: 'Design System/Loader',
@@ -11,7 +10,6 @@ const meta: Meta<LoaderComponent> = {
   decorators: [
     applicationConfig({
       providers: [
-        provideAnimations(),
         {
           provide: GlobalStore,
           useFactory: () => {
