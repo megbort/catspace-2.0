@@ -1,15 +1,15 @@
 import { inject, Injectable } from '@angular/core';
 import { User } from './models';
 import { catchError, from, map, Observable, of, throwError } from 'rxjs';
-import { Firestore } from '@angular/fire/firestore';
 import {
   collection,
   doc,
+  Firestore,
   getDoc,
   getDocs,
   setDoc,
   updateDoc,
-} from 'firebase/firestore';
+} from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root',

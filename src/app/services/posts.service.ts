@@ -2,8 +2,13 @@ import { inject, Injectable, signal } from '@angular/core';
 import { Post } from './models';
 import { from, Observable, forkJoin, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-import { Firestore } from '@angular/fire/firestore';
-import { collection, doc, getDocs, setDoc } from 'firebase/firestore';
+import {
+  collection,
+  doc,
+  Firestore,
+  getDocs,
+  setDoc,
+} from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root',

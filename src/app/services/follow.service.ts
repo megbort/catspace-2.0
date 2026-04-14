@@ -1,14 +1,14 @@
 import { inject, Injectable } from '@angular/core';
 import { from, Observable, forkJoin } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Firestore } from '@angular/fire/firestore';
 import {
   collection,
   deleteDoc,
   doc,
+  Firestore,
   getDocs,
   setDoc,
-} from 'firebase/firestore';
+} from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root',

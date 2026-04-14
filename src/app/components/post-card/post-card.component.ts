@@ -9,6 +9,9 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { UnpicImageDirective } from '@unpic/angular';
 import { catchError, tap, take, finalize } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
+import { MatButtonToggleChange } from '@angular/material/button-toggle';
+import { AuthMessageComponent } from '../auth/auth-message.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-post-card',
@@ -20,6 +23,7 @@ export class PostCardComponent implements OnInit {
   private readonly authService = inject(AuthService);
   private readonly notificationService = inject(NotificationService);
   private readonly translate = inject(TranslateService);
+  private readonly dialog = inject(MatDialog);
 
   post = input<Post>({
     id: '',
@@ -74,12 +78,16 @@ export class PostCardComponent implements OnInit {
 
   toggleFavorite(): void {
     const currentUser = this.authService.currentUserSignal();
-    const post = this.post();
+    if (!currentUser) {
+      this.showAuthMessage();
+      return;
+    }
 
-    if (!post.id || !post.userId || !currentUser) {
+    const post = this.post();
+    if (!post.id || !post.userId) {
       console.error('Post missing properties:', post);
       this.notificationService.error(
-        this.translate.instant('favorite.error.favoritePost')
+        this.translate.instant('favorite.error.favoritePost'),
       );
       return;
     }
@@ -102,14 +110,14 @@ export class PostCardComponent implements OnInit {
           catchError((error) => {
             console.error('Error unfavoriting post:', error);
             this.notificationService.error(
-              this.translate.instant('favorite.error.unfavoritePost')
+              this.translate.instant('favorite.error.unfavoritePost'),
             );
             return EMPTY;
           }),
           take(1),
           finalize(() => {
             this.loading.set(false);
-          })
+          }),
         )
         .subscribe();
     } else {
@@ -123,16 +131,20 @@ export class PostCardComponent implements OnInit {
           catchError((error) => {
             console.error('Error favoriting post:', error);
             this.notificationService.error(
-              this.translate.instant('favorite.error.favoritePost')
+              this.translate.instant('favorite.error.favoritePost'),
             );
             return EMPTY;
           }),
           take(1),
           finalize(() => {
             this.loading.set(false);
-          })
+          }),
         )
         .subscribe();
     }
+  }
+
+  showAuthMessage(): void {
+    this.dialog.open(AuthMessageComponent, { autoFocus: false });
   }
 }

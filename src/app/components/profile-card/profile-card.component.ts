@@ -88,7 +88,7 @@ export class ProfileCardComponent implements OnInit {
           console.error('Error loading follower count:', error);
           this.followerCount.set(this.profile().followers.length);
           return EMPTY;
-        })
+        }),
       )
       .subscribe();
   }
@@ -109,7 +109,7 @@ export class ProfileCardComponent implements OnInit {
       .pipe(
         tap((following) => {
           const isFollowing = following.some(
-            (follow) => follow.userId === profileId
+            (follow) => follow.userId === profileId,
           );
           this.following.set(isFollowing);
         }),
@@ -117,7 +117,7 @@ export class ProfileCardComponent implements OnInit {
           console.error('Error checking following status:', error);
           this.following.set(false);
           return EMPTY;
-        })
+        }),
       )
       .subscribe();
   }
@@ -146,18 +146,18 @@ export class ProfileCardComponent implements OnInit {
                 this.translate.instant('profile.followingSuccess', {
                   name: this.profile().name,
                 }),
-                { duration: 50000 }
+                { duration: 50000 },
               );
             }),
             catchError((error) => {
               this.following.set(false);
               event.source.checked = false;
               this.notificationService.error(
-                this.translate.instant('profile.followingError')
+                this.translate.instant('profile.followingError'),
               );
               console.error('Error following user:', error);
               return EMPTY;
-            })
+            }),
           )
           .subscribe();
       } else {
@@ -171,11 +171,11 @@ export class ProfileCardComponent implements OnInit {
               this.following.set(true);
               event.source.checked = true;
               this.notificationService.error(
-                this.translate.instant('profile.unfollowError')
+                this.translate.instant('profile.unfollowError'),
               );
               console.error('Error unfollowing user:', error);
               return EMPTY;
-            })
+            }),
           )
           .subscribe();
       }

@@ -1,15 +1,15 @@
 import { inject, Injectable } from '@angular/core';
 import { from, Observable, forkJoin, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-import { Firestore } from '@angular/fire/firestore';
 import {
   collection,
   deleteDoc,
   doc,
+  Firestore,
   getDoc,
   getDocs,
   setDoc,
-} from 'firebase/firestore';
+} from '@angular/fire/firestore';
 
 export interface FavoritePost {
   postId: string;

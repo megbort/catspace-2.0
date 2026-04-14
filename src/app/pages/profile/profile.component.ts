@@ -128,6 +128,8 @@ export class ProfileComponent implements OnInit {
   private loadProfileData(id: string): void {
     this.initialized.set(false);
     this.loader.show();
+    this.isOwner.set(false);
+    this.following.set(false);
 
     const currentUser = this.authService.currentUserSignal();
 
@@ -138,10 +140,7 @@ export class ProfileComponent implements OnInit {
       if (isCurrentUser) {
         this.loadUserData(id);
       } else {
-        this.loadUserDataVisitor(id);
-        // Load follow status and follower count for visitors
-        this.loadFollowerCount();
-        this.setFollowingStatus();
+        this.loadVisitorProfile(id);
       }
 
       return;
@@ -152,27 +151,15 @@ export class ProfileComponent implements OnInit {
         this.isOwner.set(true);
         this.loadUserData(id);
       } else {
-        this.tryLoadAsUser(id);
+        this.loadVisitorProfile(id);
       }
     });
   }
 
-  private tryLoadAsUser(id: string): void {
-    this.userService
-      .getUserProfileById(id)
-      .then((userData) => {
-        if (userData) {
-          this.isOwner.set(true);
-          this._user.set(userData);
-          this.loadUserPosts(id);
-        } else {
-          this.loadUserDataVisitor(id);
-        }
-      })
-      .catch((error) => {
-        console.error('Error loading user data, trying user data', error);
-        this.loadUserDataVisitor(id);
-      });
+  private loadVisitorProfile(id: string): void {
+    this.loadUserDataVisitor(id);
+    this.loadFollowerCount();
+    this.setFollowingStatus();
   }
 
   private loadUserData(id: string): void {

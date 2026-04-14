@@ -24,7 +24,7 @@
     <div class="basis-1/2 px-8 pb-4 md:pb-0">
       <img
         unpic
-        class="max-w-[400px]"
+        class="max-w-[400px] rounded"
         src="https://res.cloudinary.com/dm1yyjg7i/image/upload/v1753054362/catspace/cat-doodle-2_gb462f.jpg"
         alt="Two orange cats"
       />
@@ -54,11 +54,11 @@
     <div
       class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8 justify-center"
     >
-      @for(profile of featured; track profile.id) {
-      <app-profile-card
-        [profile]="profile"
-        (view)="viewProfile($event)"
-      ></app-profile-card>
+      @for (profile of featured; track profile.id) {
+        <app-profile-card
+          [profile]="profile"
+          (view)="viewProfile($event)"
+        ></app-profile-card>
       }
     </div>
     <p

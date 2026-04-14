@@ -14,6 +14,7 @@
   --app-border: #e5d1c5;
   --app-nav-footer-bg: #f9ede5;
   --app-nav-footer-text: #2d1f1a;
+  --app-card-bg: #fefdf8;
 }
 
 .dark-theme {
@@ -24,6 +25,7 @@
   --app-border: #4a3a33;
   --app-nav-footer-bg: #5a3022;
   --app-nav-footer-text: #fff3ec;
+  --app-card-bg: #5a3022;
   color-scheme: dark;
 }
 
@@ -43,6 +45,10 @@ body {
 
 * {
   @apply box-border;
+}
+
+.bg-card {
+  background-color: color-mix(in srgb, var(--app-card-bg) 55%, transparent);
 }
 
 .dark-theme .bg-catspace-beige {
