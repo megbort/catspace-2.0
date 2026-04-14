@@ -81,7 +81,15 @@
         class="justify-center grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 max-w-[800px]"
       >
         @for (post of posts(); track $index) {
-          <app-post-card [post]="post"></app-post-card>
+          <app-post-card
+            [post]="post"
+            role="button"
+            tabindex="0"
+            [attr.aria-label]="'View post: ' + post.title"
+            (click)="viewPost(post)"
+            (keydown.enter)="viewPost(post)"
+            (keydown.space)="onPostCardSpace($event, post)"
+          ></app-post-card>
         }
       </div>
     } @else {

@@ -32,6 +32,7 @@ import { CreatePostComponent } from '../../components/create-post/create-post.co
 import { GlobalStore } from '../../shared/state/global.store';
 import { EMPTY } from 'rxjs';
 import { SkeletonComponent } from '../../components/ui/skeleton.component';
+import { PostDetailComponent } from '../../components/post-detail/post-detail.component';
 
 @Component({
   selector: 'app-profile',
@@ -347,6 +348,19 @@ export class ProfileComponent implements OnInit {
           .subscribe();
       }
     });
+  }
+
+  viewPost(post: Post): void {
+    this.dialog.open(PostDetailComponent, {
+      width: '750px',
+      autoFocus: false,
+      data: { post },
+    });
+  }
+
+  onPostCardSpace(event: Event, post: Post): void {
+    event.preventDefault();
+    this.viewPost(post);
   }
 
   showAuthMessage(): void {
