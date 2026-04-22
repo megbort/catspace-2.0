@@ -48,7 +48,8 @@
       "fileTooLarge": "File size must be less than 5MB.",
       "uploadFailed": "Failed to upload image. Please try again.",
       "updateProfile": "Failed to update profile. Please try again.",
-      "userNotFound": "User not found. Please log in again."
+      "userNotFound": "User not found. Please log in again.",
+      "imageRequired": "An image is required."
     }
   },
   "menu": {

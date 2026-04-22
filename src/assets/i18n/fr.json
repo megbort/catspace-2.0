@@ -1,0 +1,188 @@
+{
+  "common": {
+    "catspace": "catspace",
+    "followers": "Abonnés",
+    "favorites": "Favoris",
+    "featured": "En vedette",
+    "following": "Abonnements",
+    "email": "E-mail",
+    "password": "Mot de passe",
+    "account": "Compte",
+    "demo": "Ce site web est à des fins de démonstration uniquement. Il est fonctionnel, mais juste pour le plaisir. N'hésitez pas à explorer et à expérimenter ! 😺"
+  },
+  "button": {
+    "createAccount": "Créer un compte",
+    "login": "Se connecter",
+    "signUp": "S'inscrire",
+    "follow": "Suivre",
+    "unfollow": "Se désabonner",
+    "viewProfile": "Voir le profil",
+    "showMore": "Voir plus",
+    "viewPost": "Voir le post",
+    "message": "Message",
+    "logout": "Se déconnecter",
+    "next": "Suivant",
+    "back": "Retour",
+    "newPost": "Nouveau post",
+    "close": "Fermer",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "editProfile": "Modifier le profil",
+    "post": "Publier",
+    "delete": "Supprimer",
+    "featured": "Profils en vedette",
+    "uploadNew": "Télécharger",
+    "remove": "Supprimer"
+  },
+  "form": {
+    "error": {
+      "login": "Échec de la connexion. Veuillez vérifier votre e-mail et votre mot de passe.",
+      "emailInUse": "Cet e-mail est déjà utilisé. Veuillez utiliser un e-mail différent.",
+      "signUpDefault": "Échec de l'inscription. Veuillez réessayer.",
+      "emailInvalid": "L'adresse e-mail est invalide. Veuillez entrer une adresse e-mail valide.",
+      "required": "Ce champ est obligatoire.",
+      "passwordLength": "Le mot de passe doit contenir au moins 6 caractères.",
+      "nameLength": "Le nom doit contenir au moins 2 caractères.",
+      "descriptionLength": "La description ne peut pas dépasser 400 caractères.",
+      "invalidFileType": "Veuillez sélectionner un fichier image valide (JPG, JPEG ou PNG).",
+      "fileTooLarge": "La taille du fichier doit être inférieure à 5 Mo.",
+      "uploadFailed": "Échec du téléchargement de l'image. Veuillez réessayer.",
+      "updateProfile": "Échec de la mise à jour du profil. Veuillez réessayer.",
+      "userNotFound": "Utilisateur introuvable. Veuillez vous reconnecter.",
+      "imageRequired": "Une image est requise."
+    }
+  },
+  "menu": {
+    "featured": "En vedette",
+    "following": "Abonnements",
+    "myPage": "Ma page",
+    "search": "Rechercher",
+    "home": "Accueil",
+    "account": "Compte",
+    "notifications": "Notifications",
+    "settings": "Paramètres",
+    "logout": "Se déconnecter",
+    "favorites": "Favoris",
+    "help": "Aide"
+  },
+  "home": {
+    "heroTitle": "Bienvenue sur catspace !",
+    "heroSubtitle": "Un endroit géré par des chats, <em>pour les chats</em>. Téléchargez et partagez vos images avec d'autres et faites de nouveaux amis.",
+    "about": "À propos de Catspace",
+    "description1": "Chez catspace, nous croyons que chaque chat mérite d'être sous les projecteurs ! Notre plateforme est dédiée aux amateurs de félins, où vous pouvez présenter vos compagnons adorés, partager des moments adorables et vous connecter avec d'autres amateurs de chats.",
+    "description2": "Que vous cherchiez des conseils, des anecdotes sur les chats, ou simplement une communauté sympathique, nous avons tout. Rejoignez-nous pour célébrer le monde parfait des chats et forger des amitiés qui transcendent les frontières, tout en profitant d'une atmosphère ludique vraiment conçue pour nos amis à fourrure.",
+    "featured": "Profils en vedette",
+    "explore": "Explorer plus de profils"
+  },
+  "footer": {
+    "copyright": "Conçu et développé par Megan Krenbrink."
+  },
+  "profile": {
+    "noPosts": "Aucun post",
+    "tags": "Tags du profil",
+    "followingSuccess": "Vous suivez maintenant {{name}} !",
+    "followingError": "Échec du suivi de l'utilisateur. Veuillez réessayer.",
+    "unfollowError": "Échec du désabonnement. Veuillez réessayer."
+  },
+  "post": {
+    "view": "Voir le post",
+    "favorite": "Le post a été ajouté à vos favoris !"
+  },
+  "auth": {
+    "authMessage": "Veuillez vous connecter ou créer un compte pour utiliser cette fonctionnalité.",
+    "loginRequired": "Veuillez vous connecter pour ajouter des posts en favoris.",
+    "noAccount": "Vous n'avez pas de compte ?",
+    "haveAccount": "Vous avez déjà un compte ?",
+    "login": {
+      "title": "Connexion",
+      "form": {
+        "email": "E-mail",
+        "password": "Mot de passe",
+        "placeholder": {
+          "email": "Entrez votre e-mail",
+          "password": "Entrez votre mot de passe"
+        }
+      },
+      "success": {
+        "loggedIn": "Connecté avec succès !"
+      }
+    },
+    "signUp": {
+      "title": "Inscription",
+      "step1": "Nous sommes ravis de vous accueillir ! Commençons par obtenir quelques informations de base pour votre profil.",
+      "step2": "Presque terminé ! Ensuite, renseignez votre e-mail et votre mot de passe, puis préparez-vous à commencer à publier.",
+      "form": {
+        "name": "Nom du profil",
+        "handle": "Identifiant",
+        "handleHelp": "C'est un moyen rapide de mentionner d'autres personnes et apparaît sur votre profil comme '@monidentifiant2000'",
+        "description": "Description du profil (optionnel)",
+        "placeholder": {
+          "name": "Entrez le nom de votre profil",
+          "handle": "Entrez votre identifiant",
+          "email": "Entrez votre e-mail",
+          "password": "Entrez votre mot de passe",
+          "description": "Entrez une courte description de vous-même, elle sera affichée sur votre page de profil."
+        }
+      },
+      "success": {
+        "accountCreated": "Compte créé avec succès ! Vous pouvez maintenant vous connecter."
+      }
+    }
+  },
+  "media": {
+    "rateLimitExceeded": "Limite de requêtes dépassée. Veuillez réessayer plus tard.",
+    "error": {
+      "authFailed": "L'utilisateur doit être authentifié pour télécharger des images.",
+      "fileTooLarge": "La taille du fichier dépasse {{maxSizeBytes}} octets. Veuillez télécharger un fichier plus petit.",
+      "invalidFileType": "Type de fichier invalide. Veuillez télécharger un fichier de type {{ fileTypes }}.",
+      "maxDimensions": "Les dimensions de l'image dépassent {{maxWidth}}x{{maxHeight}} pixels. Veuillez télécharger une image plus petite."
+    }
+  },
+  "createPost": {
+    "title": "Nouveau post",
+    "form": {
+      "title": "Titre du post",
+      "titlePlaceholder": "Entrez le titre de votre post",
+      "description": "Description du post",
+      "descriptionPlaceholder": "Entrez une description pour votre post",
+      "image": "Cliquez pour télécharger une image"
+    },
+    "success": {
+      "postCreated": "Post créé avec succès !"
+    },
+    "error": {
+      "postFailed": "Échec de la création du post. Veuillez réessayer."
+    }
+  },
+  "editProfile": {
+    "title": "Modifier le profil",
+    "form": {
+      "name": "Nom",
+      "handle": "Identifiant",
+      "description": "Description",
+      "placeholder": {
+        "name": "Entrez le nom de votre profil",
+        "handle": "Entrez votre identifiant",
+        "description": "Entrez une courte description de vous-même."
+      }
+    },
+    "success": {
+      "profileUpdated": "Profil mis à jour avec succès !"
+    },
+    "error": {
+      "updateProfile": "Échec de la mise à jour du profil. Veuillez réessayer."
+    }
+  },
+  "following": {
+    "title": "Abonnements",
+    "latest": "Derniers posts",
+    "empty1": "Aucun profil suivi pour l'instant.",
+    "empty2": "Découvrez des créateurs incroyables sur notre page en vedette !"
+  },
+  "favorite": {
+    "error": {
+      "favoritePost": "Échec de l'ajout en favoris. Veuillez réessayer.",
+      "unfavoritePost": "Échec de la suppression des favoris. Veuillez réessayer."
+    }
+  }
+}

@@ -16,7 +16,7 @@ import { TranslateModule } from '@ngx-translate/core';
           class="small"
           mat-icon-button
           (click)="close()"
-          [attr.aria-label]="'buttons.close' | translate"
+          [attr.aria-label]="'button.close' | translate"
         >
           <mat-icon class="icon-16">close</mat-icon>
         </button>
