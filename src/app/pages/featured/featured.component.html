@@ -6,7 +6,7 @@
   </h2>
   @if (loading()) {
     <div
-      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-center"
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-items-center sm:justify-items-start"
     >
       @for (skeleton of skeletonCards; track $index) {
         <app-skeleton [width]="275" [height]="275"></app-skeleton>
@@ -14,7 +14,7 @@
     </div>
   } @else {
     <div
-      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-center"
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-items-center sm:justify-items-start"
     >
       @for (profile of profiles.slice(0, loadedProfiles); track profile.id) {
         <app-profile-card

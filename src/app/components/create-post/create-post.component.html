@@ -3,7 +3,7 @@
     @if (form.get("image")?.value) {
       <div
         #imageContainer
-        class="relative overflow-hidden rounded w-full cursor-grab active:cursor-grabbing select-none bg-catspace-grey"
+        class="relative overflow-hidden rounded w-full cursor-grab active:cursor-grabbing select-none bg-catspace-grey min-h-[300px]"
         style="aspect-ratio: 4/3; touch-action: none"
         (mousedown)="startDrag($event)"
         (touchstart)="startDrag($event)"

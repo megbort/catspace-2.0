@@ -114,76 +114,83 @@
       }
     </div>
 
-    <!-- Mobile menu -->
-    <div class="inline-block md:hidden">
+    <!-- Mobile/Tablet menu -->
+    <div class="flex items-center gap-2 md:hidden">
+      <button
+        mat-icon-button
+        class="theme-toggle"
+        [attr.aria-label]="'Toggle dark mode'"
+        [attr.title]="
+          isDarkTheme() ? 'Switch to light mode' : 'Switch to dark mode'
+        "
+        (click)="toggleTheme()"
+      >
+        <mat-icon>{{ isDarkTheme() ? "light_mode" : "dark_mode" }}</mat-icon>
+      </button>
       <button mat-icon-button [matMenuTriggerFor]="menu">
         <mat-icon class="mb-1">menu</mat-icon>
       </button>
     </div>
   </div>
 
-  <mat-menu #menu="matMenu">
+  <mat-menu #menu="matMenu" class="px-2">
     <ul>
       @if (!isLoggedIn()) {
-        <li mat-menu-item>
-          <a
-            routerLink="/home"
-            routerLinkActive="text-catspace-dark-orange"
-            [routerLinkActiveOptions]="{ exact: true }"
-          >
-            {{ "menu.home" | translate }}
-          </a>
-        </li>
-      }
-      <li mat-menu-item>
-        <a routerLink="/featured" routerLinkActive="text-catspace-dark-orange">
-          {{ "menu.featured" | translate }}
+        <a
+          mat-menu-item
+          routerLink="/home"
+          routerLinkActive="text-catspace-dark-orange"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          {{ "menu.home" | translate }}
         </a>
-      </li>
+      }
+      <a
+        mat-menu-item
+        routerLink="/featured"
+        routerLinkActive="text-catspace-dark-orange"
+      >
+        <mat-icon>star</mat-icon>
+        <span>{{ "menu.featured" | translate }}</span>
+      </a>
       @if (isLoggedIn()) {
-        <li mat-menu-item>
-          <a
-            routerLink="/following"
-            routerLinkActive="text-catspace-dark-orange"
-          >
-            {{ "menu.following" | translate }}
-          </a>
-        </li>
-        <li mat-menu-item>
-          <a
-            routerLink="/profile/me"
-            routerLinkActive="text-catspace-dark-orange"
-          >
-            {{ "menu.myPage" | translate }}
-          </a>
-        </li>
-        <li mat-menu-item>
-          <button
-            (click)="toggleTheme()"
-            class="w-full text-left flex items-center gap-2"
-          >
-            <mat-icon class="text-sm">{{
-              isDarkTheme() ? "light_mode" : "dark_mode"
-            }}</mat-icon>
-            <span>{{ isDarkTheme() ? "Light mode" : "Dark mode" }}</span>
-          </button>
-        </li>
-        <li mat-menu-item>
-          <button (click)="logout()">
-            {{ "button.logout" | translate }}
-          </button>
-        </li>
+        <a
+          mat-menu-item
+          routerLink="/following"
+          routerLinkActive="text-catspace-dark-orange"
+        >
+          <mat-icon>pets</mat-icon>
+          <span>{{ "menu.following" | translate }}</span>
+        </a>
+        <a
+          mat-menu-item
+          routerLink="/profile/me"
+          routerLinkActive="text-catspace-dark-orange"
+        >
+          <mat-icon>person</mat-icon>
+          <span>{{ "menu.myPage" | translate }}</span>
+        </a>
+        <button mat-menu-item (click)="openDialog('newPost')">
+          <mat-icon>add_box</mat-icon>
+          <span>{{ "button.newPost" | translate }}</span>
+        </button>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          <span>{{ "button.logout" | translate }}</span>
+        </button>
       } @else {
-        <li mat-menu-item>
-          <button class="min-w-[150px]" (click)="openDialog('signUp')">
-            {{ "button.signUp" | translate }}
-          </button>
-        </li>
-        <li mat-menu-item>
-          <button (click)="openDialog('login')">
-            {{ "button.login" | translate }}
-          </button>
-        </li>
+        <button
+          mat-menu-item
+          class="min-w-[150px]"
+          (click)="openDialog('signUp')"
+        >
+          <mat-icon>app_registration</mat-icon>
+          <span>{{ "button.signUp" | translate }}</span>
+        </button>
+        <button mat-menu-item (click)="openDialog('login')">
+          <mat-icon>login</mat-icon>
+          <span>{{ "button.login" | translate }}</span>
+        </button>
       }
     </ul>
   </mat-menu>
