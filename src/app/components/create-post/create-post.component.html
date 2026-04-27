@@ -1,54 +1,82 @@
 <app-custom-dialog [title]="'createPost.title' | translate">
   <form [formGroup]="form">
-    @if(form.get('image')?.value) {
-    <div class="h-[300px]">
-      <div class="w-full h-full overflow-hidden rounded">
+    @if (form.get("image")?.value) {
+      <div
+        #imageContainer
+        class="relative overflow-hidden rounded w-full cursor-grab active:cursor-grabbing select-none bg-catspace-grey"
+        style="aspect-ratio: 4/3; touch-action: none"
+        (mousedown)="startDrag($event)"
+        (touchstart)="startDrag($event)"
+        (touchmove)="onTouchMove($event)"
+        (touchend)="onTouchEnd()"
+      >
         <img
+          #imageElement
           [src]="form.get('image')?.value"
-          alt="Post preview"
-          class="w-full h-full object-cover"
+          class="absolute left-1/2 top-1/2 pointer-events-none user-select-none max-w-none"
+          [style.width.px]="baseW()"
+          [style.height.px]="baseH()"
+          [style.transform]="imageTransform()"
+          draggable="false"
+          alt=""
+          (load)="onImageLoad()"
         />
       </div>
-    </div>
-    <div class="flex justify-between mt-2">
-      <button
-        mat-button
-        type="button"
-        class="flex items-center"
-        (click)="removeImage()"
-      >
+
+      <div class="flex items-center justify-between mt-2">
+        <button mat-button type="button" (click)="removeImage()">
+          <div class="flex items-center gap-1">
+            <span class="material-symbols-outlined text-catspace-orange icon-16"
+              >delete</span
+            >
+            <span class="text-body-2 text-catspace-brown">{{
+              "button.remove" | translate
+            }}</span>
+          </div>
+        </button>
+
         <div class="flex items-center gap-1">
-          <span class="material-symbols-outlined text-catspace-orange icon-16"
-            >delete</span
+          <button
+            mat-icon-button
+            type="button"
+            [disabled]="!canZoomOut()"
+            (click)="zoomOut()"
+            aria-label="Zoom out"
           >
-          <span class="text-body-2 text-catspace-brown">{{
-            "button.remove" | translate
-          }}</span>
-        </div>
-      </button>
-      <button mat-button type="button" (click)="filePicker.click()">
-        <div class="flex items-center gap-1">
-          <span class="material-symbols-outlined icon-16 text-catspace-orange"
-            >upload</span
+            <span class="material-symbols-outlined icon-20">remove</span>
+          </button>
+          <button
+            mat-icon-button
+            type="button"
+            [disabled]="!canZoomIn()"
+            (click)="zoomIn()"
+            aria-label="Zoom in"
           >
-          <span class="text-body-2 text-catspace-brown">{{
-            "button.uploadNew" | translate
-          }}</span>
+            <span class="material-symbols-outlined icon-20">add</span>
+          </button>
         </div>
-      </button>
-    </div>
+
+        <button mat-button type="button" (click)="filePicker.click()">
+          <div class="flex items-center gap-1">
+            <span class="material-symbols-outlined icon-16 text-catspace-orange"
+              >upload</span
+            >
+            <span class="text-body-2 text-catspace-brown">{{
+              "button.uploadNew" | translate
+            }}</span>
+          </div>
+        </button>
+      </div>
     } @else {
-    <button
-      type="button"
-      class="rounded bg-catspace-grey h-[300px] flex flex-col items-center justify-center cursor-pointer w-full border-none"
-      (click)="filePicker.click()"
-      [attr.aria-label]="'createPost.form.image' | translate"
-    >
-      <span class="material-symbols-outlined icon-60 text-catspace-brown">
-        add_box
-      </span>
-      <p>{{ "createPost.form.image" | translate }}</p>
-    </button>
+      <button
+        type="button"
+        class="rounded bg-catspace-grey h-[300px] flex flex-col items-center justify-center cursor-pointer w-full border-none text-catspace-black hover:text-catspace-brown transition-colors"
+        (click)="filePicker.click()"
+        [attr.aria-label]="'createPost.form.image' | translate"
+      >
+        <span class="material-symbols-outlined icon-60"> add_box </span>
+        <p>{{ "createPost.form.image" | translate }}</p>
+      </button>
     }
     <input
       #filePicker
@@ -88,8 +116,18 @@
       <button mat-stroked-button type="button" class="flex-1" (click)="close()">
         {{ "button.cancel" | translate }}
       </button>
-      <button mat-flat-button type="button" class="flex-1" (click)="post()">
-        {{ "button.post" | translate }}
+      <button
+        mat-flat-button
+        type="button"
+        class="flex-1"
+        (click)="post()"
+        [disabled]="isPosting()"
+      >
+        @if (isPosting()) {
+          <mat-spinner diameter="18" />
+        } @else {
+          {{ "button.post" | translate }}
+        }
       </button>
     </div>
   </form>

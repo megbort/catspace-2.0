@@ -37,6 +37,7 @@ export class PostCardComponent implements OnInit {
   isFavorited = signal(false);
   favoriteCount = signal(0);
   loading = signal(false);
+  showSparkles = signal(false);
 
   ngOnInit(): void {
     this.checkIfFavorited();
@@ -75,7 +76,9 @@ export class PostCardComponent implements OnInit {
       });
   }
 
-  toggleFavorite(): void {
+  toggleFavorite(event?: Event): void {
+    event?.stopPropagation();
+
     const currentUser = this.authService.currentUserSignal();
     if (!currentUser) {
       this.showAuthMessage();
@@ -97,6 +100,11 @@ export class PostCardComponent implements OnInit {
 
     this.loading.set(true);
     const wasFavorited = this.isFavorited();
+
+    if (!wasFavorited) {
+      this.showSparkles.set(true);
+      setTimeout(() => this.showSparkles.set(false), 800);
+    }
 
     if (wasFavorited) {
       this.favoriteService

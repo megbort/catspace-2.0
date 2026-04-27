@@ -113,10 +113,14 @@
             mat-flat-button
             type="button"
             (click)="save()"
-            [disabled]="!form.valid"
+            [disabled]="!form.valid || isSaving()"
             class="flex-1"
           >
-            {{ "button.save" | translate }}
+            @if (isSaving()) {
+              <mat-spinner diameter="18" />
+            } @else {
+              {{ "button.save" | translate }}
+            }
           </button>
         </div>
       </div>

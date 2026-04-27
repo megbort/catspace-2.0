@@ -85,7 +85,7 @@
       </button>
       @if (isLoggedIn()) {
         <button
-          class="rounded-full w-8 h-8 overflow-hidden"
+          class="rounded-full w-8 h-8 overflow-hidden group shadow-sm hover:shadow-md transition-all duration-200"
           (click)="open.emit()"
         >
           <img
@@ -94,7 +94,7 @@
               'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1753057717/catspace/no-avatar_mm3idt.png'
             "
             [alt]="(currentUser?.name || 'User') + '\'s avatar'"
-            class="w-full h-full object-cover"
+            class="w-full h-full object-cover transition-opacity duration-200 hover:opacity-70"
           />
         </button>
         <button

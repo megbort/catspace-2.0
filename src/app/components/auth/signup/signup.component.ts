@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -9,6 +9,7 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import {
@@ -28,6 +29,7 @@ import { Router } from '@angular/router';
     MatButtonModule,
     MatInputModule,
     MatFormFieldModule,
+    MatProgressSpinnerModule,
     TranslateModule,
     FormsModule,
     ReactiveFormsModule,
@@ -38,6 +40,7 @@ import { Router } from '@angular/router';
 export class SignupComponent {
   form: FormGroup;
   step: 1 | 2 = 1;
+  isSigningUp = signal(false);
 
   private readonly dialog = inject(MatDialog);
   private readonly dialogRef = inject(MatDialogRef<SignupComponent>);
@@ -60,6 +63,7 @@ export class SignupComponent {
 
   signUp(): void {
     if (this.form.valid) {
+      this.isSigningUp.set(true);
       const rawForm = this.form.getRawValue();
       const { name, handle, description, email, password } = rawForm;
 
@@ -86,6 +90,7 @@ export class SignupComponent {
             }
           }),
           finalize(() => {
+            this.isSigningUp.set(false);
             this.loader.hide();
           })
         )

@@ -51,7 +51,7 @@
         >
         </textarea>
       </mat-form-field>
-      <button mat-stroked-button (click)="step = 2" class="my-2">
+      <button mat-stroked-button type="button" (click)="step = 2" class="my-2">
         {{ "button.next" | translate }}
       </button>
     </div>
@@ -95,11 +95,15 @@
         <mat-error>{{ "form.error.passwordLength" | translate }}</mat-error>
         }
       </mat-form-field>
-      <button mat-stroked-button (click)="step = 1" class="my-2">
+      <button mat-stroked-button type="button" (click)="step = 1" class="my-2">
         {{ "button.back" | translate }}
       </button>
-      <button mat-flat-button (click)="signUp()" [disabled]="!form.valid">
-        {{ "button.signUp" | translate }}
+      <button mat-flat-button type="button" (click)="signUp()" [disabled]="!form.valid || isSigningUp()">
+        @if (isSigningUp()) {
+          <mat-spinner diameter="18" />
+        } @else {
+          {{ "button.signUp" | translate }}
+        }
       </button>
     </div>
     }

@@ -1,8 +1,8 @@
 <div
-  class="flex flex-col gap-2 justify-between shadow-card rounded p-3 h-[250px] w-[250px] bg-card"
+  class="flex flex-col gap-2 justify-between shadow-card rounded p-3 h-[270px] w-[250px] bg-card"
 >
   <div
-    class="post-image relative hover:cursor-pointer hover:transform hover:transition-transform duration-300 w-full h-[150px] overflow-hidden rounded"
+    class="post-image relative cursor-pointer w-full h-[170px] overflow-hidden rounded"
   >
     @defer (on viewport) {
       <img
@@ -31,21 +31,30 @@
       <p class="text-body-2 line-clamp-1">
         {{ favoriteCount() }} {{ "common.favorites" | translate }}
       </p>
-      <button
-        type="button"
-        class="heart-button hover:cursor-pointer bg-transparent border-none p-0 text-catspace-orange hover:text-catspace-dark-orange"
-        [disabled]="loading()"
-        (click)="toggleFavorite()"
-        [attr.aria-label]="
-          isFavorited() ? 'Remove from favorites' : 'Add to favorites'
-        "
-      >
-        @if (isFavorited()) {
-          <span class="material-icons icon-18">favorite</span>
-        } @else {
-          <span class="material-icons icon-18">favorite_border</span>
+      <div class="relative inline-block">
+        <button
+          type="button"
+          class="heart-button hover:cursor-pointer bg-transparent border-none p-0 text-catspace-orange hover:text-catspace-dark-orange"
+          [disabled]="loading()"
+          (click)="toggleFavorite($event)"
+          [attr.aria-label]="
+            isFavorited() ? 'Remove from favorites' : 'Add to favorites'
+          "
+        >
+          @if (isFavorited()) {
+            <span class="material-icons icon-18">favorite</span>
+          } @else {
+            <span class="material-icons icon-18">favorite_border</span>
+          }
+        </button>
+        @if (showSparkles()) {
+          <div class="sparkles-container">
+            @for (sparkle of [1, 2, 3, 4, 5]; track sparkle) {
+              <span class="sparkle sparkle-{{ sparkle }}">✨</span>
+            }
+          </div>
         }
-      </button>
+      </div>
     </div>
   </div>
 </div>

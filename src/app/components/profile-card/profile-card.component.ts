@@ -146,7 +146,6 @@ export class ProfileCardComponent implements OnInit {
                 this.translate.instant('profile.followingSuccess', {
                   name: this.profile().name,
                 }),
-                { duration: 50000 },
               );
             }),
             catchError((error) => {

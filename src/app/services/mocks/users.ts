@@ -119,7 +119,7 @@ export const USERS: User[] = [
   },
   {
     id: '03',
-    email: '',
+    email: 'demo5@example.com',
     image:
       'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1730658243/catspace/catspace-image-03_fhxfnz.jpg',
     name: 'Luna Moonpurr',

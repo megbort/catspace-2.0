@@ -67,6 +67,7 @@ export class ProfileComponent implements OnInit {
   isOwner = signal(false);
   loading = computed(() => this.globalStore.isLoading());
   initialized = signal(false);
+  postsLoading = signal(false);
   following = signal(false);
   followerCount = signal(0);
   postSkeletonCards = Array.from({ length: 6 });
@@ -208,6 +209,7 @@ export class ProfileComponent implements OnInit {
   }
 
   private loadUserPosts(id: string): void {
+    this.postsLoading.set(true);
     this.postService
       .getPostsByProfileId(id)
       .pipe(
@@ -218,6 +220,7 @@ export class ProfileComponent implements OnInit {
       )
       .subscribe((posts: Post[]) => {
         this._posts.set(posts);
+        this.postsLoading.set(false);
         this.finishLoading();
       });
   }

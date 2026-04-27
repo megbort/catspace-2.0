@@ -1,7 +1,8 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { CustomDialogComponent } from '../../ui/custom-dialog.component';
 import {
@@ -26,6 +27,7 @@ import { catchError, finalize, of, tap } from 'rxjs';
     MatButtonModule,
     MatInputModule,
     MatFormFieldModule,
+    MatProgressSpinnerModule,
     TranslateModule,
     FormsModule,
     ReactiveFormsModule,
@@ -35,6 +37,7 @@ import { catchError, finalize, of, tap } from 'rxjs';
 })
 export class LoginComponent implements OnInit {
   form: FormGroup;
+  isLoggingIn = signal(false);
 
   private readonly dialog = inject(MatDialog);
   private readonly dialogRef = inject(MatDialogRef<LoginComponent>);
@@ -60,6 +63,7 @@ export class LoginComponent implements OnInit {
 
   login(): void {
     if (this.form.valid) {
+      this.isLoggingIn.set(true);
       this.loader.show();
 
       const rawForm = this.form.getRawValue();
@@ -83,6 +87,7 @@ export class LoginComponent implements OnInit {
             }
           }),
           finalize(() => {
+            this.isLoggingIn.set(false);
             this.loader.hide();
           })
         )

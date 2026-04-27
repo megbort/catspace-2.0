@@ -31,21 +31,32 @@
       <p class="subtitle-2">
         {{ favoriteCount() }} {{ "common.favorites" | translate }}
       </p>
-      <button
-        type="button"
-        class="heart-button bg-transparent border-none p-0 text-catspace-orange hover:text-catspace-dark-orange hover:cursor-pointer"
-        [disabled]="loading()"
-        (click)="toggleFavorite()"
-        [attr.aria-label]="
-          isFavorited() ? 'Remove from favorites' : 'Add to favorites'
-        "
-      >
-        @if (isFavorited()) {
-          <span class="material-icons icon-24">favorite</span>
-        } @else {
-          <span class="material-icons icon-24">favorite_border</span>
+      <div class="relative inline-block">
+        <button
+          type="button"
+          class="heart-button bg-transparent border-none p-0 text-catspace-orange hover:text-catspace-dark-orange hover:cursor-pointer"
+          [disabled]="loading()"
+          (click)="toggleFavorite($event)"
+          [attr.aria-label]="
+            isFavorited() ? 'Remove from favorites' : 'Add to favorites'
+          "
+        >
+          @if (isFavorited()) {
+            <span class="material-icons icon-24">favorite</span>
+          } @else {
+            <span class="material-icons icon-24">favorite_border</span>
+          }
+        </button>
+        @if (showSparkles()) {
+          <div class="sparkles-container">
+            <span class="sparkle sparkle-1">✨</span>
+            <span class="sparkle sparkle-2">✨</span>
+            <span class="sparkle sparkle-3">✨</span>
+            <span class="sparkle sparkle-4">✨</span>
+            <span class="sparkle sparkle-5">✨</span>
+          </div>
         }
-      </button>
+      </div>
     </div>
     <div>
       <p class="text-body-1">{{ displayPost().description }}</p>

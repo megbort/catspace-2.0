@@ -37,12 +37,13 @@ testem.log
 /typings
 .env
 /src/environments/firebase-key.ts
+*storybook.log
+.github
+.claude
+agents.md
+claude.md
 
 # System files
 .DS_Store
 Thumbs.db
 
-*storybook.log
-
-.github
-agents.md

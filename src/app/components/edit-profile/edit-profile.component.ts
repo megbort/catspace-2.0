@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { CustomDialogComponent } from '../ui/custom-dialog.component';
 import {
@@ -36,6 +37,7 @@ interface ProfileUpdates {
     MatIconModule,
     MatInputModule,
     MatFormFieldModule,
+    MatProgressSpinnerModule,
     TranslateModule,
     FormsModule,
     ReactiveFormsModule,
@@ -47,6 +49,7 @@ export class EditProfileComponent implements OnInit {
   form: FormGroup;
   selectedFile: File | null = null;
   previewUrl: string | null = null;
+  isSaving = signal(false);
 
   private readonly dialog = inject(MatDialog);
   private readonly loader = inject(LoaderService);
@@ -119,6 +122,7 @@ export class EditProfileComponent implements OnInit {
 
   save(): void {
     if (this.form.valid) {
+      this.isSaving.set(true);
       this.loader.show();
 
       const currentUser = this.authService.currentUserSignal();
@@ -143,6 +147,7 @@ export class EditProfileComponent implements OnInit {
                 error?.message ||
                 this.translate.instant('form.error.uploadFailed');
               this.notificationService.error(errorMessage);
+              this.isSaving.set(false);
               this.loader.hide();
               return of(null);
             })
@@ -182,6 +187,7 @@ export class EditProfileComponent implements OnInit {
           return of(null);
         }),
         finalize(() => {
+          this.isSaving.set(false);
           this.loader.hide();
         })
       )

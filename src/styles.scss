@@ -1,6 +1,7 @@
 @use "./styles/typographic" as *;
 @use "./styles/theme";
 @use "./styles/material";
+@use "./styles/animations";
 
 @tailwind base;
 @tailwind components;

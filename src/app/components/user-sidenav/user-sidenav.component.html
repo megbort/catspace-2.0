@@ -46,25 +46,23 @@
         <span class="material-symbols-outlined">person</span>
         <p class="subtitle-2">{{ "menu.myPage" | translate }}</p>
       </li>
-      <li class="menu-item">
+      <li
+        class="menu-item"
+        routerLink="/following"
+        (click)="sidenavClose.emit()"
+        (keypress)="sidenavClose.emit()"
+      >
         <span class="material-symbols-outlined">pets</span>
         <p class="subtitle-2">{{ "menu.following" | translate }}</p>
       </li>
-      <li class="menu-item">
+      <li
+        class="menu-item"
+        routerLink="/favorites"
+        (click)="sidenavClose.emit()"
+        (keypress)="sidenavClose.emit()"
+      >
         <span class="material-symbols-outlined">favorite</span>
         <p class="subtitle-2">{{ "menu.favorites" | translate }}</p>
-      </li>
-      <li class="menu-item">
-        <span class="material-symbols-outlined">notifications</span>
-        <p class="subtitle-2">{{ "menu.notifications" | translate }}</p>
-      </li>
-      <li class="menu-item">
-        <span class="material-symbols-outlined">settings</span>
-        <p class="subtitle-2">{{ "menu.settings" | translate }}</p>
-      </li>
-      <li class="menu-item">
-        <span class="material-symbols-outlined">help</span>
-        <p class="subtitle-2">{{ "menu.help" | translate }}</p>
       </li>
       <li class="menu-item" (click)="logout()" (keypress)="logout()">
         <span class="material-symbols-outlined">logout</span>

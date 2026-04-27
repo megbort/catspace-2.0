@@ -9,6 +9,7 @@ import {
 import { TranslateModule } from '@ngx-translate/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { RouterModule } from '@angular/router';
 import { GlobalStore } from '../../shared';
 import {
@@ -19,6 +20,7 @@ import {
 } from '../../services';
 import { Post } from '../../services/models';
 import { PostCardComponent } from '../../components/post-card/post-card.component';
+import { PostDetailComponent } from '../../components/post-detail/post-detail.component';
 import {
   switchMap,
   finalize,
@@ -34,6 +36,7 @@ import { of, Subject } from 'rxjs';
     TranslateModule,
     MatIconModule,
     MatButtonModule,
+    MatDialogModule,
     RouterModule,
     PostCardComponent,
   ],
@@ -45,6 +48,7 @@ export class FollowingComponent implements OnInit, OnDestroy {
   private readonly followService = inject(FollowService);
   private readonly postService = inject(PostService);
   private readonly authService = inject(AuthService);
+  private readonly dialog = inject(MatDialog);
   private readonly destroy$ = new Subject<void>();
 
   initialized = signal(false);
@@ -69,6 +73,14 @@ export class FollowingComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  viewPost(post: Post): void {
+    this.dialog.open(PostDetailComponent, {
+      width: '750px',
+      autoFocus: false,
+      data: { post },
+    });
   }
 
   private loadFollowingPosts(): void {

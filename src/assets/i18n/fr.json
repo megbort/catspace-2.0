@@ -125,7 +125,7 @@
         }
       },
       "success": {
-        "accountCreated": "Compte créé avec succès ! Vous pouvez maintenant vous connecter."
+        "accountCreated": "Compte créé avec succès!"
       }
     }
   },

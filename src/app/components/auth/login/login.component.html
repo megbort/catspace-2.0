@@ -8,10 +8,11 @@
         type="email"
         placeholder="{{ 'auth.login.form.placeholder.email' | translate }}"
       />
-      @if(form.get('email')?.hasError('required')){
-      <mat-error>{{ "form.error.required" | translate }}</mat-error>
-      } @if(form.get('email')?.hasError('email')){
-      <mat-error>{{ "form.error.emailInvalid" | translate }}</mat-error>
+      @if (form.get("email")?.hasError("required")) {
+        <mat-error>{{ "form.error.required" | translate }}</mat-error>
+      }
+      @if (form.get("email")?.hasError("email")) {
+        <mat-error>{{ "form.error.emailInvalid" | translate }}</mat-error>
       }
     </mat-form-field>
     <mat-form-field appearance="outline">
@@ -22,23 +23,29 @@
         type="password"
         placeholder="{{ 'auth.login.form.placeholder.password' | translate }}"
       />
-      @if(form.get('password')?.hasError('required')){
-      <mat-error>{{
-        "form.error.required"
-          | translate : { field: ("auth.login.form.password" | translate) }
-      }}</mat-error>
-      } @if(form.get('password')?.hasError('minlength')){
-      <mat-error>{{ "form.error.passwordLength" | translate }}</mat-error>
+      @if (form.get("password")?.hasError("required")) {
+        <mat-error>{{
+          "form.error.required"
+            | translate: { field: ("auth.login.form.password" | translate) }
+        }}</mat-error>
+      }
+      @if (form.get("password")?.hasError("minlength")) {
+        <mat-error>{{ "form.error.passwordLength" | translate }}</mat-error>
       }
     </mat-form-field>
   </form>
   <button
     mat-flat-button
+    type="button"
     class="w-full"
-    [disabled]="!form.valid"
+    [disabled]="!form.valid || isLoggingIn()"
     (click)="login()"
   >
-    {{ "button.login" | translate }}
+    @if (isLoggingIn()) {
+      <mat-spinner diameter="18" />
+    } @else {
+      {{ "button.login" | translate }}
+    }
   </button>
   <div class="text-center">
     <p class="text-body-2 pt-8 text-center bold">

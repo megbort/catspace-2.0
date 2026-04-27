@@ -38,7 +38,14 @@
       class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
     >
       @for (post of followingPosts(); track post.id) {
-        <app-post-card [post]="post"></app-post-card>
+        <app-post-card
+          [post]="post"
+          role="button"
+          tabindex="0"
+          [attr.aria-label]="'View post: ' + post.title"
+          (click)="viewPost(post)"
+          (keydown.enter)="viewPost(post)"
+        ></app-post-card>
       }
     </div>
   }

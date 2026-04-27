@@ -1,0 +1,56 @@
+// Sparkle animation for liking posts
+.sparkles-container {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.sparkle {
+  position: absolute;
+  font-size: 1rem;
+  display: block;
+  animation: sparkle-burst 0.8s ease-out forwards;
+}
+
+.sparkle-1 {
+  animation-delay: 0s;
+  --translate-x: 30px;
+  --translate-y: -30px;
+}
+
+.sparkle-2 {
+  animation-delay: 0.05s;
+  --translate-x: -30px;
+  --translate-y: -30px;
+}
+
+.sparkle-3 {
+  animation-delay: 0.1s;
+  --translate-x: 30px;
+  --translate-y: -50px;
+}
+
+.sparkle-4 {
+  animation-delay: 0.05s;
+  --translate-x: -30px;
+  --translate-y: -50px;
+}
+
+.sparkle-5 {
+  animation-delay: 0.02s;
+  --translate-x: 0px;
+  --translate-y: -60px;
+}
+
+@keyframes sparkle-burst {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--translate-x), var(--translate-y)) scale(0);
+  }
+}
