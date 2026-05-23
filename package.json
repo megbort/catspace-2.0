@@ -41,6 +41,7 @@
     "@angular/compiler-cli": "21.2.7",
     "@storybook/addon-docs": "10.3.5",
     "@storybook/addon-links": "10.3.5",
+    "@storybook/addon-mcp": "^0.6.0",
     "@storybook/angular": "10.3.5",
     "@types/express": "4.17.17",
     "@types/node": "20.19.0",
