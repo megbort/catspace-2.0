@@ -19,7 +19,7 @@
     "module": "ES2022",
     "useDefineForClassFields": false
   },
-  "exclude": ["vitest.config.ts"],
+  "exclude": ["vitest.config.ts", "playwright.config.ts", "e2e"],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,

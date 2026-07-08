@@ -38,10 +38,15 @@ testem.log
 .env
 /src/environments/firebase-key.ts
 *storybook.log
-.github
-.claude
-agents.md
-claude.md
+
+# Claude Code — commit shared config, ignore personal/local state
+.claude/settings.local.json
+.claude/worktrees/
+
+# Playwright
+/test-results
+/playwright-report
+/playwright/.cache
 
 # System files
 .DS_Store
