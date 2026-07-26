@@ -1,4 +1,5 @@
 import { Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
+import { expect, userEvent, within } from 'storybook/test';
 import { applicationConfig } from '@storybook/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { storybookTranslateConfig } from '../../app/shared';
@@ -60,6 +61,15 @@ export const Success: Story = {
       ],
     },
   }),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(
+      canvas.getByText('Your changes have been saved successfully!'),
+    ).toBeVisible();
+    await userEvent.click(
+      canvas.getByRole('button', { name: 'Close notification' }),
+    );
+  },
 };
 
 export const ErrorState: Story = {
@@ -85,6 +95,12 @@ export const ErrorState: Story = {
       ],
     },
   }),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(
+      canvas.getByText('Failed to save changes. Please try again.'),
+    ).toBeVisible();
+  },
 };
 
 export const Warning: Story = {
@@ -110,4 +126,10 @@ export const Warning: Story = {
       ],
     },
   }),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(
+      canvas.getByText('Your session will expire in 5 minutes.'),
+    ).toBeVisible();
+  },
 };

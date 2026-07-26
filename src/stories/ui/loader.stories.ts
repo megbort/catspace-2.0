@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/angular';
+import { expect } from 'storybook/test';
 import { LoaderComponent } from '../../app/components/ui/loader.component';
 import { LoaderService } from '../../app/services/loader.service';
 import { GlobalStore } from '../../app/shared/state/global.store';
@@ -34,4 +35,8 @@ export const Default: Story = {
   render: () => ({
     template: `<app-loader></app-loader>`,
   }),
+  play: async ({ canvasElement }) => {
+    const spinner = canvasElement.querySelector('mat-spinner');
+    await expect(spinner).toBeInTheDocument();
+  },
 };

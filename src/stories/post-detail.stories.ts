@@ -8,18 +8,19 @@ import {
   moduleMetadata,
   StoryObj,
 } from '@storybook/angular';
+import { expect, userEvent, within } from 'storybook/test';
 import { of } from 'rxjs';
 import { PostDetailComponent } from '../app/components/post-detail/post-detail.component';
 import {
   AuthService,
   FavoriteService,
   NotificationService,
-  Post,
   USERS,
+  mockPost,
 } from '../app/services';
 import { storybookTranslateConfig } from '../app/shared';
 
-const post: Post = USERS[0].posts[0];
+const post = mockPost;
 
 const meta: Meta<PostDetailComponent> = {
   title: 'Components/Post Detail',
@@ -73,4 +74,15 @@ const meta: Meta<PostDetailComponent> = {
 export default meta;
 type Story = StoryObj<PostDetailComponent>;
 
-export const Primary: Story = {};
+export const Primary: Story = {
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByText(post.title)).toBeVisible();
+    await expect(canvas.getByText(post.description)).toBeVisible();
+    const favoriteButton = canvas.getByRole('button', {
+      name: 'Add to favorites',
+    });
+    await expect(favoriteButton).toBeVisible();
+    await userEvent.click(favoriteButton);
+  },
+};

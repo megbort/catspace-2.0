@@ -1,4 +1,5 @@
 import { Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
+import { expect, within } from 'storybook/test';
 import { UserSidenavComponent } from '../app/components/user-sidenav/user-sidenav.component';
 import { applicationConfig } from '@storybook/angular';
 import { TranslateModule } from '@ngx-translate/core';
@@ -50,4 +51,12 @@ export const Primary: Story = {
       </div>
     `,
   }),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByText(USERS[0].name)).toBeVisible();
+    await expect(canvas.getByText(`@${USERS[0].handle}`)).toBeVisible();
+    await expect(
+      await canvas.findByRole('button', { name: 'Edit Profile' }),
+    ).toBeVisible();
+  },
 };

@@ -1,4 +1,5 @@
 import { Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
+import { expect, userEvent, within } from 'storybook/test';
 import { applicationConfig } from '@storybook/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { storybookTranslateConfig } from '../app/shared/config/translate';
@@ -14,7 +15,7 @@ import {
 import { GlobalStore } from '../app/shared/state/global.store';
 import { of } from 'rxjs';
 import { signal } from '@angular/core';
-import { USERS } from '../app/services/mocks/users';
+import { USERS } from '../app/services/mocks';
 
 const meta: Meta<EditProfileComponent> = {
   title: 'Components/Edit Profile',
@@ -81,4 +82,14 @@ export const Primary: Story = {
       </div>
     `,
   }),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const nameInput = await canvas.findByLabelText('Name');
+    await expect(nameInput).toHaveValue(USERS[0].name);
+    await userEvent.clear(nameInput);
+    await userEvent.type(nameInput, 'Kiku Renamed');
+    await expect(
+      await canvas.findByRole('button', { name: 'Save' }),
+    ).toBeEnabled();
+  },
 };

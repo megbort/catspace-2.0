@@ -1,12 +1,13 @@
 import { Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
+import { expect, userEvent, within } from 'storybook/test';
 import { applicationConfig } from '@storybook/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { storybookTranslateConfig } from '../app/shared';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { PostCardComponent } from '../app/components/post-card/post-card.component';
 import {
-  Post,
   USERS,
+  mockPost,
   FavoriteService,
   AuthService,
   NotificationService,
@@ -14,7 +15,7 @@ import {
 import { of } from 'rxjs';
 import { signal } from '@angular/core';
 
-const post: Post = USERS[0].posts[0];
+const post = mockPost;
 
 const meta: Meta<PostCardComponent> = {
   title: 'Components/Post Card',
@@ -30,6 +31,7 @@ const meta: Meta<PostCardComponent> = {
             unfavoritePost: () => of(void 0),
             getUserFavorites: () => of([]),
             getPostFavoriteCount: () => of(5),
+            isPostFavorited: () => of(false),
           },
         },
         {
@@ -64,5 +66,14 @@ type Story = StoryObj<PostCardComponent>;
 export const Primary: Story = {
   args: {
     post,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByText(post.title)).toBeVisible();
+    const favoriteButton = canvas.getByRole('button', {
+      name: 'Add to favorites',
+    });
+    await expect(favoriteButton).toBeVisible();
+    await userEvent.click(favoriteButton);
   },
 };

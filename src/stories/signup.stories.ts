@@ -1,4 +1,5 @@
 import { Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
+import { expect, userEvent, within } from 'storybook/test';
 import { applicationConfig } from '@storybook/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { storybookTranslateConfig } from '../app/shared/config/translate';
@@ -70,4 +71,15 @@ export const Primary: Story = {
       </div>
     `,
   }),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.type(
+      await canvas.findByLabelText('Profile Name'),
+      'Tabby Cat',
+    );
+    await userEvent.type(canvas.getByLabelText('Handle'), 'tabbycat');
+    await userEvent.click(canvas.getByRole('button', { name: 'Next' }));
+    await expect(await canvas.findByLabelText('Email')).toBeVisible();
+    await expect(canvas.getByLabelText('Password')).toBeVisible();
+  },
 };

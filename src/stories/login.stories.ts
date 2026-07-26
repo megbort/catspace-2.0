@@ -1,4 +1,5 @@
 import { Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
+import { expect, userEvent, within } from 'storybook/test';
 import { LoginComponent } from '../app/components/auth/login/login.component';
 import { applicationConfig } from '@storybook/angular';
 import { TranslateModule } from '@ngx-translate/core';
@@ -70,4 +71,14 @@ export const Primary: Story = {
       </div>
     `,
   }),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const loginButton = await canvas.findByRole('button', { name: 'Login' });
+    const emailInput = await canvas.findByLabelText('Email');
+    await expect(loginButton).toBeEnabled();
+    await userEvent.clear(emailInput);
+    await expect(loginButton).toBeDisabled();
+    await userEvent.type(emailInput, 'kiku@example.com');
+    await expect(loginButton).toBeEnabled();
+  },
 };

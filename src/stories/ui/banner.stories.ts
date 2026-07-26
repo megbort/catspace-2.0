@@ -1,4 +1,5 @@
 import { Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
+import { expect, within } from 'storybook/test';
 import { applicationConfig } from '@storybook/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { storybookTranslateConfig } from '../../app/shared';
@@ -24,5 +25,11 @@ type Story = StoryObj<BannerComponent>;
 export const Default: Story = {
   args: {
     content: 'This is a banner message. Please pay attention to it!',
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(
+      canvas.getByText('This is a banner message. Please pay attention to it!'),
+    ).toBeVisible();
   },
 };

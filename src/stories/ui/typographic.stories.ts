@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { StoryObj, Meta } from '@storybook/angular';
+import { expect, within } from 'storybook/test';
 
 @Component({
   selector: 'app-typographic',
@@ -93,4 +94,10 @@ export default {
   },
 } as Meta<TypographicComponent>;
 
-export const Typography: StoryObj<TypographicComponent> = {};
+export const Typography: StoryObj<TypographicComponent> = {
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByText('H1 Headline')).toBeVisible();
+    await expect(canvas.getByText('caption')).toBeVisible();
+  },
+};

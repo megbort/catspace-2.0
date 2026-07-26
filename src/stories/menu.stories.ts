@@ -1,4 +1,5 @@
 import { Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
+import { expect, within } from 'storybook/test';
 import { MenuComponent } from '../app/components/menu/menu.component';
 import { applicationConfig } from '@storybook/angular';
 import { TranslateModule } from '@ngx-translate/core';
@@ -49,4 +50,14 @@ type Story = StoryObj<MenuComponent>;
 
 export const Primary: Story = {
   args: {},
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByAltText('catspace logo')).toBeVisible();
+    await expect(
+      (await canvas.findAllByRole('button', { name: 'Login' }))[0],
+    ).toBeVisible();
+    await expect(
+      (await canvas.findAllByRole('button', { name: 'Sign Up' }))[0],
+    ).toBeVisible();
+  },
 };

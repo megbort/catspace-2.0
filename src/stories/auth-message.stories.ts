@@ -1,4 +1,5 @@
 import { Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
+import { expect, within } from 'storybook/test';
 import { AuthMessageComponent } from '../app/components/auth/auth-message.component';
 import { applicationConfig } from '@storybook/angular';
 import { TranslateModule } from '@ngx-translate/core';
@@ -54,4 +55,18 @@ export const Primary: Story = {
       </div>
     `,
   }),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(
+      await canvas.findByText(
+        'Please sign or create an account to use this feature.',
+      ),
+    ).toBeVisible();
+    await expect(
+      await canvas.findByRole('button', { name: 'Sign Up' }),
+    ).toBeVisible();
+    await expect(
+      await canvas.findByRole('button', { name: 'Login' }),
+    ).toBeVisible();
+  },
 };

@@ -1,4 +1,5 @@
 import { Meta, moduleMetadata, type StoryObj } from '@storybook/angular';
+import { expect, within } from 'storybook/test';
 import { ProfileCardComponent } from '../app/components/profile-card/profile-card.component';
 import { applicationConfig } from '@storybook/angular';
 import { TranslateModule } from '@ngx-translate/core';
@@ -10,6 +11,7 @@ import {
   USERS,
   UserService,
   FollowService,
+  FOLLOWERS,
 } from '../app/services';
 import { of } from 'rxjs';
 import { signal } from '@angular/core';
@@ -46,19 +48,7 @@ const meta: Meta<ProfileCardComponent> = {
             followUser: () => of(void 0),
             unfollowUser: () => of(void 0),
             getFollowing: () => of([]),
-            getFollowers: () =>
-              of([
-                {
-                  id: '1',
-                  userId: 'user1',
-                  followedAt: '2024-01-01T00:00:00.000Z',
-                },
-                {
-                  id: '2',
-                  userId: 'user2',
-                  followedAt: '2024-01-02T00:00:00.000Z',
-                },
-              ]),
+            getFollowers: () => of(FOLLOWERS),
           },
         },
       ],
@@ -75,5 +65,14 @@ type Story = StoryObj<ProfileCardComponent>;
 export const Primary: Story = {
   args: {
     profile: profile,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByText(profile.name)).toBeVisible();
+    await expect(canvas.getByText(`@${profile.handle}`)).toBeVisible();
+    await expect(
+      await canvas.findByRole('button', { name: 'View Profile' }),
+    ).toBeVisible();
+    await expect(await canvas.findByText('Follow')).toBeVisible();
   },
 };
