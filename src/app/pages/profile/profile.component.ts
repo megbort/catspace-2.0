@@ -30,7 +30,7 @@ import { AuthMessageComponent } from '../../components/auth/auth-message.compone
 import { catchError, switchMap, take, tap } from 'rxjs/operators';
 import { CreatePostComponent } from '../../components/create-post/create-post.component';
 import { GlobalStore } from '../../shared/state/global.store';
-import { EMPTY } from 'rxjs';
+import { EMPTY, of } from 'rxjs';
 import { SkeletonComponent } from '../../components/ui/skeleton.component';
 import { PostDetailComponent } from '../../components/post-detail/post-detail.component';
 
@@ -187,19 +187,19 @@ export class ProfileComponent implements OnInit {
       .pipe(
         catchError((error) => {
           console.error('Error loading user data', error);
-          return [null];
+          return of(null);
         }),
         switchMap((userData) => {
           if (userData) {
             this._user.set(userData);
             return this.postService.getPostsByProfileId(id);
           } else {
-            return [];
+            return of([]);
           }
         }),
         catchError((error) => {
           console.error('Error loading posts', error);
-          return [];
+          return of([]);
         }),
       )
       .subscribe((posts: Post[]) => {

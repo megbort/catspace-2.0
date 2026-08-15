@@ -53,6 +53,8 @@
     </h2>
     <div
       class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8 justify-center"
+      role="list"
+      aria-label="Featured cat profiles"
     >
       @for (profile of featured; track profile.id) {
         <app-profile-card

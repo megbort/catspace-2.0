@@ -18,6 +18,8 @@ export interface NotificationData {
     <div
       class="flex items-center justify-between gap-4 p-2 min-w-[320px] rounded shadow-md"
       [class]="data.type"
+      role="status"
+      aria-live="polite"
     >
       <div class="flex gap-2 grow">
         @switch (data.type) { @case ('success') {

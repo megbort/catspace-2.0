@@ -1,26 +1,40 @@
 import { Routes } from '@angular/router';
-import { FeaturedComponent } from './app/pages/featured/featured.component';
-import { HomeComponent } from './app/pages/home/home.component';
-import { ProfileComponent } from './app/pages/profile/profile.component';
 import { redirectIfAuthenticatedGuard, authGuard } from './app/shared';
-import { FollowingComponent } from './app/pages/following/following.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   {
     path: 'home',
-    component: HomeComponent,
+    loadComponent: () =>
+      import('./app/pages/home/home.component').then(
+        (module) => module.HomeComponent,
+      ),
     canActivate: [redirectIfAuthenticatedGuard],
   },
-  { path: 'featured', component: FeaturedComponent },
-  { path: 'profile/:id', component: ProfileComponent },
+  {
+    path: 'featured',
+    loadComponent: () =>
+      import('./app/pages/featured/featured.component').then(
+        (module) => module.FeaturedComponent,
+      ),
+  },
+  {
+    path: 'profile/:id',
+    loadComponent: () =>
+      import('./app/pages/profile/profile.component').then(
+        (module) => module.ProfileComponent,
+      ),
+  },
   {
     path: 'my-page',
     redirectTo: '/profile/me',
   },
   {
     path: 'following',
-    component: FollowingComponent,
+    loadComponent: () =>
+      import('./app/pages/following/following.component').then(
+        (module) => module.FollowingComponent,
+      ),
     canActivate: [authGuard],
   },
 ];

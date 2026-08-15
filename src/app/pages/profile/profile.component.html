@@ -79,8 +79,10 @@
     } @else if (posts().length > 0) {
       <div
         class="justify-center grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 max-w-[800px]"
+        role="list"
+        [attr.aria-label]="(user()?.name || 'User') + '\'s posts'"
       >
-        @for (post of posts(); track $index) {
+        @for (post of posts(); track post.id) {
           <app-post-card
             [post]="post"
             role="button"
