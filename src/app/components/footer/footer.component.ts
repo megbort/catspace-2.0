@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { SignupComponent } from '../auth/signup/signup.component';
 import { LoginComponent } from '../auth/login/login.component';
 import { AuthService } from '../../services';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-footer',
@@ -15,6 +16,7 @@ import { AuthService } from '../../services';
 })
 export class FooterComponent {
   isLoggedIn = computed(() => this.authService.currentUserSignal());
+  version = environment.version;
 
   defaultDialogProperties = {
     width: '500px',

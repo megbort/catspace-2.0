@@ -1,7 +1,9 @@
 import { firebaseApiKey } from './firebase-key';
+import { appVersion } from './version';
 
 export const environment = {
   production: false,
+  version: appVersion,
   cloudinary: {
     cloudName: 'dm1yyjg7i',
     uploadPreset: 'catspace',
