@@ -1,0 +1,14 @@
+{
+  "name": "Catspace",
+  "short_name": "Catspace",
+  "description": "A social space run by cats, for cats. Share photos of your cat and make new friends.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#fff8f4",
+  "theme_color": "#fff8f4",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
