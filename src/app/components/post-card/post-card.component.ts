@@ -1,4 +1,4 @@
-import { Component, input, signal, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, input, output, signal, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import {
   Post,
   FavoriteService,
@@ -34,6 +34,8 @@ export class PostCardComponent implements OnInit {
     comments: [],
     userId: '',
   });
+
+  open = output<void>();
 
   isFavorited = signal(false);
   favoriteCount = signal(0);

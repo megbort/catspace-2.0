@@ -184,5 +184,27 @@
       "favoritePost": "Failed to favorite post. Please try again.",
       "unfavoritePost": "Failed to unfavorite post. Please try again."
     }
+  },
+  "a11y": {
+    "skipToContent": "Skip to main content",
+    "openMenu": "Open menu",
+    "openAccountMenu": "Open account menu",
+    "toggleTheme": "Toggle dark mode",
+    "lightMode": "Switch to light mode",
+    "darkMode": "Switch to dark mode",
+    "addFavorite": "Add to favorites",
+    "removeFavorite": "Remove from favorites",
+    "viewPost": "View post: {{title}}",
+    "closeNotification": "Close notification",
+    "followingFeed": "Posts from people you follow",
+    "userPosts": "{{name}}'s posts",
+    "avatar": "{{name}}'s avatar",
+    "featuredProfiles": "Featured cat profiles"
+  },
+  "pageTitle": {
+    "home": "Home",
+    "featured": "Featured",
+    "profile": "Profile",
+    "following": "Following"
   }
 }

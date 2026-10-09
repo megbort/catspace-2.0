@@ -1,5 +1,6 @@
 import {
   ApplicationConfig,
+  DOCUMENT,
   inject,
   provideAppInitializer,
   provideZoneChangeDetection,
@@ -7,6 +8,7 @@ import {
 import {
   InMemoryScrollingOptions,
   provideRouter,
+  TitleStrategy,
   withInMemoryScrolling,
 } from '@angular/router';
 import { routes } from './app.routes';
@@ -16,12 +18,13 @@ import {
   defaultTranslateProviders,
   SUPPORTED_LANGUAGES,
 } from './app/shared/config/translate';
-import { GlobalStore } from './app/shared';
+import { GlobalStore, TranslatedTitleStrategy } from './app/shared';
 
-function initializeLanguage(translate: TranslateService) {
+function initializeLanguage(translate: TranslateService, document: Document) {
   return () => {
     const browserLang = navigator.language?.split('-')[0] ?? 'en';
     const lang = SUPPORTED_LANGUAGES.includes(browserLang) ? browserLang : 'en';
+    document.documentElement.lang = lang;
     translate.addLangs(SUPPORTED_LANGUAGES);
     return translate.use(lang);
   };
@@ -40,7 +43,8 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes, inMemoryScrollingConfig),
     provideHttpClient(),
     defaultTranslateProviders,
-    provideAppInitializer(() => initializeLanguage(inject(TranslateService))()),
+    provideAppInitializer(() => initializeLanguage(inject(TranslateService), inject(DOCUMENT))()),
     GlobalStore,
+    { provide: TitleStrategy, useClass: TranslatedTitleStrategy },
   ],
 };

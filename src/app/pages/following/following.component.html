@@ -2,9 +2,9 @@
   class="mb-16 py-12 px-2 min-h-[575px] max-w-[320px] sm:max-w-2xl lg:max-w-5xl xl:max-w-7xl mx-auto"
 >
   <div class="pb-8 text-center md:text-left">
-    <h2 class="pb-8">
+    <h1 class="h2 pb-8">
       {{ "following.title" | translate }}
-    </h2>
+    </h1>
     <p class="subtitle-1">{{ "following.latest" | translate }}</p>
   </div>
 
@@ -36,17 +36,14 @@
   } @else {
     <div
       class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-items-center sm:justify-items-start"
-      role="feed"
-      aria-label="Posts from people you follow"
+      role="list"
+      [attr.aria-label]="'a11y.followingFeed' | translate"
     >
       @for (post of followingPosts(); track post.id) {
         <app-post-card
           [post]="post"
-          role="button"
-          tabindex="0"
-          [attr.aria-label]="'View post: ' + post.title"
-          (click)="viewPost(post)"
-          (keydown.enter)="viewPost(post)"
+          role="listitem"
+          (open)="viewPost(post)"
         ></app-post-card>
       }
     </div>

@@ -54,20 +54,21 @@
     <div
       class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8 justify-center"
       role="list"
-      aria-label="Featured cat profiles"
+      [attr.aria-label]="'a11y.featuredProfiles' | translate"
     >
       @for (profile of featured; track profile.id) {
         <app-profile-card
           [profile]="profile"
+          role="listitem"
           (view)="viewProfile($event)"
         ></app-profile-card>
       }
     </div>
-    <p
-      class="text-body-1 pt-4 mr-6 text-catspace-orange text-right hover:cursor-pointer hover:underline"
+    <a
+      class="block text-body-1 pt-4 mr-6 text-catspace-orange text-right hover:underline"
       routerLink="/featured"
     >
       {{ "home.explore" | translate }}
-    </p>
+    </a>
   </div>
 </section>
