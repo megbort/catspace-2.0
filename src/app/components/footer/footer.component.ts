@@ -1,5 +1,6 @@
 import { Component, computed, inject, ChangeDetectionStrategy } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
+import { UnpicImageDirective } from '@unpic/angular';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { Dialog, DialogType } from '../../shared';
 import { RouterModule } from '@angular/router';
@@ -10,7 +11,7 @@ import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-footer',
-  imports: [TranslatePipe, MatDialogModule, RouterModule],
+  imports: [TranslatePipe, MatDialogModule, RouterModule, UnpicImageDirective],
   templateUrl: './footer.component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './footer.component.scss',
