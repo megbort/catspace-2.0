@@ -184,5 +184,27 @@
       "favoritePost": "Échec de l'ajout en favoris. Veuillez réessayer.",
       "unfavoritePost": "Échec de la suppression des favoris. Veuillez réessayer."
     }
+  },
+  "a11y": {
+    "skipToContent": "Aller au contenu principal",
+    "openMenu": "Ouvrir le menu",
+    "openAccountMenu": "Ouvrir le menu du compte",
+    "toggleTheme": "Activer ou désactiver le mode sombre",
+    "lightMode": "Passer en mode clair",
+    "darkMode": "Passer en mode sombre",
+    "addFavorite": "Ajouter aux favoris",
+    "removeFavorite": "Retirer des favoris",
+    "viewPost": "Voir le post : {{title}}",
+    "closeNotification": "Fermer la notification",
+    "followingFeed": "Posts des profils que tu suis",
+    "userPosts": "Posts de {{name}}",
+    "avatar": "Avatar de {{name}}",
+    "featuredProfiles": "Profils de chats en vedette"
+  },
+  "pageTitle": {
+    "home": "Accueil",
+    "featured": "En vedette",
+    "profile": "Profil",
+    "following": "Abonnements"
   }
 }

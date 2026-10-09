@@ -27,12 +27,12 @@
               user()?.image ||
               'https://res.cloudinary.com/dm1yyjg7i/image/upload/v1753057717/catspace/no-avatar_mm3idt.png'
             "
-            [alt]="(user()?.name || 'User') + '\'s avatar'"
+            [alt]="'a11y.avatar' | translate: { name: user()?.name }"
             class="h-full w-full object-cover"
           />
         </div>
         <div class="flex flex-col gap-2">
-          <h2>{{ user()?.name }}</h2>
+          <h1 class="h2">{{ user()?.name }}</h1>
           <p class="subtitle-1 text-catspace-dark-beige">
             &#64;{{ user()?.handle }}
           </p>
@@ -80,17 +80,13 @@
       <div
         class="justify-center grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 max-w-[800px]"
         role="list"
-        [attr.aria-label]="(user()?.name || 'User') + '\'s posts'"
+        [attr.aria-label]="'a11y.userPosts' | translate: { name: user()?.name }"
       >
         @for (post of posts(); track post.id) {
           <app-post-card
             [post]="post"
-            role="button"
-            tabindex="0"
-            [attr.aria-label]="'View post: ' + post.title"
-            (click)="viewPost(post)"
-            (keydown.enter)="viewPost(post)"
-            (keydown.space)="onPostCardSpace($event, post)"
+            role="listitem"
+            (open)="viewPost(post)"
           ></app-post-card>
         }
       </div>

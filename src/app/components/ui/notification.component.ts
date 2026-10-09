@@ -5,6 +5,7 @@ import {
 } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { TranslatePipe } from '@ngx-translate/core';
 
 export interface NotificationData {
   message: string;
@@ -13,7 +14,7 @@ export interface NotificationData {
 
 @Component({
   selector: 'app-notification',
-  imports: [MatIconModule, MatButtonModule],
+  imports: [MatIconModule, MatButtonModule, TranslatePipe],
   template: `
     <div
       class="flex items-center justify-between gap-4 p-2 min-w-[320px] rounded shadow-md"
@@ -33,7 +34,7 @@ export interface NotificationData {
       <button
         mat-icon-button
         (click)="dismiss()"
-        aria-label="Close notification"
+        [attr.aria-label]="'a11y.closeNotification' | translate"
       >
         <mat-icon>close</mat-icon>
       </button>

@@ -363,11 +363,6 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  onPostCardSpace(event: Event, post: Post): void {
-    event.preventDefault();
-    this.viewPost(post);
-  }
-
   showAuthMessage(): void {
     this.dialog.open(AuthMessageComponent, { autoFocus: false });
   }

@@ -5,6 +5,7 @@ export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   {
     path: 'home',
+    title: 'pageTitle.home',
     loadComponent: () =>
       import('./app/pages/home/home.component').then(
         (module) => module.HomeComponent,
@@ -13,6 +14,7 @@ export const routes: Routes = [
   },
   {
     path: 'featured',
+    title: 'pageTitle.featured',
     loadComponent: () =>
       import('./app/pages/featured/featured.component').then(
         (module) => module.FeaturedComponent,
@@ -20,6 +22,7 @@ export const routes: Routes = [
   },
   {
     path: 'profile/:id',
+    title: 'pageTitle.profile',
     loadComponent: () =>
       import('./app/pages/profile/profile.component').then(
         (module) => module.ProfileComponent,
@@ -31,6 +34,7 @@ export const routes: Routes = [
   },
   {
     path: 'following',
+    title: 'pageTitle.following',
     loadComponent: () =>
       import('./app/pages/following/following.component').then(
         (module) => module.FollowingComponent,

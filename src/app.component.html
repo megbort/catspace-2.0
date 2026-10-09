@@ -1,4 +1,7 @@
 @if (authService.isInitialized()) {
+  <a class="skip-link" href="#main" (click)="focusMain($event)">
+    {{ "a11y.skipToContent" | translate }}
+  </a>
   <mat-sidenav-container class="min-h-screen flex flex-col">
     <mat-sidenav
       #profileDrawer
@@ -14,7 +17,9 @@
 
     <mat-sidenav-content class="flex flex-col grow">
       <app-menu (open)="profileDrawer.open()"></app-menu>
-      <router-outlet></router-outlet>
+      <main id="main" #main tabindex="-1" class="outline-none">
+        <router-outlet></router-outlet>
+      </main>
       <app-footer></app-footer>
     </mat-sidenav-content>
   </mat-sidenav-container>
