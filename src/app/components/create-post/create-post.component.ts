@@ -207,9 +207,10 @@ export class CreatePostComponent {
   }
 
   protected startDrag(event: MouseEvent | TouchEvent): void {
-    this.isDragging = true;
-
     const point = event instanceof MouseEvent ? event : event.touches[0];
+    if (!point) return;
+
+    this.isDragging = true;
     this.dragStartX = point.clientX;
     this.dragStartY = point.clientY;
     this.dragOriginX = this.panX();
@@ -222,8 +223,9 @@ export class CreatePostComponent {
   }
 
   protected onTouchMove(event: TouchEvent): void {
-    if (!this.isDragging) return;
-    this.applyPan(event.touches[0].clientX, event.touches[0].clientY);
+    const touch = event.touches[0];
+    if (!this.isDragging || !touch) return;
+    this.applyPan(touch.clientX, touch.clientY);
   }
 
   protected onMouseUp(): void {

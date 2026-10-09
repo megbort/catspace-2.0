@@ -117,7 +117,7 @@ export class MediaService {
 
     // Clean up old entries
     for (const [key] of this.uploadCount) {
-      const keyTime = parseInt(key.split('_')[1]);
+      const keyTime = parseInt(key.split('_')[1] ?? '', 10);
       if (now - keyTime * 60000 > 60000) {
         this.uploadCount.delete(key);
       }
