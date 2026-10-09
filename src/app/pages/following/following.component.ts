@@ -89,7 +89,6 @@ export class FollowingComponent implements OnInit, OnDestroy {
     const currentUser = this.authService.currentUserSignal();
 
     if (!currentUser) {
-      console.log('No current user found, cannot load following posts');
       return;
     }
 
