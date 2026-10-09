@@ -205,6 +205,13 @@
     "home": "Home",
     "featured": "Featured",
     "profile": "Profile",
-    "following": "Following"
+    "following": "Following",
+    "notFound": "Page not found"
+  },
+  "notFound": {
+    "title": "This page wandered off",
+    "message": "We couldn't find the page you were looking for. Maybe it's napping somewhere?",
+    "home": "Go home",
+    "featured": "See featured cats"
   }
 }
