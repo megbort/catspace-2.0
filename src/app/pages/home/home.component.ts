@@ -8,6 +8,7 @@ import { map } from 'rxjs';
 import { UnpicImageDirective } from '@unpic/angular';
 import { SignupComponent } from '../../components/auth/signup/signup.component';
 import { MatDialog } from '@angular/material/dialog';
+import { PriorityImageDirective } from '../../shared';
 
 @Component({
   selector: 'app-home',
@@ -16,6 +17,7 @@ import { MatDialog } from '@angular/material/dialog';
     TranslatePipe,
     ProfileCardComponent,
     UnpicImageDirective,
+    PriorityImageDirective,
     RouterModule,
   ],
   templateUrl: './home.component.html',

@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { SignupComponent } from '../auth/signup/signup.component';
 import { LoginComponent } from '../auth/login/login.component';
-import { Dialog, DialogType } from '../../shared';
+import { Dialog, DialogType, PriorityImageDirective } from '../../shared';
 import { UnpicImageDirective } from '@unpic/angular';
 import { AuthService, ThemeService } from '../../services';
 import { BannerComponent } from '../ui/banner.component';
@@ -23,6 +23,7 @@ import { CreatePostComponent } from '../create-post/create-post.component';
     RouterModule,
     MatDialogModule,
     UnpicImageDirective,
+    PriorityImageDirective,
     BannerComponent,
   ],
   templateUrl: './menu.component.html',
