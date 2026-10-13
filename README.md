@@ -96,7 +96,7 @@ erDiagram
     USER ||--o{ FOLLOWING : "users/{uid}/following/{targetUid}"
     USER ||--o{ FOLLOWER : "users/{uid}/followers/{followerUid}"
     USER ||--o{ USER_FAVORITE : "users/{uid}/favorites/{postId}"
-    POST ||--o{ POST_FAVORITE : "users/{uid}/posts/{postId}/favorites/{uid}"
+    POST ||--o{ POST_FAVORITE : "users/{ownerUid}/posts/{postId}/favorites/{userUid}"
     FOLLOWING }o--|| USER : "userId → followed cat"
     FOLLOWER }o--|| USER : "userId → follower"
     USER_FAVORITE }o--|| POST : "postId + postOwnerId"

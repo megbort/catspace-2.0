@@ -9,6 +9,9 @@ import { NotificationService } from './notification.service';
 @Component({ template: '' })
 class TestDialogComponent {}
 
+@Component({ template: '' })
+class OtherDialogComponent {}
+
 describe('LazyDialogService', () => {
   let service: LazyDialogService;
   const dialogRef = { id: 'ref' };
@@ -44,19 +47,20 @@ describe('LazyDialogService', () => {
     expect(mockNotification.error).toHaveBeenCalledWith('common.dialogLoadFailed');
   });
 
-  it('ignores a second call while a load is pending', async () => {
+  it('ignores any other dialog request while a load is pending', async () => {
     let resolveLoad!: (component: typeof TestDialogComponent) => void;
     const pending = new Promise<typeof TestDialogComponent>((resolve) => {
       resolveLoad = resolve;
     });
 
     const first = service.open(() => pending);
-    const second = await service.open(() => Promise.resolve(TestDialogComponent));
+    const second = await service.open(() => Promise.resolve(OtherDialogComponent));
     resolveLoad(TestDialogComponent);
     await first;
 
     expect(second).toBeNull();
     expect(mockDialog.open).toHaveBeenCalledTimes(1);
+    expect(mockDialog.open).toHaveBeenCalledWith(TestDialogComponent, undefined);
   });
 
   it('allows a new attempt after a failed load', async () => {
