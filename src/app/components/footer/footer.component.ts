@@ -4,8 +4,6 @@ import { UnpicImageDirective } from '@unpic/angular';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { Dialog, DialogType } from '../../shared';
 import { RouterModule } from '@angular/router';
-import { SignupComponent } from '../auth/signup/signup.component';
-import { LoginComponent } from '../auth/login/login.component';
 import { AuthService } from '../../services';
 import { environment } from '../../../environments/environment';
 
@@ -28,10 +26,12 @@ export class FooterComponent {
   private readonly dialog = inject(MatDialog);
   private readonly authService = inject(AuthService);
 
-  openDialog(dialog: DialogType): void {
+  async openDialog(dialog: DialogType): Promise<void> {
     if (dialog === Dialog.SignUp) {
+      const { SignupComponent } = await import('../auth/signup/signup.component');
       this.dialog.open(SignupComponent, this.defaultDialogProperties);
     } else {
+      const { LoginComponent } = await import('../auth/login/login.component');
       this.dialog.open(LoginComponent, this.defaultDialogProperties);
     }
   }

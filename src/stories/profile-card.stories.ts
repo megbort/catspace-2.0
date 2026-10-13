@@ -7,7 +7,7 @@ import { provideHttpClient } from '@angular/common/http';
 import {
   AuthService,
   User,
-  USERS,
+  mockUser,
   UserService,
   FollowService,
   FOLLOWERS,
@@ -15,7 +15,7 @@ import {
 import { of } from 'rxjs';
 import { signal } from '@angular/core';
 
-const profile: User = USERS[0];
+const profile: User = mockUser;
 
 const meta: Meta<ProfileCardComponent> = {
   title: 'Components/Profile Card',
@@ -39,7 +39,7 @@ const meta: Meta<ProfileCardComponent> = {
             logout: () => of(void 0),
             register: () => of(void 0),
             user$: of(null),
-            currentUserSignal: signal(USERS[0]),
+            currentUserSignal: signal(mockUser),
           },
         },
         {

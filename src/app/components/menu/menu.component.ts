@@ -5,13 +5,10 @@ import { MatMenuModule } from '@angular/material/menu';
 import { TranslatePipe } from '@ngx-translate/core';
 import { RouterModule } from '@angular/router';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { SignupComponent } from '../auth/signup/signup.component';
-import { LoginComponent } from '../auth/login/login.component';
 import { Dialog, DialogType, PriorityImageDirective } from '../../shared';
 import { UnpicImageDirective } from '@unpic/angular';
 import { AuthService, ThemeService } from '../../services';
 import { BannerComponent } from '../ui/banner.component';
-import { CreatePostComponent } from '../create-post/create-post.component';
 
 @Component({
   selector: 'app-menu',
@@ -48,12 +45,15 @@ export class MenuComponent {
     return this.authService.currentUserSignal();
   }
 
-  openDialog(dialog: DialogType): void {
+  async openDialog(dialog: DialogType): Promise<void> {
     if (dialog === Dialog.SignUp) {
+      const { SignupComponent } = await import('../auth/signup/signup.component');
       this.dialog.open(SignupComponent, this.defaultDialogProperties);
     } else if (dialog === Dialog.Login) {
+      const { LoginComponent } = await import('../auth/login/login.component');
       this.dialog.open(LoginComponent, this.defaultDialogProperties);
     } else {
+      const { CreatePostComponent } = await import('../create-post/create-post.component');
       this.dialog.open(CreatePostComponent, {
         width: '550px',
         autoFocus: false,

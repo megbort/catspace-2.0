@@ -17,7 +17,7 @@
 
     <mat-sidenav-content class="flex flex-col grow">
       <app-menu (open)="profileDrawer.open()"></app-menu>
-      <main id="main" #main tabindex="-1" class="outline-none">
+      <main id="main" #main tabindex="-1" class="outline-none min-h-screen">
         <router-outlet></router-outlet>
       </main>
       <app-footer></app-footer>

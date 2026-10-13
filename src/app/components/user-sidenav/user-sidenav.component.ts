@@ -6,8 +6,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { RouterModule } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { AuthService } from '../../services';
-import { EditProfileComponent } from '../edit-profile/edit-profile.component';
-import { CreatePostComponent } from '../create-post/create-post.component';
 
 @Component({
   selector: 'app-user-sidenav',
@@ -35,7 +33,8 @@ export class UserSidenavComponent {
     this.sidenavClose.emit();
   }
 
-  editProfile(): void {
+  async editProfile(): Promise<void> {
+    const { EditProfileComponent } = await import('../edit-profile/edit-profile.component');
     this.dialog.open(EditProfileComponent, {
       width: '500px',
       autoFocus: false,
@@ -43,7 +42,8 @@ export class UserSidenavComponent {
     this.sidenavClose.emit();
   }
 
-  newPost(): void {
+  async newPost(): Promise<void> {
+    const { CreatePostComponent } = await import('../create-post/create-post.component');
     this.dialog.open(CreatePostComponent, {
       width: '550px',
       autoFocus: false,

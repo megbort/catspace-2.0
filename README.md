@@ -14,8 +14,6 @@ Create a profile for your cat, share their latest adventures, follow other cats,
 - Personalized social feed
 - English and French support
 
-Built with **Angular**, using standalone components and signals. **Firebase/Firestore** handles data and authentication, **Cloudinary** is used for image hosting, and **Storybook** is used for component development and testing.
-
 Visit the live site at [catspace.megankrenbrink.com](https://catspace.megankrenbrink.com).
 
 Enjoy exploring Catspace!
@@ -28,7 +26,7 @@ Enjoy exploring Catspace!
 
 ### Prerequisites
 
-- Node.js 20.19+, 22.12+, or 24.0+ (per [Angular 21's compatibility table](https://angular.dev/reference/versions))
+- Node.js 24.15+
 - npm
 
 ### Installation
@@ -58,11 +56,11 @@ Open [http://localhost:6006](http://localhost:6006) to view storybook.
 
 ### Environment Setup
 
-The app needs a Firebase project to run against. Config lives in `src/environments/environment.ts` / `environment.prod.ts`, plus a gitignored `src/environments/firebase-key.ts` for your Firebase API key — never commit real credentials to this file.
+Requires a Firebase project. Put your API key in `src/environments/firebase-key.ts` (gitignored).
 
 ## Tech Stack
 
-- **Angular 21** (standalone components, signals) with **TypeScript**
+- **Angular 22** with **TypeScript**
 - **Tailwind CSS** for styling
 - **Angular Material** for UI components
 - **Firebase Auth + Firestore** for authentication and data
@@ -70,29 +68,78 @@ The app needs a Firebase project to run against. Config lives in `src/environmen
 - **@ngx-translate** for i18n (English, French)
 - **Storybook** for UI development
 - **Vitest** for unit tests, **Playwright** for end-to-end tests
-- **GitHub Actions** runs unit + e2e tests on every push/PR to `master` (see `.github/workflows/ci.yml`)
+- **GitHub Actions** for CI
 
 ## Project Structure
 
 ```
 src/
-├── app/                # Main application code (components, pages, services, shared)
-│   ├── components/     # Reusable feature components (auth, posts, profile card, etc.)
-│   │   └── ui/         # UI primitives (buttons, banners, etc.)
-│   ├── pages/          # Route-based feature pages (home, following, featured, profile)
-│   ├── services/       # App services (auth, posts, follow, favorite, media, models, mocks)
-│   ├── shared/         # Shared utilities, guards, state, types, directives, pipes
-│   └── ...             # Other app logic
-├── assets/             # Static assets (images, i18n translation files)
-├── stories/             # Storybook stories for components
-├── styles/              # Global and theme styles
-└── environments/        # Environment configs (Firebase keys excluded from git)
+├── app/                # Application code
+│   ├── components/     # Feature components
+│   │   └── ui/         # UI primitives
+│   ├── pages/          # Routed pages
+│   ├── services/       # Services, models and mocks
+│   └── shared/         # Guards, state, pipes, utilities
+├── assets/             # Images and i18n files
+├── stories/            # Storybook stories
+├── styles/             # Global and theme styles
+└── environments/       # Environment config
 ```
 
-## Data & Backend
+## Data Model
 
-Catspace runs on Firebase: Firestore holds users (`/users/{uid}`) and their posts (`/users/{uid}/posts`), and Firebase Auth handles login/signup. Image uploads go through Cloudinary. Mock data in `src/app/services/mocks/` is used only for unit tests and Storybook — the running app always talks to real Firestore.
+Firestore collections and subcollections:
 
-## State Management
+```mermaid
+erDiagram
+    USER ||--o{ POST : "users/{uid}/posts"
+    USER ||--o{ FOLLOWING : "users/{uid}/following/{targetUid}"
+    USER ||--o{ FOLLOWER : "users/{uid}/followers/{followerUid}"
+    USER ||--o{ USER_FAVORITE : "users/{uid}/favorites/{postId}"
+    POST ||--o{ POST_FAVORITE : "posts/{postId}/favorites/{uid}"
+    FOLLOWING }o--|| USER : "userId → followed cat"
+    FOLLOWER }o--|| USER : "userId → follower"
+    USER_FAVORITE }o--|| POST : "postId + postOwnerId"
+    POST_FAVORITE }o--|| USER : "userId → who favorited"
 
-Global state uses NgRx Signal Store (`@ngrx/signals`) — `GlobalStore` at `src/app/shared/state/global.store.ts`. Feature/domain state lives in services as signals (e.g. `AuthService.currentUserSignal`) alongside RxJS Observables for async streams.
+    USER {
+        string id PK "Firebase Auth uid"
+        string email
+        string name
+        string handle
+        string description
+        string image "Cloudinary URL"
+        string createdAt
+        string updatedAt
+    }
+    POST {
+        string id PK
+        string userId FK "owner uid"
+        string title
+        string description
+        string image "Cloudinary URL"
+        number favorites
+        string createdAt
+    }
+    FOLLOWING {
+        string id PK "followed uid"
+        string userId FK
+        string followedAt
+    }
+    FOLLOWER {
+        string id PK "follower uid"
+        string userId FK
+        string followedAt
+    }
+    USER_FAVORITE {
+        string id PK "postId"
+        string postId FK
+        string postOwnerId FK
+        string favoritedAt
+    }
+    POST_FAVORITE {
+        string id PK "uid"
+        string userId FK
+        string favoritedAt
+    }
+```

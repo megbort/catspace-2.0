@@ -14,7 +14,7 @@ import {
 import { GlobalStore } from '../app/shared/state/global.store';
 import { of } from 'rxjs';
 import { signal } from '@angular/core';
-import { USERS } from '../app/services/mocks';
+import { mockUser } from '../app/services/mocks';
 
 const meta: Meta<EditProfileComponent> = {
   title: 'Components/Edit Profile',
@@ -47,7 +47,7 @@ const meta: Meta<EditProfileComponent> = {
             logout: () => of(void 0),
             register: () => of(void 0),
             user$: of(null),
-            currentUserSignal: signal(USERS[0]),
+            currentUserSignal: signal(mockUser),
           },
         },
         {
@@ -82,7 +82,7 @@ export const Primary: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const nameInput = await canvas.findByLabelText('Name');
-    await expect(nameInput).toHaveValue(USERS[0].name);
+    await expect(nameInput).toHaveValue(mockUser.name);
     await userEvent.clear(nameInput);
     await userEvent.type(nameInput, 'Kiku Renamed');
     await expect(

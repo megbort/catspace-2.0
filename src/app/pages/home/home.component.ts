@@ -6,7 +6,6 @@ import { AuthService, User, UserService } from '../../services';
 import { Router, RouterModule } from '@angular/router';
 import { map } from 'rxjs';
 import { UnpicImageDirective } from '@unpic/angular';
-import { SignupComponent } from '../../components/auth/signup/signup.component';
 import { MatDialog } from '@angular/material/dialog';
 import { PriorityImageDirective } from '../../shared';
 
@@ -50,7 +49,8 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/profile', id]);
   }
 
-  signUp(): void {
+  async signUp(): Promise<void> {
+    const { SignupComponent } = await import('../../components/auth/signup/signup.component');
     this.dialog.open(SignupComponent, { width: '500px', autoFocus: false });
   }
 }
