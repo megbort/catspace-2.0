@@ -10,6 +10,8 @@
         appPriorityImage
         src="https://res.cloudinary.com/dm1yyjg7i/image/upload/v1730658024/catspace/catspace-logo-lg_jxurk2.png"
         alt="catspace logo"
+        width="200"
+        height="59"
         class="w-[175px] md:w-[200px]"
       />
     </div>
@@ -21,7 +23,7 @@
           <li class="menu-item">
             <a
               routerLink="/home"
-              routerLinkActive="border-catspace-dark-orange text-catspace-dark-orange"
+              routerLinkActive="nav-active"
               [routerLinkActiveOptions]="{ exact: true }"
               class="flex items-center"
             >
@@ -33,7 +35,7 @@
         <li class="menu-item">
           <a
             routerLink="/featured"
-            routerLinkActive="text-catspace-dark-orange"
+            routerLinkActive="nav-active"
             class="flex items-center"
           >
             <p class="subtitle-1 pr-1">{{ "menu.featured" | translate }}</p>
@@ -44,7 +46,7 @@
           <li class="menu-item">
             <a
               routerLink="/following"
-              routerLinkActive="text-catspace-dark-orange"
+              routerLinkActive="nav-active"
               class="flex items-center"
             >
               <p class="subtitle-1 pr-1">{{ "menu.following" | translate }}</p>
@@ -54,7 +56,7 @@
           <li class="menu-item">
             <a
               routerLink="/profile/me"
-              routerLinkActive="text-catspace-dark-orange"
+              routerLinkActive="nav-active"
               class="flex items-center"
             >
               <p class="subtitle-1 pr-1">{{ "menu.myPage" | translate }}</p>
@@ -141,7 +143,7 @@
       <a
         mat-menu-item
         routerLink="/home"
-        routerLinkActive="text-catspace-dark-orange"
+        routerLinkActive="nav-active"
         [routerLinkActiveOptions]="{ exact: true }"
       >
         {{ "menu.home" | translate }}
@@ -150,7 +152,7 @@
     <a
       mat-menu-item
       routerLink="/featured"
-      routerLinkActive="text-catspace-dark-orange"
+      routerLinkActive="nav-active"
     >
       <mat-icon aria-hidden="true">star</mat-icon>
       <span>{{ "menu.featured" | translate }}</span>
@@ -159,7 +161,7 @@
       <a
         mat-menu-item
         routerLink="/following"
-        routerLinkActive="text-catspace-dark-orange"
+        routerLinkActive="nav-active"
       >
         <mat-icon aria-hidden="true">pets</mat-icon>
         <span>{{ "menu.following" | translate }}</span>
@@ -167,7 +169,7 @@
       <a
         mat-menu-item
         routerLink="/profile/me"
-        routerLinkActive="text-catspace-dark-orange"
+        routerLinkActive="nav-active"
       >
         <mat-icon aria-hidden="true">person</mat-icon>
         <span>{{ "menu.myPage" | translate }}</span>

@@ -21,7 +21,7 @@ module.exports = {
         "catspace-black": "#0D0D0D",
         "catspace-white": "#fefdf8",
         "catspace-grey": "#e8e8e8",
-        "catspace-brown": "#86736d",
+        "catspace-brown": "#7a6863",
       },
     },
   },

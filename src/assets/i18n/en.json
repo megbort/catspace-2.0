@@ -8,6 +8,7 @@
     "email": "Email",
     "password": "Password",
     "account": "Account",
+    "dialogLoadFailed": "Couldn't load this. Please refresh the page and try again.",
     "demo": "This website is for demo purposes only. It's functional, but is just for fun. Feel free to explore and experiment! 😺"
   },
   "button": {

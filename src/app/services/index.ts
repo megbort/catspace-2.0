@@ -1,6 +1,7 @@
 export * from './auth.service';
 export * from './favorite.service';
 export * from './follow.service';
+export * from './lazy-dialog.service';
 export * from './loader.service';
 export * from './media.service';
 export * from './mocks';

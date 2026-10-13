@@ -38,6 +38,10 @@
   @apply text-catspace-brown;
 }
 
+.dark-theme .mat-mdc-outlined-button .mdc-button__label {
+  @apply text-catspace-dark-beige;
+}
+
 .mat-mdc-button,
 .mat-mdc-unelevated-button,
 .mat-mdc-raised-button,

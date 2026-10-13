@@ -1,5 +1,10 @@
 .menu-item {
-  @apply flex items-center cursor-pointer text-catspace-black hover:border-catspace-dark-orange hover:text-catspace-dark-orange transition-all duration-300 ease-in-out;
+  @apply flex items-center cursor-pointer text-catspace-black transition-all duration-300 ease-in-out;
+}
+
+.menu-item:hover,
+.nav-active {
+  color: var(--app-nav-active);
 }
 
 .theme-toggle {
@@ -18,4 +23,9 @@
 :host-context(.dark-theme) .theme-toggle,
 :host-context(.dark-theme) .theme-toggle-mobile {
   color: var(--app-text-primary);
+}
+
+:host-context(.dark-theme) .menu-item:hover,
+:host-context(.dark-theme) .nav-active {
+  color: var(--app-nav-active);
 }

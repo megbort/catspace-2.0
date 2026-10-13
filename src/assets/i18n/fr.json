@@ -8,6 +8,7 @@
     "email": "E-mail",
     "password": "Mot de passe",
     "account": "Compte",
+    "dialogLoadFailed": "Impossible de charger. Rafraîchis la page et réessaie.",
     "demo": "Ce site web est à des fins de démonstration uniquement. Il est fonctionnel, mais juste pour le plaisir. N'hésitez pas à explorer et à expérimenter ! 😺"
   },
   "button": {

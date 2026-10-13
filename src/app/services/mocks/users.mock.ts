@@ -328,3 +328,5 @@ export const USERS: User[] = [
     posts: [],
   },
 ];
+
+export const mockUser: User = USERS[0]!;

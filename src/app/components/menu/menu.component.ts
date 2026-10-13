@@ -4,14 +4,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { TranslatePipe } from '@ngx-translate/core';
 import { RouterModule } from '@angular/router';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { SignupComponent } from '../auth/signup/signup.component';
-import { LoginComponent } from '../auth/login/login.component';
+import { MatDialogModule } from '@angular/material/dialog';
 import { Dialog, DialogType, PriorityImageDirective } from '../../shared';
 import { UnpicImageDirective } from '@unpic/angular';
-import { AuthService, ThemeService } from '../../services';
+import { AuthService, LazyDialogService, ThemeService } from '../../services';
 import { BannerComponent } from '../ui/banner.component';
-import { CreatePostComponent } from '../create-post/create-post.component';
 
 @Component({
   selector: 'app-menu',
@@ -42,22 +39,28 @@ export class MenuComponent {
 
   public readonly authService = inject(AuthService);
   private readonly themeService = inject(ThemeService);
-  private readonly dialog = inject(MatDialog);
+  private readonly lazyDialog = inject(LazyDialogService);
 
   get currentUser() {
     return this.authService.currentUserSignal();
   }
 
-  openDialog(dialog: DialogType): void {
+  async openDialog(dialog: DialogType): Promise<void> {
     if (dialog === Dialog.SignUp) {
-      this.dialog.open(SignupComponent, this.defaultDialogProperties);
+      await this.lazyDialog.open(
+        () => import('../auth/signup/signup.component').then((m) => m.SignupComponent),
+        this.defaultDialogProperties,
+      );
     } else if (dialog === Dialog.Login) {
-      this.dialog.open(LoginComponent, this.defaultDialogProperties);
+      await this.lazyDialog.open(
+        () => import('../auth/login/login.component').then((m) => m.LoginComponent),
+        this.defaultDialogProperties,
+      );
     } else {
-      this.dialog.open(CreatePostComponent, {
-        width: '550px',
-        autoFocus: false,
-      });
+      await this.lazyDialog.open(
+        () => import('../create-post/create-post.component').then((m) => m.CreatePostComponent),
+        { width: '550px', autoFocus: false },
+      );
     }
   }
 

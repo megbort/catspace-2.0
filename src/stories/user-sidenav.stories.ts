@@ -5,7 +5,7 @@ import { applicationConfig } from '@storybook/angular';
 import { storybookTranslateProviders } from '../app/shared';
 import { provideHttpClient } from '@angular/common/http';
 import { signal } from '@angular/core';
-import { USERS } from '../app/services/mocks';
+import { mockUser } from '../app/services/mocks';
 import { AuthService } from '../app/services';
 import { of } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
@@ -25,7 +25,7 @@ const meta: Meta<UserSidenavComponent> = {
             logout: () => of(void 0),
             register: () => of(void 0),
             user$: of(null),
-            currentUserSignal: signal(USERS[0]),
+            currentUserSignal: signal(mockUser),
           },
         },
         {
@@ -50,8 +50,8 @@ export const Primary: Story = {
   }),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await expect(canvas.getByText(USERS[0].name)).toBeVisible();
-    await expect(canvas.getByText(`@${USERS[0].handle}`)).toBeVisible();
+    await expect(canvas.getByText(mockUser.name)).toBeVisible();
+    await expect(canvas.getByText(`@${mockUser.handle}`)).toBeVisible();
     await expect(
       await canvas.findByRole('button', { name: 'Edit Profile' }),
     ).toBeVisible();
