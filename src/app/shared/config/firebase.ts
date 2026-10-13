@@ -1,6 +1,11 @@
 import { inject, InjectionToken } from '@angular/core';
 import { initializeApp, type FirebaseApp } from 'firebase/app';
-import { getAuth, type Auth } from 'firebase/auth';
+import {
+  browserLocalPersistence,
+  indexedDBLocalPersistence,
+  initializeAuth,
+  type Auth,
+} from 'firebase/auth';
 import { getFirestore, type Firestore } from 'firebase/firestore';
 import { environment } from '../../../environments/environment';
 
@@ -16,5 +21,8 @@ export const FIRESTORE = new InjectionToken<Firestore>('FIRESTORE', {
 
 export const FIREBASE_AUTH = new InjectionToken<Auth>('FIREBASE_AUTH', {
   providedIn: 'root',
-  factory: () => getAuth(inject(FIREBASE_APP)),
+  factory: () =>
+    initializeAuth(inject(FIREBASE_APP), {
+      persistence: [indexedDBLocalPersistence, browserLocalPersistence],
+    }),
 });
