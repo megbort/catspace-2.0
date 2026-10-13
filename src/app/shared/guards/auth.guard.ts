@@ -29,22 +29,22 @@ export const redirectIfAuthenticatedGuard: CanActivateFn = () => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  return authService.isInitialized$.pipe(
-    filter((isInitialized) => isInitialized),
-    take(1),
-    switchMap(() =>
-      authService.currentUser$.pipe(
-        filter((user) => user !== undefined),
-        take(1),
-        map((user) => {
-          if (user) {
-            router.navigate(['/following']);
-            return false;
-          } else {
-            return true;
-          }
-        })
-      )
+  if (authService.isInitialized()) {
+    return authService.currentUserSignal()
+      ? router.createUrlTree(['/following'])
+      : true;
+  }
+
+  authService.currentUser$
+    .pipe(
+      filter((user) => user !== undefined),
+      take(1),
     )
-  );
+    .subscribe((user) => {
+      if (user && router.url.startsWith('/home')) {
+        router.navigate(['/following']);
+      }
+    });
+
+  return true;
 };
