@@ -1,11 +1,11 @@
 import { Component, output, computed, inject, ChangeDetectionStrategy } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { RouterModule } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
-import { AuthService } from '../../services';
+import { AuthService, LazyDialogService } from '../../services';
 
 @Component({
   selector: 'app-user-sidenav',
@@ -26,7 +26,7 @@ export class UserSidenavComponent {
   user = computed(() => this.authService.currentUserSignal());
 
   private readonly authService = inject(AuthService);
-  private readonly dialog = inject(MatDialog);
+  private readonly lazyDialog = inject(LazyDialogService);
 
   logout(): void {
     this.authService.logout();
@@ -34,20 +34,22 @@ export class UserSidenavComponent {
   }
 
   async editProfile(): Promise<void> {
-    const { EditProfileComponent } = await import('../edit-profile/edit-profile.component');
-    this.dialog.open(EditProfileComponent, {
-      width: '500px',
-      autoFocus: false,
-    });
-    this.sidenavClose.emit();
+    const dialogRef = await this.lazyDialog.open(
+      () => import('../edit-profile/edit-profile.component').then((m) => m.EditProfileComponent),
+      { width: '500px', autoFocus: false },
+    );
+    if (dialogRef) {
+      this.sidenavClose.emit();
+    }
   }
 
   async newPost(): Promise<void> {
-    const { CreatePostComponent } = await import('../create-post/create-post.component');
-    this.dialog.open(CreatePostComponent, {
-      width: '550px',
-      autoFocus: false,
-    });
-    this.sidenavClose.emit();
+    const dialogRef = await this.lazyDialog.open(
+      () => import('../create-post/create-post.component').then((m) => m.CreatePostComponent),
+      { width: '550px', autoFocus: false },
+    );
+    if (dialogRef) {
+      this.sidenavClose.emit();
+    }
   }
 }

@@ -2,11 +2,10 @@ import { Component, computed, inject, OnInit, ChangeDetectionStrategy } from '@a
 import { MatButtonModule } from '@angular/material/button';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ProfileCardComponent } from '../../components/profile-card/profile-card.component';
-import { AuthService, User, UserService } from '../../services';
+import { AuthService, LazyDialogService, User, UserService } from '../../services';
 import { Router, RouterModule } from '@angular/router';
 import { map } from 'rxjs';
 import { UnpicImageDirective } from '@unpic/angular';
-import { MatDialog } from '@angular/material/dialog';
 import { PriorityImageDirective } from '../../shared';
 
 @Component({
@@ -29,7 +28,7 @@ export class HomeComponent implements OnInit {
 
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
-  private readonly dialog = inject(MatDialog);
+  private readonly lazyDialog = inject(LazyDialogService);
   private readonly userService = inject(UserService);
 
   ngOnInit(): void {
@@ -50,7 +49,12 @@ export class HomeComponent implements OnInit {
   }
 
   async signUp(): Promise<void> {
-    const { SignupComponent } = await import('../../components/auth/signup/signup.component');
-    this.dialog.open(SignupComponent, { width: '500px', autoFocus: false });
+    await this.lazyDialog.open(
+      () =>
+        import('../../components/auth/signup/signup.component').then(
+          (m) => m.SignupComponent,
+        ),
+      { width: '500px', autoFocus: false },
+    );
   }
 }
