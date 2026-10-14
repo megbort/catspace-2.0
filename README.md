@@ -70,6 +70,15 @@ Requires a Firebase project. Put your API key in `src/environments/firebase-key.
 - **Vitest** for unit tests, **Playwright** for end-to-end tests
 - **GitHub Actions** for CI
 
+## Lighthouse
+
+|         | Performance | Accessibility | Best Practices | SEO |
+| ------- | ----------- | ------------- | -------------- | --- |
+| Mobile  | 73          | 100           | 100            | 100 |
+| Desktop | 98          | 100           | 100            | 100 |
+
+Zero layout shift (CLS 0). Measured October 2026.
+
 ## Project Structure
 
 ```
